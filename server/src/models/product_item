@@ -1,0 +1,29 @@
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'postgres'
+});
+
+const Product_Item = sequelize.define('Product_Item', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  product_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'products',
+      key: 'id'
+    }
+  },
+  qty_in_stock: DataTypes.INTEGER,
+  product_image: DataTypes.TEXT,
+  price: DataTypes.INTEGER
+});
+
+// Associations
+Product_Item.belongsTo(Product, { foreignKey: 'product_id' });
+
+module.exports = Product_Item;
+
