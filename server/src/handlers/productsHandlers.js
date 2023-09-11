@@ -2,10 +2,10 @@ const { createProduct, getAllProducts, getProductByName } = require("../controll
 
 //! Crear Producto
 const createProductsHandler = async (req, res) => {
-    const { name, description } = req.body;
+    const { product_category_id, name, description, product_image } = req.body;
 
     try {
-        const newProduct = await createProduct(name, description);
+        const newProduct = await createProduct(product_category_id, name, description, product_image);
         res.status(200).json({ success: true, data: newProduct });
     } catch (error) {
         res.status(400).json({ success: false, message: "Error creating new Product. " + error.message });
@@ -31,7 +31,9 @@ const getAllProductsHandler = async (req, res) => {
 
 };
 
+
 module.exports = {
     createProductsHandler,
     getAllProductsHandler,
+   
 };
