@@ -24,3 +24,8 @@ const variation_option = sequelize.define('variation_option', {
 variation_option.belongsTo(Variation, { foreignKey: 'variation_id' });
 
 module.exports = variation_option;
+
+// Asociaciones
+variation_option.belongsTo(Variation, { foreignKey: 'variation_id' });
+
+module.exports = variation_option;

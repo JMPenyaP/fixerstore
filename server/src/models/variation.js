@@ -4,19 +4,20 @@ const sequelize = new Sequelize('database', 'username', 'password', {
   dialect: 'postgres'
 });
 
-const Shopping_Cart = sequelize.define('Shopping_Cart', {
+const Variation = sequelize.define('Variation', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  product_id: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'users',
+      model: 'products',
       key: 'id'
     }
-  }
+  },
+  name: DataTypes.STRING
 });
 
-module.exports = Shopping_Cart;
+module.exports = Variation;

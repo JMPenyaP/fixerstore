@@ -40,4 +40,3 @@ User_Payment_Method.belongsTo(User, { foreignKey: 'user_id' });
 User_Payment_Method.belongsTo(Payment_Type, { foreignKey: 'payment_type_id' });
 
 module.exports = User_Payment_Method;
-

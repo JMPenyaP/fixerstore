@@ -15,4 +15,3 @@ const shipping_method = sequelize.define('shipping_method', {
 });
 
 module.exports = shipping_method;
-
