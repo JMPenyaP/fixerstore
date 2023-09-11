@@ -4,26 +4,23 @@ const sequelize = new Sequelize('database', 'username', 'password', {
   dialect: 'postgres'
 });
 
-const Product_Item = sequelize.define('Product_Item', {
+const variation_option = sequelize.define('variation_option', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  product_id: {
+  variation_id: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'products',
+      model: 'variations',
       key: 'id'
     }
   },
-  qty_in_stock: DataTypes.INTEGER,
-  product_image: DataTypes.TEXT,
-  price: DataTypes.INTEGER
+  name: DataTypes.STRING
 });
 
-// Associations
-Product_Item.belongsTo(Product, { foreignKey: 'product_id' });
+// Asociaciones
+variation_option.belongsTo(Variation, { foreignKey: 'variation_id' });
 
-module.exports = Product_Item;
-
+module.exports = variation_option;
