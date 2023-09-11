@@ -2,7 +2,9 @@ const { Product } = require("../db");
 
 //! Crear Producto
 const createProduct = async (product_category_id, name, description, product_image) => {
+
     return await Product.create({ product_category_id, name, description, product_image });
+
 
 };
 
