@@ -1,12 +1,13 @@
 const { Product } = require("../db");
 
 //! Crear Producto
-const createProduct = async (product_category_id, name, description, product_image) => {
+const createProduct = async (product_category_id, name, description, product_image, status) => {
 
-    return await Product.create({ product_category_id, name, description, product_image });
+    return await Product.create({ product_category_id, name, description, product_image, status });
 
 
 };
+
 
 //! Obtener todos los Productos
 const getAllProducts = async () => {
