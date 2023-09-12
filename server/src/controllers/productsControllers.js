@@ -1,23 +1,24 @@
-const { Product } = require("../db");
+const { product } = require("../db");
 
 //! Crear Producto
-const createProduct = async (product_category_id, name, description, product_image) => {
+const createProduct = async (name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
 
-    return await Product.create({ product_category_id, name, description, product_image });
+    return await product.findOrCreate({ where: { name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock } });
 
 
 };
 
+
 //! Obtener todos los Productos
 const getAllProducts = async () => {
-    const allProducts = await Product.findAll();
+    const allProducts = await product.findAll();
     return allProducts;
 
 };
 
 //! Obtener Producto por Nombre
 const getProductByName = async (name) => {
-    const productName = await Product.findAll({ where: { name: name } });
+    const productName = await product.findAll({ where: { name } });
     return productName;
 };
 

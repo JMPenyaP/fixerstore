@@ -1,24 +1,65 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'postgres'
-});
+const { DataTypes } = require('sequelize');
 
-const Product = sequelize.define('Product', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  description: DataTypes.TEXT,
-  product_image: DataTypes.TEXT
-});
 
-// Asociaciones
-Product.belongsTo(Product_Category, { foreignKey: 'product_category_id' });
+module.exports = (sequelize) => {
 
-module.exports = Product;
+  const product = sequelize.define('product', {
+
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+
+    },
+    firstImage: {
+      type: DataTypes.STRING,
+      allowNull: false
+
+    },
+    carrouselImage: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    priceOfList: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    statusOffer: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+
+    },
+    offer: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    }
+
+  }, { timestamps: false })
+
+  return product;
+}
+

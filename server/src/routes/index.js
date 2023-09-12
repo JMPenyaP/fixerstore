@@ -1,15 +1,12 @@
 const { Router } = require("express");
 const usersRouters = require("./usersRouters");
 const productsRouters = require("./productsRouters.js");
-const productCategoriesRouters = require("./productCategoriesRouters");
-const promotionsRouters = require("./promotionsRouters");
-
+const categoryRouter = require("./categoryRouters.js");
 const router = Router(); // Creamos una instancia de Router
 
 // Creamos la redirección al router correspondiente
 router.use("/users", usersRouters);
 router.use("/products", productsRouters);
-router.use("/productCategories", productCategoriesRouters);
-router.use("/promotions", promotionsRouters);
+router.use("/categories", categoryRouter);
 
 module.exports = router; // Exportamos el router configurado
