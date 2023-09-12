@@ -1,16 +1,20 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'postgres'
-});
+const { DataTypes } = require('sequelize');
 
-const Product_Category = sequelize.define('Product_Category', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  name: DataTypes.STRING
-});
 
-module.exports = Product_Category;
+
+module.exports = (sequelize) => {
+
+  sequelize.define('product_category', {
+
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: DataTypes.STRING
+
+
+  }, { timestamps: false })
+
+}
+

@@ -8,9 +8,10 @@ const getAllProductsItems = async () => {
 
 };
 
-const createProductItem = async (productItem) => {
+const createProductItem = async (productId, qtyInStock, productImage, price) => {
 
-    const newProductItem = await Product_Item.create(productItem);
+    const newProductItem = await Product_Item.create(productId, qtyInStock, productImage, price);
+
     return newProductItem;
 
 };
