@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 
+<<<<<<< HEAD
 
 module.exports = (sequelize) => {
 
@@ -19,3 +20,6 @@ module.exports = (sequelize) => {
 
 }
 
+=======
+module.exports = shipping_method;
+>>>>>>> 813d1675264466ede17e95ac410319eb15bad65a

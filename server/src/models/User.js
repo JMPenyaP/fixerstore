@@ -45,7 +45,4 @@ module.exports = (sequelize) => {
     }
 
 
-  }, { timestamps: false })
-
-}
-
+module.exports = User;

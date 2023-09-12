@@ -22,3 +22,7 @@ module.exports = (sequelize) => {
 
 }
 
+<<<<<<< HEAD
+=======
+module.exports = Product;
+>>>>>>> 813d1675264466ede17e95ac410319eb15bad65a
