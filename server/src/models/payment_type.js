@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 
 
-<<<<<<< HEAD
 module.exports = (sequelize) => {
 
   sequelize.define('payment_type', {
@@ -16,6 +15,3 @@ module.exports = (sequelize) => {
 
 }
 
-=======
-module.exports = Payment_Type;
->>>>>>> 813d1675264466ede17e95ac410319eb15bad65a

@@ -35,9 +35,5 @@ module.exports = (sequelize) => {
 
   }, { timestamps: false })
 
-<<<<<<< HEAD
 
 }
-=======
-module.exports = User_Payment_Method;
->>>>>>> 813d1675264466ede17e95ac410319eb15bad65a

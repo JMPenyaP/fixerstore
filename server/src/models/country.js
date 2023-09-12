@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 
 
-<<<<<<< HEAD
 module.exports = (sequelize) => {
 
   sequelize.define('country', {
@@ -18,6 +17,3 @@ module.exports = (sequelize) => {
   }, { timestamps: false })
 
 }
-=======
-module.exports = Country;
->>>>>>> 813d1675264466ede17e95ac410319eb15bad65a

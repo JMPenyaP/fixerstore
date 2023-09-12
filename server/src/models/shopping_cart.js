@@ -18,10 +18,6 @@ module.exports = (sequelize) => {
       }
     }
 
-<<<<<<< HEAD
   }, { timestamps: false })
 
 }
-=======
-module.exports = Shopping_Cart;
->>>>>>> 813d1675264466ede17e95ac410319eb15bad65a
