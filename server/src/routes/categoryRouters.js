@@ -5,6 +5,7 @@ const { categoryHandler } = require('../handlers/categoryHandlers.js');
 
 
 categoryRouter.post("/", categoryHandler);
+categoryRouter.get("/", getCategoryHandler);
 
 
 module.exports = categoryRouter;

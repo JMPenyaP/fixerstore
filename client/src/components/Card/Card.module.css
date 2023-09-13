@@ -1,0 +1,24 @@
+.divCard{
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 330px;
+    margin: 30px;
+    border-radius: 15px;
+    background: rgba(60, 187, 237, 0.50);
+    align-items: center;
+}
+
+.img{
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.divInfo{
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+
+}
+

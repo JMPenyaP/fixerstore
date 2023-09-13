@@ -8,10 +8,15 @@ const createCategory = async (name) => {
     return newCategory;
 
 }
-
+const getCategories = async()=>{
+    const categories = await category.findAll()
+    return categories 
+}
 
 module.exports = {
 
-    createCategory
-
+    createCategory,
+    getCategories
+ 
 }
+
