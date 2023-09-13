@@ -3,6 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import axios from 'axios';
 import { Spinner } from "../Carga/Carga";
 import Card from "../Card/Card";
+import styles from './Cards.module.css'
 
 const Cards = () => {
 
@@ -35,11 +36,13 @@ const Cards = () => {
             next={fetchNextPage}
             loader={<Spinner />} 
           >
-            <ul>
+            <div className={styles.divCards}>
               {characters.map((char) => (
+                <div>
                 <Card key={char.id} char={char} />
+                </div>
               ))}
-            </ul>
+            </div>
           </InfiniteScroll>
         </>
       );
