@@ -3,6 +3,7 @@ const usersRouters = require("./usersRouters");
 const productsRouters = require("./productsRouters.js");
 const categoryRouter = require("./categoryRouters.js");
 const loginRouters = require('./loginRouters')
+const paginationRouters = require("./paginationRouters");
 
 const router = Router(); // Creamos una instancia de Router
 
