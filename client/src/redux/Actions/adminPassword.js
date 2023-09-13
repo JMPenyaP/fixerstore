@@ -1,4 +1,4 @@
-import {ADMIN_PASS} from "./"
+import {ADMIN_PASS} from "../actionTypes"
 import axios from "axios"
 // Mejor en estado local
 
