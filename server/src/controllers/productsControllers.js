@@ -1,5 +1,5 @@
+const { Sequelize, Op } = require("sequelize");
 const { product } = require("../db");
-
 //! Crear Producto
 const createProduct = async (name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
 
@@ -18,13 +18,27 @@ const getAllProducts = async () => {
 
 //! Obtener Producto por Nombre
 const getProductByName = async (name) => {
-    const productName = await product.findAll({ where: { name: name } });
+    
+    const productName = await product.findAll({
+        where: {
+          name: {
+            [Op.iLike]: '%' + name + '%', 
+          },
+        },
+      });
+    console.log(productName)
     return productName;
 };
 
-
+const getProductById = async(id)=>{
+    const productId = await product.findByPk(id)
+    console.log(productId)
+    
+    return productId
+}
 module.exports = {
     createProduct,
     getAllProducts,
     getProductByName,
+    getProductById
 };
