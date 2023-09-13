@@ -33,7 +33,7 @@ const Cards = () => {
             dataLength={characters.length}
             hasMore={hasNextPage || isLoading}
             next={fetchNextPage}
-            loader={<Spinner />} // Aquí debes proporcionar tu componente Spinner
+            loader={<Spinner />} 
           >
             <ul>
               {characters.map((char) => (
