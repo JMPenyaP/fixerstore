@@ -1,19 +1,21 @@
 import "./App.css";
-import Landing from "./Paginas/Landing/Landing";
-import Form from "./Paginas/Form/Form";
-import Detail from "./Paginas/Detail/Detail";
+import Catalogo from "./paginas/Catalogo/Catalogo"
+import Dashboard from "./paginas/DashBoard/Dashboard"
+import DetailPage from "./paginas/DetailPage/DetailPage";
+import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin"
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+
   return (
     <>
       <div className="App"></div>
       <Routes>
         <Route path="/" element={<Home />} />
-{/*         <Route path="/home" element={<Home />} /> */}
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/add" element={<Form />} />
-        <Route path="/add" element={<Form />} />
+        <Route path="/productos" element={<Catalogo/>} />
+        <Route path="/detail/:id" element={<DetailPage/>} />
+        <Route path="/admin" element={< LoginAdmin/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </>
   );
