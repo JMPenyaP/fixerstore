@@ -1,16 +1,4 @@
-const { createUser, getAllUsers, getUserByName } = require("../controllers/usersControllers");
-
-//! Crear Usuarios
-const createUsersHandler = async (req, res) => {
-    const { name, email, password } = req.body;
-
-    try {
-        const newUser = await createUser(name, email, password);
-        res.status(200).json({ success: true, data: newUser });
-    } catch (error) {
-        res.status(400).json({ success: false, message: "Error creating new User. " + error.message });
-    };
-};
+const { getAllUsers, getUserByName } = require("../controllers/usersControllers");
 
 //! Obtener todas los Usuarios o uno por nombre
 const getAllUsersHandler = async (req, res) => {
@@ -32,6 +20,5 @@ const getAllUsersHandler = async (req, res) => {
 };
 
 module.exports = {
-    createUsersHandler,
     getAllUsersHandler,
 };
