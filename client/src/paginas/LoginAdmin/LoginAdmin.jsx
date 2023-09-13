@@ -39,4 +39,4 @@ const LoginAdmin = () => {
         </div>
     )
 };
-export default LoginAdmin
+export default LoginAdmin;

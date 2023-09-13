@@ -17,7 +17,6 @@ const DetailPage = () => {
     categoria: "Deportes",
     enOferta: true,
     stock: 50,
-    // Agrega más atributos según tus necesidades
   });
   const [mainImage, setMainImage] = useState(product.image);
   const params = useParams();
