@@ -18,7 +18,7 @@ const getAllProducts = async () => {
 
 //! Obtener Producto por Nombre
 const getProductByName = async (name) => {
-    const productName = await product.findAll({ where: { name } });
+    const productName = await product.findAll({ where: { name: name } });
     return productName;
 };
 
