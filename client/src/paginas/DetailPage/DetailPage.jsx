@@ -17,7 +17,6 @@ const DetailPage = () => {
     categoria: "Deportes",
     enOferta: true,
     stock: 50,
-    // Agrega más atributos según tus necesidades
   });
   const [mainImage, setMainImage] = useState(product.image);
   const params = useParams();
@@ -52,8 +51,8 @@ const DetailPage = () => {
               <img src={mainImage} alt="product image" />
             </div>
             <div className={style.carouselImages}>
-              {images.map((image) => {
-                return <div className={style.divImageCarousel}><img src={image} alt="product image" onClick={() => {setImage(image)}}/></div>;
+              {images.map((image, index) => {
+                return <div className={style.divImageCarousel} key={index}><img src={image} alt="product image" onClick={() => {setImage(image)}}/></div>;
               })}
             </div>
           </div>
