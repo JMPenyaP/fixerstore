@@ -1,27 +1,24 @@
 import "./App.css";
-import Catalogo from "./paginas/Catalogo/Catalogo"
-import Dashboard from "./paginas/DashBoard/Dashboard"
+import Catalogo from "./paginas/Catalogo/Catalogo";
+import Dashboard from "./paginas/DashBoard/Dashboard";
 import DetailPage from "./paginas/DetailPage/DetailPage";
-import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin"
-import Home from "./paginas/Home/Home"
-import NavBar from "./components/NavBar/NavBar"
+import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin";
+import Home from "./paginas/Home/Home";
+import NavBar from "./components/NavBar/NavBar";
 import { Routes, Route } from "react-router-dom";
 
-
 function App() {
-
-  
   return (
     <>
       <div className="App">
-        <NavBar/>
+        <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Catalogo/>} />
-          <Route path="/detail/:id" element={<DetailPage/>} />
-          <Route path="/admin" element={< LoginAdmin/>} />
-          <Route path="/dashboard" element={<Dashboard/>} />
-      </Routes>
+          <Route path="/productos" element={<Catalogo />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/admin" element={<LoginAdmin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
       </div>
     </>
   );
