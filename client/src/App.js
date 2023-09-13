@@ -1,6 +1,5 @@
 import "./App.css";
 import Landing from "./Paginas/Landing/Landing";
-import Home from "./Paginas/Home/Home";
 import Form from "./Paginas/Form/Form";
 import Detail from "./Paginas/Detail/Detail";
 import { Routes, Route } from "react-router-dom";
