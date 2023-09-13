@@ -13,7 +13,7 @@ const BarDashboard = () => {
                 <button disabled>Pedidos</button>
                 <button disabled>Productos</button>
                 <button>Crear producto</button>
-                <button disabled>Perfiles</button>
+                <button>Perfiles</button>
             </div>
         </div>
     )
