@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize"); // Importar Sequelize para que JS interactue con la DDBB
 require("dotenv").config(); //Dependencia para leer archivo .env
-const userModel = require('./models/user');
+const userModel = require('./models/UserModel');
 const ProductModel = require("./models/product.js");
 const categoryModel = require("./models/category.js");
 // Importar módulos de Node.js
