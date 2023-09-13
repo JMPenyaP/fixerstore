@@ -3,9 +3,12 @@ import Catalogo from "./paginas/Catalogo/Catalogo"
 import Dashboard from "./paginas/DashBoard/Dashboard"
 import DetailPage from "./paginas/DetailPage/DetailPage";
 import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin"
+import Home from "./paginas/Home/Home"
 import { Routes, Route } from "react-router-dom";
 
+
 function App() {
+
 
   return (
     <>
