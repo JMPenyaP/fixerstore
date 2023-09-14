@@ -3,8 +3,8 @@ import Catalogo from "./paginas/Catalogo/Catalogo";
 import Dashboard from "./paginas/DashBoard/Dashboard";
 import DetailPage from "./paginas/DetailPage/DetailPage";
 import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin"
-import Home from "./paginas/Home/Home"
-import NavBar from "./components/NavBar/NavBar"
+import Home from "./paginas/Home/Home";
+import Navbar from "./components/NavBar/NavBar";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <NavBar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Catalogo />} />
