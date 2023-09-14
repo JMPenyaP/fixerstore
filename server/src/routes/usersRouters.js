@@ -6,4 +6,6 @@ const { createUserHandler } = require('../controllers/usersControllers');
 usersRouters.post("/register", createUserHandler);
 usersRouters.get("/", getAllUsersHandler);
 
+
+
 module.exports = usersRouters;
