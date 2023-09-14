@@ -28,7 +28,6 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries);
 // Obtener el modelos desde sequelize
 const { User, Product, Category } = sequelize.models;
-console.log("aquiiiii::::", Category, Product, User)
 // Aca vendrian las relaciones/asociaciones
 /*Country.belongsToMany(Activity, { through: 'Country_Activities' });
 Activity.belongsToMany(Country, { through: 'Country_Activities' });*/
