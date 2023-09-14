@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const categoryRouter = Router();
 
-const { categoryHandler,  getCategoryHandler} = require('../handlers/categoryHandler.js');
+const { categoryHandler, getCategoryHandler } = require('../handlers/categoryHandlers.js');
 
 
 categoryRouter.post("/", categoryHandler);

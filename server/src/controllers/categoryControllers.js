@@ -1,22 +1,22 @@
-const { category } = require('../db.js');
+const { Category } = require('../db.js');
 
 
 
 const createCategory = async (name) => {
 
-    const newCategory = await category.create({ name });
+    const newCategory = await Category.create({ name });
     return newCategory;
 
 }
-const getCategories = async()=>{
-    const categories = await category.findAll()
-    return categories 
+const getCategories = async () => {
+    const categories = await Category.findAll()
+    return categories
 }
 
 module.exports = {
 
     createCategory,
     getCategories
- 
+
 }
 
