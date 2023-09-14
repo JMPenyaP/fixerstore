@@ -1,10 +1,10 @@
-
+import style from "../../components/BarDashboard/Constru.module.css"
 
 const FormProduct = () => {
-
+    const imagen = "https://acortar.link/t7yfgg"
     return (
-        <div>
-            <h2>Este es el form de crear producto</h2>
+        <div className={style.div}>
+            <h2 className={style.titulo}>Crear producto</h2>
         </div>
     )
 }

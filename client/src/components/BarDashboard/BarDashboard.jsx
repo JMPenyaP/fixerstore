@@ -8,16 +8,16 @@ import DefaultView from "./DefaultView"
 import style from "./Bar.module.css"
 
 const BarDashboard = () => {
-    const [actualSection, setActualSection] = useState(<DefaultView/>)
+    //Importar estos datos de los estados globales
+    const email = "admin@fixer.com"
+    const name = "Fabian Idarraga"
+    const inicial = name.charAt(0).toUpperCase();
+    const [actualSection, setActualSection] = useState(<DefaultView name = {name}/>)
     const [actualBoton, setActualBoton] = useState(null)
     const handleSection = (contenido, boton) => {
         setActualSection(contenido)
         setActualBoton(boton)
     }
-    //Importar estos datos de los estados globales
-    const correo = "admin@fixer.com"
-    const nombre = "Fabian Correa"
-    const inicial = nombre.charAt(0).toUpperCase();
     //Renderizado
     return (
         <div className={style.contenedor}>
@@ -27,8 +27,8 @@ const BarDashboard = () => {
                         <h3>{inicial}</h3>
                     </div>
                     <div className={style.dataProfile}>
-                        <h4 className={style.nombre}>{nombre}</h4>
-                        <h5 className={style.correo}>{correo}</h5>
+                        <h4 className={style.nombre}>{name}</h4>
+                        <h5 className={style.correo}>{email}</h5>
                     </div>
                 </div>
                 <div className={style.divbotones}>
@@ -40,7 +40,7 @@ const BarDashboard = () => {
                 </div>
             </div>
             <div className={style.section}>
-                <h2 className={style.titulo}>Dashboard</h2>
+                <h2 className={style.titulo}>Dashboard Fixer Shoes</h2>
                 {actualSection}
             </div>
         </div>
