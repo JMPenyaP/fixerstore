@@ -7,4 +7,6 @@ usersRouters.post("/register", createUserHandler);
 usersRouters.get("/", getAllUsersHandler);
 usersRouters.get("/email", getUserEmailHandler);
 
+
+
 module.exports = usersRouters;
