@@ -1,21 +1,36 @@
 .fondo {
-  width: 1448px;
+  width: auto;
   height: 538px;
-  flex-shrink: 0;
-  border-radius: 10px;
   background: #3cbbed;
   display: flex;
+}
+.fondo div{
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+.cita{
+display: flex;
+flex-direction: column;
+justify-content: center;
+position: relative;
+z-index: 1;
 }
 .imagen {
   width: 590px;
   height: 492px;
   flex-shrink: 0;
   border-radius: 10px;
+  position: relative;
 }
 .imagen2 {
   width: 650px;
   height: 162.064px;
   flex-shrink: 0;
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: 1;
 }
 .promo {
   display: flex;
