@@ -1,5 +1,5 @@
 import Banner from "../../components/Banner/Banner";
-import Carrusel from "../../components/Carrusel/Carrusel";
+/* import Carrusel from "../../components/Carrusel/Carrusel"; */
 import Footer from "../../components/Footer/Footer";
 import style from "./Home.module.css";
 import Cards from "../../components/Cards/Cards";
@@ -13,8 +13,9 @@ const Home = () => {
       </div>
       <div className={style.carrusel}>
         <p>Aqui va el carrusel</p>
-        <Carrusel/>
+{/*         <Carrusel/> */}
       </div>
+      <Cards/>
       <Footer />
     </>
   );
