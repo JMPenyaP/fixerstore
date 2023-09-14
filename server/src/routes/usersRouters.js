@@ -5,4 +5,6 @@ const { createUsersHandler, getAllUsersHandler } = require("../handlers/usersHan
 usersRouters.post("/", createUsersHandler);
 usersRouters.get("/", getAllUsersHandler);
 
+
+
 module.exports = usersRouters;
