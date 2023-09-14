@@ -6,7 +6,7 @@ import * as actions from "../../redux/actions"
 
 const FormProduct = () => {
     const dispatch = useDispatch()
-    const {register, handleSubmit, control, formState: {errors}} = useForm()
+    const {handleSubmit, control, formState: {errors}, trigger} = useForm()
     const onSubmit = (data) => {
         console.log(data);
         //dispatch(actions.createProd(data))
@@ -22,33 +22,33 @@ const FormProduct = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="nombre">Nombre del producto</label>
-                    <Controller name="nombre"
+                    <Controller name="name"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Este campo es obligatorio' }}
-                    render={({ field }) => <input {...field} />}
+                    render={({ field }) => (
+                    <input {...field} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}
                     />
                     {errors.nombre && <p>{errors.nombre.message}</p>}
                 </div>
                 <div>
                     <label htmlFor="nombre">Categoria</label>
-                <Controller
-                name="categoria"
-                control={control}
-                defaultValue=""
-                rules={{ required: 'Seleccione una categoría' }}
-                render={({ field }) => (
-                <select {...field}>
-                    <option value="" disabled>
-                        Seleccione una categoría
-                        </option>
+                    <Controller
+                    name="categoryId"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: 'Seleccione una categoría' }}
+                    render={({ field }) => (
+                    <select {...field}>
+                        <option value="" disabled> Seleccione una categoría </option>
                         {categorias.map((categoria) => (
                         <option key={categoria.id} value={categoria.id}>
                             {categoria.nombre}</option>))}
-                </select>)} />{errors.categoria && <p>{errors.categoria.message}</p>}
+                    </select>)} />
+                {errors.categoria && <p>{errors.categoria.message}</p>}
                 </div>
                 <div>
-                    <label htmlFor="precio">Precio:</label>
+                    <label htmlFor="precio">Precio del producto </label>
                     <Controller
                     name="precio"
                     control={control}
@@ -59,9 +59,10 @@ const FormProduct = () => {
                             value: /^\d+(\.\d{1,2})?$/,
                             message: 'Ingrese un precio válido (ejemplo: 19.99)',},
                         }}
-                    render={({ field }) => <input {...field} />}
+                    render={({ field }) => (
+                    <input {...field} onChange={(e) => {field.onChange(e); trigger('precio'); }}/>)}
                     />
-                    {errors? (errors.precio && <p>{errors.precio.message}</p>):(null)}
+                    {errors.precio && <p>{errors.precio.message}</p>}
                 </div>
                 <div>
                     <label htmlFor="descripcion">Descripción:</label>
@@ -74,7 +75,7 @@ const FormProduct = () => {
                     />
                     {errors? (errors.descripcion && <p>{errors.descripcion.message}</p>):(null)}
             </div>
-            <button type="submit" disabled= {errors ? true:false}>Crear Producto</button>
+            <button type="submit" >Crear Producto</button>
             </form>
         </div>
     )
@@ -102,3 +103,5 @@ export default FormProduct
 //     "stock": 15
   
 //   }
+
+//name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock
