@@ -1,20 +1,18 @@
 const { DataTypes } = require('sequelize');
 
-
 module.exports = (sequelize) => {
-
-  sequelize.define('order_status', {
-
+  sequelize.define("Category", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    status: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+
+    }
 
   }, { timestamps: false })
-
-
-
 }
 

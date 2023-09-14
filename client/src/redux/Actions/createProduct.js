@@ -1,4 +1,4 @@
-import {CREATED_PRODUCT, NEW_PRODUCT} from "./"
+import {CREATED_PRODUCT, NEW_PRODUCT} from "../actionTypes"
 import axios from "axios"
 // Mejor created en el local
 export const createProduct = (product) => {
@@ -30,3 +30,5 @@ export const createProduct = (product) => {
         return errorResponse
     }
 }
+
+
