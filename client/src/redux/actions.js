@@ -21,3 +21,7 @@ export const clearFilter = clearF // Limpia el filtro
 export const createDog = create // Crea un nuevo perro
 export const searchDog = search // Busca perro(s)
 */
+
+import { createProduct } from "./Actions/createProduct";
+
+export const createProd = createProduct;

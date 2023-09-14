@@ -111,11 +111,12 @@
 
 .divButton {
     margin-top: 90px;
+    margin-left: auto;
 }
 
 .divButton button {
     border: none;
-    font-size: 30px;
+    font-size: 23px;
     padding: 10px 30px 10px 30px;
     border-radius: 50px;
     cursor: pointer;
@@ -127,6 +128,7 @@
     color: #3cbbed;
     background-color: transparent;
     transition: 0.3s;
+    overflow: hidden;
 }
 
 .divButton button:hover{
@@ -144,7 +146,7 @@
     background-color: #3cbbed;
     z-index: -1;
     transition: 0.6s;
-    opacity: 0;
+    opacity: 0.5;
 }
 
 .divButton button:hover::before{

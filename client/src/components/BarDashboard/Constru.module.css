@@ -1,0 +1,38 @@
+
+
+
+.div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.titulo {
+    border: none;
+    font-size: 15px;
+    padding: 8px 28px 8px 28px;
+    border-radius: 50px;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    background-color: #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham";
+    width: auto;
+}
+
+.img {
+    width: 35%;
+    height: 35%;
+}
+
+.p {
+    border: none;
+    font-size: 15px;
+    padding: 8px 28px 8px 28px;
+    color: black;
+    font-family: "Gotham";
+    width: auto;
+}
