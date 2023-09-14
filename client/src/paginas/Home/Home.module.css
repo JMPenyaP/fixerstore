@@ -1,0 +1,24 @@
+.titulo {
+  line-height: 50px;
+}
+.carrusel {
+  background: rgba(217, 217, 217, 0.5);
+  height: 500px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer {
+  display: flex;
+  background: black;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+}
+.link {
+  text-decoration: none;
+  color: aliceblue;
+}

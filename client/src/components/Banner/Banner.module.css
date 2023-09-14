@@ -1,21 +1,38 @@
 .fondo {
-  width: 1448px;
+  width: auto;
   height: 538px;
-  flex-shrink: 0;
-  border-radius: 10px;
   background: #3cbbed;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fondo div {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+.cita {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 .imagen {
   width: 590px;
   height: 492px;
   flex-shrink: 0;
   border-radius: 10px;
+  position: relative;
 }
 .imagen2 {
   width: 650px;
   height: 162.064px;
   flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 .promo {
   display: flex;
@@ -38,14 +55,20 @@
   font-weight: 500;
   line-height: normal;
 }
+.link {
+  text-decoration: none;
+}
 .button {
   display: flex;
-  width: 333px;
+  width: 200px;
   height: 56px;
   padding: 6px 25px 7px 26px;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  border-radius: 20px;
-  background: #202549;
+  border-radius: 30px;
+  background: #ffffff;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
 }

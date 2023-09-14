@@ -1,0 +1,13 @@
+.footer {
+  display: flex;
+  background: black;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+}
+.link {
+  text-decoration: none;
+  color: aliceblue;
+}
