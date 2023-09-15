@@ -7,6 +7,7 @@ const DetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
   const [mainImage, setMainImage] = useState();
+  const [images, setImages] = useState([]); // Utiliza un estado para las imágenes
   const params = useParams();
   const id = params.id;
 
@@ -15,8 +16,8 @@ const DetailPage = () => {
       axios(`http://localhost:3001/products/${id}`).then(({ data }) => {
         if (data.name) {
           setProduct(data);
-          console.log(data);
-          setMainImage(data.firstImage)
+          setMainImage(data.firstImage);
+          setImages([data.firstImage, ...data.carrouselImage]); // Actualiza el estado de las imágenes
         }
         setLoading(false);
       });
@@ -28,12 +29,6 @@ const DetailPage = () => {
   const setImage = (url) => {
     setMainImage(url);
   };
-
-  const images = [
-    "https://http2.mlstatic.com/D_NQ_NP_632124-MLA42150136966_062020-O.webp",
-    "https://http2.mlstatic.com/D_NQ_NP_817118-MLA42150173428_062020-O.webp",
-    "https://http2.mlstatic.com/D_NQ_NP_816748-MLA42150191129_062020-O.webp",
-  ];
 
   return (
     <div className={style.divDetail}>

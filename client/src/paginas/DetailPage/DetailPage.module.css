@@ -128,13 +128,14 @@
     background-color: transparent;
     transition: 0.3s;
     overflow: hidden;
+    z-index: 99999999999999;
 }
 
-.divButton button:hover{
+.divButton button:hover {
     color: white;
 }
 
-.divButton button::before{
+.divButton button::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -148,7 +149,7 @@
     opacity: 0.5;
 }
 
-.divButton button:hover::before{
+.divButton button:hover::before {
     width: 100%;
     opacity: 1;
 }
