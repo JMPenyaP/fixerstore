@@ -1,5 +1,7 @@
 .titulo {
   line-height: 50px;
+  text-align: center;
+  color: #3cbbed;
 }
 .carrusel {
   background: rgba(217, 217, 217, 0.5);
@@ -17,8 +19,4 @@
   text-align: center;
   justify-content: center;
   gap: 5px;
-}
-.link {
-  text-decoration: none;
-  color: aliceblue;
 }
