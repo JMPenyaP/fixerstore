@@ -1,6 +1,29 @@
 import style from "./NavBar.module.css";
+import { Link } from "react-router-dom";
+import { setFilters, getProductName } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [name, setName] = useState("");
+  const dispatch = useDispatch();
+  const productName = useSelector((state) => state.productName);
+
+  const handleChange = (event) => {
+    const updatedName = event.target.value; // MIENTRAS CAMBIA EL INPUT TAMBIEN LO HACE EL NAME
+    setName(updatedName);
+
+    if (updatedName.length === 0) {
+      // Cambiar la propiedad filter del estado global a false
+      dispatch(setFilters(false)); //   
+      console.log(productName);                             // EN EL CASO DE QUE SE BORRE EL NAME, SETEAR EN FALSE EL FILTER
+    }
+  };
+
+  const searchName =  () => {
+    dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product
+  };
+
   return (
     <div className={style.divNavBar}>
       <img
@@ -9,11 +32,28 @@ const Navbar = () => {
         className={style.logo}
       />
       <div className={style.divButtonsNav}>
-        <button>Inicio</button>
-        <button>Productos</button>
+        <Link to="/">
+          <button>Inicio</button>
+        </Link>
+        <Link to="/productos">
+          <button>Productos</button>
+        </Link>
         <button>Quienes Somos</button>
       </div>
-      <input type="search" placeholder="Buscar Producto" />
+      <div className={style.searchBarDiv}>
+        <input
+          type="search"
+          placeholder="Buscar Producto"
+          value={name}
+          onChange={handleChange}
+        />
+        <button onClick={searchName}>
+          <img
+            src="https://s3-alpha-sig.figma.com/img/9e95/eac1/98843c95e535f8beea5822d26858cfbd?Expires=1695600000&Signature=CeNGEaIfNS5Zj9wW8kDK0iWNTvRJEwEXquv~JLYiVDqMZdP1ucqtcW6R0JxoV1gv~CxLeTmsJCAbpbsTaFV5AZjBM25KfMVptLHQdASnGlEM9gedY~3w~j-CJaEu1ROJIAbTZJBYWD0zIMx0VSkSymws1-AZbKqgoFisKDlH78Ac1hpdR1WAJFG1GwQOfRMVVXUfwk0cKrSkbc0q6RbeBUrC12fdp5Y7y~QHOLugXAT4OPvSfiNu-FC4chb3LkTqY5JmiSVnt0f2z6djMYtMnTBcGyVa2R3-EhS~r5Q1RL8aEvWZpijUGd5HXgr4Cbibb5JsZeS2vkATCuxYMIFQRg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+            alt="search button"
+          />
+        </button>
+      </div>
       <div className={style.userLetter}>A</div>
       <div className={style.carritoDiv}>
         <img

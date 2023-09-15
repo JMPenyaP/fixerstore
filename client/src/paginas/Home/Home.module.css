@@ -1,13 +1,11 @@
 .titulo {
   line-height: 50px;
+  text-align: center;
+  color: #3cbbed;
 }
-.carrusel {
-  background: rgba(217, 217, 217, 0.5);
-  height: 500px;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.carrusel{
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .footer {
   display: flex;
@@ -18,7 +16,8 @@
   justify-content: center;
   gap: 5px;
 }
-.link {
-  text-decoration: none;
-  color: aliceblue;
+.separador{
+  height: 10px;
+  width: 100%;
+  background-color: transparent;
 }
