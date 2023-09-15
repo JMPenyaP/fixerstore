@@ -1,5 +1,4 @@
 const { User } = require("../db");
-const userHandler = require('../handlers/usersHandlers');
 const bcrypt = require('bcrypt');
 
 //! Crear Usuario Cliente
@@ -21,9 +20,6 @@ const createUserHandler = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error en el servidor' });
     }
 }
-/* module.exports = {
-    register: userHandler.createUserHandler
-}; */
 
 //! Obtener todos los Usuarios
 const getAllUsers = async () => {
@@ -37,8 +33,15 @@ const getUserByName = async (name) => {
     return userName;
 };
 
+//! Obtener usuario por Email y devolver Rol
+const getUserByEmail = async (email) => {
+    const user = await User.findOne({ where: { email } });
+    return user;
+}
+
 module.exports = {
     getAllUsers,
     getUserByName,
     createUserHandler,
+    getUserByEmail,
 };

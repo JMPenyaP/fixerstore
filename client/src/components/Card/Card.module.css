@@ -1,24 +1,69 @@
-.divCard{
+@import url('https://url_de_la_fuente/AntipastoPro.css');
+
+.divCard {
     display: flex;
     flex-direction: column;
-    width: 230px;
-    height: 330px;
-    margin: 30px;
-    border-radius: 15px;
-    background: rgba(60, 187, 237, 0.50);
+    width: 290px;
+    height: 410px;
+    margin: 35px 15px;
+    border-radius: 5px;
     align-items: center;
+    justify-content: space-between;
 }
 
-.img{
-    border-radius: 15px;
-    margin-bottom: 10px;
+
+.img {
+    border-radius: 5px;
 }
 
-.divInfo{
-    font-size: 18px;
+
+.divInfo {
     display: flex;
     justify-content: space-between;
-    width: 200px;
-
+    width: 90%;
+    color: #000;
+    font-family: 'AntipastoPro', sans-serif;
+    font-size: 18px;
 }
 
+
+
+
+.divButton {
+    margin-top: 18px;
+}
+
+.divButton button {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #3cbbed;
+    border: 1px solid #3cbbed;
+    background-color: transparent;
+    transition: color 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.divButton button::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: -100%;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: left 0.3s ease-in-out;
+}
+
+.divButton button:hover {
+    color: white;
+}
+
+.divButton button:hover::before {
+    left: 0;
+}
