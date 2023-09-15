@@ -1,5 +1,7 @@
 .titulo {
   line-height: 50px;
+  text-align: center;
+  color: #3cbbed;
 }
 .carrusel{
   margin-top: 50px;
@@ -14,11 +16,6 @@
   justify-content: center;
   gap: 5px;
 }
-.link {
-  text-decoration: none;
-  color: aliceblue;
-}
-
 .separador{
   height: 10px;
   width: 100%;
