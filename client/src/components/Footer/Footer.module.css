@@ -1,11 +1,26 @@
+.contact{
+  display: flex;
+  background: #3cbbed;
+  height: 350px;
+  color: aliceblue;
+  flex-direction: column;
+  justify-content: center;
+}
+.tabla{
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  gap: 200px;
+  line-height: 30px;
+}
 .footer {
   display: flex;
   background: black;
-  line-height: 20px;
-  align-items: center;
-  text-align: center;
+  line-height: 40px;
   justify-content: center;
   gap: 5px;
+  text-decoration: none;
+  color: aliceblue;
 }
 .link {
   text-decoration: none;
