@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom"
 
 const LoginAdmin = () => {
-/*     const [existe, setExiste] = useState(null)
+    const [existe, setExiste] = useState(null)
     const userAdmin = (userData) => {
         try {
             const {email} = userData;
@@ -21,11 +21,11 @@ const LoginAdmin = () => {
             errorResponse.error = error.message
             return errorResponse
         }
-    } */
+    }
     // Renderizado
     return (
         <div>
-{/*             <div>
+            <div>
                 <img src="" alt=""/>
                 <form onSubmit={handleSummit}>
                     <input type="text" name="email"/>
@@ -42,7 +42,7 @@ const LoginAdmin = () => {
             </div>
             <div>
 
-            </div> */}
+            </div>
         </div>
     )
 };
