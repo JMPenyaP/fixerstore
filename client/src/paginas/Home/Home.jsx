@@ -7,13 +7,16 @@ const Home = () => {
   return (
     <>
       <Banner />
-      {/* <div className={style.titulo}>
-        <h1>PRODUCTOS RECOMENDADOS</h1>
-      </div> */}
+      {
+        <div className={style.titulo}>
+          <h1>PRODUCTOS RECOMENDADOS</h1>
+        </div>
+      }
       <div className={style.carrusel}>
         <p>Aqui va el carrusel</p>
-        {/* <Carrusel/> */}
+        <Carrusel/>
       </div>
+      <div className={style.separador}></div>
       <Footer />
     </>
   );

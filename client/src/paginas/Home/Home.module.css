@@ -3,13 +3,9 @@
   text-align: center;
   color: #3cbbed;
 }
-.carrusel {
-  background: rgba(217, 217, 217, 0.5);
-  height: 500px;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.carrusel{
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 .footer {
   display: flex;
@@ -19,4 +15,9 @@
   text-align: center;
   justify-content: center;
   gap: 5px;
+}
+.separador{
+  height: 10px;
+  width: 100%;
+  background-color: transparent;
 }
