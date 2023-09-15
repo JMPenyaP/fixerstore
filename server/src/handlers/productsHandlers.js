@@ -3,7 +3,6 @@ const { firstImageFunction, imagesInCarrousel } = require('./utils/functionsClou
 //! Crear Producto
 
 
-
 const createProductsHandler = async (req, res) => {
 
 

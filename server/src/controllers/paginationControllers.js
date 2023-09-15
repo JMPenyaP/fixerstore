@@ -9,18 +9,23 @@ const pagination = async (req, res) => {
     try {
         const offset = (currentPage - 1) * itemPerPage;
 
-        const allProducts = await Product.findAll({
+        const allProducts = await Product.findAndCountAll({
             offset,
             limit: itemPerPage,
         });
 
+        const totalCount = allProducts.count;
+        const totalPages = Math.ceil(totalCount / itemPerPage);
+
+
         res.json({
-            products: allProducts,
+            products: allProducts.rows,
             currentPage,
-            totalPages: Math.ceil(allProducts.count / itemPerPage),
+            totalPages,
         });
+
     } catch (error) {
-        console.error(error);
+
         res.status(500).json({ error: 'Error al obtener los productos.' });
     }
 };
