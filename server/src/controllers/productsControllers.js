@@ -1,6 +1,9 @@
-const { Sequelize, Op } = require("sequelize");
+const { Op } = require("sequelize");
 const { Product } = require("../db");
 //! Crear Producto
+
+
+
 const createProduct = async (name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
 
   return await Product.findOrCreate({ where: { name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock } });
@@ -26,7 +29,7 @@ const getProductByName = async (name) => {
       },
     },
   });
-  console.log(productName)
+
   return productName;
 };
 

@@ -6,46 +6,51 @@ import Card from "../Card/Card";
 import styles from './Cards.module.css'
 
 const Cards = () => {
-
     const {
         data,
         isLoading,
         fetchNextPage,
         hasNextPage,
-      } = useInfiniteQuery(
-        "characters",
+    } = useInfiniteQuery(
+        "products",
         ({ pageParam = 1 }) => {
-          const apiUrl = `https://rickandmortyapi.com/api/character?page=${pageParam}`;
-          return axios.get(apiUrl).then((response) => response.data);
-        },
-        {
+          const apiUrl = `http://localhost:3001/pagination/?page=${pageParam}`;
+          return axios.get(apiUrl).then((response) => response.data.products);
+      },
+      {
           getNextPageParam: (lastPage, pages) => {
-            // Verifica si hay más páginas disponibles
-            return lastPage.info.next ? pages.length + 1 : null;
+              if (lastPage.currentPage < lastPage.totalPages) {
+                  return lastPage.currentPage + 1;
+              } else {
+                  return null;
+              }
           },
-        }
-      );
+      }
+    );
     
-      const characters = data ? data.pages.flatMap((page) => page.results) : [];
-    
-      return (
+    const products = data ? data.pages.flat() : [];
+      console.log(data);
+    return (
         <>
-          <InfiniteScroll
-            dataLength={characters.length}
-            hasMore={hasNextPage || isLoading}
-            next={fetchNextPage}
-            loader={<Spinner />} 
-          >
-            <div className={styles.divCards}>
-              {characters.map((char) => (
-                <div>
-                <Card key={char.id} char={char} />
+            <InfiniteScroll
+                dataLength={products.length}
+                hasMore={hasNextPage || isLoading}
+                next={() => {
+                  console.log('fetchNextPage llamado'); // Agrega esta línea
+                  fetchNextPage();
+              }}
+                loader={<Spinner />} 
+            >
+                <div className={styles.divCards}>
+                    {products.map((product) => (
+                        <div key={product.id}>
+                            <Card product={product} />
+                        </div>
+                    ))}
                 </div>
-              ))}
-            </div>
-          </InfiniteScroll>
+            </InfiniteScroll>
         </>
-      );
-    };
-    
-    export default Cards;
+    );
+};
+
+export default Cards;
