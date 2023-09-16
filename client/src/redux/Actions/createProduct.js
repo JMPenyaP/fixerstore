@@ -1,25 +1,22 @@
 import {CREATED_PRODUCT, NEW_PRODUCT} from "../actionTypes"
 import axios from "axios"
-// Mejor created en el local
+
+
 export const createProduct = (product) => {
     try {
-        const endpoint = ''
+        const endpoint = 'http://localhost:3001/products/'
         return async (dispatch)=> {
-            const {data} = await axios.post(endpoint, product)
-            const {creado} = data
-            if (creado === true) {
-                const {producto} = data
+            const response = await axios.post(endpoint, product)
+            const {producto, create} = response.data
+            if (create === true) {
                 const nuevo = producto[0]
                 dispatch({type: NEW_PRODUCT,
-                    payload: nuevo},
-                    {type: CREATED_PRODUCT,
-                    payload: creado    
-                    })
+                    payload: nuevo})
             }
-            else if (creado === false) {
+            else if (create === false) {
                 dispatch({
                     type: CREATED_PRODUCT,
-                    payload: creado
+                    payload: create
                 })
             }       
         }
