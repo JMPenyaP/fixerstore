@@ -14,8 +14,13 @@ const Home = () => {
       }
       {/* <div className={style.carrusel}>
         <p>Aqui va el carrusel</p>
+<<<<<<< HEAD
         <Carrusel/>
       </div> */}
+=======
+        <Carrusel />
+      </div>
+>>>>>>> 8696547b8007c0be8cf576c1ce2d65b91370e706
       <div className={style.separador}></div>
       <Footer />
     </>
