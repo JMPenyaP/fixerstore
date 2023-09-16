@@ -18,12 +18,12 @@ module.exports = (sequelize) => {
     },
     firstImage: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
 
     },
     carrouselImage: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING,
@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
     },
     date: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     priceOfList: {
       type: DataTypes.INTEGER,

@@ -13,7 +13,7 @@ const Home = () => {
       </div>
       <div className={style.carrusel}>
         <p>Aqui va el carrusel</p>
-        <Carrusel/>
+        <Carrusel />
       </div>
       <Footer />
     </>
