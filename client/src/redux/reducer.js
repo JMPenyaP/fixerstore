@@ -4,6 +4,7 @@ import {
   ROLE,
   GET_NAME,
   SET_FILTER,
+  CREATED_PRODUCT
 } from "./actionTypes";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   role: null,
   productName: false,
   productByName: [],
+  product_creado: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -31,6 +33,10 @@ const rootReducer = (state = initialState, action) => {
 
     case SET_FILTER: {
       return { ...state, productName: action.payload };
+    }
+
+    case CREATED_PRODUCT: {
+      return { ...state, product_creado: action.payload };
     }
     default:
       return {
