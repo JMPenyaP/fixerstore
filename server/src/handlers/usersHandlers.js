@@ -24,7 +24,11 @@ const getUserEmailHandler = async (req, res) => {
     const { email } = req.query;
     try {
         const user = await getUserByEmail(email);
-        res.status(200).json({ success: true, message: "Email encontrado.", email: user.email, role: user.role });
+        if (user) {
+            res.status(200).json({ success: true, message: "Email encontrado.", email: user.email, role: user.role });
+        } else {
+            res.status(400).json({ success: false, message: "Email NO está registrado. " + error.message });
+        }
     } catch (error) {
         res.status(400).json({ success: false, message: "Email NO está registrado. " + error.message });
     }

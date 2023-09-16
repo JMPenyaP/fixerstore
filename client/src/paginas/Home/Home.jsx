@@ -14,7 +14,7 @@ const Home = () => {
       }
       <div className={style.carrusel}>
         <p>Aqui va el carrusel</p>
-        <Carrusel/>
+        <Carrusel />
       </div>
       <div className={style.separador}></div>
       <Footer />
