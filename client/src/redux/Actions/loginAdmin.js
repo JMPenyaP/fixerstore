@@ -3,19 +3,13 @@ import axios from "axios"
 
 export const loginAdmin = (userData) => {
     try {
-        const endpoint = "/auth/login"
+        const endpoint = "http://localhost:3001/auth/login"
         return async (dispatch) => {
-            const {data} = await axios.get(endpoint, userData);
-            const {success, token} = data;
-            const role = token.role
+            const {data} = await axios.post(endpoint, userData);
+            const {success} = data;
             dispatch({
                 type: ADMIN_PROFILE,
-                payload: success
-            },
-            {
-                type: ROLE,
-                payload: role
-            })
+                payload: success})
         }
     } 
     catch (error) {

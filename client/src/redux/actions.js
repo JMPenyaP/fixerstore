@@ -23,5 +23,9 @@ export const searchDog = search // Busca perro(s)
 */
 
 import { createProduct } from "./Actions/createProduct";
+import { getProductByName } from "./Actions/getProductByName";
+import { setFilter } from "./Actions/setearFilter";
 
 export const createProd = createProduct;
+export const getProductName = getProductByName;
+export const setFilters = setFilter;

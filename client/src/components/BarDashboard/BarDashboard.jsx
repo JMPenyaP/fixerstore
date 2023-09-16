@@ -18,7 +18,7 @@ const BarDashboard = () => {
         setActualSection(contenido)
         setActualBoton(boton)
     }
-    //Renderizado
+    //Renderizado de barra 
     return (
         <div className={style.contenedor}>
             <div className={style.barralateral}>

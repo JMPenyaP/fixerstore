@@ -1,74 +1,86 @@
 .fondo {
   width: auto;
-  height: 538px;
-  background: #3cbbed;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap:50px
 }
 .fondo div {
-  display: flex;
-  align-items: center;
   margin: 10px;
 }
 .cita {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
 }
 .imagen {
-  width: 590px;
+  width: 40%;
   height: 492px;
-  flex-shrink: 0;
   border-radius: 10px;
   position: relative;
+  background-image: url('../../assets/IMG_2122.jpg');
+  border-style: none;
 }
-.imagen2 {
-  width: 650px;
-  height: 162.064px;
-  flex-shrink: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+@font-face{
+  font-family: "promo";
+  src: url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 }
 .promo {
+  font-family: "promo";
   display: flex;
   width: 459px;
-  height: 274px;
+  height: 0px;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
-  color: #202549;
   text-align: center;
-  font-family: Gotham Black;
-  font-size: 128px;
-  font-style: normal;
-  font-weight: 500;
   line-height: normal;
-  color: #fff;
-  font-family: Gotham Black;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  color: #2c2d32;
+  font-size: 50px;
 }
 .link {
   text-decoration: none;
 }
-.button {
-  display: flex;
-  width: 200px;
-  height: 56px;
-  padding: 6px 25px 7px 26px;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border-radius: 30px;
-  background: #ffffff;
+.divButton {
+  margin-top: 90px;
+  margin-left: auto;
+}
+
+.divButton button {
   border: none;
-  text-decoration: none;
+  font-size: 23px;
+  padding: 10px 30px 10px 30px;
+  border-radius: 50px;
   cursor: pointer;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  border: 1px solid #3cbbed;
+  color: #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.divButton button:hover{
+  color: white;
+}
+
+.divButton button::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #3cbbed;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0.5;
+}
+
+.divButton button:hover::before{
+  width: 100%;
+  opacity: 1;
 }
