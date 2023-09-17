@@ -12,7 +12,7 @@ const products = [
         priceOfList: 95.000,
         statusOffer: false,
         offer: 10,
-        status: false,
+        status: true,
         stock: 15
       
       }, 
@@ -27,7 +27,7 @@ const products = [
         priceOfList: 5,
         statusOffer: false,
         offer: 25.000,
-        status: false,
+        status: true,
         stock: 15
       
       },
@@ -87,7 +87,7 @@ const products = [
         priceOfList: 25.000,
         statusOffer: false,
         offer: 10,
-        status: false,
+        status: true,
         stock: 15
       
       } ,
@@ -102,7 +102,7 @@ const products = [
         priceOfList: 20.000,
         statusOffer: false,
         offer: 10,
-        status: false,
+        status: true,
         stock: 15
       
       } ,
@@ -117,7 +117,7 @@ const products = [
         priceOfList: 35.000,
         statusOffer: false,
         offer: 10,
-        status: false,
+        status: true,
         stock: 15
       
       } ,
@@ -132,7 +132,7 @@ const products = [
         priceOfList: 15.000,
         statusOffer: false,
         offer: 10,
-        status: false,
+        status: true,
         stock: 15
       
       } ,
@@ -147,10 +147,55 @@ const products = [
         priceOfList: 25.000,
         statusOffer: false,
         offer: 10,
-        status: false,
+        status: true,
         stock: 15
       
-      } 
+      },
+      {
+
+        name: "cepillo",
+         categoryId: 4,
+         firstImage: "https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cleaning-tools-image_2243050.jpg",
+         carrouselImage: ["https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cleaning-tools-image_2243050.jpg"],
+         description: "SON PLANTILLAS TRANSPIRABLES, DE MATERIAL EVA TE AYUDAN A LA COMODIDAD DE LA PARTE DEL TALON Y A UNA MICRO TRANSPIRACION DE TUS PIES.SIRVEN PARA HACER DEPORTE E INCLUSO CAMINAR, SE UILIZAN MUCHO EN TENIS DEPORTIVOS.",
+         date: "01-18-2023",
+         priceOfList: 65.000,
+         statusOffer: false,
+         offer: 10,
+         status: true,
+         stock: 15
+       
+       },
+       {
+
+        name: "spray",
+         categoryId: 4,
+         firstImage: "https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cleaning-tools-image_2243050.jpg",
+         carrouselImage: ["https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cleaning-tools-image_2243050.jpg"],
+         description: "SON PLANTILLAS TRANSPIRABLES, DE MATERIAL EVA TE AYUDAN A LA COMODIDAD DE LA PARTE DEL TALON Y A UNA MICRO TRANSPIRACION DE TUS PIES.SIRVEN PARA HACER DEPORTE E INCLUSO CAMINAR, SE UILIZAN MUCHO EN TENIS DEPORTIVOS.",
+         date: "01-18-2023",
+         priceOfList: 65.000,
+         statusOffer: false,
+         offer: 10,
+         status: true,
+         stock: 15
+       
+       },
+       {
+
+        name: "gotita",
+         categoryId: 4,
+         firstImage: "https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cleaning-tools-image_2243050.jpg",
+         carrouselImage: ["https://png.pngtree.com/element_our/20200610/ourmid/pngtree-cleaning-tools-image_2243050.jpg"],
+         description: "SON PLANTILLAS TRANSPIRABLES, DE MATERIAL EVA TE AYUDAN A LA COMODIDAD DE LA PARTE DEL TALON Y A UNA MICRO TRANSPIRACION DE TUS PIES.SIRVEN PARA HACER DEPORTE E INCLUSO CAMINAR, SE UILIZAN MUCHO EN TENIS DEPORTIVOS.",
+         date: "01-18-2023",
+         priceOfList: 65.000,
+         statusOffer: false,
+         offer: 10,
+         status: true,
+         stock: 15
+       
+       }
 ]
 
 const createProducts=async()=>{
