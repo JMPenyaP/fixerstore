@@ -65,7 +65,6 @@ const Carrusel = () => {
                 className="carouselImage"
               />
               <h3>$ {prod.priceOfList}</h3>
-              <h3>{prod.description}</h3>
               <Link to={`/detail/${prod.id}`}>
                 <div className="divButton">
                   <button>Ver Producto</button>
