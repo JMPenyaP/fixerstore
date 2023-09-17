@@ -1,35 +1,97 @@
 import style from "../../components/BarDashboard/Constru.module.css"
 import { useForm, Controller } from 'react-hook-form';
-import { useState} from "react"
-import { useDispatch } from "react-redux"
+import { useState, useEffect} from "react"
+import { useDispatch, useSelector } from "react-redux"
 import * as actions from "../../redux/actions"
-
 
 const FormProduct = () => {
     const dispatch = useDispatch()
     const {handleSubmit, control, formState: {errors}, trigger, setValue} = useForm()
-    const [selectedImage, setSelectedImage] = useState(null);
+    const createProduct = useSelector(state => state.product_creado)
+    const [creado, setCreado] = useState(createProduct)
+    const [principal, setPrincipal] = useState("")
+    const [carrusel, setCarrusel] = useState([])
+    useEffect(() => {
+        setCreado(createProduct);
+      }, [createProduct]);
     const [showPercentageInput, setShowPercentageInput] = useState(false);
     const currentDate = new Date().toISOString().substr(0, 10);
     const togglePercentageInput = (value) => {
         setShowPercentageInput(value);
       };
-    const handleImageChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        setSelectedImage(URL.createObjectURL(file))
-        setValue('firstImage', file)
-      }
-    };
-    const onSubmit = (data) => {
-        console.log(data);
-        //dispatch(actions.createProd(data))
-    }
+      const handleCarruselChange = async (e) => {
+        const files = e.target.files;
+        let formData = new FormData();
+        const uploadedImageUrls = []; // Arreglo para almacenar las URLs de las imágenes cargadas
+      
+        if (files.length > 0) {
+          const arrayOfFiles = Array.from(files);
+      
+          // Utiliza Promise.all para realizar todas las solicitudes en paralelo
+          await Promise.all(
+            arrayOfFiles.map(async (file) => {
+              formData = new FormData(); // Crea un nuevo formData para cada archivo
+              formData.append("file", file);
+              formData.append("upload_preset", "to62brlp");
+      
+              try {
+                const res = await fetch("https://api.cloudinary.com/v1_1/dgxp4c4yk/image/upload", {
+                  method: "POST",
+                  body: formData,
+                });
+      
+                if (res.status === 200) {
+                  const data = await res.json();
+                  uploadedImageUrls.push(data.secure_url); // Agrega la URL al arreglo
+                } else {
+                  console.error("Error al cargar el archivo a Cloudinary:", res.statusText);
+                }
+              } catch (error) {
+                console.error("Error en la solicitud:", error);
+              }
+            })
+          );
+      
+          // Una vez que todas las solicitudes se completen, actualiza el estado Carrusel
+          setCarrusel(uploadedImageUrls);
+        }
+      };
+      
+    const handleImageChange = async (e) => {
+        const files = e.target.files; // Cambiar de e.target.value a e.target.files
+        const formData = new FormData();
+        if (files.length > 0) { // Verifica si se seleccionó al menos un archivo
+          formData.append("file", files[0]);
+          formData.append("upload_preset", "to62brlp");
+      
+          try {
+            const res = await fetch("https://api.cloudinary.com/v1_1/dgxp4c4yk/image/upload", 
+            { method: "POST",
+            body:formData});
+            console.log(res);
+            if (res.status === 200) {
+            const data = await res.json();
+            setPrincipal(data.secure_url)
+            } else {
+              console.error("Error al cargar el archivo a Cloudinary:", res.statusText);
+            }
+          } catch (error) {
+            console.error("Error en la solicitud:", error);
+          }
+        }
+      };
     const categorias = [
         { id: 1, nombre: 'Categoría 1' },
         { id: 2, nombre: 'Categoría 2' },
         { id: 3, nombre: 'Categoría 3' },
     ];
+    console.log(carrusel.length);
+    const onSubmit = async (data) => {
+        data.firstImage = principal
+        data.carrouselImage = carrusel
+        console.log(data)
+        dispatch(actions.createProd(data))
+    }
     return (
         <div className={style.div}>
             <h2 className={style.titulo}>Crear producto</h2>
@@ -78,9 +140,31 @@ const FormProduct = () => {
                     />
                     )}/>
                     {errors.firstImage && <p>{errors.firstImage.message}</p>}
-                    {selectedImage && (<div><img src={selectedImage} alt="Vista previa" style={{ maxWidth: '50px' }} />
+                    {principal && (<div><img src={principal} alt="Vista previa" style={{maxWidth: '50px' }} />
                     </div>)}
-                </div>     
+                </div>
+                <div>
+                    <label htmlFor="carrouselImage">Imagen del producto</label>
+                    <Controller
+                    name="carrouselImage"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: 'Este campo es obligatorio',}}
+                    render={({ field }) => (
+                    <input
+                    type="file"
+                    multiple
+                    accept="image/jpeg, image/png, image/gif, image/svg+xml, image/webp"
+                    onChange={(e) => { field.onChange(e);
+                        trigger('firstImage')
+                        handleCarruselChange(e)
+                        }}
+                    />
+                    )}/>
+                    {errors.firstImage && <p>{errors.firstImage.message}</p>}
+                    {carrusel.length > 0 && (<div>{carrusel.map((carru)=>(<img src={carru} alt="Vista previa" style={{maxWidth: '50px' }} />))}
+                    </div>)}
+                </div> 
                 <div>
                     <label htmlFor="priceOfList">Precio del producto</label>
                     <p>$</p>
@@ -147,14 +231,14 @@ const FormProduct = () => {
                     <Controller
                     name="offer"
                     control={control}
-                    defaultValue=""
+                    defaultValue="0"
                     rules={{ required: 'Este campo es obligatorio' }}
                     render={({ field }) => (
                     <div>
                         <select {...field}>
-                            <option value="" disabled> Seleccione un %</option>
+                            <option value="0" disabled> Seleccione un %</option>
                             {[...Array(19)].map((_, index) => (
-                            <option key={index} value={(index + 1) * 5/100}> {(index + 1) * 5}% </option>
+                            <option key={index} value={(index + 1) * 5}> {(index + 1) * 5}% </option>
                             ))}
                         </select>
                     </div>
@@ -198,13 +282,12 @@ const FormProduct = () => {
                     />
                     {errors.stock && <p>{errors.stock.message}</p>}
                 </div>
+                <div>
+                {creado === true ? (<><span>Producto creado</span></>) : (creado === false ? (<><span>No pudo crearse el producto</span></>) : null)}
+                </div>
             <button type="submit" >Crear Producto</button>
             </form>
         </div>
     )
 }
 export default FormProduct
-
-
-
-// carrouselImage

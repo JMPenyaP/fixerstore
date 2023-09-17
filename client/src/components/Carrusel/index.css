@@ -89,3 +89,8 @@
     width: 100%;
     opacity: 1;
 }
+
+.slick-arrow::before{
+    font-size: 40px;
+    color: #3cbbed;
+}

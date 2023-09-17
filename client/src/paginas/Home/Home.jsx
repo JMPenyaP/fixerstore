@@ -12,9 +12,9 @@ const Home = () => {
           <h1>PRODUCTOS RECOMENDADOS</h1>
         </div>
       }
-      <div className={style.carrusel}>
+      {<div className={style.carrusel}>
         <Carrusel/>
-      </div>
+      </div>}
       <div className={style.separador}></div>
       <Footer />
     </>
