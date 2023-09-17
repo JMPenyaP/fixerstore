@@ -31,6 +31,7 @@ const Cards = () => {
     ? data.pages.flatMap((page) => page.products).filter((product) => product.status === true)
     : [];
     
+    
 
     return (
         <>
@@ -48,7 +49,6 @@ const Cards = () => {
                             <Card product={product} />
                         </div>
                     )
-
                     )}
                 </div>
             </InfiniteScroll>
