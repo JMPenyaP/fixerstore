@@ -1,0 +1,10 @@
+.filtros{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    line-height: 70px;
+}
+.active{
+    position: absolute;
+    margin-right: 0px;
+}

@@ -1,21 +1,11 @@
 const { createProduct, getAllProducts, getProductByName, getProductById } = require("../controllers/productsControllers");
-const { firstImageFunction, imagesInCarrousel } = require('./utils/functionsCloudinary')
-//! Crear Producto
 
 
 const createProductsHandler = async (req, res) => {
-
-
-
-    try {
-        let { name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock } = req.body;
-
-
-        firstImage = await firstImageFunction(firstImage)
-
-        carrouselImage = await imagesInCarrousel(carrouselImage)
-
-        const newProduct = await createProduct(name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock);
+    
+    const{ name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock } = req.body;
+ try {
+     const newProduct = await createProduct(name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock);
 
         res.status(200).json({ producto: newProduct, create: true });
     } catch (error) {
