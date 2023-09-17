@@ -1,21 +1,15 @@
-import {ADMIN_PROFILE, ROLE} from "../actionTypes"
+import {ADMIN_PROFILE} from "../actionTypes"
 import axios from "axios"
 
 export const loginAdmin = (userData) => {
     try {
-        const endpoint = "/auth/login"
+        const endpoint = "http://localhost:3001/auth/login"
         return async (dispatch) => {
-            const {data} = await axios.get(endpoint, userData);
-            const {success, token} = data;
-            const role = token.role
+            const response= await axios.post(endpoint, userData);
+            console.log(response);
             dispatch({
                 type: ADMIN_PROFILE,
-                payload: success
-            },
-            {
-                type: ROLE,
-                payload: role
-            })
+                payload: response.data})
         }
     } 
     catch (error) {

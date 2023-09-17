@@ -24,7 +24,6 @@ const Home = () => {
         </div>
       }
       <div className={style.carrusel}>
-        {/* <p>Aqui va el carrusel</p> */}
         <Carrusel />
       </div>
       <div className={style.separador}></div>
