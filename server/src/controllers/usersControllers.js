@@ -1,5 +1,5 @@
 const { User } = require("../db");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
@@ -13,13 +13,23 @@ const createUserHandler = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await User.create({ email, password: hashedPassword, name, surname, phone, address, neighborhood, department })
-        res.status(201).json({ success: true, message: 'Registro de usuario exitoso' })
+        await User.create({
+            email,
+            password: hashedPassword,
+            name,
+            surname,
+            phone,
+            address,
+            neighborhood,
+            department
+        });
+
+        res.status(201).json({ success: true, message: 'Registro de usuario exitoso' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Error en el servidor' });
     }
-}
+};
 
 //! Obtener todos los Usuarios
 const getAllUsers = async () => {
@@ -36,7 +46,7 @@ const getUserByName = async (name) => {
 //! Obtener usuario por Email y devolver Rol
 const getUserByEmail = async (email) => {
     const user = await User.findOne({ where: { email } });
-    return user;
+    return user || false;
 }
 
 module.exports = {
