@@ -9,7 +9,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-// import SearchedProduct from "./paginas/SearchedProduct/SearchedProduct";
+import SearchedProduct from "./paginas/SearchedProduct/SearchedProduct";
 
 function App() {
   const navigate = useNavigate()
@@ -35,7 +35,7 @@ function App() {
           <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/admin" element={<LoginAdmin />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          {/* <Route path="SearchedProd" element={<SearchedProduct />} /> */}
+          <Route path="SearchedProd" element={<SearchedProduct />} />
         </Routes>
       </div>
     </>

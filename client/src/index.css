@@ -4,3 +4,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #fbfbfb;
 }
+*{
+  scroll-behavior: smooth;
+}

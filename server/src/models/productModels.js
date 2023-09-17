@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     date: {
@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     priceOfList: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false
     },
     statusOffer: {
