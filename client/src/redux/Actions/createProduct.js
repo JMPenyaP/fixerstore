@@ -7,16 +7,16 @@ export const createProduct = (product) => {
         const endpoint = 'http://localhost:3001/products/'
         return async (dispatch)=> {
             const response = await axios.post(endpoint, product)
-            const {producto, create} = response.data
+            const {data}= response
+            const {producto, create} = data
             if (create === true) {
-                const nuevo = producto[0]
                 dispatch({type: NEW_PRODUCT,
-                    payload: nuevo})
+                    payload: data})
             }
             else if (create === false) {
                 dispatch({
-                    type: CREATED_PRODUCT,
-                    payload: create
+                    type: NEW_PRODUCT,
+                    payload: data
                 })
             }       
         }

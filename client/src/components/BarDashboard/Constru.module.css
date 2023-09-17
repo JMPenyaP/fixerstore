@@ -6,8 +6,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 5px;
 }
-
+.tituloDash {
+  font-family: "Gotham";
+  color: #15214a;
+}
+.logo {
+  width: 10%;
+  height: 10%;
+}
 
 .titulo {
     border: none;
@@ -24,15 +32,29 @@
 }
 
 .img {
-    width: 35%;
-    height: 35%;
+    width: 25%;
+    height: 25%;
 }
 
 .p {
-    border: none;
-    font-size: 15px;
     padding: 8px 28px 8px 28px;
-    color: black;
     font-family: "Gotham";
-    width: auto;
+    font-size: 20px;
+    font-weight: 4px;
+    text-align: center;
+    animation: blink 3s infinite;
 }
+  @keyframes blink {
+    0% {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+    50% {
+      color: orange;
+      text-shadow: 0 0 10px orange;
+    }
+    100% {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+  }

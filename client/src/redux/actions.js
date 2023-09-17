@@ -30,4 +30,4 @@ import { loginAdmin } from "./Actions/loginAdmin";
 export const createProd = createProduct;
 export const getProductName = getProductByName;
 export const setFilters = setFilter;
-export const login = loginAdmin;
+export const login = loginAdmin
