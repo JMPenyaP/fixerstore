@@ -32,6 +32,7 @@ const rootReducer = (state = initialState, action) => {
     case SET_FILTER: {
       return { ...state, productName: action.payload };
     }
+
     default:
       return {
         ...state,

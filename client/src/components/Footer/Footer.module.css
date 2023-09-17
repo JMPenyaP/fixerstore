@@ -1,10 +1,11 @@
 .contact{
   display: flex;
   background: #3cbbed;
-  height: 350px;
+  height: 250px;
   color: aliceblue;
   flex-direction: column;
   justify-content: center;
+  font-size: small;
 }
 .tabla{
   display: flex;

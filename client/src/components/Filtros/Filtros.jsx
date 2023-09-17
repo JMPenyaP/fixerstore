@@ -1,60 +1,38 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FiltroCategoria from './FiltroCategoria'
+import OrderName from './OrderName'
+import OrderPrice from './OrderPrecio'
+import styles from './Filtros.module.css'
 
 export default function Filtros() {
-  const dispatch = useDispatch();
+/*   const dispatch = useDispatch();
   const productos = useSelector((state) => state.productos);
   const categorias = useSelector((state) => state.categorias);
   const toShow = useSelector((state) => state.toShow);
 
   const [categoria, setCategoria] = useState("Todas");
   const [order, setOrder] = useState("Ninguno");
-  const [precio, setPrecio] = useState("Todos");
+  const [precio, setPrecio] = useState("Todos"); */
   /* const [fecha, setFecha] = useState('Ninguna') */
 
-  /* const limpiarFiltros = () => {
-    dispatch(filterOptions(productos));
-    setCategoria("Todas");
-    setPrecio("Todos");
-    setOrder("Ninguno");
-  };
- */
+  const [orderName, setOrderName] = useState('DEFAULT')
+  const [orderPrecio, setOrderPrecio] = useState('DEFAULT')
+
   return (
     <>
-      <div>
+      <div className={styles.divMain}>
         <div>
-          <p>Categoría</p>
-          <select
-            onChange={(event) => handleFilter("categoria", event.target.value)}
-            defaultValue="Todas"
-            value={categoria}
-          >
-            <option value="Todas">Todas</option>
-            {diets.length &&
-              categorias?.map((cat, index) => (
-                <option key={index} value={cat.nombre}>
-                  {cat.nombre}
-                </option>
-              ))}
-          </select>
+          <FiltroCategoria orderName={orderName} setOrderName={setOrderName}
+          orderPrecio={orderPrecio} setOrderPrecio={setOrderPrecio}/>
         </div>
         <div>
-          <p>Nombre</p>
-          <select
-            onChange={(event) => handleFilter("order", event.target.value)}
-            defaultValue="Ninguno"
-            value={order}
-          >
-            <option value="Ninguno" disabled>
-              Ninguno
-            </option>
-            <option value="Ascendente">Ascendente</option>
-            <option value="Descendente">Descendente</option>
-          </select>
+          <OrderName orderName={orderName} setOrderName={setOrderName}
+          orderPrecio={orderPrecio} setOrderPrecio={setOrderPrecio}/>
         </div>
         <div>
-          <p>Precio</p>
-          <select name="" id=""></select>
+          <OrderPrice orderName={orderName} setOrderName={setOrderName}
+           orderPrecio={orderPrecio} setOrderPrecio={setOrderPrecio}/>
         </div>
       </div>
     </>

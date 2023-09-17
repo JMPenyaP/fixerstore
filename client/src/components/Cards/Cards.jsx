@@ -29,7 +29,7 @@ const Cards = () => {
     );
     
     const products = data ? data.pages.flat() : [];
-      console.log(data);
+      /* console.log(data); */
     return (
         <>
             <InfiniteScroll
