@@ -27,7 +27,7 @@ const getUserEmailHandler = async (req, res) => {
         if (user) {
             res.status(200).json({ success: true, message: "Email encontrado.", email: user.email, role: user.role });
         } else {
-            res.status(400).json({ success: false, message: "Email NO está registrado. " + error.message });
+            res.status(200).json({ success: false, message: "Email NO está registrado. " + error.message });
         }
     } catch (error) {
         res.status(400).json({ success: false, message: "Email NO está registrado. " + error.message });

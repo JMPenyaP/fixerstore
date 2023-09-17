@@ -1,9 +1,14 @@
 const server = require("./src/server");
 const { conn } = require('./src/db.js');
 const PORT = process.env.PORT || 3001;
-
-server.listen(PORT, () => {
-    conn.sync({ force: false });
-    console.log(`Success conextion to Port: ${PORT}`);
-});
-   
+const {createCategories}=require("./src/hardcoded/categories")
+const {createProducts}=require("./src/hardcoded/products")
+conn
+.sync({ force: true })
+.then(() => {
+   server.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+   })
+   createCategories()
+   createProducts()
+})
