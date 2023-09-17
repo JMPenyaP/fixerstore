@@ -55,9 +55,9 @@ const Carrusel = () => {
   return (
     <div className="divCarousel">
       <Slider {...settings}>
-        {products.map((prod) => {
+        {products.map((prod, index) => {
           return (
-            <div className="divImgsCarousel">
+            <div className="divImgsCarousel" key={index}>
               <h1>{prod.name}</h1>
               <img
                 src={prod.firstImage}
