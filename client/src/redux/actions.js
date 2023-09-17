@@ -29,3 +29,5 @@ import { setFilter } from "./Actions/setearFilter";
 export const createProd = createProduct;
 export const getProductName = getProductByName;
 export const setFilters = setFilter;
+import { loginAdmin } from "./Actions/loginAdmin";
+export const login = loginAdmin
