@@ -57,6 +57,7 @@ const DetailPage = () => {
             </div>
           </div>
           <div className={style.infoDiv}>
+            <h5>Unidades en Stock: {product.stock}</h5>
             <h1>{product.name}</h1>
             <h2>${product.priceOfList}</h2>
             <h3>{product.description}</h3>
