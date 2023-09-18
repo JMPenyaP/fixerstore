@@ -11,7 +11,7 @@ const FiltroCategoria = ({
   setOrderName,
   setOrderPrecio,
 }) => {
-  const [categoria, setCategoria] = useState("all");
+
   const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.allCategories);
 

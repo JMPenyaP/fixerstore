@@ -4,10 +4,12 @@ import Filtros from "../../components/Filtros/Filtros";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/Actions/getAllProducts";
 import style from "./Catalogo.module.css";
+import CardsArr from "../../components/Cards/CardsArr";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
-  const filtrosActivos = useSelector((state) => state.filtrosActivos);
+
+  const productosFiltrados = useSelector((state) => state.productosFiltrados);
   const allProducts = useSelector((state) => state.allProducts);
 
   const [filtroActivo, setFiltroActivo] = useState(false);
@@ -24,7 +26,6 @@ const Catalogo = () => {
     setFiltroActivo(!filtroActivo);
   };
 
-  console.log(allProducts);
   return (
     <>
       <div className={style.filtros}>
@@ -37,7 +38,7 @@ const Catalogo = () => {
         />
         {filtroActivo && <Filtros />}
       </div>
-      <Cards />
+      {!filtroActivo ? <Cards /> : (<CardsArr allProducts={productosFiltrados}/>) }
     </>
   );
 };
