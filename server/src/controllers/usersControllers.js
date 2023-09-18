@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
-    const { email, password, name, surname, phone, address, neighborhood, department } = req.body;
+    const { email, password, name, surname, phone, address, neighborhood, department, role} = req.body;
 
     try {
         const existingUser = await User.findOne({ where: { email } });
@@ -21,7 +21,8 @@ const createUserHandler = async (req, res) => {
             phone,
             address,
             neighborhood,
-            department
+            department,
+            role
         });
 
         res.status(201).json({ success: true, message: 'Registro de usuario exitoso' });
@@ -46,7 +47,12 @@ const getUserByName = async (name) => {
 //! Obtener usuario por Email y devolver Rol
 const getUserByEmail = async (email) => {
     const user = await User.findOne({ where: { email } });
-    return user || false;
+    if (user) {
+        return user;
+    } else if (!user) {
+        // No se encontró ningún usuario con el correo electrónico especificado
+        return false
+    }
 }
 
 module.exports = {

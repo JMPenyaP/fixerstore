@@ -12,41 +12,44 @@ const Cards = () => {
         fetchNextPage,
         hasNextPage,
     } = useInfiniteQuery(
-        "products",
+        ["products"],
         ({ pageParam = 1 }) => {
-          const apiUrl = `http://localhost:3001/pagination/?page=${pageParam}`;
-          return axios.get(apiUrl).then((response) => response.data.products);
-      },
-      {
-          getNextPageParam: (lastPage, pages) => {
-              if (lastPage.currentPage < lastPage.totalPages) {
-                  return lastPage.currentPage + 1;
-              } else {
-                  return null;
-              }
-          },
-      }
+            const apiUrl = `http://localhost:3001/pagination/?page=${pageParam}`;
+            return axios.get(apiUrl).then((response) => response.data);
+        },
+        {
+            getNextPageParam: (lastPage) => {
+                if (lastPage.currentPage === lastPage.totalPages) {
+                    return false;
+                }
+                return lastPage.currentPage + 1;
+            },
+        }
     );
+
+    const products = data
+    ? data.pages.flatMap((page) => page.products).filter((product) => product.status === true)
+    : [];
     
-    const products = data ? data.pages.flat() : [];
-      console.log(data);
+    
+
     return (
         <>
             <InfiniteScroll
                 dataLength={products.length}
                 hasMore={hasNextPage || isLoading}
-                next={() => {
-                  console.log('fetchNextPage llamado'); // Agrega esta línea
-                  fetchNextPage();
-              }}
-                loader={<Spinner />} 
+                next={() => fetchNextPage()}
+                loader={<Spinner />}
             >
                 <div className={styles.divCards}>
-                    {products.map((product) => (
+                    {products.map((product) => 
+                    
+                    (
                         <div key={product.id}>
                             <Card product={product} />
                         </div>
-                    ))}
+                    )
+                    )}
                 </div>
             </InfiniteScroll>
         </>

@@ -1,129 +1,137 @@
-import style from "../../components/BarDashboard/Constru.module.css"
+
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as actions from "../../redux/actions"
+import style from "./FormProduct.module.css"
 
 const FormProduct = () => {
     const dispatch = useDispatch()
     const {handleSubmit, control, formState: {errors}, trigger, setValue} = useForm()
-    const createProduct = useSelector(state => state.product_creado)
+    const createProduct = useSelector(state => state.createdProduct)
+    const categories = useSelector(state => state.allCategories)
+    const [categorias, setCategorias] =useState([
+      { id: 1, name: 'Categoría 1' },
+      { id: 2, name: 'Categoría 2' },
+      { id: 3, name: 'Categoría 3' },
+    ])
     const [creado, setCreado] = useState(createProduct)
     const [principal, setPrincipal] = useState("")
     const [carrusel, setCarrusel] = useState([])
     useEffect(() => {
         setCreado(createProduct);
-      }, [createProduct]);
-    const [showPercentageInput, setShowPercentageInput] = useState(false);
-    const currentDate = new Date().toISOString().substr(0, 10);
+        if (categories) {
+          setCategorias(categories)
+        }
+      }, [createProduct, categories]);
+    const [showPercentageInput, setShowPercentageInput] = useState(null);
+    const currentDate = new Date().toLocaleDateString('es-CO', { timeZone: 'America/Bogota' });
     const togglePercentageInput = (value) => {
         setShowPercentageInput(value);
       };
-      const handleCarruselChange = async (e) => {
-        const files = e.target.files;
-        let formData = new FormData();
-        const uploadedImageUrls = []; // Arreglo para almacenar las URLs de las imágenes cargadas
-      
-        if (files.length > 0) {
-          const arrayOfFiles = Array.from(files);
-      
-          // Utiliza Promise.all para realizar todas las solicitudes en paralelo
+    const handleCarruselChange = async (e) => {
+      const files = e.target.files;
+      let formData = new FormData();
+      const uploadedImageUrls = [];
+      if (files.length > 0) {
+        const arrayOfFiles = Array.from(files);
           await Promise.all(
             arrayOfFiles.map(async (file) => {
-              formData = new FormData(); // Crea un nuevo formData para cada archivo
-              formData.append("file", file);
-              formData.append("upload_preset", "to62brlp");
-      
-              try {
-                const res = await fetch("https://api.cloudinary.com/v1_1/dgxp4c4yk/image/upload", {
-                  method: "POST",
-                  body: formData,
-                });
-      
-                if (res.status === 200) {
-                  const data = await res.json();
-                  uploadedImageUrls.push(data.secure_url); // Agrega la URL al arreglo
-                } else {
-                  console.error("Error al cargar el archivo a Cloudinary:", res.statusText);
-                }
-              } catch (error) {
-                console.error("Error en la solicitud:", error);
-              }
-            })
-          );
-      
-          // Una vez que todas las solicitudes se completen, actualiza el estado Carrusel
-          setCarrusel(uploadedImageUrls);
-        }
-      };
-      
-    const handleImageChange = async (e) => {
-        const files = e.target.files; // Cambiar de e.target.value a e.target.files
-        const formData = new FormData();
-        if (files.length > 0) { // Verifica si se seleccionó al menos un archivo
-          formData.append("file", files[0]);
-          formData.append("upload_preset", "to62brlp");
+            formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "to62brlp");
       
           try {
-            const res = await fetch("https://api.cloudinary.com/v1_1/dgxp4c4yk/image/upload", 
-            { method: "POST",
-            body:formData});
-            console.log(res);
-            if (res.status === 200) {
-            const data = await res.json();
-            setPrincipal(data.secure_url)
-            } else {
-              console.error("Error al cargar el archivo a Cloudinary:", res.statusText);
+              const res = await fetch("https://api.cloudinary.com/v1_1/dgxp4c4yk/image/upload", {
+                method: "POST",
+                body: formData,
+              });
+              if (res.status === 200) {
+                const data = await res.json();
+                uploadedImageUrls.push(data.secure_url);
+              }
+              else {
+                console.error("Error al cargar el archivo a Cloudinary:", res.statusText);
+              }
+            } 
+          catch (error) {
+              console.error("Error en la solicitud:", error);
             }
-          } catch (error) {
+          })
+          );
+        setCarrusel(uploadedImageUrls);
+      }
+    };
+    const handleImageChange = async (e) => {
+      const files = e.target.files;
+      const formData = new FormData();
+      if (files.length > 0) {
+        formData.append("file", files[0]);
+        formData.append("upload_preset", "to62brlp");
+        try {
+          const res = await fetch("https://api.cloudinary.com/v1_1/dgxp4c4yk/image/upload", 
+          { method: "POST",
+          body:formData});
+          console.log(res);
+          if (res.status === 200) {
+          const data = await res.json();
+          setPrincipal(data.secure_url)
+          }
+          else {
+            console.error("Error al cargar el archivo a Cloudinary:", res.statusText);
+          }
+          }
+          catch (error) {
             console.error("Error en la solicitud:", error);
           }
-        }
-      };
-    const categorias = [
-        { id: 1, nombre: 'Categoría 1' },
-        { id: 2, nombre: 'Categoría 2' },
-        { id: 3, nombre: 'Categoría 3' },
-    ];
-    console.log(carrusel.length);
+      }
+    };
     const onSubmit = async (data) => {
-        data.firstImage = principal
-        data.carrouselImage = carrusel
-        console.log(data)
-        dispatch(actions.createProd(data))
+      data.firstImage = principal
+      data.carrouselImage = carrusel
+      dispatch(actions.createProd(data))
     }
     return (
         <div className={style.div}>
             <h2 className={style.titulo}>Crear producto</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label htmlFor="name">Nombre del producto</label>
+            <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="name">Nombre del producto</label>
+                    <div className={style.divInput}>
                     <Controller name="name"
                     control={control}
                     defaultValue=""
-                    rules={{ required: 'Este campo es obligatorio' }}
+                    rules={{ required: 'Este campo es obligatorio', maxLength: {value: 30,message: 'El nombre no puede tener más de 30 caracteres'}} }
                     render={({ field }) => (
-                    <input type="text" {...field} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
-                    {errors.name && <p>{errors.name.message}</p>}
+                    <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
+                    <div className={style.errorMenssage}>
+                    {errors.name && <p className={style.errorText}>{errors.name.message}</p>}
+                    </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="categoryId">Categoria</label>
-                    <Controller
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="categoryId">Categoria</label>
+                    <div className={style.divInput}>
+                      <Controller
                     name="categoryId"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Seleccione una categoría' }}
                     render={({ field }) => (
-                    <select {...field} onChange={(e) => {field.onChange(e); trigger("categoryId"); }}> 
+                    <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("categoryId"); }}> 
                         <option value="" disabled> Seleccione una categoría </option>
                         {categorias.map((categoria) => (
                         <option key={categoria.id} value={categoria.id}>
-                            {categoria.nombre}</option>))}
+                            {categoria.name}</option>))}
                     </select>)} />
-                    {errors.categoryId && <p>{errors.categoryId.message}</p>}
+                    <div className={style.errorMenssage}>
+                    {errors.categoryId && <p className={style.errorText}>{errors.categoryId.message}</p>}
+                    </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="firstImage">Imagen del producto</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="firstImage">Imagen principal del producto</label>
+                    <div className={style.divInput}>
                     <Controller
                     name="firstImage"
                     control={control}
@@ -139,12 +147,14 @@ const FormProduct = () => {
                         }}
                     />
                     )}/>
-                    {errors.firstImage && <p>{errors.firstImage.message}</p>}
-                    {principal && (<div><img src={principal} alt="Vista previa" style={{maxWidth: '50px' }} />
-                    </div>)}
+                    <div className={style.errorMenssage}>
+                    {errors.firstImage && <p className={style.errorText}>{errors.firstImage.message}</p>}
+                    </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="carrouselImage">Imagen del producto</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="carrouselImage">Imagenes para carrusel</label>
+                    <div className={style.divInput}>
                     <Controller
                     name="carrouselImage"
                     control={control}
@@ -161,13 +171,24 @@ const FormProduct = () => {
                         }}
                     />
                     )}/>
-                    {errors.firstImage && <p>{errors.firstImage.message}</p>}
+                    <div className={style.errorMenssage}>
+                      {errors.carrouselImage && <p className={style.errorText}>{errors.carrouselImage.message}</p>}
+                    </div>
+                    </div>
+                </div> 
+                <div className={style.divCampo}>
+                  <label className={style.label} htmlFor="carrouselImage">Vista previa de imagenes</label>
+                  <div>
                     {carrusel.length > 0 && (<div>{carrusel.map((carru)=>(<img src={carru} alt="Vista previa" style={{maxWidth: '50px' }} />))}
                     </div>)}
-                </div> 
-                <div>
-                    <label htmlFor="priceOfList">Precio del producto</label>
-                    <p>$</p>
+                    {principal && (<div><img src={principal} alt="Vista previa" style={{maxWidth: '50px' }} />
+                    </div>)}
+                  </div>
+                </div>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="priceOfList">Precio del producto</label>
+                    <div className={style.divInput}>
+                    <p className={style.p}>$</p>
                     <Controller
                     name="priceOfList"
                     control={control}
@@ -179,23 +200,26 @@ const FormProduct = () => {
                             message: 'Ingrese un precio válido (ejemplo: 20000)',},
                         }}
                     render={({ field }) => (
-                    <input {...field} onChange={(e) => {field.onChange(e); trigger('priceOfList'); }}/>)}
+                    <input className={style.input} min="0" type="number" {...field} onChange={(e) => {field.onChange(e); trigger('priceOfList'); }}/>)}
                     />
-                    {errors.priceOfList && <p>{errors.priceOfList.message}</p>}
+                    <div className={style.errorMenssage}>
+                    {errors.priceOfList && <p className={style.errorText} >{errors.priceOfList.message}</p>}
+                    </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="descripcion">Descripción:</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="descripcion">Descripción:</label>
                     <Controller
                     name="description"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Este campo es obligatorio', maxLength: {value: 200,message: 'La descripción no puede tener más de 200 caracteres'}}}
-                    render={({ field }) => <textarea {...field} onChange={(e) => {field.onChange(e); trigger('description'); }} />}
+                    render={({ field }) => <textarea className={style.inputext} {...field} onChange={(e) => {field.onChange(e); trigger('description'); }} />}
                     />
                     {(errors.description && <p>{errors.description.message}</p>)}
                 </div>
-                <div>
-                    <label htmlFor="date">Fecha de publicación:</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="date">Fecha de publicación:</label>
                     <Controller
                     name="date"
                     control={control}
@@ -206,15 +230,16 @@ const FormProduct = () => {
                     />
                     {(errors.date && <p>{errors.date.message}</p>)}
                 </div>
-                <div>
-                    <label htmlFor="statusOffer">¿Producto en oferta?</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="statusOffer">¿Producto en oferta?</label>
+                    <div>
                     <Controller
                     name="statusOffer"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Este campo es obligatorio' }}
                     render={({ field }) => (
-                    <select {...field} onChange={(e) => {
+                    <select className={style.select} {...field} onChange={(e) => {
                         field.onChange(e);
                         trigger('statusOffer');
                         togglePercentageInput(e.target.value === 'true');}}>
@@ -224,10 +249,12 @@ const FormProduct = () => {
                     </select>)}
                     />
                     {errors.statusOffer && <p>{errors.statusOffer.message}</p>}
+                    </div>
                 </div>
                 {showPercentageInput && (
-                <div>
-                    <label htmlFor="offer">Porcentaje de oferta</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="offer">Porcentaje de oferta</label>
+                    <div className={style.divInput}> 
                     <Controller
                     name="offer"
                     control={control}
@@ -235,7 +262,7 @@ const FormProduct = () => {
                     rules={{ required: 'Este campo es obligatorio' }}
                     render={({ field }) => (
                     <div>
-                        <select {...field}>
+                        <select className={style.select} {...field}>
                             <option value="0" disabled> Seleccione un %</option>
                             {[...Array(19)].map((_, index) => (
                             <option key={index} value={(index + 1) * 5}> {(index + 1) * 5}% </option>
@@ -245,28 +272,31 @@ const FormProduct = () => {
                     )}
                     />
                     {errors.offer && <p>{errors.offer.message}</p>}
+                    </div>
                 </div>)}
-                <div>
-                    <label htmlFor="status">Estado</label>
-                    <Controller
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="status">Estado</label>
+                    <div className={style.divInput}>                    
+                      <Controller
                     name="status"
                     control={control}
                     defaultValue=""
                     rules={{ required: 'Este campo es obligatorio' }}
                     render={({ field }) => (
-                    <select {...field} onChange={(e) => {
+                    <select className={style.select} {...field} onChange={(e) => {
                         field.onChange(e);
-                        trigger('status');
-                        togglePercentageInput(e.target.value === 'true');}}>
-                            <option value="" disabled> Seleccione un estado</option>
+                        trigger('status');}}>
+                            <option value="" disabled>Seleccione un estado</option>
                             <option value="true">Disponible</option>
                             <option value="false">No disponible</option>
                     </select>)}
                     />
                     {errors.statusOffer && <p>{errors.statusOffer.message}</p>}
+                    </div>
                 </div> 
-                <div>
-                    <label htmlFor="stock">Stock</label>
+                <div className={style.divCampo}>
+                    <label className={style.label} htmlFor="stock">Stock</label>
+                    <div className={style.divInput}> 
                     <Controller
                     name="stock"
                     control={control}
@@ -277,10 +307,11 @@ const FormProduct = () => {
                             value: /^[0-9]*$/,
                             message: 'Ingresa un valor numérico válido',},}}
                     render={({ field }) => (
-                        <input {...field} type="number" placeholder="Ingrese el stock"/>
+                        <input className={style.input} {...field} min="0" type="number" placeholder="Ingrese el stock"/>
                     )}
                     />
                     {errors.stock && <p>{errors.stock.message}</p>}
+                    </div>
                 </div>
                 <div>
                 {creado === true ? (<><span>Producto creado</span></>) : (creado === false ? (<><span>No pudo crearse el producto</span></>) : null)}

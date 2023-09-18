@@ -1,15 +1,15 @@
 const {Category} = require("../db");
 const categories = [
-  { name: "productos exclusivos" },
-  { name: "cordones" },
-  { name: "hormas" },
-  { name: "plantillas" },
-  { name: "taloneras" },
-  { name: "cepillos" },
-  { name: "productos para limpieza" },
-  { name: "productos para el cuidado" },
-  { name: "calzadores" },
-  { name: "productos para zapatos formales" },
+  { name: "Productos exclusivos" },
+  { name: "Cordones" },
+  { name: "Hormas" },
+  { name: "Plantillas" },
+  { name: "Taloneras" },
+  { name: "Cepillos" },
+  { name: "Productos para limpieza" },
+  { name: "Productos para el cuidado" },
+  { name: "Calzadores" },
+  { name: "Productos para zapatos formales" },
 ];
 
 const createCategories = async () => {

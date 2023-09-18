@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { orderLetter } from "../../redux/Actions/orderLetter";
+import { orderPrice } from "../../redux/Actions/orderPrice";
+import { useState } from "react";
 import style from './select.module.css'
 
-export default function OrderName({
-  orderName,
+export default function OrderPrecio({orderName,
   setOrderName,
   orderPrecio,
-  setOrderPrecio,
-}) {
+  setOrderPrecio,}) {
+
   const dispatch = useDispatch();
 
   const handleSelect = (value) => {
-    setOrderPrecio("DEFAULT");
+    setOrderName("DEFAULT");
     switch (value) {
       case "Ascendente":
-        setOrderName("Ascendente");
-        dispatch(orderLetter(value));
+        setOrderPrecio("Ascendente");
+        dispatch(orderPrice(value));
         break;
 
       default:
-        setOrderName("Descendente");
-        dispatch(orderLetter(value));
+        setOrderPrecio("Descendente");
+        dispatch(orderPrice(value));
         break;
     }
   };
@@ -29,13 +29,15 @@ export default function OrderName({
   return (
     <>
       <div>
-        <select
+      <select
           onChange={(event) => handleSelect(event.target.value)}
           defaultValue="DEFAULT"
-          value={orderName}
+          value={orderPrecio}
           className={style.selectBox}
         >
-          <option value="DEFAULT" disabled>Nombre</option>
+          <option value="DEFAULT" disabled>
+            Precio
+          </option>
           <option value="Ascendente">Ascendente</option>
           <option value="Descendente">Descendente</option>
         </select>

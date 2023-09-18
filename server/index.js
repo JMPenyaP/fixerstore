@@ -3,7 +3,7 @@ const { conn } = require('./src/db.js');
 const PORT = process.env.PORT || 3001;
 const { createCategories } = require("./src/hardcoded/categories")
 const { createProducts } = require("./src/hardcoded/products")
-const { createUsers } = require('./src/hardcoded/users');
+const { createAdmin } = require("./src/hardcoded/user")
 conn
    .sync({ force: true })
    .then(() => {
@@ -12,5 +12,5 @@ conn
       })
       createCategories()
       createProducts()
-      createUsers();
+      createAdmin()
    })
