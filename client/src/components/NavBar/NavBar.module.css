@@ -1,7 +1,7 @@
 .divNavBar {
     display: flex;
     height: 60px;
-    padding: 50px 60px 50px 50px;
+    padding: 25px 30px 25px 30px;
     justify-content: space-between;
     align-items: center;
     align-content: center;
@@ -15,7 +15,7 @@
 
 .logo {
     height: 60px;
-    width: 284px;
+    width: 250px;
 }
 
 /* BUTTONS */
@@ -69,6 +69,10 @@
     cursor: pointer;
 }
 
+.searchBarDiv button h5{
+    font-family: 'Gotham Black', sans-serif;
+}
+
 .searchBarDiv button img {
     height: 100%;
     width: 100%;
@@ -92,6 +96,7 @@
     transition: 0.6s;
     overflow: hidden;
     z-index: 99999999999;
+    font-family: 'Gotham Black', sans-serif;
 }
 
 .userLetter:hover {

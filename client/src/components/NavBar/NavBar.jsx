@@ -7,7 +7,13 @@ import { useState } from "react";
 const Navbar = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const productName = useSelector((state) => state.productName);
+  const dataProfile = useSelector((state) => state.dataProfile)
+
+  let letter = "A"
+
+  if (dataProfile != null) {
+    letter = dataProfile.name.charAt(0);
+  }
 
   const handleChange = (event) => {
     const updatedName = event.target.value; // MIENTRAS CAMBIA EL INPUT TAMBIEN LO HACE EL NAME
@@ -36,12 +42,12 @@ const Navbar = () => {
       />
       <div className={style.divButtonsNav}>
         <Link to="/">
-          <button>Inicio</button>
+          <button><h5>Inicio</h5></button>
         </Link>
         <Link to="/productos">
-          <button>Productos</button>
+          <button><h5>Productos</h5></button>
         </Link>
-        <button>Quienes Somos</button>
+        <button><h5>Quienes Somos</h5></button>
       </div>
       <div className={style.searchBarDiv}>
         <input
@@ -59,7 +65,9 @@ const Navbar = () => {
           </button>
         </Link>
       </div>
-      <div className={style.userLetter}>A</div>
+      <div className={style.userLetter}>
+        {letter}
+      </div>
 {/*       <div className={style.carritoDiv}>
         <img
           src="https://s3-alpha-sig.figma.com/img/12c3/1118/bb819854018b2e238fa8383bbc4dbc58?Expires=1695600000&Signature=lPvxgur06egYS0OhwWAM1GfdJRgREFP694bOi99E7DCMjPQbhtrlb2kTSZ00905WpfUYpOw2zfwHOFsx~e3sKpbkBQCUdiY-nTavcHquK2wrPaiQag5r7-aFv3ntKGU9iy4lKBizSJ5K3z0kGeJ9xg-ND0yExebRRMCZLrYmDPwy2Dk-w1-YBJCV~ln0CJTBuFfGwhuX-x5JljAzmH40NQFm2w7J8J6PWISaHteB0Tm9zVNBWzYs~6OjZOC-h~eaYNJIgKQZM-JWc6ntHTwgis6xTx0k2v2vvxRANqhZmlmpsgcoMfQNbCi1IdqfbAgz48J00zRtos4acXhZmZvYBw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"

@@ -1,4 +1,4 @@
-import "./index.css";
+import "./carrusel.css";
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import axios from "axios";
@@ -65,10 +65,9 @@ const Carrusel = () => {
                 className="carouselImage"
               />
               <h3>$ {prod.priceOfList}</h3>
-              <h3>{prod.description}</h3>
               <Link to={`/detail/${prod.id}`}>
                 <div className="divButton">
-                  <button>Ver Producto</button>
+                  <button><h5>Ver Producto</h5></button>
                 </div>
               </Link>
             </div>
