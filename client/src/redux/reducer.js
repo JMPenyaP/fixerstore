@@ -37,7 +37,7 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case NEW_PRODUCT: {
-      return { ...state, createdProduct: action.payload.create }; // Agregar al global de productos al principio
+      return { ...state, createdProduct: action.payload.producto[1] }; // Agregar al global de productos al principio
     }
 
     case ROLE: {
