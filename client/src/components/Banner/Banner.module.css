@@ -3,24 +3,49 @@
   height: 600px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap:50px
+  position: relative; /* Agregamos position: relative; al contenedor */
 }
-.fondo div {
+/* .fondo div {
   margin: 10px;
-}
+} */
 .cita {
+  width: 50%;
   display: flex;
   flex-direction: column;
+  gap: 40px;
+  text-transform: uppercase;
+}
+.peq{
+  display: flex;
+  text-transform: lowercase;
+  justify-content: center;
+}
+.imagenContainer {
+  width: 70%;
+  height: auto;
 }
 .imagen {
-  width: 40%;
-  height: 492px;
+  width: auto;
+  height: 500px;
+  border-top-left-radius: 400px;
+  border-bottom-left-radius: 400px;
+  position: relative;
+  background-image: url('../../assets/Zapato\ y\ Porducto.png');
+  border-style: none;
+  background-size: cover;
+  background-color: #3cbbed; 
+
+}
+/* .imagen2 {
+  width: 45vh;
+  height: 600px;
   border-radius: 10px;
   position: relative;
-  background-image: url('../../assets/IMG_2122.jpg');
+  background-image: url('../../assets/Mesa\ de\ trabajo\ 1-8.png');
   border-style: none;
-}
+  background-size: cover;
+  z-index: 1; 
+} */
 @font-face{
   font-family: "promo";
   src: url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
@@ -28,22 +53,21 @@
 .promo {
   font-family: "promo";
   display: flex;
-  width: 459px;
+  width: auto;
   height: 0px;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
   text-align: center;
-  line-height: normal;
   color: #2c2d32;
   font-size: 50px;
+  font-weight: 600;
 }
 .link {
   text-decoration: none;
 }
 .divButton {
-  margin-top: 90px;
-  margin-left: auto;
+  margin-top: 60px;
 }
 
 .divButton button {

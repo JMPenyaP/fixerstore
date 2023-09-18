@@ -20,7 +20,7 @@ const Card = ({product}) => {
 
             <div className={styles.divInfo}>
                 <span className={styles.span} >{product.name}</span>|
-                <span >${product.id}</span>
+                <span >${product.priceOfList}</span>
             </div>
             <Link to={`/detail/${product.id}`} >
                 <div className={styles.divButton}>

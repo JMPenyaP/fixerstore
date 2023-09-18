@@ -26,7 +26,7 @@
     align-items: center;
     height: 350px;
     width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.475);
+    background-color: rgba(240, 240, 240, 0.475);
     padding: 50px 15px 50px 15px;
 }
 
@@ -92,25 +92,34 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
+    align-items: start;
     width: 40%;
-    height: 100%;
+    height: 80%;
+    margin-bottom: auto;
 }
+
 
 .infoDiv h3 {
     font-size: 15px;
 }
 
 .infoDiv h1 {
-    font-size: 44px;
+    font-size: 38px;
     color: #3cbbed;
+    max-width: 100%;
+    white-space: wrap;
+    text-align: start;
+}
+
+.infoDiv h5{
+    margin-right: auto;
 }
 
 /* BUTTON */
 
 .divButton {
-    margin-top: 90px;
+    margin-left: auto;
 }
 
 .divButton button {
@@ -152,4 +161,18 @@
 .divButton button:hover::before {
     width: 100%;
     opacity: 1;
+}
+
+
+/* WHATSAPP */
+.buttonwpp a {
+    text-decoration: none;
+}
+
+
+
+
+.buttonwpp ion-icon {
+    font-size: 40px;
+    color: green;
 }

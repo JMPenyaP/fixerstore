@@ -1,0 +1,6 @@
+.filtros{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    line-height: 70px;
+}

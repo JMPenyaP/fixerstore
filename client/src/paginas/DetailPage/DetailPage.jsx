@@ -1,6 +1,6 @@
 import style from "./DetailPage.module.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const DetailPage = () => {
@@ -57,11 +57,17 @@ const DetailPage = () => {
             </div>
           </div>
           <div className={style.infoDiv}>
+            <h5>Unidades en Stock: {product.stock}</h5>
             <h1>{product.name}</h1>
             <h2>${product.priceOfList}</h2>
             <h3>{product.description}</h3>
             <div className={style.divButton}>
-              <button>Agregar Al Carrito</button>
+{/*               <button>Agregar Al Carrito</button> */}
+              <div className={style.buttonwpp}>
+                <Link target="_blank" to={`https://api.whatsapp.com/send?phone=573102909092&text=Hola%20estoy%20interesado(a)%20en%20saber%20mas%20informacion%20acerca%20del%20producto%20${product.name}`}>
+                  <ion-icon name="logo-whatsapp"></ion-icon>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

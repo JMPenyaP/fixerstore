@@ -1,37 +1,50 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../redux/Actions/getCategories";
+import { filterCategories } from "../../redux/Actions/filterCategories";
+import { orderLetter } from "../../redux/Actions/orderLetter";
+import style from './select.module.css'
 
-const FiltroCategoria = () => {
-    // const dispatch = useDispatch();
-    // const allGenres = useSelector( state => state.allGenres )
-    
-    // useEffect(() => {
-    //     dispatch( getAllGenres() )
-    // },[ dispatch ]);
-    
-    // const handleSelect =  ( event ) => {
-    //     const value = event.target.value;
-    //     dispatch( filterGenre( value ));
-    // };
-    return ( 
-        <>
-            <div>
-                {/* <select onChange={handleSelect}> */}
-                <select>
-                    <option  disabled selected value="DEFAULT">Category</option>
-                    <option value="all">All</option>
-                    <option value="limpieza">Limpieza</option>
-                    <option value="servicio">Servicio</option>
-                    <option value="cuidado">Cuidado</option>
-                    {/* {
-                        allCategory.map(( category, index ) => {
-                            return(
-                                <option  value={ category } key={ index } > { category } </option>
-                            )
-                        })    
-                    } */}
-                </select>
-            </div>
-        </>
-     );
-}
- 
+const FiltroCategoria = ({
+  orderName,
+  orderPrice,
+  setOrderName,
+  setOrderPrecio,
+}) => {
+
+  const dispatch = useDispatch();
+  const allCategories = useSelector((state) => state.allCategories);
+
+  useEffect(() => {
+    allCategories?.length === 0 && dispatch(getCategories());
+  },[allCategories, dispatch]);
+
+  const handleSelect = (event) => {
+    const value = event.target.value;
+    dispatch(orderLetter())
+    setOrderName('DEFAULT')
+    setOrderPrecio('DEFAULT')
+    dispatch(filterCategories(value));
+  };
+  return (
+    <>
+      <div>
+        <select onChange={handleSelect} className={style.selectBox}>
+          <option disabled selected value="DEFAULT">
+            Categoria
+          </option>
+          <option value="all">All</option>
+          {allCategories?.map((category, index) => {
+            return (
+              <option value={category.id} key={index}>
+                {category.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    </>
+  );
+};
+
 export default FiltroCategoria;
