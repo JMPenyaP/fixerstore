@@ -9,7 +9,7 @@
     gap: 5px;
 }
 .tituloDash {
-  font-family: "Gotham";
+  font-family: "Gotham", sans-serif;
   color: #15214a;
 }
 .logo {
@@ -27,7 +27,7 @@
     transition: 0.2s;
     background-color: #3cbbed;
     transition: 0.3s;
-    font-family: "Gotham";
+    font-family: "Gotham", sans-serif;
     width: auto;
 }
 
@@ -38,7 +38,7 @@
 
 .p {
     padding: 8px 28px 8px 28px;
-    font-family: "Gotham";
+    font-family: "Gotham", sans-serif;
     font-size: 20px;
     font-weight: 4px;
     text-align: center;
