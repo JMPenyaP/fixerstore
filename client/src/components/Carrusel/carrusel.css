@@ -1,0 +1,113 @@
+.carouselImage {
+    height: 500px;
+    width: 100%;
+}
+
+.slick-list {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.slick-initialized {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.divImgsCarousel:focus {
+    outline: none;
+    border: none;
+}
+
+.divImgsCarousel:hover {
+    background-color: #2988ad07;
+}
+
+.divImgsCarousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    padding-bottom: 10px;
+}
+
+.divImgsCarousel img {
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
+
+.divImgsCarousel h4 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* Puedes establecer un ancho máximo si lo deseas */
+    max-width: 60%;
+    /* Ajusta el valor según tus preferencias */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.divImgsCarousel h1 {
+    color: #2987ad;
+}
+
+
+.divButton {
+    margin-top: 3px;
+}
+
+.divButton button {
+    border: none;
+    font-size: 18px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    border: 1px solid #3cbbed;
+    color: #3cbbed;
+    background-color: transparent;
+    transition: 0.3s;
+    overflow: hidden;
+    z-index: 99999999999999;
+}
+
+.divButton button h5{
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Gotham', sans-serif;
+}
+
+.divButton button:hover {
+    color: white;
+}
+
+.divButton button::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.4s;
+    opacity: 0.5;
+}
+
+.divButton button:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+.slick-arrow::before {
+    font-size: 40px;
+    color: #3cbbed;
+}

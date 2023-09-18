@@ -7,7 +7,6 @@ export const getProductByName = (name) => {
       const apiData = await axios.get(`http://localhost:3001/products/?name=${name}`);
 
       const product = apiData.data;
-      console.log(product);
       dispatch({ type: GET_NAME, payload: product });
     } catch (error) {
       // Manejamos el error de la llamada a la API
