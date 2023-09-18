@@ -27,7 +27,6 @@ function App() {
   }, [adminPass, location.pathname, navigate]);
   return (
     <>
-      <div className="App">
         {!isLoginPage && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,7 +36,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="searchedprod/:name" element={<SearchedProduct />} />
         </Routes>
-      </div>
     </>
   );
 }
