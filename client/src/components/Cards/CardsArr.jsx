@@ -3,6 +3,7 @@ import Footer from "../Footer/Footer";
 import styles from './Cards.module.css'
 
 const CardsArr = ({allProducts}) => {
+    const allProductsFiltrado = allProducts?.filter(product => product.status === true)
     return ( 
         <>
         <div className={styles.divCards}>
@@ -11,7 +12,7 @@ const CardsArr = ({allProducts}) => {
                          <span>LOADING...</span>
                      </div>
                  ) : (
-                     allProducts?.map((product) => (
+                     allProductsFiltrado?.map((product) => (
 
                         <div key={product.id}>
                             <Card product={product} />
@@ -20,7 +21,6 @@ const CardsArr = ({allProducts}) => {
                      ))
                  )}
              </div>
-             <Footer />
         </>
      );
 }

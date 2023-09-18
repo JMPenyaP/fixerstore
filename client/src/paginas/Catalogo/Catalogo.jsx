@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/Actions/getAllProducts";
 import style from "./Catalogo.module.css";
 import CardsArr from "../../components/Cards/CardsArr";
+import Footer from "../../components/Footer/Footer";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
@@ -22,23 +23,36 @@ const Catalogo = () => {
     allProducts?.length === 0 && dispatch(getAllProducts());
   }, [allProducts, dispatch]);
 
-  const handleCheckboxChange = () => {
+  const handleCheckboxChange = (event) => {
+    const { checked } = event.target;
+    if(checked===false){
+      dispatch(getAllProducts())
+    }
     setFiltroActivo(!filtroActivo);
   };
 
   return (
     <>
-      <div className={style.filtros}>
-        <h3>Filtros</h3>
-        <input
-          className={style.active}
-          type="checkbox"
-          checked={filtroActivo}
-          onChange={handleCheckboxChange}
-        />
-        {filtroActivo && <Filtros />}
+      <div>
+          <h3>Filtros</h3>
+          <input
+            className={style.active}
+            type="checkbox"
+            checked={filtroActivo}
+            onChange={(event)=>handleCheckboxChange(event)}
+          />
+          {filtroActivo && <Filtros />}
       </div>
-      {!filtroActivo ? <Cards /> : (<CardsArr allProducts={productosFiltrados}/>) }
+      <div>
+        {filtroActivo ? (
+          <>
+            <CardsArr allProducts={productosFiltrados} />
+            <Footer />
+          </>
+        ) : (
+          <Cards />
+        )}
+      </div>
     </>
   );
 };
