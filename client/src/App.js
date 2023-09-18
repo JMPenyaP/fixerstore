@@ -6,9 +6,7 @@ import DetailPage from "./paginas/DetailPage/DetailPage";
 import Home from "./paginas/Home/Home";
 import Navbar from "./components/NavBar/NavBar";
 import { Routes, Route } from "react-router-dom";
-// test
-import FormProductTest from "./components/FormProduct/FormProductTest";
-// end test
+
 
 function App() {
 
