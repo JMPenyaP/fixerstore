@@ -2,6 +2,7 @@ import style from "./SearchedProduct.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../components/Card/Card";
 import { Spinner } from "../../components/Carga/Carga";
+import Footer from "../../components/Footer/Footer";
 
 const SearchedProduct = () => {
   const products = useSelector((state) => state.productByName);
@@ -16,6 +17,7 @@ const SearchedProduct = () => {
   }
 
   return (
+    <>
     <div className={style.divSearchedProduct}>
       {showNoProductsMessage ? (
         productsData.map((prod) => <Card product={prod} />)
@@ -26,6 +28,8 @@ const SearchedProduct = () => {
         </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Spinner } from "../Carga/Carga";
 import Card from "../Card/Card";
 import styles from './Cards.module.css'
+import Footer from "../Footer/Footer";
 
 const Cards = () => {
     const {
@@ -51,6 +52,7 @@ const Cards = () => {
                     )
                     )}
                 </div>
+                <Footer />
             </InfiniteScroll>
         </>
     );
