@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltroCategoria from './FiltroCategoria'
 import OrderName from './OrderName'
 import OrderPrice from './OrderPrecio'
 import styles from './Filtros.module.css'
+import { getAllProducts } from "../../redux/Actions/getAllProducts";
 
 export default function Filtros() {
 /*   const dispatch = useDispatch();
@@ -15,6 +16,12 @@ export default function Filtros() {
   const [order, setOrder] = useState("Ninguno");
   const [precio, setPrecio] = useState("Todos"); */
   /* const [fecha, setFecha] = useState('Ninguna') */
+  // const dispatch = useDispatch();
+  // useEffect(()=>{
+  //   return ()=>{
+  //     dispatch(getAllProducts())
+  //   }
+  // })
 
   const [orderName, setOrderName] = useState('DEFAULT')
   const [orderPrecio, setOrderPrecio] = useState('DEFAULT')
