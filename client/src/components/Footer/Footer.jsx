@@ -10,7 +10,10 @@ export default function Footer() {
             <tr>
               <h2>Fixer Shoes</h2>
             </tr>
-            <tr>Puntos de Venta</tr>
+            <div className={style.puntosDeVentaDiv}>
+              <ion-icon name="location-outline"></ion-icon>
+              <tr>Puntos de Venta</tr>
+            </div>
             <ul>
               <li>C.C. Centro Mayor | Whatsapp: 3125402667</li>
               <li>C.C. Plaza Américas | Whatsapp: 3132070155</li>
@@ -31,7 +34,10 @@ export default function Footer() {
                 to="https://www.instagram.com/fixershoes/?hl=es"
                 className={style.link}
               >
-                Instagram
+                <div className={style.divInstagram}>
+                  <ion-icon name="logo-instagram"></ion-icon>
+                  Instagram
+                </div>
               </Link>
             </tr>
             {/*<tr>
@@ -45,7 +51,10 @@ export default function Footer() {
             <tr>
               <h2>Contáctanos</h2>
             </tr>
-            <tr>info@fixershoes.com</tr>
+            <div className={style.infoDiv}>
+              <ion-icon name="mail-outline"></ion-icon>
+              <tr>info@fixershoes.com</tr>
+            </div>
             {/* <tr>Preguntas Frecuentes</tr> */}
           </td>
         </table>

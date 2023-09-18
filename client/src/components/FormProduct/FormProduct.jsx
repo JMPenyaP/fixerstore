@@ -1,31 +1,26 @@
-
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as actions from "../../redux/actions"
 import style from "./FormProduct.module.css"
+import { getCategories } from '../../redux/Actions/getCategories';
 
 const FormProduct = () => {
     const dispatch = useDispatch()
-    const {handleSubmit, control, formState: {errors}, trigger, setValue} = useForm()
+    const {handleSubmit, control, formState: {errors}, trigger, setValue, reset} = useForm()
     const createProduct = useSelector(state => state.createdProduct)
-    const categories = useSelector(state => state.allCategories)
-    const [categorias, setCategorias] =useState([
-      { id: 1, name: 'Categoría 1' },
-      { id: 2, name: 'Categoría 2' },
-      { id: 3, name: 'Categoría 3' },
-    ])
+    let categorias = useSelector(state => state.allCategories)
+    if (categorias.length < 1) {
+      dispatch(getCategories())
+    }
     const [creado, setCreado] = useState(createProduct)
     const [principal, setPrincipal] = useState("")
     const [carrusel, setCarrusel] = useState([])
     useEffect(() => {
         setCreado(createProduct);
-        if (categories) {
-          setCategorias(categories)
-        }
-      }, [createProduct, categories]);
+      }, [createProduct]);
     const [showPercentageInput, setShowPercentageInput] = useState(null);
-    const currentDate = new Date().toLocaleDateString('es-CO', { timeZone: 'America/Bogota' });
+    const currentDate = new Date();
     const togglePercentageInput = (value) => {
         setShowPercentageInput(value);
       };
@@ -91,9 +86,23 @@ const FormProduct = () => {
       data.carrouselImage = carrusel
       dispatch(actions.createProd(data))
     }
+    const [botonLimpiar, setBotonLimpiar] = useState(null)
+    const handleCancel = () => {
+      setBotonLimpiar(true)
+    }
+    const handleNo = () => {
+      setBotonLimpiar(false)
+    }
+    const handleYes = () => {
+      setBotonLimpiar(null)
+      setCarrusel([])
+      setPrincipal("")
+      setCreado(null)
+      reset()
+    }
     return (
         <div className={style.div}>
-            <h2 className={style.titulo}>Crear producto</h2>
+            <h2 className={style.titulo}>Nuevo productos</h2>
             <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
                 <div className={style.divCampo}>
                     <label className={style.label} htmlFor="name">Nombre del producto</label>
@@ -105,6 +114,7 @@ const FormProduct = () => {
                     render={({ field }) => (
                     <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
                     <div className={style.errorMenssage}>
+                    {errors.name && <p className={style.simbolo}>!</p>}
                     {errors.name && <p className={style.errorText}>{errors.name.message}</p>}
                     </div>
                     </div>
@@ -122,14 +132,17 @@ const FormProduct = () => {
                         <option value="" disabled> Seleccione una categoría </option>
                         {categorias.map((categoria) => (
                         <option key={categoria.id} value={categoria.id}>
-                            {categoria.name}</option>))}
+                            {categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</option>))}
                     </select>)} />
                     <div className={style.errorMenssage}>
+                    {errors.categoryId && <p className={style.simbolo}>!</p>}
                     {errors.categoryId && <p className={style.errorText}>{errors.categoryId.message}</p>}
                     </div>
                     </div>
                 </div>
+                <div className={style.divImagenes}>
                 <div className={style.divCampo}>
+                  <div className={style.divCampo}>
                     <label className={style.label} htmlFor="firstImage">Imagen principal del producto</label>
                     <div className={style.divInput}>
                     <Controller
@@ -148,6 +161,7 @@ const FormProduct = () => {
                     />
                     )}/>
                     <div className={style.errorMenssage}>
+                    {errors.firstImage && <p className={style.simbolo}>!</p>}
                     {errors.firstImage && <p className={style.errorText}>{errors.firstImage.message}</p>}
                     </div>
                     </div>
@@ -172,18 +186,21 @@ const FormProduct = () => {
                     />
                     )}/>
                     <div className={style.errorMenssage}>
+                    {errors.carrouselImage && <p className={style.simbolo}>!</p>}
                       {errors.carrouselImage && <p className={style.errorText}>{errors.carrouselImage.message}</p>}
                     </div>
                     </div>
-                </div> 
+                </div>
+                  </div>
                 <div className={style.divCampo}>
                   <label className={style.label} htmlFor="carrouselImage">Vista previa de imagenes</label>
-                  <div>
-                    {carrusel.length > 0 && (<div>{carrusel.map((carru)=>(<img src={carru} alt="Vista previa" style={{maxWidth: '50px' }} />))}
+                  <div className={style.divVistaPrevia}>
+                    {carrusel.length > 0 && (<div>{carrusel.map((carru)=>(<img className={style.miniatura} src={carru}  />))}
                     </div>)}
-                    {principal && (<div><img src={principal} alt="Vista previa" style={{maxWidth: '50px' }} />
+                    {principal !== "" && (<div><img className={style.miniatura} src={principal} alt="Vista previa" />
                     </div>)}
                   </div>
+                </div>
                 </div>
                 <div className={style.divCampo}>
                     <label className={style.label} htmlFor="priceOfList">Precio del producto</label>
@@ -203,36 +220,47 @@ const FormProduct = () => {
                     <input className={style.input} min="0" type="number" {...field} onChange={(e) => {field.onChange(e); trigger('priceOfList'); }}/>)}
                     />
                     <div className={style.errorMenssage}>
+                    {errors.priceOfList && <p className={style.simbolo}>!</p>}
                     {errors.priceOfList && <p className={style.errorText} >{errors.priceOfList.message}</p>}
                     </div>
                     </div>
                 </div>
                 <div className={style.divCampo}>
-                    <label className={style.label} htmlFor="descripcion">Descripción:</label>
+                <label className={style.label} htmlFor="descripcion">Descripción:</label>
+                <div className={style.divInput}>
                     <Controller
                     name="description"
                     control={control}
                     defaultValue=""
-                    rules={{ required: 'Este campo es obligatorio', maxLength: {value: 200,message: 'La descripción no puede tener más de 200 caracteres'}}}
+                    rules={{ required: 'Este campo es obligatorio', maxLength: {value: 200,message: 'La descripción no puede tener más de 200 caracteres'}, minLength: {value: 50,message: 'La descripción no puede tener menos de 50 caracteres'}}}
                     render={({ field }) => <textarea className={style.inputext} {...field} onChange={(e) => {field.onChange(e); trigger('description'); }} />}
                     />
-                    {(errors.description && <p>{errors.description.message}</p>)}
+                    <div className={style.errorMenssage}>
+                    {errors.description && <p className={style.simbolo}>!</p>}
+                    {errors.description && <p className={style.errorText}>{errors.description.message}</p>}
+                    </div>
+                  </div>
                 </div>
                 <div className={style.divCampo}>
                     <label className={style.label} htmlFor="date">Fecha de publicación:</label>
+                    <div>
                     <Controller
                     name="date"
                     control={control}
                     defaultValue={currentDate}
                     render={({ field }) => (
-                    <input type="date" {...field} />
+                    <input type="date" className={style.select} {...field} />
                     )}
                     />
-                    {(errors.date && <p>{errors.date.message}</p>)}
+                    <div className={style.errorMenssage}>
+                    {errors.date && <p className={style.simbolo}>!</p>}
+                    {errors.date && <p className={style.errorText}>{errors.date.message}</p>}
+                    </div>
+                    </div>
                 </div>
                 <div className={style.divCampo}>
                     <label className={style.label} htmlFor="statusOffer">¿Producto en oferta?</label>
-                    <div>
+                    <div className={style.divInput}>
                     <Controller
                     name="statusOffer"
                     control={control}
@@ -248,7 +276,10 @@ const FormProduct = () => {
                             <option value="false">Sin oferta</option>
                     </select>)}
                     />
-                    {errors.statusOffer && <p>{errors.statusOffer.message}</p>}
+                    <div className={style.errorMenssage}>
+                    {errors.statusOffer && <p className={style.simbolo}>!</p>}
+                    {errors.statusOffer && <p className={style.errorText}>{errors.statusOffer.message}</p>}
+                    </div>
                     </div>
                 </div>
                 {showPercentageInput && (
@@ -271,7 +302,10 @@ const FormProduct = () => {
                     </div>
                     )}
                     />
-                    {errors.offer && <p>{errors.offer.message}</p>}
+                    <div className={style.errorMenssage}>
+                    {errors.offer && <p className={style.simbolo}>!</p>}
+                    {errors.offer && <p className={style.errorText}>{errors.offer.message}</p>}
+                    </div>
                     </div>
                 </div>)}
                 <div className={style.divCampo}>
@@ -291,7 +325,10 @@ const FormProduct = () => {
                             <option value="false">No disponible</option>
                     </select>)}
                     />
-                    {errors.statusOffer && <p>{errors.statusOffer.message}</p>}
+                    <div className={style.errorMenssage}>
+                    {errors.status && <p className={style.simbolo}>!</p>}
+                    {errors.status && <p className={style.errorText}>{errors.status.message}</p>}
+                    </div>
                     </div>
                 </div> 
                 <div className={style.divCampo}>
@@ -310,14 +347,26 @@ const FormProduct = () => {
                         <input className={style.input} {...field} min="0" type="number" placeholder="Ingrese el stock"/>
                     )}
                     />
-                    {errors.stock && <p>{errors.stock.message}</p>}
+                    <div className={style.errorMenssage}>
+                    {errors.stock && <p className={style.simbolo}>!</p>}
+                    {errors.stock && <p className={style.errorText}>{errors.stock.message}</p>}
+                    </div>
                     </div>
                 </div>
-                <div>
-                {creado === true ? (<><span>Producto creado</span></>) : (creado === false ? (<><span>No pudo crearse el producto</span></>) : null)}
-                </div>
-            <button type="submit" >Crear Producto</button>
+            <div className={style.mensajeProducto}>
+              <button type="submit" className={style.formbutton} >Crear Producto</button>
+              {creado === true ? (<><span className={style.mensajeCreated}> <img src="https://api.iconify.design/material-symbols:check-circle-outline-rounded.svg?color=%23ffffff" alt="" /> Producto creado con éxito</span></>) : (creado === false ? (<><span className={style.mensajeNoCreated}> <img src="https://api.iconify.design/icon-park-outline:file-failed.svg?color=%23ffffff" alt="" />El producto ya existe</span></>) : null)}
+            </div>
             </form>
+            <div className={style.mensajeProducto}>
+            <button className={style.formbuttonClean} onClick={handleCancel}>Limpiar/Cancelar</button>
+            {botonLimpiar === true ? (<div className={style.aviso}>
+              <h5 className={style.mensajeAviso}>¿Seguro que quiere cancelar la subida de productos?</h5>
+              <button onClick={handleYes} className={style.botonYes}>Sí</button>
+              <button onClick={handleNo} className={style.botonNo} >No</button>
+            </div>): (null)}
+            </div>
+
         </div>
     )
 }
