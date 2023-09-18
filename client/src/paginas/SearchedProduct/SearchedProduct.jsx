@@ -31,13 +31,13 @@ const SearchedProduct = () => {
     <>
         <div>
           <h1>resultados con : {name}</h1>
-          <h3>Filtros</h3>
+          {/* <h3>Filtros</h3>
           <input
             className={style.active}
             type="checkbox"
             checked={filtroActivo}
             onChange={handleCheckboxChange}
-          />
+          /> */}
 
         </div>
         <div className={style.divSearchedProduct}>
