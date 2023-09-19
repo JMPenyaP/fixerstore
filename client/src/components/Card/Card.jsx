@@ -6,7 +6,7 @@ const Card = ({product}) => {
     <>
         <div className={styles.divCard}>
             
-            <div>
+            <div className={styles.divImg}>
                 <Link to={`/detail/${product.id}`} >
                     <img
                     className={styles.img}
@@ -19,8 +19,12 @@ const Card = ({product}) => {
             </div>
 
             <div className={styles.divInfo}>
-                <span className={styles.span} >{product.name}</span>|
-                <span >${product.priceOfList}</span>
+                <div className={styles.divName}>
+                    <span className={styles.span} >{product.name}</span>
+                </div>
+                <div>
+                    <span>${product.priceOfList}.000</span>
+                </div>
             </div>
             <Link to={`/detail/${product.id}`} >
                 <div className={styles.divButton}>
