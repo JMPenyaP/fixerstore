@@ -147,8 +147,8 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_PRODUCT_NAME: {
       return {
         ...state,
-        productName: false, // Cambiar a `false` para indicar que no hay un nombre de producto
-        productByName: [], // Vaciar el array `productByName`
+        productName: false, 
+        productByName: [], 
       };
     }
 
