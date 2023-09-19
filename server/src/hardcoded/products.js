@@ -307,14 +307,13 @@ const products = [
   }
 
 
-
-
 ]
 
 const createProducts = async () => {
   const promises = products.map((prod) => Product.create({ name: prod.name, categoryId: prod.categoryId, firstImage: prod.firstImage, carrouselImage: prod.carrouselImage, description: prod.description.toLowerCase(), date: prod.date, priceOfList: prod.priceOfList, statusOffer: prod.statusOffer, offer: prod.offer, status: prod.status, stock: prod.stock }));
   await Promise.all(promises);
 }
+
 
 module.exports = {
   createProducts
