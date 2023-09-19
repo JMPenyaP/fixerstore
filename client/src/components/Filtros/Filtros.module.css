@@ -1,5 +1,10 @@
 .divMain {
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.divOne, .divTwo, .divThree {
+  flex: 1 0 30%; /* El 30% es el ancho máximo de cada div */
+  margin: 0px 10px;
+  box-sizing: border-box; /* Asegura que el margen no aumente el ancho */
 }
