@@ -1,0 +1,36 @@
+/* SwitchButton.module.css */
+.switchContainer {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .switchInput {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  
+  .switchInput:checked + .slider {
+    transform: translateX(30px);
+    background: #3cbbed; 
+  }
+  
+  .switchContainer:active .slider {
+    background: #3cbbed;
+  }

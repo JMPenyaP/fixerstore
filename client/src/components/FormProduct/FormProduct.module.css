@@ -23,10 +23,10 @@
 
 .form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: left;
-    gap: 10px;
+    width: 100%;
 }
 
 .divCampo {
@@ -45,16 +45,16 @@
 
 .divInput {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: left;
-    gap: 5px;
+    gap: 1px;
     .p {
         font-family: "Gotham", sans-serif;
         color: #15214a;
         font-weight: bold;
         font-size: 12px;
-        padding: 0PX;
+        margin-top: 1px;
     }
     .input {
         width: 400px;
@@ -63,7 +63,6 @@
         font-family: "Gotham", sans-serif;
         font-size: 15px;
         align-items: center;
-        gap: 12px;
         border-radius: 10px;
         background: transparent;
         border: 0.5px solid #3cbbed;
@@ -170,6 +169,7 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    margin-top: 15px;
 
 }
 .mensajeCreated {
@@ -355,33 +355,30 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 5px;
-    align-content: flex-start
+    padding: 0px;
+    text-align: left;
 }
 .simbolo {
     font-family: "Gotham", sans-serif;
         color: red;
-        font-size: 13.5px;
         font-weight: bolder;
-        padding: 5px;
         cursor: pointer;
-}
-
-.simbolo:hover + .errorText {
-    opacity: 0.8;
-    color: red;
-    visibility: visible;
-    font-weight: bold;
-    border-radius: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+        margin: 0px;
+        padding: 0px;
 }
 
 .errorText {
     font-size: 13.5px;
-    opacity: 0; /* Comienza oculto */
+    margin: 0px;
     transition: opacity 0.3s ease;
     font-family: "Gotham", sans-serif;
-    position: relative;
-    visibility: hidden;
+    color: red;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
 }

@@ -1,6 +1,27 @@
 .selectBox {
+  width: 200px;
+  height: 32px;
+  padding:5px;
+  border-color: rgba(60, 187, 237, 0.50);
   border-radius: 20px;
-  width: 100px;
-  border-color: #3cbbed;
-  color: rgba(0, 0, 0, 0.623);
+  background: rgba(60, 187, 237, 0.50);
+  outline: none;
+  flex-wrap: wrap;
+}
+
+.selectBox {
+  font-family: "Gotham", sans-serif;
+  background-color: white;
+  padding: 4px;
+  color: #3cbbed;
+  margin: 50px;
+  font-size: 15px;
+  border: solid #3cbbed 1.8px;
+  border-radius: 100px;
+}
+.select:focus {
+  background-color: #3cbbed;
+  color: white;
+  outline: none; 
+  border-color: #15214a;
 }
