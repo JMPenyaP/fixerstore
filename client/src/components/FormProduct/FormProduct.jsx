@@ -2,8 +2,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as actions from "../../redux/actions"
+import setProduct from '../../redux/Actions/setProduct';
 import style from "./FormProduct.module.css"
 import { getCategories } from '../../redux/Actions/getCategories';
+import { NavLink} from "react-router-dom"
 
 const FormProduct = () => {
     const dispatch = useDispatch()
@@ -16,14 +18,15 @@ const FormProduct = () => {
     const [creado, setCreado] = useState(createProduct)
     const [principal, setPrincipal] = useState("")
     const [carrusel, setCarrusel] = useState([])
-    useEffect(() => {
-        setCreado(createProduct);
-      }, [createProduct]);
+    const [createOptions, setCreateOptions] = useState(null)
     const [showPercentageInput, setShowPercentageInput] = useState(null);
     const currentDate = new Date();
     const togglePercentageInput = (value) => {
         setShowPercentageInput(value);
       };
+    useEffect(()=> {
+      setCreado(createProduct)
+    }, [createProduct])
     const handleCarruselChange = async (e) => {
       const files = e.target.files;
       let formData = new FormData();
@@ -84,7 +87,11 @@ const FormProduct = () => {
     const onSubmit = async (data) => {
       data.firstImage = principal
       data.carrouselImage = carrusel
+      if(data.offer === undefined) {
+        data.offer = "0"
+      }
       dispatch(actions.createProd(data))
+      setCreateOptions(true)
     }
     const [botonLimpiar, setBotonLimpiar] = useState(null)
     const handleCancel = () => {
@@ -93,18 +100,26 @@ const FormProduct = () => {
     const handleNo = () => {
       setBotonLimpiar(false)
     }
-    const handleYes = () => {
-      setBotonLimpiar(null)
-      setCarrusel([])
-      setPrincipal("")
-      setCreado(null)
-      reset()
+    const handleYes = () => {    
+        setBotonLimpiar(null)
+        setCarrusel([])
+        setPrincipal("")
+        setCreado(null)
+        dispatch(setProduct())
+        reset()}
+    const handleOptionsClean = () => {
+      setCreateOptions(null)
+      handleYes()
+    }
+    const handleCleanState = () => {
+      dispatch(setProduct())
     }
     return (
         <div className={style.div}>
             <h2 className={style.titulo}>Nuevo productos</h2>
             <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
-                <div className={style.divCampo}>
+              <div className={style.container}>
+              <div className={style.divCampo}>
                     <label className={style.label} htmlFor="name">Nombre del producto</label>
                     <div className={style.divInput}>
                     <Controller name="name"
@@ -205,7 +220,7 @@ const FormProduct = () => {
                 <div className={style.divCampo}>
                     <label className={style.label} htmlFor="priceOfList">Precio del producto</label>
                     <div className={style.divInput}>
-                    <p className={style.p}>$</p>
+                    {/* <p className={style.p}>$</p> */}
                     <Controller
                     name="priceOfList"
                     control={control}
@@ -213,11 +228,11 @@ const FormProduct = () => {
                     rules={{
                         required: 'Este campo es obligatorio',
                         pattern: {
-                            value: /^\d+(\.\d{1,2})?$/,
+                            value: /^[0-9]*$/,
                             message: 'Ingrese un precio válido (ejemplo: 20000)',},
                         }}
                     render={({ field }) => (
-                    <input className={style.input} min="0" type="number" {...field} onChange={(e) => {field.onChange(e); trigger('priceOfList'); }}/>)}
+                    <input className={style.input} min="0" type="number" placeholder='$' {...field} onChange={(e) => {field.onChange(e); trigger('priceOfList'); }}/>)}
                     />
                     <div className={style.errorMenssage}>
                     {errors.priceOfList && <p className={style.simbolo}>!</p>}
@@ -225,7 +240,9 @@ const FormProduct = () => {
                     </div>
                     </div>
                 </div>
-                <div className={style.divCampo}>
+              </div>
+              <div className={style.container}>
+              <div className={style.divCampo}>
                 <label className={style.label} htmlFor="descripcion">Descripción:</label>
                 <div className={style.divInput}>
                     <Controller
@@ -243,11 +260,12 @@ const FormProduct = () => {
                 </div>
                 <div className={style.divCampo}>
                     <label className={style.label} htmlFor="date">Fecha de publicación:</label>
-                    <div>
+                    <div className={style.divInput}>
                     <Controller
                     name="date"
                     control={control}
                     defaultValue={currentDate}
+                    rules={{ required: 'Este campo es obligatorio'}}
                     render={({ field }) => (
                     <input type="date" className={style.select} {...field} />
                     )}
@@ -337,7 +355,7 @@ const FormProduct = () => {
                     <Controller
                     name="stock"
                     control={control}
-                    defaultValue= "0"
+                    defaultValue= ""
                     rules={{
                         required: 'Este campo es obligatorio',
                         pattern: {
@@ -355,18 +373,24 @@ const FormProduct = () => {
                 </div>
             <div className={style.mensajeProducto}>
               <button type="submit" className={style.formbutton} >Crear Producto</button>
-              {creado === true ? (<><span className={style.mensajeCreated}> <img src="https://api.iconify.design/material-symbols:check-circle-outline-rounded.svg?color=%23ffffff" alt="" /> Producto creado con éxito</span></>) : (creado === false ? (<><span className={style.mensajeNoCreated}> <img src="https://api.iconify.design/icon-park-outline:file-failed.svg?color=%23ffffff" alt="" />El producto ya existe</span></>) : null)}
+              {creado === true ? (<><span className={style.mensajeCreated}> <img src="https://api.iconify.design/material-symbols:check-circle-outline-rounded.svg?color=%23ffffff" alt="" /> Producto creado con éxito</span></>) : (creado === false ? (<><span className={style.mensajeNoCreated}> <img src="https://api.iconify.design/icon-park-outline:file-failed.svg?color=%23ffffff" alt="" />El producto ya existe</span></>) : (null))}
+            </div>
             </div>
             </form>
             <div className={style.mensajeProducto}>
-            <button className={style.formbuttonClean} onClick={handleCancel}>Limpiar/Cancelar</button>
+            {createOptions === true ? (<div className={style.aviso}>
+              <button onClick={handleOptionsClean} className={style.formbuttonClean}>Crea otro producto</button>
+              <NavLink to="/productos">
+              <button className={style.formbuttonClean} onClick={()=> {setCreateOptions(null); handleCleanState()}} >Ir al catalogo</button>
+              </NavLink>
+            </div>):(null)}
+            <button className={style.formbuttonClean} onClick={handleYes}>Limpiar/Cancelar</button>
             {botonLimpiar === true ? (<div className={style.aviso}>
               <h5 className={style.mensajeAviso}>¿Seguro que quiere cancelar la subida de productos?</h5>
               <button onClick={handleYes} className={style.botonYes}>Sí</button>
               <button onClick={handleNo} className={style.botonNo} >No</button>
             </div>): (null)}
             </div>
-
         </div>
     )
 }

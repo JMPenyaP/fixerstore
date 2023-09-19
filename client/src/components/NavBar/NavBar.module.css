@@ -69,6 +69,10 @@
     cursor: pointer;
 }
 
+.searchBarDiv button:disabled{
+    cursor: not-allowed;
+}
+
 .searchBarDiv button h5{
     font-family: 'Gotham Black', sans-serif;
 }
