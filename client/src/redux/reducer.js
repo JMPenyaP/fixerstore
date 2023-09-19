@@ -68,7 +68,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allCategories: action.payload };
     }
 
-    case FILTER_CATEGORIES:
+   /*  case FILTER_CATEGORIES:
       const selectedCategory = action.payload;
 
       if (selectedCategory === "all") {
@@ -141,7 +141,7 @@ const rootReducer = (state = initialState, action) => {
           productosFiltrados: state.productosFiltrados,
         };
       }
-    }
+    } */
     
     default:
       return {
