@@ -3,7 +3,7 @@ const { Product } = require("../db")
 const products = [
 
   {
-    name: "PROTECTOR ADHESIVO SUELAS",
+    name: "Protector Adhesivo Suelas",
     categoryId: 1,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705709/FIXERSHOES/image00032_dqqxt1.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705709/FIXERSHOES/image00032_dqqxt1.png", "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705709/FIXERSHOES/image00032_dqqxt1.png"],
@@ -18,7 +18,7 @@ const products = [
   },
   {
 
-    name: "CORDONES REFLECTIVOS",
+    name: "Cordones Reflectivos",
     categoryId: 2,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706972/FIXERSHOES/IMG_4141_v4m6tw.jpg",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706961/FIXERSHOES/IMG_4129_xhfm54.jpg"],
@@ -33,7 +33,7 @@ const products = [
   },
   {
 
-    name: "HORMAS PLASTICAS",
+    name: "Hormas Plasticas",
     categoryId: 3,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705595/FIXERSHOES/Copia_de_image00008_ahebor.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705586/FIXERSHOES/Copia_de_image00004_eqlb4k.png"],
@@ -48,7 +48,7 @@ const products = [
   },
   {
 
-    name: "PLANTILLAS SILICON ERGONOMIC PIE PLANO",
+    name: "Plantillas Silicon Ergonomic Pie Plano",
     categoryId: 4,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705704/FIXERSHOES/image00011_cvmbw7.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705705/FIXERSHOES/image00020_avficn.png", "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705722/FIXERSHOES/image00071_ltoic9.png"],
@@ -63,7 +63,7 @@ const products = [
   },
   {
 
-    name: "TALONERAS NIVELADORAS EN SILICONA",
+    name: "Taloneras Niveladoras En Siliconas",
     categoryId: 5,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705725/FIXERSHOES/image00073_ej7twy.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705711/FIXERSHOES/image00034_pv6jd3.png"],
@@ -78,7 +78,7 @@ const products = [
   },
   {
 
-    name: "CEPILLO PARA GAMUZA",
+    name: "Cepillo Para Gamuza",
     categoryId: 6,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705741/FIXERSHOES/image00124_m6fkwr.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705743/FIXERSHOES/image00132_evlhxv.png"],
@@ -93,7 +93,7 @@ const products = [
   },
   {
 
-    name: "LIMPIADOR EXPRESS",
+    name: "Limpiador Express",
     categoryId: 7,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705736/FIXERSHOES/image00115_wwra1a.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705743/FIXERSHOES/image00129_zgitym.png"],
@@ -108,7 +108,7 @@ const products = [
   },
   {
 
-    name: "SHIELDS ANTIARRUGAS",
+    name: "Shields Antiarrugas",
     categoryId: 8,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705715/FIXERSHOES/image00050_r2e6sl.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705716/FIXERSHOES/image00052_t22ydq.png"],
@@ -123,7 +123,7 @@ const products = [
   },
   {
 
-    name: "CALZADOR PLASTICO",
+    name: "Calzado Plastico",
     categoryId: 9,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705717/FIXERSHOES/image00054_fwrgky.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705721/FIXERSHOES/image00066_xwvoox.png"],
@@ -140,7 +140,7 @@ const products = [
   },
   {
 
-    name: "ALMOHADILLAS PARA METATARSO",
+    name: "Almohadillas Para Metatarso",
     categoryId: 10,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705726/FIXERSHOES/image00079_ay0hmn.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705726/FIXERSHOES/image00079_ay0hmn.png", "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705725/FIXERSHOES/image00076_eze0la.png"],
@@ -154,7 +154,7 @@ const products = [
 
   },
   {
-    name: "PUNTERAS SILICONA",
+    name: "Punteras Silicona",
     categoryId: 10,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705709/FIXERSHOES/image00032_dqqxt1.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705706/FIXERSHOES/image00028_evt9d1.png"],
@@ -168,7 +168,7 @@ const products = [
   },
   {
 
-    name: "REAVIVADOR DE GAMUZA",
+    name: "Reavivador De Gamuza",
     categoryId: 8,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705738/FIXERSHOES/image00117_fycba0.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705738/FIXERSHOES/image00117_fycba0.png"],
@@ -182,7 +182,7 @@ const products = [
 
   },
   {
-    name: "CREMA HIDRATANTE",
+    name: "Crema Hidratante",
     categoryId: 1,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705745/FIXERSHOES/image00142_jgeqoh.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706962/FIXERSHOES/IMG_4130_aqzakf.jpg"],
@@ -197,7 +197,7 @@ const products = [
   },
   {
 
-    name: "KIT LIMPIEZA PREMIUM",
+    name: "Kit Limpieza PREMIUM",
     categoryId: 1,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706551/FIXERSHOES/IMG_4139_zddk65.jpg",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705734/FIXERSHOES/image00106_bzmhkb.png"],
@@ -213,7 +213,7 @@ const products = [
 
   {
 
-    name: "LIMPIADOR EN SECO GAMUZA",
+    name: "Limpiador En Seco Gamuza",
     categoryId: 7,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705739/FIXERSHOES/image00121_l32uxo.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705739/FIXERSHOES/image00118_iyvctp.png", "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706958/FIXERSHOES/IMG_4125_xupgyq.jpg"],
@@ -229,7 +229,7 @@ const products = [
 
   {
 
-    name: "HORMA CEDRO MADERA",
+    name: "Horma Cedro Madera",
     categoryId: 3,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705734/FIXERSHOES/image00110_hy4dgj.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705734/FIXERSHOES/image00110_hy4dgj.png"],
@@ -246,7 +246,7 @@ const products = [
   //16
   {
 
-    name: "PLANTILLA EN SILICONA PARA SUBIR ESTATURA",
+    name: "Plantilla En Silicona Para Subir Estatura",
     categoryId: 4,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705713/FIXERSHOES/image00045_fbnsmu.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705736/FIXERSHOES/image00112_tyu2ts.png"],
@@ -262,7 +262,7 @@ const products = [
   },
   {
 
-    name: "CORDONES DE CUERO",
+    name: "Cordones De Cuero",
     categoryId: 2,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706961/FIXERSHOES/IMG_4129_xhfm54.jpg",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706961/FIXERSHOES/IMG_4129_xhfm54.jpg"],
@@ -277,7 +277,7 @@ const products = [
   },
   {
 
-    name: "CALZADOR PLASTICO LARGO DOBLE",
+    name: "Calzador Plastico Largo Doble",
     categoryId: 9,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705711/FIXERSHOES/image00040_o523tr.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705711/FIXERSHOES/image00040_o523tr.png"],
@@ -292,7 +292,7 @@ const products = [
 
   }, {
 
-    name: "PLANTILLA EN SILICONA PARA DAMAS",
+    name: "Plantilla En Silicona Para Damas",
     categoryId: 4,
     firstImage: "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694705710/FIXERSHOES/image00038_feamxa.png",
     carrouselImage: ["https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694706965/FIXERSHOES/IMG_4132_kklhzm.jpg"],

@@ -33,10 +33,10 @@ const FiltroCategoria = ({
           <option disabled selected value="DEFAULT">
             Categoria
           </option>
-          <option value="all">All</option>
+          <option value="all">Todos</option>
           {allCategories?.map((category, index) => {
             return (
-              <option value={category.id} key={index}>
+              <option className={style.options} value={category.id} key={index}>
                 {category.name}
               </option>
             );
