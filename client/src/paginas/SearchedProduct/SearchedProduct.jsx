@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 const SearchedProduct = () => {
-  const {name} = useParams()
+  const { name } = useParams();
 
   const [filtroActivo, setFiltroActivo] = useState(false);
 
@@ -29,30 +29,29 @@ const SearchedProduct = () => {
 
   return (
     <>
-        <div>
-          <h1>resultados con : {name}</h1>
-          {/* <h3>Filtros</h3>
+      <div>
+        {/* <h3>Filtros</h3>
           <input
             className={style.active}
             type="checkbox"
             checked={filtroActivo}
             onChange={handleCheckboxChange}
           /> */}
-
-        </div>
-        <div className={style.divSearchedProduct}>
-            {showNoProductsMessage ? (
-    
-              <CardsArr allProducts={productsData}/>
-
-            ) : (
-              <div className={style.container}>
-                <Spinner />
-                <h1>¡No se Encontraron Productos!</h1>
-              </div>
-            )}
-        </div>
-    <Footer />
+      </div>
+      <div className={style.divSearchedProduct}>
+        {showNoProductsMessage ? (
+          <div>
+            <h1>resultados con : {name}</h1>
+            <CardsArr allProducts={productsData} />
+          </div>
+        ) : (
+          <div className={style.container}>
+            <Spinner />
+            <h1>¡No se Encontraron Productos!</h1>
+          </div>
+        )}
+      </div>
+      <Footer />
     </>
   );
 };

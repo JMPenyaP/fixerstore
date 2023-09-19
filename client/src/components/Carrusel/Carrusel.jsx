@@ -64,7 +64,7 @@ const Carrusel = () => {
                 alt="imagen"
                 className="carouselImage"
               />
-              <h3>$ {prod.priceOfList}</h3>
+              <h3>$ {prod.priceOfList}.000</h3>
               <Link to={`/detail/${prod.id}`}>
                 <div className="divButton">
                   <button><h5>Ver Producto</h5></button>

@@ -1,4 +1,4 @@
-const { createProduct, getAllProducts, getProductByName, getProductById, getFilteredProduct } = require("../controllers/productsControllers");
+const { createProduct, getAllProducts, getProductByName, getProductById } = require("../controllers/productsControllers");
 
 
 const createProductsHandler = async (req, res) => {
@@ -43,22 +43,9 @@ const getProductIdHandler = async (req, res) => {
     }
 }
 
-// Borrar
-const getFilteredProductHandler = async (req, res) => {
-    const { name, categoryId, priceOfList } = req.query
-    console.log(name, categoryId, priceOfList);
-    try {
-        const filteredProduct = await getFilteredProduct(name, categoryId, priceOfList)
-        res.status(200).json(filteredProduct)
-    } catch (error) {
-        res.status(400).json({ success: false, message: "Error getting Filtered Product. " + error.message })
-    }
-}
 module.exports = {
     createProductsHandler,
     getAllProductsHandler,
     getProductIdHandler,
-    // Borrar
-    getFilteredProductHandler,
 };
 

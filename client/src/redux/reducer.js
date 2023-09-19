@@ -10,6 +10,7 @@ import {
   FILTER_CATEGORIES,
   ORDER_LETTER,
   ORDER_PRICE,
+  CLEAR_PRODUCT_NAME
 } from "./actionTypes";
 
 const initialState = {
@@ -68,7 +69,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allCategories: action.payload };
     }
 
-   /*  case FILTER_CATEGORIES:
+    case FILTER_CATEGORIES:
       const selectedCategory = action.payload;
 
       if (selectedCategory === "all") {
@@ -141,8 +142,16 @@ const rootReducer = (state = initialState, action) => {
           productosFiltrados: state.productosFiltrados,
         };
       }
-    } */
-    
+    }
+
+    case CLEAR_PRODUCT_NAME: {
+      return {
+        ...state,
+        productName: false, 
+        productByName: [], 
+      };
+    }
+
     default:
       return {
         ...state,

@@ -3,6 +3,7 @@ import Cards from "../../components/Cards/Cards";
 import Filtros from "../../components/Filtros/Filtros";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/Actions/getAllProducts";
+import { clearProductName } from "../../redux/Actions/clearProductName";
 import style from "./Catalogo.module.css";
 import CardsArr from "../../components/Cards/CardsArr";
 import Footer from "../../components/Footer/Footer";
@@ -19,6 +20,10 @@ const Catalogo = () => {
   /*  const handlerFilter = () => {
     dispatch(setFiltros())
   }; */
+
+  useEffect(() => {
+    dispatch(clearProductName());
+  }, [dispatch]);
 
   useEffect(() => {
     allProducts?.length === 0 && dispatch(getAllProducts());
