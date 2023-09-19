@@ -24,7 +24,7 @@ const Home = () => {
       </div>
       <div className={style.separador}></div>
       <Footer />
-      <BotonSwitch />
+
     </>
   );
 };
