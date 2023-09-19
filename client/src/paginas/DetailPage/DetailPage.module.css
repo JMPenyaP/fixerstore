@@ -112,7 +112,7 @@
     text-align: start;
 }
 
-.infoDiv h5{
+.infoDiv h5 {
     margin-right: auto;
 }
 
@@ -179,20 +179,25 @@
 
 /* PAGINATE BUTTONS */
 
-.paginateButton{
+.paginateButton {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
 }
 
-.paginateButton button{
+.paginateButton button {
     background-color: transparent;
     border: none;
     position: relative;
+    cursor: pointer;
 }
 
-.paginateButton button h5{
+.paginateButton button:disabled {
+    cursor:auto;
+}
+
+.paginateButton button h5 {
     margin: 0;
     font-size: 19px;
     color: #3cbbed;
@@ -209,12 +214,12 @@
     transition: 0.4s;
 }
 
-.paginateButton button:hover h5::before{
+.paginateButton button:hover h5::before {
     width: 100%;
 }
 
 
-.stockAndCategory{
+.stockAndCategory {
     display: flex;
     justify-content: space-between;
     width: 100%;

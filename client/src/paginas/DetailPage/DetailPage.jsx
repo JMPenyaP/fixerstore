@@ -103,7 +103,7 @@ const DetailPage = () => {
               <h5>Categoría: {productCategory ? productCategory.name : 'Sin categoría'}</h5>
             </div>
             <h1>{product.name}</h1>
-            <h2>${product.priceOfList}</h2>
+            <h2>$ {product.priceOfList}.000</h2>
             <h3>{product.description}</h3>
             <div className={style.divButton}>
               {/*               <button>Agregar Al Carrito</button> */}

@@ -64,7 +64,7 @@ const Navbar = () => {
           onChange={handleChange}
         />
         {name.length > 0 ? (
-          <Link to={`/SearchedProd/${name}`}>
+          <Link to={`/searchedprod/${name}`}>
             <button onClick={searchName}>
               <img
                 src="https://s3-alpha-sig.figma.com/img/9e95/eac1/98843c95e535f8beea5822d26858cfbd?Expires=1695600000&Signature=CeNGEaIfNS5Zj9wW8kDK0iWNTvRJEwEXquv~JLYiVDqMZdP1ucqtcW6R0JxoV1gv~CxLeTmsJCAbpbsTaFV5AZjBM25KfMVptLHQdASnGlEM9gedY~3w~j-CJaEu1ROJIAbTZJBYWD0zIMx0VSkSymws1-AZbKqgoFisKDlH78Ac1hpdR1WAJFG1GwQOfRMVVXUfwk0cKrSkbc0q6RbeBUrC12fdp5Y7y~QHOLugXAT4OPvSfiNu-FC4chb3LkTqY5JmiSVnt0f2z6djMYtMnTBcGyVa2R3-EhS~r5Q1RL8aEvWZpijUGd5HXgr4Cbibb5JsZeS2vkATCuxYMIFQRg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
