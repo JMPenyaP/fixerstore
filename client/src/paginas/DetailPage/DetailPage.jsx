@@ -64,7 +64,7 @@ const DetailPage = () => {
             <div className={style.divButton}>
 {/*               <button>Agregar Al Carrito</button> */}
               <div className={style.buttonwpp}>
-                <Link to={`https://api.whatsapp.com/send?phone=573102909092&text=Hola%20estoy%20interesado(a)%20en%20saber%20mas%20informacion%20acerca%20del%20producto%20${product.name}`}>
+                <Link target="_blank" to={`https://api.whatsapp.com/send?phone=573102909092&text=Hola%20estoy%20interesado(a)%20en%20saber%20mas%20informacion%20acerca%20del%20producto%20${product.name}`}>
                   <ion-icon name="logo-whatsapp"></ion-icon>
                 </Link>
               </div>
