@@ -10,6 +10,7 @@ import {
   FILTER_CATEGORIES,
   ORDER_LETTER,
   ORDER_PRICE,
+  CLEAR_PRODUCT_NAME
 } from "./actionTypes";
 
 const initialState = {
@@ -142,7 +143,15 @@ const rootReducer = (state = initialState, action) => {
         };
       }
     }
-    
+
+    case CLEAR_PRODUCT_NAME: {
+      return {
+        ...state,
+        productName: false, 
+        productByName: [], 
+      };
+    }
+
     default:
       return {
         ...state,
