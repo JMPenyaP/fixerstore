@@ -7,6 +7,7 @@ const loginRouters = require('./loginRouters')
 const paginationRouters = require("./paginationRouters");
 const whatsappRouters = require("./whatsappRouters");
 const router = Router(); 
+const cartRouters = require("../routes/cartRouters");
 
 
 router.use("/users", usersRouters);
@@ -15,6 +16,7 @@ router.use("/products", productsRouters);
 router.use("/categories", categoryRouter);
 router.use("/pagination", paginationRouters);
 router.use("/message", whatsappRouters)
+router.use("/cart", cartRouters);
 
 
 
