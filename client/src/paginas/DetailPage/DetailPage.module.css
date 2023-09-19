@@ -31,7 +31,7 @@
 }
 
 .divImage img {
-    width: 100%;
+    width: 70%;
     height: 80%;
 }
 
@@ -54,7 +54,7 @@
 
 .carouselImages img {
     height: 80px;
-    width: 130px;
+    width: 100px;
     padding: 5px 15px 5px 15px;
     transition: 0.4s;
 }
@@ -175,4 +175,47 @@
 .buttonwpp ion-icon {
     font-size: 40px;
     color: green;
+}
+
+/* PAGINATE BUTTONS */
+
+.paginateButton{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.paginateButton button{
+    background-color: transparent;
+    border: none;
+    position: relative;
+}
+
+.paginateButton button h5{
+    margin: 0;
+    font-size: 19px;
+    color: #3cbbed;
+}
+
+.paginateButton button h5::before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 0px;
+    top: 100%;
+    left: 0;
+    background-color: #3cbbed;
+    transition: 0.4s;
+}
+
+.paginateButton button:hover h5::before{
+    width: 100%;
+}
+
+
+.stockAndCategory{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
