@@ -27,7 +27,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 // Obtener el modelos desde sequelize
-const { User, Product, Category, CarShop, PurchaseOrder, MethodPayment, PasswordReset } = sequelize.models;
+const { User, Product, Category, CarShop, PurchaseOrder, MethodPayment, PasswordReset, UserReviews } = sequelize.models;
 
 User.hasMany(PasswordReset, { foreignKey: 'userId' });
 User.hasMany(UserReviews, { foreignKey: 'userId' })
