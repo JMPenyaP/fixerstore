@@ -1,20 +1,17 @@
-.carouselImage {
-    height: 500px;
-    width: 100%;
-}
-
+/* CSS DE SLICK */
 .slick-list {
-    width: 100%;
     margin-bottom: 20px;
 }
 
 .slick-initialized {
-    width: 90%;
+    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
+
+/* DIV CAROUSEL */
 
 .divImgsCarousel:focus {
     outline: none;
@@ -22,7 +19,7 @@
 }
 
 .divImgsCarousel:hover {
-    background-color: #2988ad07;
+    background-color: transparent;
 }
 
 .divImgsCarousel {
@@ -31,6 +28,7 @@
     align-items: center;
     transition: 0.3s;
     padding-bottom: 10px;
+    background-color: #2988ad0b;
 }
 
 .divImgsCarousel img {
@@ -39,22 +37,40 @@
     margin: auto;
 }
 
-.divImgsCarousel h4 {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    /* Puedes establecer un ancho máximo si lo deseas */
-    max-width: 60%;
-    /* Ajusta el valor según tus preferencias */
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .divImgsCarousel h1 {
     color: #2987ad;
+    font-size: 18px;
 }
 
+.divImgsCarousel h2{
+    color: #3cbbed;
+
+}
+
+
+.divImgsCarousel h3{
+    font-weight: normal;
+    color: rgb(26, 24, 24);
+    position: relative;
+    width: 100%;
+}
+
+.divImgsCarousel h3::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    height: 2px;
+    width: 20%;
+    background-color: rgb(26, 24, 24);
+    transform: rotate(3deg);
+    border-radius: 50%;
+}
+
+.carouselImage {
+    height: 500px;
+    width: 100%;
+}
 
 .divButton {
     margin-top: 3px;
@@ -105,9 +121,4 @@
 .divButton button:hover::before {
     width: 100%;
     opacity: 1;
-}
-
-.slick-arrow::before {
-    font-size: 40px;
-    color: #3cbbed;
 }
