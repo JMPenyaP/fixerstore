@@ -4,15 +4,19 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize) => {
   sequelize.define("User", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      autoIncrement: true
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
-    password: { // Campo para almacenar la contraseña en texto plano
+    password: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -23,10 +27,16 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        len: [3, 150],
+      },
     },
     surname: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        len: [3, 150],
+      },
     },
     phone: {
       type: DataTypes.STRING,
@@ -44,13 +54,17 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'Colombia',
+    },
   },
-    { timestamps: false },
+    { timestamps: true },
     {
       hooks: {
         beforeCreate: async (user) => {
-          // Genera un hash de la contraseña utilizando bcrypt
-          const saltRounds = 10; // Número de rondas de sal
+          const saltRounds = 10;
           const hashedPassword = await bcrypt.hash(user.password, saltRounds);
           user.password = hashedPassword;
         },
