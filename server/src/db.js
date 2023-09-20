@@ -27,14 +27,14 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 // Obtener el modelos desde sequelize
-const { User, Product, Category, PasswordReset } = sequelize.models;
+const { User, Product, Category, PasswordReset, UserReviews } = sequelize.models;
 // Aca vendrian las relaciones/asociaciones
 /*Country.belongsToMany(Activity, { through: 'Country_Activities' });
 Activity.belongsToMany(Country, { through: 'Country_Activities' });*/
 
 User.hasMany(PasswordReset, { foreignKey: 'userId' });
+User.hasMany(UserReviews, { foreignKey: 'userId' })
 Category.hasMany(Product, { foreignKey: 'categoryId' });
-
 
 // Exportar los modelos y la conexión a la base de datos
 module.exports = {
