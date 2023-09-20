@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const methodsPaymentRouter = Router();
 
-const createMethodPayments = require("../handlers/createMpHandlers.js")
+const createMethodPayments = require("../handlers/createMethodPaymentsHandlers")
 
 
 methodsPaymentRouter.post('/', createMethodPayments);
