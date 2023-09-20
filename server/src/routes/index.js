@@ -6,7 +6,8 @@ const categoryRouter = require("./categoryRouters.js");
 const loginRouters = require('./loginRouters')
 const paginationRouters = require("./paginationRouters");
 const whatsappRouters = require("./whatsappRouters");
-const filtrosPreciosRouters = require('../routes/filtrosPreciosRouters')
+const filtrosPreciosRouters = require('../routes/filtrosPreciosRouters');
+const { requestPasswordReset, resetPassword } = require('../controllers/passwordResetControllers');
 const router = Router();
 
 
@@ -17,7 +18,8 @@ router.use("/categories", categoryRouter);
 router.use("/pagination", paginationRouters);
 router.use("/message", whatsappRouters);
 router.use("/filtros", filtrosPreciosRouters);
-
+router.use("/request-reset", requestPasswordReset);
+router.use("/reset/:token", resetPassword);
 
 
 module.exports = router; // Exportamos el router configurado
