@@ -82,51 +82,6 @@
     width: 100%;
 }
 
-/* USER LETTER */
-
-.userLetter {
-    display: flex;
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #202549;
-    color: white;
-    font-size: 20px;
-    position: relative;
-    transition: 0.6s;
-    overflow: hidden;
-    z-index: 99999999999;
-    font-family: 'Gotham Black', sans-serif;
-}
-
-.userLetter:hover {
-    background-color: transparent;
-}
-
-.userLetter::before {
-    position: absolute;
-    content: "";
-    top: -20%;
-    left: 0%;
-    background-color: #3cbbed;
-    height: 10%;
-    width: 0%;
-    border-radius: 50%;
-    z-index: -1;
-    transition: 0.6s;
-    opacity: 0;
-}
-
-.userLetter:hover::before {
-    width: 150%;
-    height: 150%;
-    opacity: 1;
-}
-
 
 /* Carrito */
 
@@ -153,4 +108,100 @@
 .carritoImg {
     width: 32px;
     height: 33px;
+}
+
+/* MENU DESPLEGABLE LOG IN LETTER */
+
+
+.containerLogIn{
+    position: relative;
+}
+
+.divMenuDesplegable{
+    position: absolute;
+    height: 120px;
+    width: 250px;
+    background-color: #202549;
+    left: -160%;
+    top: 110%;
+    z-index: 99;
+    border: 2px solid #3cbbed;
+    border-radius: 16px;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+.divMenuDesplegable ion-icon{
+    color: #3cbbed;
+    font-size: 18px;
+}
+
+.divMenuDesplegable h5{
+    margin: 0;
+    color: #3cbbed;
+}
+
+.divMenuDesplegable button{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 16px;
+    width: 70%;
+    border: 1px solid #3cbbed;
+    background-color: white;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.divMenuDesplegable button h5{
+    font-size: 14px;
+    color: white;
+    color: #3cbbed;
+}
+
+.userLetter {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #202549;
+    color: white;
+    font-size: 20px;
+    position: relative;
+    transition: 0.6s;
+    overflow: hidden;
+    z-index: 99999999999;
+    font-family: 'Gotham Black', sans-serif;
+    cursor: pointer;
+}
+
+.userLetter:hover {
+    background-color: transparent;
+}
+
+.userLetter::before {
+    position: absolute;
+    content: "";
+    top: -20%;
+    left: 0%;
+    background-color: #3cbbed;
+    height: 10%;
+    width: 0%;
+    border-radius: 50%;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+
+.userLetter:hover::before {
+    width: 150%;
+    height: 150%;
+    opacity: 1;
 }

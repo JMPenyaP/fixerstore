@@ -26,7 +26,7 @@
     align-items: center;
     height: 350px;
     width: 100%;
-    background-color: rgba(240, 240, 240, 0.475);
+    background-color: #3cbbed24;
     padding: 50px 15px 50px 15px;
 }
 
@@ -45,46 +45,6 @@
     align-items: center;
 }
 
-.carouselImages {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding-top: 10px;
-}
-
-.carouselImages img {
-    height: 80px;
-    width: 100px;
-    padding: 5px 15px 5px 15px;
-    transition: 0.4s;
-}
-
-.carouselImages img:hover {
-    opacity: 0.8;
-}
-
-.divImageCarousel {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.divImageCarousel::before {
-    content: "";
-    position: absolute;
-    height: 1px;
-    width: 0px;
-    top: 100%;
-    left: 0;
-    background-color: #3cbbed;
-    transition: 0.4s;
-}
-
-.divImageCarousel:hover::before {
-    width: 100%;
-}
 
 /* INFO */
 
@@ -95,13 +55,14 @@
     justify-content: center;
     align-items: start;
     width: 40%;
-    height: 80%;
+    height: 90%;
     margin-bottom: auto;
 }
 
 
 .infoDiv h3 {
     font-size: 15px;
+    font-weight: normal;
 }
 
 .infoDiv h1 {
@@ -116,11 +77,23 @@
     margin-right: auto;
 }
 
-/* BUTTON */
-
-.divButton {
-    margin-left: auto;
+.oldPrice{
+    position: relative;
 }
+
+.oldPrice::before{
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: -16%;
+    background-color: rgba(0, 0, 0, 0.733);
+    height: 2px;
+    width: 120%;
+    transform: rotate(3deg);
+    border-radius: 50%;
+}
+
+/* BUTTON */
 
 .divButton button {
     border: none;
@@ -167,10 +140,12 @@
 /* WHATSAPP */
 .buttonwpp a {
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: green;
 }
-
-
-
 
 .buttonwpp ion-icon {
     font-size: 40px;
@@ -183,6 +158,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    gap: 20px;
     width: 100%;
 }
 
@@ -194,12 +170,12 @@
 }
 
 .paginateButton button:disabled {
-    cursor:auto;
+    cursor: auto;
 }
 
 .paginateButton button h5 {
     margin: 0;
-    font-size: 19px;
+    font-size: 12px;
     color: #3cbbed;
 }
 
@@ -223,4 +199,38 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+
+/* CAROUSEL */
+
+.carouselImages {
+    width: 100%;
+}
+
+.divImageCarousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.carouselImages img {
+    height: 80px;
+    width: 80px;
+    transition: 0.4s;
+    background-color: #3cbbed24;
+    padding: 10px;
+    margin: auto;
+    cursor: pointer;
+}
+
+/* NO CAROUSEL */
+
+.imgNoCarousel {
+    display: flex;
+}
+
+.imgNoCarousel img{
+    cursor: pointer;
 }

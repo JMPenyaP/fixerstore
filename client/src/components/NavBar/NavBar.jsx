@@ -8,11 +8,14 @@ const Navbar = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const dataProfile = useSelector((state) => state.dataProfile);
+  const [showMenu, setShowMenu] = useState(false);
 
   let letter = "A";
+  let nameMenu = "invitado";
 
   if (dataProfile != null) {
     letter = dataProfile.name.charAt(0);
+    nameMenu = dataProfile.name;
   }
 
   const handleChange = (event) => {
@@ -25,6 +28,10 @@ const Navbar = () => {
     }
   };
 
+  const handleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   const searchName = () => {
     setName("");
     if (name.length < 1) {
@@ -33,6 +40,10 @@ const Navbar = () => {
       dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product
     }
   };
+
+  {
+    console.log(showMenu);
+  }
 
   return (
     <div className={style.divNavBar}>
@@ -59,7 +70,7 @@ const Navbar = () => {
       <div className={style.searchBarDiv}>
         <input
           type="search"
-          placeholder="Buscar Producto"
+          placeholder="Buscar Productos"
           value={name}
           onChange={handleChange}
         />
@@ -81,16 +92,37 @@ const Navbar = () => {
           </button>
         )}
       </div>
-      <div className={style.userLetter}>{letter}</div>
-      {/*       <div className={style.carritoDiv}>
+      <div className={style.containerLogIn}>
+        <div className={style.userLetter} onClick={handleMenu}>
+          <h4>{letter}</h4>
+        </div>
+        {showMenu ? (
+          <div className={style.divMenuDesplegable}>
+            <h5>{nameMenu}</h5>
+            <button><ion-icon name="person"></ion-icon> <h5>Mi perfil</h5></button>
+            <button><ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5></button>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+      <div className={style.carritoDiv}>
         <img
           src="https://s3-alpha-sig.figma.com/img/12c3/1118/bb819854018b2e238fa8383bbc4dbc58?Expires=1695600000&Signature=lPvxgur06egYS0OhwWAM1GfdJRgREFP694bOi99E7DCMjPQbhtrlb2kTSZ00905WpfUYpOw2zfwHOFsx~e3sKpbkBQCUdiY-nTavcHquK2wrPaiQag5r7-aFv3ntKGU9iy4lKBizSJ5K3z0kGeJ9xg-ND0yExebRRMCZLrYmDPwy2Dk-w1-YBJCV~ln0CJTBuFfGwhuX-x5JljAzmH40NQFm2w7J8J6PWISaHteB0Tm9zVNBWzYs~6OjZOC-h~eaYNJIgKQZM-JWc6ntHTwgis6xTx0k2v2vvxRANqhZmlmpsgcoMfQNbCi1IdqfbAgz48J00zRtos4acXhZmZvYBw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
           alt="Bolso de Compras"
           className={style.carritoImg}
         />
-      </div> */}
+      </div>
     </div>
   );
 };
 
 export default Navbar;
+
+/* const handleEnter = (event) => {
+  if (event.key === 'Enter') {
+      onSearch(name);
+  } else if (event.target.tagName === 'BUTTON') {
+      onSearch(name);
+  }
+} */

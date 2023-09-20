@@ -32,7 +32,7 @@ const { User, Product, Category, CarShop, PurchaseOrder, MethodPayment } = seque
 /*Country.belongsToMany(Activity, { through: 'Country_Activities' });
 Activity.belongsToMany(Country, { through: 'Country_Activities' });*/
 
-
+User.hasMany(PasswordReset, { foreignKey: 'userId' });
 Category.hasMany(Product, { foreignKey: 'categoryId' });
 Product.belongsTo(Category);
 CarShop.belongsToMany(Product, { through: 'ProductosEnCarrito' });
