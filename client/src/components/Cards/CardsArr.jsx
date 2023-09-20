@@ -6,7 +6,7 @@ const CardsArr = ({allProducts}) => {
     const allProductsFiltrado = allProducts?.filter(product => product.status === true)
     return ( 
         <>
-        <div className={styles.divCards}>
+        <div className={styles.divCardsArr}>
                  {allProducts.length === 0 ? (
                      <div>
                          <span>LOADING...</span>
