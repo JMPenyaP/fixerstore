@@ -6,25 +6,34 @@
     height: 410px;
     margin: 35px 15px;
     border-radius: 5px;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
-
+.divImg{
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
 .img {
     border-radius: 5px;
 }
-
 
 .divInfo {
     display: flex;
     justify-content: space-between;
     width: 90%;
-    color: #000;
+    color: #2C2D32 ;
     font-family: 'AntipastoPro', sans-serif;
     font-size: 18px;
+    align-items: center;
 }
 
+.divName{
+
+    &:hover{
+        color: #3cbbed;
+    }
+}
 
 
 
