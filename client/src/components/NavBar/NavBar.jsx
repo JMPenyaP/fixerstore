@@ -1,7 +1,9 @@
 import style from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import { setFilters, getProductName } from "../../redux/actions";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import logOut from "../../redux/Actions/logOut";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -9,14 +11,15 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const dataProfile = useSelector((state) => state.dataProfile);
   const [showMenu, setShowMenu] = useState(false);
+  const [letter, setLetter] = useState("i")
 
-  let letter = "A";
-  let nameMenu = "invitado";
-
-  if (dataProfile != null) {
-    letter = dataProfile.name.charAt(0);
-    nameMenu = dataProfile.name;
-  }
+  useEffect(() => {
+    if(dataProfile !== null){
+      setLetter(dataProfile.success !== null ? dataProfile.name.charAt(0) : "i");
+    }else{
+      setLetter("i")
+    }
+  }, [dataProfile]);
 
   const handleChange = (event) => {
     const updatedName = event.target.value; // MIENTRAS CAMBIA EL INPUT TAMBIEN LO HACE EL NAME
@@ -39,6 +42,10 @@ const Navbar = () => {
     } else {
       dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product
     }
+  };
+
+  const handleRedirect = () => {
+    dispatch(logOut());
   };
 
   {
@@ -97,11 +104,22 @@ const Navbar = () => {
           <h4>{letter}</h4>
         </div>
         {showMenu ? (
-          <div className={style.divMenuDesplegable}>
-            <h5>{nameMenu}</h5>
-            <button><ion-icon name="person"></ion-icon> <h5>Mi perfil</h5></button>
-            <button><ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5></button>
-          </div>
+          letter !== "i" ? (
+            <div className={style.divMenuDesplegable}>
+              <button>
+                <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
+              </button>
+              <button onClick={() => handleRedirect()}>
+                <ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5>
+              </button>
+            </div>
+          ) : (
+            <div className={style.divMenuDesplegable}>
+              <button>
+                <ion-icon name="person-add"></ion-icon> <h5>Registrarme</h5>
+              </button>
+            </div>
+          )
         ) : (
           ""
         )}
