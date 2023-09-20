@@ -31,11 +31,6 @@ const { User, Product, Category, CartItem } = sequelize.models;
 // Aca vendrian las relaciones/asociaciones
 /*Country.belongsToMany(Activity, { through: 'Country_Activities' });
 Activity.belongsToMany(Country, { through: 'Country_Activities' });*/
-<<<<<<< HEAD
-
-Category.hasMany(Product, { foreignKey: 'categoryId' });
-=======
->>>>>>> dev
 
 
 Category.hasMany(Product, { foreignKey: 'categoryId' });

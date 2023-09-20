@@ -2,5 +2,9 @@
   "dependencies": {
     "infinite-scroll": "^4.0.1",
     "react-infinite-scroll-component": "^6.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }
