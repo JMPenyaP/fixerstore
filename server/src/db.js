@@ -39,8 +39,6 @@ User.hasMany(CarShop, { foreignKey: 'userId' })
 PurchaseOrder.hasOne(CarShop, { foreignKey: 'purchaseOrderId' });
 MethodPayment.hasMany(PurchaseOrder, { foreignKey: "methodPaymentId" });
 
-
-// Exportar los modelos y la conexión a la base de datos
 module.exports = {
     ...sequelize.models, // exporta los modelos
     conn: sequelize,     // exporta la conexión { conn } = require('./db.js');
