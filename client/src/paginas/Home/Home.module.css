@@ -8,6 +8,7 @@
 .carrusel{
   margin-top: 150px;
   margin-bottom: 150px;
+  align-items: center;
 }
 .footer {
   display: flex;
