@@ -10,7 +10,11 @@ import {
   FILTER_CATEGORIES,
   ORDER_LETTER,
   ORDER_PRICE,
-  CLEAR_PRODUCT_NAME
+  CLEAR_PRODUCT_NAME,
+  AGREGAR_AL_CARRITO,
+  ACTUALIZAR_CANTIDAD_EN_CARRITO,
+  REGISTER,
+  FILTER_BACK,
 } from "./actionTypes";
 
 const initialState = {
@@ -25,6 +29,8 @@ const initialState = {
   allProducts: [],
   productosFiltrados: [],
   allCategories: [],
+  carrito: [],
+  registerConfirm: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -61,7 +67,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
-        productosFiltrados: action.payload,
       };
     }
 
@@ -147,10 +152,60 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_PRODUCT_NAME: {
       return {
         ...state,
-        productName: false, 
-        productByName: [], 
+        productName: false,
+        productByName: [],
       };
     }
+
+    // CARRITO
+
+    case AGREGAR_AL_CARRITO:
+      const { producto, cantidad } = action.payload;
+      const productoExistente = state.carrito.find(
+        (item) => item.id === producto.id
+      );
+
+      if (productoExistente) {
+        return {
+          ...state,
+          carrito: state.carrito.map((item) => {
+            if (item.id === producto.id) {
+              return { ...item, cantidad: item.cantidad + cantidad };
+            }
+            return item;
+          }),
+        };
+      } else {
+        return {
+          ...state,
+          carrito: [...state.carrito, { ...producto, cantidad }],
+        };
+      }
+
+    case ACTUALIZAR_CANTIDAD_EN_CARRITO:
+      const { productoId, nuevaCantidad } = action.payload;
+      return {
+        ...state,
+        carrito: state.carrito.map((item) => {
+          if (item.id === productoId) {
+            return { ...item, cantidad: nuevaCantidad };
+          }
+          return item;
+        }),
+      };
+
+    case REGISTER: {
+      return {
+        ...state,
+        registerConfirm: action.payload,
+      };
+    }
+
+    case FILTER_BACK:
+      return {
+        ...state,
+        productosFiltrados: action.payload,
+      };
 
     default:
       return {
