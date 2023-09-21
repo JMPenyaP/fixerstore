@@ -40,6 +40,11 @@ export default function Footer() {
                 </div>
               </Link>
             </tr>
+            <tr>
+              <Link to="/login" className={style.link}>
+                Ingresar
+              </Link>
+            </tr>
             {/*<tr>
               <Link className={style.link}>Facebook</Link>
             </tr>
