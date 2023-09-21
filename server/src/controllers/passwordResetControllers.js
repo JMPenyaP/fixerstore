@@ -72,14 +72,14 @@ const resetPassword = async (req, res) => {
 
 
         if (!resetToken || resetToken.expirationDate < new Date() || resetToken.status !== 'pending') {
-            return res.status(400).json({ success: false, message: 'Token inválido o expirado' });
+            return res.status(201).json({ success: false, message: 'Token inválido o expirado' });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         const user = await User.findByPk(resetToken.userId);
         if (!user) {
-            return res.status(401).json({ success: false, message: 'Usuario no encontrado' });
+            return res.status(202).json({ success: false, message: 'Usuario no encontrado' });
         }
 
         user.password = hashedPassword;
