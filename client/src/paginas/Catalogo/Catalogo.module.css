@@ -1,26 +1,8 @@
-.filtros{
+.divMain{
     display: flex;
-    height: 50px;
-}
-.divFiltros{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    width: 100%;
+    margin: 50px 0px 150px 0px;
 }
 
-.divOne{
-    display: flex;
-    width: 25%;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Gotham',sans-serif;
-}
-
-.divTwo{
-    width: 75%;
-}
 
 /* .divOne, .divTwo, .divThree {
     flex: 1 0 30%; /* El 30% es el ancho máximo de cada div 

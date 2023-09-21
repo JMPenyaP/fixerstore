@@ -5,7 +5,7 @@ import style from "./Home.module.css";
 import { useEffect } from "react";
 import { getAllProducts } from "../../redux/Actions/getAllProducts";
 import { useDispatch, useSelector } from "react-redux";
-import BotonSwitch from "../../elementos/BotonSwitch";
+
 
 const Home = () => {
   const dispatch = useDispatch();

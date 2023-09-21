@@ -4,6 +4,7 @@ import Dashboard from "./paginas/DashBoard/Dashboard";
 import DetailPage from "./paginas/DetailPage/DetailPage";
 import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin"
 import Home from "./paginas/Home/Home";
+import Carrito from "./paginas/Carrito/Carrito";
 import Navbar from "./components/NavBar/NavBar";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -37,8 +38,9 @@ function App() {
           <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/admin" element={<LoginAdmin />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/searchedprod/:name" element={<SearchedProduct />} />
+          <Route path="/carrodecompras" element={<Carrito />} />
           <Route path="/login" element={<LoginUser />}/>
-          <Route path="searchedprod/:name" element={<SearchedProduct />} />
         </Routes>
     </>
   );
