@@ -5,10 +5,11 @@
   color: #3cbbed;
   margin-bottom: 70px;
 }
-/* .carrusel{
+.carrusel{
   margin-top: 150px;
   margin-bottom: 150px;
-} */
+  text-align: center;
+}
 .footer {
   display: flex;
   background: black;

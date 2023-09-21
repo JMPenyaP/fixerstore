@@ -95,7 +95,7 @@ const LoginUser = () => {
                     <br /><br />
                     <Link><button className={style.formbutton}>Inicia Sesión con Google</button></Link>
                     <Link to='/' className={style.olvido}><p>¿Olvidó su contraseña?</p></Link>
-                    <Link to='/' className={style.olvido}><p>Registrarse</p></Link>
+                    <Link to='/registro' className={style.olvido}><p>Registrarse</p></Link>
                     {handleRedirect ()}
                     {adminPass === false ? (
                     <div className={style.divmensajePass}>
