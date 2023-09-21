@@ -9,6 +9,8 @@ const whatsappRouters = require("./whatsappRouters");
 const filtrosPreciosRouters = require('../routes/filtrosPreciosRouters');
 const { requestPasswordReset, resetPassword } = require('../controllers/passwordResetControllers');
 const router = Router();
+const cartRouters = require("../routes/cartRouters");
+
 
 
 router.use("/users", usersRouters);
