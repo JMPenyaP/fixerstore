@@ -48,10 +48,6 @@ const Navbar = () => {
     dispatch(logOut());
   };
 
-  {
-    console.log(showMenu);
-  }
-
   return (
     <div className={style.divNavBar}>
       <img

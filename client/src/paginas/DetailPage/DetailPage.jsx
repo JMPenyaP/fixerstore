@@ -2,6 +2,7 @@ import style from "./DetailPage.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/Actions/getCategories";
+import { agregarAlCarrito } from "../../redux/Actions/carrito";
 import { Link, useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
@@ -10,19 +11,41 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const DetailPage = () => {
+  // ESTADOS ///
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
   const [mainImage, setMainImage] = useState();
-  const [images, setImages] = useState([]); // Utiliza un estado para las imágenes
+  const [cantidad, setCantidad] = useState(1);
+  const [images, setImages] = useState([]);
+  //////
+
+  let precioReal;
+
+  if (product.statusOffer === true) {
+    precioReal =
+      product.priceOfList - (product.priceOfList * product.offer) / 100;
+  } else {
+    precioReal = product.priceOfList;
+  }
+
+  // STATE REDUX
   const productByName = useSelector((state) => state.productByName);
+  const allCategories = useSelector((state) => state.allCategories);
+  const carrito = useSelector((state) => state.carrito);
+  //////
+
+  // USE PARAMS Y DISPATCH
   const params = useParams();
   const dispatch = useDispatch();
-  const allCategories = useSelector((state) => state.allCategories);
+  //////
+
   const id = params.id;
-  let disabledButton = true;
+
+  // CATEGORIAS
   const productCategory = allCategories.find(
     (category) => category.id === product.categoryId
   );
+  //////
 
   useEffect(() => {
     try {
@@ -41,9 +64,9 @@ const DetailPage = () => {
 
   useEffect(() => {
     allCategories?.length === 0 && dispatch(getCategories());
-    console.log(allCategories);
   }, [allCategories, dispatch]);
 
+  // ONCLICK FUNCTIONS
   const setImage = (url) => {
     setMainImage(url);
   };
@@ -52,9 +75,32 @@ const DetailPage = () => {
     window.history.back();
   };
 
+  const handleAumentar = () => {
+    setCantidad(cantidad + 1);
+  };
+
+  const handleDisminuir = () => {
+    if (cantidad > 1) {
+      setCantidad(cantidad - 1);
+    }
+  };
+
+  const agregarProductoAlCarrito = () => { 
+    dispatch(
+      agregarAlCarrito(
+        { id: product.id, name: product.name, precio: precioReal },
+        cantidad
+      )
+    );
+  };
+  ///////
+
+  // VARIABLES QUE CAMBIAN
   let slidesToShowImg = images.length;
   let carousel = true;
+  /////
 
+  // SETTINGS CAROUSEL
   let settings = {
     dots: true,
     infinite: true,
@@ -66,6 +112,7 @@ const DetailPage = () => {
   if (slidesToShowImg < 4) {
     carousel = false;
   }
+  ///////
 
   return (
     <>
@@ -178,6 +225,28 @@ const DetailPage = () => {
                       <h6>Consultá Por Este Producto !</h6>
                     </Link>
                   )}
+                </div>
+              </div>
+              <div className={style.divAddCart}>
+                <div className={style.addAndRestButtons}>
+                  <button
+                    onClick={handleDisminuir}
+                    className={style.buttonCantidad}
+                  >
+                    <ion-icon name="remove-circle"></ion-icon>
+                  </button>
+                  <span>{cantidad}</span>
+                  <button
+                    onClick={handleAumentar}
+                    className={style.buttonCantidad}
+                  >
+                    <ion-icon name="add-circle"></ion-icon>
+                  </button>
+                </div>
+                <div className={style.divButton}>
+                  <button onClick={agregarProductoAlCarrito}>
+                    Agregar Al Carrito
+                  </button>
                 </div>
               </div>
             </div>
