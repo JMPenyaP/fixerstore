@@ -11,6 +11,8 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import SearchedProduct from "./paginas/SearchedProduct/SearchedProduct";
+import LoginUser from "./paginas/LoginUser/LoginUser";
+import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 
 function App() {
   const navigate = useNavigate()
@@ -20,7 +22,7 @@ function App() {
     setAdminPass(admin)
 }, [admin])
   const location = useLocation();
-  const isLoginPage = location.pathname === '/admin';
+  const isLoginPage = location.pathname === '/admin' || location.pathname === "/login" || location.pathname === "/registro";
   useEffect(() => {
     if (!adminPass && location.pathname === '/dashboard') {
       navigate('/admin');
@@ -28,9 +30,9 @@ function App() {
   }, [adminPass, location.pathname, navigate]);
   return (
     <>
-      <div className="App">
         {!isLoginPage && <Navbar />}
         <Routes>
+          <Route path="/registro" element={<RegistroUsuario/>}/>
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Catalogo />} />
           <Route path="/detail/:id" element={<DetailPage />} />
@@ -38,9 +40,10 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/searchedprod/:name" element={<SearchedProduct />} />
           <Route path="/carrodecompras" element={<Carrito />} />
+          <Route path="/login" element={<LoginUser />}/>
         </Routes>
-      </div>
     </>
   );
 }
 export default App;
+

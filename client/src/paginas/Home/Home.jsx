@@ -19,6 +19,8 @@ const Home = () => {
   return (
     <>
       <Banner />
+        {/* <h2>PRODUCTOS RECOMENDADOS</h2> */}
+        <br /><br />
       <div className={style.carrusel}>
         <Carrusel />
       </div>

@@ -39,6 +39,7 @@ const getProductById = async (id) => {
 
   return productId
 }
+
 module.exports = {
   createProduct,
   getAllProducts,
