@@ -1,10 +1,66 @@
 .divMain {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  font-size: 14px;
+  width: 300px;
 }
 
-.divOne, .divTwo, .divThree {
-  flex: 1 0 30%; /* El 30% es el ancho máximo de cada div */
-  margin: 0px 10px;
-  box-sizing: border-box; /* Asegura que el margen no aumente el ancho */
+.buttonContainer {
+  display: flex;
+  flex-direction: column; /* Alineación vertical */
+}
+
+/* Estilos comunes para ambos tipos de botones */
+.offBoton,
+.onBoton {
+  border: none;
+  font-size: 14px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+  margin: 5px 0px;
+}
+
+/* Estilos para botones desactivados (.offBoton) */
+.offBoton {
+  color: #3cbbed;
+  background-color: transparent;
+}
+
+.offBoton:hover {
+  color: white; /* Cambia el color de la letra a blanco al hacer hover */
+}
+
+.offBoton::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 20px;
+  background-color: rgba(60, 187, 237, 0.50);
+  z-index: -1;
+  transition: width 0.6s, opacity 0.6s; /* Aplica la transición a ambas propiedades */
+  opacity: 0;
+}
+
+.offBoton:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+/* Estilos para botones activados (.onBoton) */
+.onBoton {
+  color: white;
+  background-color: #3cbbed;
+}
+
+.onBoton .logoboton {
+  filter: brightness(50);
+  cursor: pointer;
 }

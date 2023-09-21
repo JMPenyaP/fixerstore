@@ -129,9 +129,10 @@
     border-radius: 16px;
     color: white;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 20%;
 }
 
 .divMenuDesplegable ion-icon{
@@ -146,14 +147,15 @@
 
 .divMenuDesplegable button{
     display: flex;
-    justify-content: space-evenly;
+    justify-content:flex-start;
+    gap: 10%;
     align-items: center;
     border-radius: 16px;
     width: 70%;
     border: 1px solid #3cbbed;
     background-color: white;
     cursor: pointer;
-    padding: 3px;
+    padding: 5px;
 }
 
 .divMenuDesplegable button h5{

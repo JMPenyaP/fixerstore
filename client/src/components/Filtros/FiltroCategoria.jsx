@@ -1,47 +1,50 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/Actions/getCategories";
-import { filterCategories } from "../../redux/Actions/filterCategories";
-import { orderLetter } from "../../redux/Actions/orderLetter";
-import style from './select.module.css'
+import style from './Filtros.module.css';
+import { filterBack } from "../../redux/Actions/filterBack";
 
-const FiltroCategoria = ({
-  orderName,
-  orderPrice,
-  setOrderName,
-  setOrderPrecio,
-}) => {
-
+const FiltroCategoria = () => {
   const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.allCategories);
 
   useEffect(() => {
     allCategories?.length === 0 && dispatch(getCategories());
-  },[allCategories, dispatch]);
+  }, [allCategories, dispatch]);
 
-  const handleSelect = (event) => {
-    const value = event.target.value;
-    dispatch(orderLetter())
-    setOrderName('DEFAULT')
-    setOrderPrecio('DEFAULT')
-    dispatch(filterCategories(value));
+  // Estado para rastrear el filtro seleccionado
+  const [actualBoton, setActualBoton] = useState("DEFAULT"); // Estado para rastrear el botón actual
+
+  const handleSection = (boton) => {
+    if(boton === actualBoton){
+      return
+    }
+    setActualBoton(boton);
+    dispatch(filterBack(boton))
   };
+
   return (
     <>
-      <div>
-        <select onChange={handleSelect} className={style.selectBox}>
-          <option disabled selected value="DEFAULT">
-            Categoria
-          </option>
-          <option value="all">Todos</option>
-          {allCategories?.map((category, index) => {
-            return (
-              <option className={style.options} value={category.id} key={index}>
+      <div className={style.divMain}>
+        <h2>Categorias</h2>
+            <div className={style.buttonContainer}>
+            <button
+              className={actualBoton === 'DEFAULT' ? style.onBoton : style.offBoton}
+              onClick={() => handleSection("DEFAULT")}
+            >
+              Todos
+            </button>
+          
+            {allCategories?.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => handleSection(category.name)}
+                className={actualBoton === category.name ? style.onBoton : style.offBoton}
+              >
                 {category.name}
-              </option>
-            );
-          })}
-        </select>
+              </button>
+            ))}
+        </div>
       </div>
     </>
   );
