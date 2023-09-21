@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/Actions/getCategories";
 import style from './Filtros.module.css';
+import { filterBack } from "../../redux/Actions/filterBack";
 
 const FiltroCategoria = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const FiltroCategoria = () => {
       return
     }
     setActualBoton(boton);
-    // dispatch(getFiltro(boton))
+    dispatch(filterBack(boton))
   };
 
   return (

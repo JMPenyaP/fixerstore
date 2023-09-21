@@ -10,7 +10,7 @@ import CardsArr from "../../components/Cards/CardsArr";
 const Catalogo = () => {
   const dispatch = useDispatch();
 
-  const allProducts = useSelector((state) => state.allProducts);
+  const productosFiltrados = useSelector((state) => state.productosFiltrados);
 
   /*  const handlerFilter = () => {
     dispatch(setFiltros())
@@ -29,9 +29,9 @@ const Catalogo = () => {
               <Filtros />
             </div>
 
-            {allProducts.length ? 
+            {productosFiltrados.length ? 
             
-              <CardsArr allProducts={allProducts} />
+              <CardsArr allProducts={productosFiltrados} />
             
             :
             <div >

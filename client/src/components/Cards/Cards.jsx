@@ -27,6 +27,7 @@ const Cards = () => {
             },
         }
     );
+    
 
     const products = data
     ? data.pages.flatMap((page) => page.products).filter((product) => product.status === true)

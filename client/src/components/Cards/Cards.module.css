@@ -11,9 +11,18 @@
     width: 90%;
 }
 
+
+
+
+/* margin: 50px 0px 150px 0px; */
+
+.divMain{
+justify-content: center;
+margin: auto;
+}
+
 .divCardsArr{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 }
