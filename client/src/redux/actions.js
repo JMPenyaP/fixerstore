@@ -26,8 +26,10 @@ import { createProduct } from "./Actions/createProduct";
 import { getProductByName } from "./Actions/getProductByName";
 import { setFilter } from "./Actions/setearFilter";
 import { loginAdmin } from "./Actions/loginAdmin";
+import { loginUser } from './Actions/loginUser'
 
 export const createProd = createProduct;
 export const getProductName = getProductByName;
 export const setFilters = setFilter;
-export const login = loginAdmin
+export const login = loginAdmin;
+export const loginU = loginUser;

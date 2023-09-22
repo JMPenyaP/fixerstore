@@ -82,7 +82,86 @@
     width: 100%;
 }
 
-/* USER LETTER */
+
+/* Carrito */
+
+.carritoDiv {
+    position: relative;
+    cursor: pointer;
+}
+
+.cartCounter{
+    background-color: #3cbbed;
+    border-radius: 50%;
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carritoImg {
+    width: 32px;
+    height: 33px;
+}
+
+/* MENU DESPLEGABLE LOG IN LETTER */
+
+
+.containerLogIn{
+    position: relative;
+}
+
+.divMenuDesplegable{
+    position: absolute;
+    height: 120px;
+    width: 250px;
+    background-color: #202549;
+    left: -160%;
+    top: 110%;
+    z-index: 99;
+    border: 2px solid #3cbbed;
+    border-radius: 16px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20%;
+}
+
+.divMenuDesplegable ion-icon{
+    color: #3cbbed;
+    font-size: 18px;
+}
+
+.divMenuDesplegable h5{
+    margin: 0;
+    color: #3cbbed;
+}
+
+.divMenuDesplegable button{
+    display: flex;
+    justify-content:flex-start;
+    gap: 10%;
+    align-items: center;
+    border-radius: 16px;
+    width: 70%;
+    border: 1px solid #3cbbed;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.divMenuDesplegable button h5{
+    font-size: 14px;
+    color: white;
+    color: #3cbbed;
+}
 
 .userLetter {
     display: flex;
@@ -101,6 +180,7 @@
     overflow: hidden;
     z-index: 99999999999;
     font-family: 'Gotham Black', sans-serif;
+    cursor: pointer;
 }
 
 .userLetter:hover {
@@ -125,32 +205,4 @@
     width: 150%;
     height: 150%;
     opacity: 1;
-}
-
-
-/* Carrito */
-
-.carritoDiv {
-    position: relative;
-    cursor: pointer;
-}
-
-.carritoDiv::before {
-    content: "1";
-    position: absolute;
-    top: 70%;
-    left: 70%;
-    background-color: #3cbbed;
-    border-radius: 50%;
-    height: 21px;
-    width: 21px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
-.carritoImg {
-    width: 32px;
-    height: 33px;
 }

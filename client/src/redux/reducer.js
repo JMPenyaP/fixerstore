@@ -10,11 +10,20 @@ import {
   FILTER_CATEGORIES,
   ORDER_LETTER,
   ORDER_PRICE,
-  CLEAR_PRODUCT_NAME
+  CLEAR_PRODUCT_NAME,
+  AGREGAR_AL_CARRITO,
+  ACTUALIZAR_CANTIDAD_EN_CARRITO,
+  REGISTER,
+  FILTER_BACK,
+  INCREMENT_QTY,
+  DECREMENT_QTY,
+  REMOVE_PRODUCT,
+  USER_PROFILE,
 } from "./actionTypes";
 
 const initialState = {
   adminProfile: null,
+  clientProfile: null,
   nuevo_producto: null,
   role: null,
   productName: false,
@@ -25,6 +34,9 @@ const initialState = {
   allProducts: [],
   productosFiltrados: [],
   allCategories: [],
+  carrito: [],
+  registerConfirm: null,
+  clientProfile: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -35,6 +47,14 @@ const rootReducer = (state = initialState, action) => {
         adminProfile: action.payload.success,
         dataProfile: action.payload,
       };
+    }
+
+    case USER_PROFILE: {
+      return {
+        ...state,
+        clientProfile: action.payload.success,
+        dataProfile: action.payload,
+      }
     }
 
     case NEW_PRODUCT: {
@@ -61,7 +81,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: action.payload,
-        productosFiltrados: action.payload,
       };
     }
 
@@ -147,8 +166,106 @@ const rootReducer = (state = initialState, action) => {
     case CLEAR_PRODUCT_NAME: {
       return {
         ...state,
-        productName: false, 
-        productByName: [], 
+        productName: false,
+        productByName: [],
+      };
+    }
+
+    // CARRITO
+
+    case AGREGAR_AL_CARRITO:
+      const { producto, cantidad } = action.payload;
+      const productoExistente = state.carrito.find(
+        (item) => item.id === producto.id
+      );
+
+      if (productoExistente) {
+        return {
+          ...state,
+          carrito: state.carrito.map((item) => {
+            if (item.id === producto.id) {
+              return { ...item, cantidad: item.cantidad + cantidad };
+            }
+            return item;
+          }),
+        };
+      } else {
+        return {
+          ...state,
+          carrito: [...state.carrito, { ...producto, cantidad }],
+        };
+      }
+
+    case ACTUALIZAR_CANTIDAD_EN_CARRITO:
+      const { productoId, nuevaCantidad } = action.payload;
+      return {
+        ...state,
+        carrito: state.carrito.map((item) => {
+          if (item.id === productoId) {
+            return { ...item, cantidad: nuevaCantidad };
+          }
+          return item;
+        }),
+      };
+
+    case INCREMENT_QTY: {
+      return {
+        ...state,
+        carrito: state.carrito.map((item) => {
+          if (item.id === action.payload.productId) {
+            return {
+              ...item,
+              cantidad: item.cantidad + 1,
+            };
+          } else {
+            return item;
+          }
+        }),
+      };
+    }
+
+    case DECREMENT_QTY:
+      return {
+        ...state,
+        carrito: state.carrito.map((producto) => {
+          if (producto.id === action.payload.productId) {
+            return {
+              ...producto,
+              cantidad: Math.max(1, producto.cantidad - 1),
+            };
+          }
+          return producto;
+        }),
+      };
+
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        carrito: state.carrito.filter(
+          (producto) => producto.id !== action.payload.productId
+        ),
+      };
+
+    ////////////
+
+    case REGISTER: {
+      return {
+        ...state,
+        registerConfirm: action.payload,
+      };
+    }
+
+    case FILTER_BACK:
+      return {
+        ...state,
+        productosFiltrados: action.payload,
+      };
+
+    case USER_PROFILE: {
+      return {
+        ...state,
+        clientProfile: action.payload.success,
+        dataProfile: action.payload,
       };
     }
 
