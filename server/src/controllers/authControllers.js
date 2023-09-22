@@ -23,7 +23,7 @@ exports.loginUsers = async (req, res) => {
 
         const token = jwt.sign({ userId: user.id, role: user.role }, 'clave_secreta', { expiresIn: '1h' });
 
-        res.status(200).json({ success: true, message: 'Inicio de sesión exitoso', token, name: user.name + " " + user.surname, email: user.email, role: user.role });
+        res.status(200).json({ success: true, message: 'Inicio de sesión exitoso', token, userData: user });
 
     } catch (error) {
         console.error(error);

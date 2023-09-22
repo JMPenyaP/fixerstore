@@ -11,6 +11,7 @@ import { createUser, closeUser } from '../../redux/Actions/createUser';
 
 const RegistroUsuario = () => {
     const dispatch = useDispatch()
+    const [existe, setExiste] = useState(null);
     const navigate = useNavigate()
     const {handleSubmit, control, formState: {errors}, trigger, reset, watch} = useForm()
     const currentDate = new Date();
@@ -102,16 +103,17 @@ const RegistroUsuario = () => {
             const query = `?email=${email}`;
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
+            console.log(res.data.success);
             if (res.status === 200) {
                 const { success } = res.data;
-                if (success === true) {
-                    return true
-                }else return false}
-
+                if (success === true) {setExiste(true); return true}
+                else setExiste(false);return false
+            }
         } catch (error) {
             return error.message;
         }
     }
+    console.log(existe);
     useEffect(() => {
         if(errors.password || password === "") setIsRepeatPasswordEnabled(false);
         if(!errors.password && password !== "") setIsRepeatPasswordEnabled(true);
@@ -182,18 +184,14 @@ const RegistroUsuario = () => {
                                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                                       message: 'Este no es un correo electrónico válido',
                                     },
-                                    validate: async (value) => {
-                                      if (value) {
-                                        const existe = await verifyEmail(value);
-                                        if (existe) {
-                                          return 'Este correo electrónico ya está registrado';
-                                        }
-                                      }
-                                      return true;
-                                    },
-                                  }}
+                                    validate: async (value) =>  {
+                                        const success = await verifyEmail(value)
+                                        if (success) return "Este correo ya registrado, intenta con uno nuevo"
+                                        else return true
+                                    }
+                                }}
                                 render={({ field }) => (
-                                    <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("email"); }}/>)}/>
+                                    <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("email")}}/>)}/>
                                 <div className={style.errorMenssage}>
                                     {errors.email && <p className={style.simbolo}>¡</p>}
                                     {errors.email && <p className={style.errorText}>{errors.email.message}</p>}
