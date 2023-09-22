@@ -18,11 +18,12 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     role: {
       type: DataTypes.ENUM('admin', 'client'),
       defaultValue: 'client',
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -38,7 +39,15 @@ module.exports = (sequelize) => {
         len: [3, 150],
       },
     },
+    gender: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
     age: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    birthDate: {
       type: DataTypes.DATEONLY,
       allowNull: true,
     },
@@ -50,7 +59,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    neighborhood: {
+    city: {
       type: DataTypes.STRING,
       allowNull: true,
     },
