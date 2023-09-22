@@ -7,11 +7,12 @@ const addToCartHandler = async (req, res) => {
 
         const resp = await addToCartController(userId, products);
 
-
         return res.status(201).json(resp);
 
     } catch (error) {
+
         return res.status(500).json({ message: 'Error interno del servidor' });
+
     }
 };
 

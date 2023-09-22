@@ -7,6 +7,7 @@ import style from "./loginUser.module.css"
 import imagenIzq from "../../assets/Fondolaterallogin.png"
 import {gapi} from "gapi-script"
 import GoogleLogin from "react-google-login"
+import { createUser } from "../../redux/Actions/createUser";
 
 const LoginUser = () => {
     const [existe, setExiste] = useState(null);
@@ -14,7 +15,6 @@ const LoginUser = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
     const [clientPass, setClientPass] = useState(null)
-
     const navigate = useNavigate()
     const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
@@ -39,15 +39,11 @@ const LoginUser = () => {
             const query = `?email=${email}`;
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
+            console.log(res);
             if (res.status === 200) {
                 const { success, role } = res.data;
                 if (success === true) {
-                    if (role === "client") {
-                        setExiste(success);
-                    }
-                    else {
-                        setExiste(false);
-                    }
+                    setExiste(true);
                 }
                 if (success === false) {
                     setExiste(false)
@@ -61,11 +57,11 @@ const LoginUser = () => {
     const loginAdmin = (emails, passwords, event) => {
         event.preventDefault()
         const data = { email: emails, password: passwords }
-        dispatch(actions.login(data))
+        dispatch(actions.loginU(data))
     }
     const handleRedirect = () => {
         if (clientPass) {
-            navigate("/registro")
+            navigate("/")
         }
       };
     console.log(existe);
@@ -76,45 +72,40 @@ const LoginUser = () => {
         gapi.auth2.init({
             clientId:clientId
         })
-     }
+    }
      gapi.load("client:auth2",start)
     },[])
-
-    const onSuccess=(response)=>{
-        const { profileObj, googleId } = response;
-        const { givenName, familyName, email } = profileObj;
-
-        const userData = {
-            name: givenName,
-            surname: familyName,
-            password: googleId,
-            email,
-            role: "client",
-          };
-
-        dispatch(actions.loginU(userData))
-/*         axios.post("http://localhost:3001/users/register",{
-  
-        name:response.profileObj.givenName,
-        surname:response.profileObj.familyName,
-        password:response.googleId,
-        email:response.profileObj.email,
-        role:"client"
-  
-      })
-        console.log(response) */
-      }
+    const onSuccess= async (response)=>{
+        try {
+            const { profileObj, tokenId} = response;
+            const { givenName, familyName, email } = profileObj;
+            console.log(response);
+            const userData = {
+                name: givenName,
+                surname: familyName,
+                password: tokenId,
+                email: email,
+                role: "client",
+              };
+            const URL = "http://localhost:3001/users/email";
+            const query = `?email=${userData.email}`;
+            const endpoint = URL + query;
+            const res = await axios.get(endpoint);
+                const { success } = res.data;
+                if (success === true) {
+                    dispatch(actions.loginU({email: userData.email, password: userData.password}))
+                }
+                else if (success === false) {
+                    dispatch(createUser(userData))
+                    setTimeout(()=> {dispatch(actions.loginU({email: userData.email, password: userData.password}))}, 1000)
+                }
+        } catch (error) {
+            return error.message;
+        }
+    }
       const onFailure=()=>{
         console.log("somethimg went wrong")
-      }
-
-    /* const handleGoogleLoginClick = () => {
-        setGoogle(true)
-        setTimeout(() => {
-            console.log("Estado de google:", google); // Imprime el valor de google en la consola
-          }, 0);
-    } */
-    
+    }
     return (
         <div className={style.contenedorMayor}>
             <div className={style.contenedor} >
@@ -172,3 +163,23 @@ const LoginUser = () => {
     )
 };
 export default LoginUser;
+
+
+/*         axios.post("http://localhost:3001/users/register",{
+  
+        name:response.profileObj.givenName,
+        surname:response.profileObj.familyName,
+        password:response.googleId,
+        email:response.profileObj.email,
+        role:"client"
+  
+      })
+        console.log(response) */
+
+    /* const handleGoogleLoginClick = () => {
+        setGoogle(true)
+        setTimeout(() => {
+            console.log("Estado de google:", google); // Imprime el valor de google en la consola
+          }, 0);
+    } */
+    

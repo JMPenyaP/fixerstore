@@ -19,7 +19,7 @@ const Navbar = () => {
   useEffect(() => {
     if (dataProfile !== null) {
       setLetter(
-        dataProfile.success !== null ? dataProfile.name.charAt(0) : "i"
+        dataProfile.success !== null ? dataProfile.userData.name[0] : "i"
       );
     } else {
       setLetter("i");

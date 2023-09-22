@@ -5,7 +5,7 @@ export const loginUser = (userData) => {
   try {
     return async (dispatch) => {
       const response = await axios.post(
-        "http://localhost:3001/users/register",
+        "http://localhost:3001/auth/login",
         userData
       );
       dispatch({
