@@ -27,12 +27,7 @@ module.exports = (sequelize) => {
             default: true,
             allowNull: false
         },
-        methodPaymentId: {
 
-            type: DataTypes.INTEGER,
-            allowNull: false
-
-        }
 
     })
 
