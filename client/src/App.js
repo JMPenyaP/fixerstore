@@ -83,6 +83,8 @@ function App() {
           <Route path="/searchedprod/:name" element={<SearchedProduct />} />
           <Route path="/carrodecompras" element={<Carrito />} />
           <Route path="/login" element={<LoginUser />}/>
+          <Route path="/payment" element={<Pasarela />}/>
+
         </Routes>
     </>
   );
