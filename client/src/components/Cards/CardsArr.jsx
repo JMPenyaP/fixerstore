@@ -1,26 +1,27 @@
 import Card from "../Card/Card";
-import Footer from "../Footer/Footer";
 import styles from './Cards.module.css'
 
 const CardsArr = ({allProducts}) => {
     const allProductsFiltrado = allProducts?.filter(product => product.status === true)
     return ( 
         <>
-        <div className={styles.divCards}>
+            <div className={styles.divMain}>
                  {allProducts.length === 0 ? (
                      <div>
                          <span>LOADING...</span>
                      </div>
                  ) : (
-                     allProductsFiltrado?.map((product) => (
+                 <div className={styles.divCardsArr}>
+                     {allProductsFiltrado?.map((product) => (
 
                         <div key={product.id}>
                             <Card product={product} />
                         </div>
                         
-                     ))
+                     ))}
+                </div>
                  )}
-             </div>
+            </div>
         </>
      );
 }

@@ -42,9 +42,10 @@ const getProductIdHandler = async (req, res) => {
         res.status(400).json({ success: false, message: "Error getting Product by id. " + error.message })
     }
 }
+
 module.exports = {
     createProductsHandler,
     getAllProductsHandler,
-    getProductIdHandler
+    getProductIdHandler,
 };
 

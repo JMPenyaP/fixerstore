@@ -90,19 +90,18 @@
     cursor: pointer;
 }
 
-.carritoDiv::before {
-    content: "1";
-    position: absolute;
-    top: 70%;
-    left: 70%;
+.cartCounter{
     background-color: #3cbbed;
     border-radius: 50%;
-    height: 21px;
-    width: 21px;
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
 .carritoImg {
@@ -129,9 +128,10 @@
     border-radius: 16px;
     color: white;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 20%;
 }
 
 .divMenuDesplegable ion-icon{
@@ -146,14 +146,15 @@
 
 .divMenuDesplegable button{
     display: flex;
-    justify-content: space-evenly;
+    justify-content:flex-start;
+    gap: 10%;
     align-items: center;
     border-radius: 16px;
     width: 70%;
     border: 1px solid #3cbbed;
     background-color: white;
     cursor: pointer;
-    padding: 3px;
+    padding: 5px;
 }
 
 .divMenuDesplegable button h5{

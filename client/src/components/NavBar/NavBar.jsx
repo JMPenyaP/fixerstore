@@ -1,22 +1,34 @@
 import style from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import { setFilters, getProductName } from "../../redux/actions";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import logOut from "../../redux/Actions/logOut";
 import { useState } from "react";
 
 const Navbar = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
-  const dataProfile = useSelector((state) => state.dataProfile);
   const [showMenu, setShowMenu] = useState(false);
+  const [letter, setLetter] = useState("i");
+  const [cartLong, setCartLong] = useState(0);
 
-  let letter = "A";
-  let nameMenu = "invitado";
+  const carrito = useSelector((state) => state.carrito);
+  const dataProfile = useSelector((state) => state.dataProfile);
 
-  if (dataProfile != null) {
-    letter = dataProfile.name.charAt(0);
-    nameMenu = dataProfile.name;
-  }
+  useEffect(() => {
+    if (dataProfile !== null) {
+      setLetter(
+        dataProfile.success !== null ? dataProfile.name.charAt(0) : "i"
+      );
+    } else {
+      setLetter("i");
+    }
+
+    if (carrito.length > 0) {
+      setCartLong(carrito.length);
+    }
+  }, [dataProfile, carrito]);
 
   const handleChange = (event) => {
     const updatedName = event.target.value; // MIENTRAS CAMBIA EL INPUT TAMBIEN LO HACE EL NAME
@@ -41,9 +53,9 @@ const Navbar = () => {
     }
   };
 
-  {
-    console.log(showMenu);
-  }
+  const handleRedirect = () => {
+    dispatch(logOut());
+  };
 
   return (
     <div className={style.divNavBar}>
@@ -97,22 +109,36 @@ const Navbar = () => {
           <h4>{letter}</h4>
         </div>
         {showMenu ? (
-          <div className={style.divMenuDesplegable}>
-            <h5>{nameMenu}</h5>
-            <button><ion-icon name="person"></ion-icon> <h5>Mi perfil</h5></button>
-            <button><ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5></button>
-          </div>
+          letter !== "i" ? (
+            <div className={style.divMenuDesplegable}>
+              <button>
+                <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
+              </button>
+              <button onClick={() => handleRedirect()}>
+                <ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5>
+              </button>
+            </div>
+          ) : (
+            <div className={style.divMenuDesplegable}>
+              <button>
+                <ion-icon name="person-add"></ion-icon> <h5>Registrarme</h5>
+              </button>
+            </div>
+          )
         ) : (
           ""
         )}
       </div>
-      <div className={style.carritoDiv}>
-        <img
-          src="https://s3-alpha-sig.figma.com/img/12c3/1118/bb819854018b2e238fa8383bbc4dbc58?Expires=1695600000&Signature=lPvxgur06egYS0OhwWAM1GfdJRgREFP694bOi99E7DCMjPQbhtrlb2kTSZ00905WpfUYpOw2zfwHOFsx~e3sKpbkBQCUdiY-nTavcHquK2wrPaiQag5r7-aFv3ntKGU9iy4lKBizSJ5K3z0kGeJ9xg-ND0yExebRRMCZLrYmDPwy2Dk-w1-YBJCV~ln0CJTBuFfGwhuX-x5JljAzmH40NQFm2w7J8J6PWISaHteB0Tm9zVNBWzYs~6OjZOC-h~eaYNJIgKQZM-JWc6ntHTwgis6xTx0k2v2vvxRANqhZmlmpsgcoMfQNbCi1IdqfbAgz48J00zRtos4acXhZmZvYBw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-          alt="Bolso de Compras"
-          className={style.carritoImg}
-        />
-      </div>
+      <Link to="/carrodecompras">
+        <div className={style.carritoDiv}>
+          <img
+            src="https://s3-alpha-sig.figma.com/img/12c3/1118/bb819854018b2e238fa8383bbc4dbc58?Expires=1695600000&Signature=lPvxgur06egYS0OhwWAM1GfdJRgREFP694bOi99E7DCMjPQbhtrlb2kTSZ00905WpfUYpOw2zfwHOFsx~e3sKpbkBQCUdiY-nTavcHquK2wrPaiQag5r7-aFv3ntKGU9iy4lKBizSJ5K3z0kGeJ9xg-ND0yExebRRMCZLrYmDPwy2Dk-w1-YBJCV~ln0CJTBuFfGwhuX-x5JljAzmH40NQFm2w7J8J6PWISaHteB0Tm9zVNBWzYs~6OjZOC-h~eaYNJIgKQZM-JWc6ntHTwgis6xTx0k2v2vvxRANqhZmlmpsgcoMfQNbCi1IdqfbAgz48J00zRtos4acXhZmZvYBw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+            alt="Bolso de Compras"
+            className={style.carritoImg}
+          />
+          <div className={style.cartCounter}>{cartLong}</div>
+        </div>
+      </Link>
     </div>
   );
 };

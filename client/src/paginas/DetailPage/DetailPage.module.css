@@ -98,7 +98,7 @@
 .divButton button {
     border: none;
     font-size: 23px;
-    padding: 10px 30px 10px 30px;
+    padding: 4px 13px 4px 13px;
     border-radius: 50px;
     cursor: pointer;
     color: white;
@@ -233,4 +233,41 @@
 
 .imgNoCarousel img{
     cursor: pointer;
+}
+
+/* AGREGAR AL CARRITO */
+
+.divAddCart{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+
+.addAndRestButtons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+}
+
+.divAddCart span{
+    font-size: 26px;
+}
+
+.buttonCantidad{
+    padding: 0px;
+    background-color: transparent;
+    margin: 0px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.buttonCantidad ion-icon{
+    font-size: 25px;
+    color: #3cbbed;
 }

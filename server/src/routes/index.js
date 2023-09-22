@@ -11,6 +11,8 @@ const CartRouter = require('../routes/cartRouters');
 
 const { requestPasswordReset, resetPassword } = require('../controllers/passwordResetControllers');
 const router = Router();
+const cartRouters = require("../routes/cartRouters");
+
 
 
 router.use("/users", usersRouters);
