@@ -3,9 +3,9 @@ const bcrypt = require("bcryptjs");
 
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
-  arreglo = req.body;
+/*   arreglo = req.body;
 
-  for (let i = 0; i < arreglo.length; i++) {
+  for (let i = 0; i < arreglo.length; i++) { */
     const {
       email,
       password,
@@ -16,13 +16,13 @@ const createUserHandler = async (req, res) => {
       neighborhood,
       department,
       role,
-    } = arreglo[i];
+    } = req.body;
 
     try {
       const existingUser = await User.findOne({ where: { email } });
       if (existingUser) {
         return res
-          .status(400)
+          .status(200)
           .json({ success: false, message: "El email ya está registrado" });
       }
 
@@ -48,7 +48,7 @@ const createUserHandler = async (req, res) => {
       res.status(500).json({ success: false, message: "Error en el servidor" });
     }
   }
-};
+;
 
 //! Modificar Datos de Usuario
 const updateUserController = async (req, res) => {

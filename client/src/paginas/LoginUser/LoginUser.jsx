@@ -5,31 +5,34 @@ import * as actions from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux"
 import style from "./loginUser.module.css"
 import imagenIzq from "../../assets/Fondolaterallogin.png"
+import {gapi} from "gapi-script"
+import GoogleLogin from "react-google-login"
 
 const LoginUser = () => {
     const [existe, setExiste] = useState(null);
     const [emailInput, setEmailInput] = useState("");
-    const [adminPass, setAdminPass] = useState(null)
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('');
+    const [clientPass, setClientPass] = useState(null)
+
     const navigate = useNavigate()
     const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
     };
     const dispatch = useDispatch()
-    let admin = useSelector((state) => state.adminProfile)
+    let user = useSelector((state) => state.clientProfile)
     useEffect(() => {
-        setAdminPass(admin)
-    }, [admin])
+        setClientPass(user)
+    }, [user])
     const handleChange = (e) => {
         setEmailInput(e.target.value);
         setExiste(null)
-        setAdminPass(null)
+        setClientPass(null)
     }
     const handleChangePass = (e) => {
         setPassword(e.target.value);
     }
-    const userAdmin = async (email, event) => {
+    const userClient = async (email, event) => {
         event.preventDefault();
         try {
             const URL = "http://localhost:3001/users/email";
@@ -61,12 +64,57 @@ const LoginUser = () => {
         dispatch(actions.login(data))
     }
     const handleRedirect = () => {
-        if (adminPass) {
+        if (clientPass) {
             navigate("/registro")
         }
       };
     console.log(existe);
     // Renderizado
+    const clientId="857226330997-djo84o8lcmedrffj6d4bm0pt8oks23bn.apps.googleusercontent.com"
+    useEffect(()=>{
+     const start= ()=>{
+        gapi.auth2.init({
+            clientId:clientId
+        })
+     }
+     gapi.load("client:auth2",start)
+    },[])
+
+    const onSuccess=(response)=>{
+        const { profileObj, googleId } = response;
+        const { givenName, familyName, email } = profileObj;
+
+        const userData = {
+            name: givenName,
+            surname: familyName,
+            password: googleId,
+            email,
+            role: "client",
+          };
+
+        dispatch(actions.loginU(userData))
+/*         axios.post("http://localhost:3001/users/register",{
+  
+        name:response.profileObj.givenName,
+        surname:response.profileObj.familyName,
+        password:response.googleId,
+        email:response.profileObj.email,
+        role:"client"
+  
+      })
+        console.log(response) */
+      }
+      const onFailure=()=>{
+        console.log("somethimg went wrong")
+      }
+
+    /* const handleGoogleLoginClick = () => {
+        setGoogle(true)
+        setTimeout(() => {
+            console.log("Estado de google:", google); // Imprime el valor de google en la consola
+          }, 0);
+    } */
+    
     return (
         <div className={style.contenedorMayor}>
             <div className={style.contenedor} >
@@ -75,7 +123,7 @@ const LoginUser = () => {
                 <form>
                     <div className={style.form}>
                     <input type="text" name="email" onChange={handleChange} placeholder="Correo electronico" />
-                    {existe !== true ? (<button className={style.formbutton} onClick={(event) => userAdmin(emailInput, event)}>Siguiente</button>) : (null)}
+                    {existe !== true ? (<button className={style.formbutton} onClick={(event) => userClient(emailInput, event)}>Siguiente</button>) : (null)}
                     {existe === true ? (
                         <div className={style.passwordcontainer}>
                         <input
@@ -93,11 +141,19 @@ const LoginUser = () => {
                     {existe === true ? (<NavLink to="/dashboard"> <button className={style.formbutton} onClick={(event) => loginAdmin(emailInput, password, event)}>Iniciar sesión</button></NavLink>
                     ) : (null)}
                     <br /><br />
-                    <Link><button className={style.formbutton}>Inicia Sesión con Google</button></Link>
+                    <GoogleLogin
+                        clientId={clientId}
+                        buttonText="Inicia Sesión o Continuar con Google"
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                        cookiePolicy={"single_host_policy"}/>
+                       {/*  <a href="#" onClick={()=> handleGoogleLoginClick()}>
+                        Iniciar sesión con Google
+                        </a> */}
                     <Link to='/' className={style.olvido}><p>¿Olvidó su contraseña?</p></Link>
                     <Link to='/registro' className={style.olvido}><p>Registrarse</p></Link>
                     {handleRedirect ()}
-                    {adminPass === false ? (
+                    {clientPass === false ? (
                     <div className={style.divmensajePass}>
                     <span className={style.span}> &#9888; Contraseña incorrecta </span>
                     </div>): (null)}
