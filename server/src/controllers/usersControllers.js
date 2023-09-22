@@ -3,20 +3,7 @@ const bcrypt = require("bcryptjs");
 
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
-/*   arreglo = req.body;
-
-  for (let i = 0; i < arreglo.length; i++) { */
-    const {
-      email,
-      password,
-      name,
-      surname,
-      phone,
-      address,
-      neighborhood,
-      department,
-      role,
-    } = req.body;
+    const { email, password, role, name, surname, gender, age, birthDate, phone, address, city, department, country } = req.body;
 
     try {
       const existingUser = await User.findOne({ where: { email } });
@@ -28,17 +15,21 @@ const createUserHandler = async (req, res) => {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      await User.create({
-        email,
-        password: hashedPassword,
-        name,
-        surname,
-        phone,
-        address,
-        neighborhood,
-        department,
-        role,
-      });
+        await User.create({
+            email,
+            password: hashedPassword,
+            role,
+            name,
+            surname,
+            gender,
+            age,
+            birthDate,
+            phone,
+            address,
+            city,
+            department,
+            country,
+        });
 
       res
         .status(201)
@@ -52,17 +43,8 @@ const createUserHandler = async (req, res) => {
 
 //! Modificar Datos de Usuario
 const updateUserController = async (req, res) => {
-  const { userId } = req.params; // Obtén el ID del usuario a modificar
-  const {
-    email,
-    password,
-    name,
-    surname,
-    phone,
-    address,
-    neighborhood,
-    department,
-  } = req.body;
+    const { userId } = req.params; // Obtén el ID del usuario a modificar
+    const { email, password, role, name, surname, gender, age, birthDate, phone, address, city, department, country } = req.body;
 
   try {
     // Comprueba si el usuario existe
@@ -88,14 +70,19 @@ const updateUserController = async (req, res) => {
       }
     }
 
-    // Actualiza los datos del usuario
-    user.email = email || user.email;
-    user.name = name || user.name;
-    user.surname = surname || user.surname;
-    user.phone = phone || user.phone;
-    user.address = address || user.address;
-    user.neighborhood = neighborhood || user.neighborhood;
-    user.department = department || user.department;
+        // Actualiza los datos del usuario
+        user.email = email || user.email;
+        user.role = role || user.role;
+        user.name = name || user.name;
+        user.surname = surname || user.surname;
+        user.gender = gender || user.gender;
+        user.age = age || user.age;
+        user.birthDate = birthDate || user.birthDate;
+        user.phone = phone || user.phone;
+        user.address = address || user.address;
+        user.city = city || user.city;
+        user.department = department || user.department;
+        user.country = country || user.country;
 
     // Si se proporciona una nueva contraseña, la hashea y la actualiza
     if (password) {

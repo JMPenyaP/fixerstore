@@ -15,6 +15,9 @@ import {
   ACTUALIZAR_CANTIDAD_EN_CARRITO,
   REGISTER,
   FILTER_BACK,
+  INCREMENT_QTY,
+  DECREMENT_QTY,
+  REMOVE_PRODUCT,
   USER_PROFILE,
 } from "./actionTypes";
 
@@ -33,6 +36,7 @@ const initialState = {
   allCategories: [],
   carrito: [],
   registerConfirm: null,
+  clientProfile: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -204,6 +208,46 @@ const rootReducer = (state = initialState, action) => {
         }),
       };
 
+    case INCREMENT_QTY: {
+      return {
+        ...state,
+        carrito: state.carrito.map((item) => {
+          if (item.id === action.payload.productId) {
+            return {
+              ...item,
+              cantidad: item.cantidad + 1,
+            };
+          } else {
+            return item;
+          }
+        }),
+      };
+    }
+
+    case DECREMENT_QTY:
+      return {
+        ...state,
+        carrito: state.carrito.map((producto) => {
+          if (producto.id === action.payload.productId) {
+            return {
+              ...producto,
+              cantidad: Math.max(1, producto.cantidad - 1),
+            };
+          }
+          return producto;
+        }),
+      };
+
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        carrito: state.carrito.filter(
+          (producto) => producto.id !== action.payload.productId
+        ),
+      };
+
+    ////////////
+
     case REGISTER: {
       return {
         ...state,
@@ -216,6 +260,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productosFiltrados: action.payload,
       };
+
+    case USER_PROFILE: {
+      return {
+        ...state,
+        clientProfile: action.payload.success,
+        dataProfile: action.payload,
+      };
+    }
 
     default:
       return {
