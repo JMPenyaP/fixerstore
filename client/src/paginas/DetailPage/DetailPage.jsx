@@ -66,9 +66,27 @@ const DetailPage = () => {
     allCategories?.length === 0 && dispatch(getCategories());
   }, [allCategories, dispatch]);
 
+  useEffect(() => {
+    
+    const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
+    
+    
+    if (carrito.length === 0 && storedCart.length > 0) {
+      storedCart.forEach(item => {
+        dispatch(agregarAlCarrito({ id: item.id, name: item.name, precio: item.precio, image: item.image }, item.cantidad));
+      });
+    }
+    
+    guardarCarritoEnLocalStorage();
+  }, [carrito, dispatch]);
+
   // ONCLICK FUNCTIONS
   const setImage = (url) => {
     setMainImage(url);
+  };
+
+  const guardarCarritoEnLocalStorage = () => {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
   };
 
   const goBack = () => {
@@ -85,13 +103,15 @@ const DetailPage = () => {
     }
   };
 
-  const agregarProductoAlCarrito = () => { 
+  const agregarProductoAlCarrito = () => {
     dispatch(
       agregarAlCarrito(
-        { id: product.id, name: product.name, precio: precioReal },
+        { id: product.id, name: product.name, precio: precioReal, image: product.firstImage },
         cantidad
       )
     );
+
+    guardarCarritoEnLocalStorage();
   };
   ///////
 
@@ -116,6 +136,7 @@ const DetailPage = () => {
 
   return (
     <>
+    {console.log(carrito)}
       <div className={style.divDetail}>
         {loading ? (
           <h1>Cargando Producto...</h1>
