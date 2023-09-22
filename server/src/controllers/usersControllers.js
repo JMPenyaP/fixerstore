@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
   const { email, password, role, name, surname, gender, age, birthDate, phone, address, city, department, country } = req.body;
-   
+
   try {
     if (!email) {
       return res

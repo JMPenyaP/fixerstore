@@ -32,12 +32,13 @@ const { User, Product, Category, Cart, PasswordReset, UserReviews } = sequelize.
 /*Country.belongsToMany(Activity, { through: 'Country_Activities' });
 Activity.belongsToMany(Country, { through: 'Country_Activities' });*/
 User.hasMany(PasswordReset, { foreignKey: 'userId' });
-User.hasMany(UserReviews, { foreignKey: 'userId' })
+User.hasMany(UserReviews, { foreignKey: 'userId' });
 Category.hasMany(Product, { foreignKey: 'categoryId' });
 User.hasMany(Cart);
 Cart.belongsTo(User);
 Product.belongsToMany(User, { through: Cart });
 User.belongsToMany(Product, { through: Cart });
+
 
 module.exports = {
     ...sequelize.models, // exporta los modelos
