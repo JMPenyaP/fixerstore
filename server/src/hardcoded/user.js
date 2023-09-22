@@ -8,9 +8,9 @@ const user = [{
     surname: "Idarraga",
     phone: "3152235421",
     address: "calle 30 Kra 15 #8",
-    neighborhood: "Kenedy",
+    city: "Kenedy",
     department: "Cundinamarca"
-},{
+}, {
     email: "usuario@gmail.com",
     password: "abcdef",
     role: "client",
@@ -18,7 +18,7 @@ const user = [{
     surname: "Gomez",
     phone: "3115889778",
     address: "calle 30 Kra 15 #8",
-    neighborhood: "Kenedy",
+    city: "Kenedy",
     department: "Cundinamarca"
 }];
 
@@ -48,6 +48,6 @@ async function createAdmin() {
 }
 
 
-module.exports={
-  createAdmin
+module.exports = {
+    createAdmin
 }
