@@ -1,57 +1,71 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import * as actions from "../../redux/actions"
 import style from "./RegistroUsuario.module.css"
-import { NavLink} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { isBefore, parseISO } from "date-fns";
 import axios from 'axios';
-import { createUser } from '../../redux/Actions/createUser';
+import { createUser, closeUser } from '../../redux/Actions/createUser';
 
 
 
 const RegistroUsuario = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const {handleSubmit, control, formState: {errors}, trigger, reset, watch} = useForm()
     const currentDate = new Date();
     const [departamentos, setDepartamentos] = useState([]);
     const [municipios, setMunicipios] = useState([]);
     const [selectedDepartamento, setSelectedDepartamento] = useState("")
     const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordRepeat, setShowPasswordRepeat] = useState(false);
     const [erroresPass, setErroresPass] = useState([])
     const [isRepeatPasswordEnabled, setIsRepeatPasswordEnabled] = useState(false);
+    const [validate,setValidate] = useState(false)
     const password = watch("password");
-    const togglePasswordVisibility = () => {
+    const registro = useSelector((state) => state.registerConfirm);
+    const [confirmRegistro, setConfirmRegistro] = useState(false);
+    const [formDisabled, setFormDisabled] = useState(false);
+    useEffect(() => {
+        try {
+            setConfirmRegistro(registro);
+        } catch (error) {
+            console.error('Error al obtener registro:', error);}}, [registro]);
+    const togglePasswordVisibilityPass = () => {
         setShowPassword(!showPassword);
       };
+      const togglePasswordVisibilityPassRe = () => {
+        setShowPasswordRepeat(!showPasswordRepeat);
+      };
       const validatePassword = (e) => {
-        const valor = e.target.value
+        const valor = e.target.value;
         const hasUppercase = /[A-Z]/.test(valor);
         const hasLowercase = /[a-z]/.test(valor);
-        const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(valor);
+        const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\/\-]/.test(valor);
         const hasMinLength = valor.length >= 8;
         const hasNumber = /[0-9]/.test(valor);
-    
-        if (hasUppercase && hasLowercase && hasSpecialChar && hasMinLength && hasNumber) {
-          return true; 
-        }
+      
         const errorMessages = [];
+        if(valor === "") {
+            errorMessages.push('Este campo es obligatorio')
+        }
         if (!hasNumber) {
-            errorMessages.push('Debe contener al menos un número.') 
+          errorMessages.push('Debe contener al menos un número.');
         }
         if (!hasUppercase) {
-            errorMessages.push('Debe contener al menos una letra mayúscula.')
+          errorMessages.push('Debe contener al menos una letra mayúscula.');
         }
         if (!hasLowercase) {
-            errorMessages.push('Debe contener al menos una letra minúscula.')
+          errorMessages.push('Debe contener al menos una letra minúscula.');
         }
         if (!hasSpecialChar) {
-            errorMessages.push('Debe contener al menos un carácter especial.')
+          errorMessages.push('Debe contener al menos un carácter especial.');
         }
         if (!hasMinLength) {
-            errorMessages.push('Debe tener un mínimo de 8 caracteres.')
+          errorMessages.push('Debe tener un mínimo de 8 caracteres.');
         }
-        setErroresPass(errorMessages)
+        setErroresPass(errorMessages);
+        setValidate(errorMessages.length === 0)
       };
     useEffect(() => {
       const fetchDepartamentos = async () => {
@@ -104,6 +118,7 @@ const RegistroUsuario = () => {
       }, [password, errors.password]);
     const passwordMatchRule = (value) => value === password || "Las contraseñas no coinciden"
     const onSubmit = async (data) => {
+        setFormDisabled(true)
         const fechaNacimiento = new Date(data.birthDate);
         const fechaActual = new Date();
         const diferenciaMilisegundos = fechaActual - fechaNacimiento;
@@ -111,9 +126,9 @@ const RegistroUsuario = () => {
         delete data.repeatPassword;
         data.age = edad
         console.log(data)
-
+        dispatch(createUser(data))
+        setTimeout(()=> {reset(); dispatch(closeUser()); setFormDisabled(false); navigate("/login")}, 1000)
     }
-    console.log(erroresPass);
     return (
         <div className={style.div}>
             <div className={style.divComplementario}>
@@ -156,41 +171,27 @@ const RegistroUsuario = () => {
                             </div>
                         </div>
                         <div className={style.divCampo}>
-                            <label className={style.label} htmlFor="gender"> Género </label>
-                            <div className={style.divInput}>
-                                <Controller name="gender"
-                                control={control}
-                                defaultValue=""
-                                rules={{ required: 'Seleccione su género' }}
-                                render={({ field }) => (
-                                    <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("gender"); }}> 
-                                        <option value="" disabled> Seleccione su género </option>
-                                        <option value="Hombre"> Hombre </option>
-                                        <option value="Mujer"> Mujer </option>
-                                        <option value="Prefiero no decirlo"> Prefiero no decirlo</option>
-                                    </select>)} />
-                                <div className={style.errorMenssage}>
-                                    {errors.gender && <p className={style.simbolo}>¡</p>}
-                                    {errors.gender && <p className={style.errorText}>{errors.gender.message}</p>}
-                                    {errors.gender && <p className={style.simbolo}>!</p>}
-                                </div>
-                            </div>
-                        </div>
-                        <div className={style.divCampo}>
                             <label className={style.label} htmlFor="email"> Correo electronico </label>
                             <div className={style.divInput}>
                                 <Controller name="email"
                                 control={control}
                                 defaultValue=""
-                                rules={{ required: 'Este campo es obligatorio',     validate: async (value) => {
-                                    if (value) {
-                                      const existe = await verifyEmail(value);
-                                      if (existe) {
-                                        return 'Este correo electrónico ya está registrado';
+                                rules={{
+                                    required: 'Este campo es obligatorio',
+                                    pattern: {
+                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                      message: 'Este no es un correo electrónico válido',
+                                    },
+                                    validate: async (value) => {
+                                      if (value) {
+                                        const existe = await verifyEmail(value);
+                                        if (existe) {
+                                          return 'Este correo electrónico ya está registrado';
+                                        }
                                       }
-                                    }
-                                    return true;
-                                  } }}
+                                      return true;
+                                    },
+                                  }}
                                 render={({ field }) => (
                                     <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("email"); }}/>)}/>
                                 <div className={style.errorMenssage}>
@@ -209,7 +210,7 @@ const RegistroUsuario = () => {
                                     defaultValue=""
                                     rules={{ 
                                         required: 'Este campo es obligatorio',
-                                      validate: {
+                                        validate: {
                                         uppercase: (value) =>
                                           /[A-Z]/.test(value) || 'Debe contener al menos una letra mayúscula.',
                                         lowercase: (value) =>
@@ -223,14 +224,14 @@ const RegistroUsuario = () => {
                                       }
                                     }}
                                     render={({ field }) => (<input className={style.input} type={showPassword ? 'text' : 'password'} {...field} onChange={(e) => {field.onChange(e); trigger("password"); validatePassword(e)}}/>)}/>
-                                    <span className={style.passwordtoggle} onClick={togglePasswordVisibility}>
+                                    <span className={style.passwordtoggle} onClick={togglePasswordVisibilityPass}>
                                         {showPassword ? (<><img className={style.img} src="https://api.iconify.design/material-symbols:visibility-off-outline.svg?color=%233cbbed" alt="eyeopne" /></>) : (<><img className={style.img} src="https://api.iconify.design/material-symbols:visibility-outline.svg?color=%233cbbed" alt="eyeopne" /></>)}
                                     </span>
                                 </div>
-                                <div className={style.errorMenssage}>
+                                {validate !== true ? (<div className={style.errorMenssagePass}>
                                     {erroresPass.map((error, index) => (
-                                    <span className={style.passOff} key={index}>{error}</span>))}
-                                </div>
+                                    <span className={style.errorText} key={index}>{error}</span>))}
+                                </div>):(null)}
                             </div>
                         </div>
                         <div className={style.divCampo}>
@@ -245,9 +246,9 @@ const RegistroUsuario = () => {
                                         validate: passwordMatchRule,
                                     }}
                                     disabled={isRepeatPasswordEnabled === false}
-                                    render={({ field }) => (<input className={style.input} type={showPassword ? 'text' : 'password'} {...field} onChange={(e) => {field.onChange(e); trigger("repeatPassword"); }}/>)}/>
-                                    <span className={style.passwordtoggle} onClick={togglePasswordVisibility}>
-                                        {showPassword ? (<><img className={style.img} src="https://api.iconify.design/material-symbols:visibility-off-outline.svg?color=%233cbbed" alt="eyeopne" /></>) : (<><img className={style.img} src="https://api.iconify.design/material-symbols:visibility-outline.svg?color=%233cbbed" alt="eyeopne" /></>)}
+                                    render={({ field }) => (<input className={style.input} type={showPasswordRepeat ? 'text' : 'password'} {...field} onChange={(e) => {field.onChange(e); trigger("repeatPassword"); }}/>)}/>
+                                    <span className={style.passwordtoggle} onClick={togglePasswordVisibilityPassRe}>
+                                        {showPasswordRepeat ? (<><img className={style.img} src="https://api.iconify.design/material-symbols:visibility-off-outline.svg?color=%233cbbed" alt="eyeopne" /></>) : (<><img className={style.img} src="https://api.iconify.design/material-symbols:visibility-outline.svg?color=%233cbbed" alt="eyeopne" /></>)}
                                     </span>
                                 </div>
                                 <div className={style.errorMenssage}>
@@ -282,6 +283,27 @@ const RegistroUsuario = () => {
                             </div>
                         </div>
                         <div className={style.divCampo}>
+                            <label className={style.label} htmlFor="gender"> Género </label>
+                            <div className={style.divInput}>
+                                <Controller name="gender"
+                                control={control}
+                                defaultValue=""
+                                // rules={{ required: 'Seleccione su género' }}
+                                render={({ field }) => (
+                                    <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("gender"); }}> 
+                                        <option value="" disabled> Seleccione su género </option>
+                                        <option value="Hombre"> Hombre </option>
+                                        <option value="Mujer"> Mujer </option>
+                                        <option value="Prefiero no decirlo"> Prefiero no decirlo</option>
+                                    </select>)} />
+                                {/* <div className={style.errorMenssage}>
+                                    {errors.gender && <p className={style.simbolo}>¡</p>}
+                                    {errors.gender && <p className={style.errorText}>{errors.gender.message}</p>}
+                                    {errors.gender && <p className={style.simbolo}>!</p>}
+                                </div> */}
+                            </div>
+                        </div>
+                        {/* <div className={style.divCampo}>
                             <label className={style.label} htmlFor="departament"> Departamento </label>
                             <div className={style.divInput}>
                                 <Controller name="departament"
@@ -338,12 +360,13 @@ const RegistroUsuario = () => {
                                     {errors.address && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
-                    <div className={style.divDireccion}>
-                    </div>
-                    <button type="submit" className={style.formbutton} >Registrarme</button>
+                    <button type="submit" className={style.formbutton} disabled={formDisabled} >Registrarme</button>
                 </form>
+                <div className= {style.mensaje}>
+                    {confirmRegistro === true ? (<><p className={style.positivo}>Usuario registrado con exito</p></>):(confirmRegistro === false ? (<><p className={style.negativo} >No se pudo registrar, vuelve a intentarlo</p></>):(null))}
+                </div>
             </div>
         </div>
     )
