@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import SearchedProduct from "./paginas/SearchedProduct/SearchedProduct";
 import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
+import Pasarela from "./paginas/Pasarela/Pasarela";
 
 function App() {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ function App() {
     setAdminPass(admin)
 }, [admin])
   const location = useLocation();
-  const isLoginPage = location.pathname === '/admin' || location.pathname === "/login" || location.pathname === "/registro";
+  const isLoginPage = location.pathname === '/admin' || location.pathname === "/login" || location.pathname === "/registro" || location.pathname === "/payment";
   useEffect(() => {
     if (!adminPass && location.pathname === '/dashboard') {
       navigate('/admin');
@@ -41,6 +42,7 @@ function App() {
           <Route path="/searchedprod/:name" element={<SearchedProduct />} />
           <Route path="/carrodecompras" element={<Carrito />} />
           <Route path="/login" element={<LoginUser />}/>
+          <Route path="/payment" element={<Pasarela />}/>
         </Routes>
     </>
   );
