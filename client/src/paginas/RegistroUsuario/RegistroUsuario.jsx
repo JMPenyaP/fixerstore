@@ -371,5 +371,4 @@ const RegistroUsuario = () => {
         </div>
     )
 }
-
 export default RegistroUsuario
