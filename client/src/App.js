@@ -16,6 +16,7 @@ import SearchedProduct from "./paginas/SearchedProduct/SearchedProduct";
 import { agregarAlCarrito } from "./redux/Actions/carrito";
 import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
+import Pasarela from "./paginas/Pasarela/Pasarela";
 
 function App() {
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ function App() {
     location.pathname === "/login" ||
     location.pathname === "/registro" ||
     location.pathname === "/resetPass" ||
-    location.pathname === "/reset";
+    location.pathname === "/reset" ||
+    location.pathname === "/payment"
   useEffect(() => {
     if (!adminPass && location.pathname === "/dashboard") {
       navigate("/admin");
@@ -70,20 +72,20 @@ function App() {
   }, [carrito, dispatch]);
   return (
     <>
-      {!isLoginPage && <Navbar />}
-      <Routes>
-        <Route path="/registro" element={<RegistroUsuario />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/productos" element={<Catalogo />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/admin" element={<LoginAdmin />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/searchedprod/:name" element={<SearchedProduct />} />
-        <Route path="/resetPass" element={<PassSolicitud />} />
-        <Route path="/reset" element={<ResetPass />} />
-        <Route path="/carrodecompras" element={<Carrito />} />
-        <Route path="/login" element={<LoginUser />} />
-      </Routes>
+        {!isLoginPage && <Navbar />}
+        <Routes>
+          <Route path="/registro" element={<RegistroUsuario/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/productos" element={<Catalogo />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/admin" element={<LoginAdmin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/searchedprod/:name" element={<SearchedProduct />} />
+          <Route path="/carrodecompras" element={<Carrito />} />
+          <Route path="/login" element={<LoginUser />}/>
+          <Route path="/payment" element={<Pasarela />}/>
+
+        </Routes>
     </>
   );
 }

@@ -1,0 +1,89 @@
+.divMain{
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 110px;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.logo{
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seguro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    gap: 10px;
+}
+
+
+
+
+.divContenedor{
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+            .divDatos{
+                width: 320px;
+                height: 500px;
+                background-color: red;
+                margin: 15px;
+                padding: 5px;
+            }
+
+            .divEnvio{
+                width: 320px;
+                height: 500px;
+                background-color: blue;
+                margin: 15px;
+                padding: 5px;
+            }
+
+            .divPago{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 320px;
+                height: 500px;
+                background-color: green;
+                margin: 15px;
+                padding: 5px;
+            }
+
+            .divDetalle{
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                height: auto;
+                background-color: gray;
+                margin: 0px 10px;
+                padding: 20px;
+                align-items: center;
+                
+            }
+
+            
+
+            
+            .ticket{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
