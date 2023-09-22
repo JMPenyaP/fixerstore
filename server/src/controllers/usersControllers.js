@@ -6,6 +6,11 @@ const createUserHandler = async (req, res) => {
   const { email, password, role, name, surname, gender, age, birthDate, phone, address, city, department, country } = req.body;
 
   try {
+    if (!email) {
+      return res
+        .status(400)
+        .json({ success: false, message: "El campo 'email' es obligatorio" });
+    }
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res
@@ -38,8 +43,7 @@ const createUserHandler = async (req, res) => {
     console.error(error);
     res.status(500).json({ success: false, message: "Error en el servidor" });
   }
-}
-  ;
+};
 
 //! Modificar Datos de Usuario
 const updateUserController = async (req, res) => {
@@ -116,16 +120,20 @@ const getUserByName = async (name) => {
   return userName;
 };
 
-//! Obtener usuario por Email y devolver Rol
+//! Obtener usuario por Email y devolver todos los campos
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
   if (user) {
-    return user;
-  } else if (!user) {
-    // No se encontró ningún usuario con el correo electrónico especificado
-    return false;
+    console.log("ASÍ TE DEVUELVE EL JSON:", user.toJSON())
+    return {
+      success: true,
+      message: "Email encontrado.",
+      user: user.toJSON()
+    };
+  } else {
+    return { success: false, message: "Email NO está registrado." };
   }
-};
+}
 
 module.exports = {
   getAllUsers,
