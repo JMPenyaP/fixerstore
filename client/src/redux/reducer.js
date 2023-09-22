@@ -23,6 +23,7 @@ import {
 
 const initialState = {
   adminProfile: null,
+  clientProfile: null,
   nuevo_producto: null,
   role: null,
   productName: false,
@@ -46,6 +47,14 @@ const rootReducer = (state = initialState, action) => {
         adminProfile: action.payload.success,
         dataProfile: action.payload,
       };
+    }
+
+    case USER_PROFILE: {
+      return {
+        ...state,
+        clientProfile: action.payload.success,
+        dataProfile: action.payload,
+      }
     }
 
     case NEW_PRODUCT: {

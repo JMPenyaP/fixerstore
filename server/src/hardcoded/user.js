@@ -1,6 +1,6 @@
 const { createUserHandler } = require('../controllers/usersControllers');
 
-const user = {
+const user = [{
     email: "admin@gmail.com",
     password: "123456",
     role: "admin",
@@ -10,7 +10,17 @@ const user = {
     address: "calle 30 Kra 15 #8",
     neighborhood: "Kenedy",
     department: "Cundinamarca"
-};
+},{
+    email: "usuario@gmail.com",
+    password: "abcdef",
+    role: "client",
+    name: "Carlos",
+    surname: "Gomez",
+    phone: "3115889778",
+    address: "calle 30 Kra 15 #8",
+    neighborhood: "Kenedy",
+    department: "Cundinamarca"
+}];
 
 const mockRequest = {
     body: user // Simula un cuerpo de solicitud con el objeto de usuario
