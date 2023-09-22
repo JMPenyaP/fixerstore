@@ -38,19 +38,14 @@ const requestPasswordReset = async (req, res) => {
             subject: 'Recuperación de contraseña',
             text: `Haga clic en el siguiente enlace para restablecer su contraseña: https://fixershoes.com/reset/${token}`,
             html: `
-            <head>
-                <title>Recuperación de Contraseña</title>
-            </head>
-            <body>
                 <p>Estimado/a ${user.name},</p>
                 <p>Hemos registrado tu solicitud para restablecer tu contraseña. Si no has solicitado esta acción, te recomendamos hacer caso omiso de este mensaje.</p>
                 <p>Si, por el contrario, has solicitado recuperar tu contraseña, por favor sigue el enlace a continuación para completar el proceso:</p>
-                <p><a href="href="https://fixershoes.com/reset/${token}">Enlace de Restablecimiento de Contraseña</a></p>
+                <p><a href="https://fixershoes.com/reset/${token}"><b>Enlace de Restablecimiento de Contraseña</b></a></p>
                 <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nuestro equipo de soporte.</p>
                 <p>Gracias por confiar en nosotros.</p>
                 <p>Atentamente,</p>
-                <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>
-            </body>`,
+                <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>`,
         };
 
         await transporter.sendMail(mailOptions);
@@ -72,14 +67,14 @@ const resetPassword = async (req, res) => {
 
 
         if (!resetToken || resetToken.expirationDate < new Date() || resetToken.status !== 'pending') {
-            return res.status(400).json({ success: false, message: 'Token inválido o expirado' });
+            return res.status(201).json({ success: false, message: 'Token inválido o expirado' });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         const user = await User.findByPk(resetToken.userId);
         if (!user) {
-            return res.status(401).json({ success: false, message: 'Usuario no encontrado' });
+            return res.status(202).json({ success: false, message: 'Usuario no encontrado' });
         }
 
         user.password = hashedPassword;

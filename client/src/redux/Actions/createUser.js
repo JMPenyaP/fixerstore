@@ -4,7 +4,7 @@ import axios from "axios"
 
 export const createUser = (user) => {
     try {
-        const endpoint = 'http://localhost:3001/products/'
+        const endpoint = 'http://localhost:3001/users/register'
         return async (dispatch)=> {
             const response = await axios.post(endpoint, user)
             const {data}= response
@@ -19,4 +19,11 @@ export const createUser = (user) => {
         errorResponse.error = error.message
         return errorResponse
     }
+}
+
+export const closeUser = () => {
+    return (dispatch) => dispatch({
+        type: REGISTER,
+        payload: null
+    })
 }

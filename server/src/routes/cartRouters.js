@@ -1,8 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const cartController = require('../controllers/cartControllers');
+const { Router } = require('express');
 
-// Ruta para agregar un producto al carrito
-router.post('/', cartController);
+const CartRouter = Router();
 
-module.exports = router;
+
+const { addToCartHandler } = require("../handlers/cartHandlers");
+
+
+
+CartRouter.post("/", addToCartHandler);
+
+
+
+
+module.exports = CartRouter;
+

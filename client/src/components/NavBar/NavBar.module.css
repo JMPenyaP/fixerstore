@@ -90,19 +90,18 @@
     cursor: pointer;
 }
 
-.carritoDiv::before {
-    content: "1";
-    position: absolute;
-    top: 70%;
-    left: 70%;
+.cartCounter{
     background-color: #3cbbed;
     border-radius: 50%;
-    height: 21px;
-    width: 21px;
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
 .carritoImg {
