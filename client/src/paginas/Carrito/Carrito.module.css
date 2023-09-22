@@ -1,5 +1,5 @@
 .cartContainer{
-    min-height: 100vh;
+    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -17,6 +17,10 @@
     display: flex;
     flex-direction: column;
     gap: 70px;
+}
+
+.cartCardDivContainer h2{
+    text-align: center;
 }
 
 .cardCartContainer{
@@ -40,6 +44,7 @@
 .cardCartContainer h1{
     color: #3cbbed;
     font-size: 27px;
+    width: 300px;
 }
 
 /* DATOS CART Product*/
@@ -105,6 +110,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    border-radius: 16px;
 }
 
 .divResumen h2{
@@ -136,6 +142,10 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+
+.divButton button:disabled{
+    cursor: not-allowed;
 }
 
 .divButton button:hover {
@@ -173,4 +183,28 @@
 .divDelete ion-icon{
     color: red;
     font-size: 20px;
+}
+
+/* EMPTY CART */
+
+.divEmptyCart{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.divLinkToProducts{
+    width: 35%;
+    margin: auto;
+}
+
+.divLinkToProducts a{
+    color: #3cbbed;
+    transition: 0.4s;
+}
+
+.divLinkToProducts a:hover{
+    color: #1d8ab5;
 }

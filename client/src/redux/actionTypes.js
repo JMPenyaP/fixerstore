@@ -23,5 +23,4 @@ export const FILTER_BACK = "FILTER_BACK";
 export const INCREMENT_QTY = "INCREMENT_QTY";
 export const DECREMENT_QTY = "DECREMENT_QTY";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
-export const USER_PROFILE = "USER_PROFILE";
 

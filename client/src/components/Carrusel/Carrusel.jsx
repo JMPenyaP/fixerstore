@@ -33,12 +33,11 @@ const Carrusel = () => {
     settings = {
       dots: true,
       infinite: true,
-      speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 0,
-      speed: 4000,
+      autoplaySpeed: 2700,
+      pauseOnHover: true,
       responsive: [
         {
           breakpoint: 1024,
@@ -65,7 +64,6 @@ const Carrusel = () => {
           },
         },
       ],
-      cssEase: "linear",
     };
   }
 
