@@ -128,29 +128,34 @@
     border-radius: 16px;
     color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
     flex-direction: column;
-    gap: 20%;
+    align-content: center;
+    justify-content: center;
+    justify-items: stretch;
+    gap: 10%;
 }
 
 .divMenuDesplegable ion-icon{
     color: #3cbbed;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .divMenuDesplegable h5{
+    text-align: center;
     margin: 0;
     color: #3cbbed;
 }
 
 .divMenuDesplegable button{
     display: flex;
-    justify-content:flex-start;
+    justify-content:center;
+    text-align: center;
     gap: 10%;
     align-items: center;
     border-radius: 16px;
-    width: 70%;
+    width: 85%;
+    height: 25px;
     border: 1px solid #3cbbed;
     background-color: white;
     cursor: pointer;
@@ -158,7 +163,8 @@
 }
 
 .divMenuDesplegable button h5{
-    font-size: 14px;
+    padding: 5px;
+    font-size: 12.5px;
     color: white;
     color: #3cbbed;
 }
@@ -205,4 +211,25 @@
     width: 150%;
     height: 150%;
     opacity: 1;
+}
+
+
+.botonInicio {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: transparent;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonInicio:hover{
+    color: white;
+    background-color: #3cbbed;
 }

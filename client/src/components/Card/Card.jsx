@@ -1,11 +1,32 @@
 import styles from './Card.module.css'
 import { Link } from 'react-router-dom';
+import { useDebugValue, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { crearFavoritos } from '../../redux/Actions/crearFavoritos';
+import { borrarFavoritos } from '../../redux/Actions/borrarFavoritos';
 
 const Card = ({product}) => {
+    const dispatch = useDispatch()
+    const [isFav, setIsFav] = useState(false); 
+    const user = useSelector((state) => state.clientProfile)
+
+    const handleFavorite = () => {
+
+        const { id } = product
+
+        if(isFav){
+           setIsFav(false);
+           dispatch(borrarFavoritos(id))
+        }
+        else{
+           setIsFav(true);
+           dispatch(crearFavoritos({product}))
+        }
+     }
+
     return ( 
     <>
         <div className={styles.divCard}>
-            
             <div className={styles.divImg}>
                 <Link to={`/detail/${product.id}`} >
                     <img
@@ -31,6 +52,11 @@ const Card = ({product}) => {
                 <button>Ver Producto</button>
                 </div>
             </Link>
+            {user && (
+          <button onClick={() => handleFavorite()}>
+            {isFav ? '❤️' : '🤍'}
+          </button>
+        )}
 
         </div>
     </>

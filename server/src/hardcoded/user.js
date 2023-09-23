@@ -18,7 +18,7 @@ const user = [{
     surname: "Gomez",
     phone: "3115889778",
     address: "calle 30 Kra 15 #8",
-    city: "Kenedy",
+    city: "Villeta",
     department: "Cundinamarca"
 }];
 

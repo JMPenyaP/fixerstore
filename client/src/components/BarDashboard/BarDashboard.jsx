@@ -15,18 +15,20 @@ import { set } from "react-hook-form"
 const BarDashboard = () => {
     //Importar estos datos de los estados globales
     const dispatch = useDispatch()
-    let dataProfileActual = useSelector((state)=> state.dataProfile)
-    let adminProfile = useSelector((state) => state.adminProfile)
+    const dataProfileActual = useSelector((state)=> state.dataProfile)
+    const adminProfile = useSelector((state) => state.adminProfile)
     const [log, setLog] = useState(null)
     const navigate = useNavigate()
     const [email,setEmail] = useState(null)
     const [name,setName] = useState(null)
     const [inicial, setInicial] = useState(null)
     useEffect(()=> {
-        if(dataProfileActual) {
-            setEmail(dataProfileActual.email)
-            setName(dataProfileActual.name)
-/*             setInicial(dataProfileActual.name.charAt(0).toUpperCase()) */
+        if(dataProfileActual !== null) {
+            if (dataProfileActual.userData) {
+                setEmail(dataProfileActual.userData.email)
+                setName(dataProfileActual.userData.name + " " + dataProfileActual.userData.surname)
+                setInicial(dataProfileActual.userData.name[0])
+            }
         }
         setLog(adminProfile)
     }, [dataProfileActual, adminProfile])
@@ -39,6 +41,9 @@ const BarDashboard = () => {
     console.log(log);
     const handleRedirect = () => {
         dispatch(logOut())
+        setEmail(null)
+        setName(null)
+        setInicial(null)
         if(log === false) {
             navigate("/admin")
         }
