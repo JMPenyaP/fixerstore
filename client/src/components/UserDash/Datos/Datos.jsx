@@ -1,15 +1,15 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux"
-import style from "./RegistroUsuario.module.css"
-import { NavLink, useNavigate } from "react-router-dom";
-import { isBefore, parseISO } from "date-fns";
+import style from "./datos.module.css"
+import { useNavigate } from "react-router-dom";
+import { isBefore, parseISO, set } from "date-fns";
 import axios from 'axios';
-import { createUser, closeUser } from '../../redux/Actions/createUser';
+import setModify from "../../../redux/Actions/setModify"
+import * as actions from "../../../redux/actions"
 
 
-
-const RegistroUsuario = () => {
+const Datos = () => {
     const dispatch = useDispatch()
     const [existe, setExiste] = useState(null);
     const navigate = useNavigate()
@@ -17,21 +17,31 @@ const RegistroUsuario = () => {
     const currentDate = new Date();
     const [departamentos, setDepartamentos] = useState([]);
     const [municipios, setMunicipios] = useState([]);
-    const [selectedDepartamento, setSelectedDepartamento] = useState("")
+    const userModify = useSelector((state) => state.userChanges);
+    const [userMod, setUserMod] = useState(null)
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordRepeat, setShowPasswordRepeat] = useState(false);
     const [erroresPass, setErroresPass] = useState([])
     const [isRepeatPasswordEnabled, setIsRepeatPasswordEnabled] = useState(false);
     const [validate,setValidate] = useState(false)
     const password = watch("password");
-    const registro = useSelector((state) => state.registerConfirm);
+    const department = watch("department");
     const [confirmRegistro, setConfirmRegistro] = useState(false);
     const [formDisabled, setFormDisabled] = useState(false);
+    const dataProfile = useSelector((state) => state.dataProfile ?? null);
+    const [userDatos, setUserDatos] = useState("")
+    useEffect(()=> {
+        if(dataProfile !== null) {
+            const userData = dataProfile.userData
+            setUserDatos(userData)
+        }
+    }, [dataProfile])
+    const [selectedDepartamento, setSelectedDepartamento] = useState("")
     useEffect(() => {
         try {
-            setConfirmRegistro(registro);
+            setUserMod(userModify)
         } catch (error) {
-            console.error('Error al obtener registro:', error);}}, [registro]);
+            console.error('Error al obtener registro:', error);}}, [userModify]);
     const togglePasswordVisibilityPass = () => {
         setShowPassword(!showPassword);
       };
@@ -81,6 +91,9 @@ const RegistroUsuario = () => {
       };
       fetchDepartamentos();
     }, []);
+    useEffect(() => {
+        handleDepartamentoChange({ target: { value: department } });
+      }, [selectedDepartamento]);
     const handleDepartamentoChange = async (e) => {
         const selected = e.target.value;
         setSelectedDepartamento(selected);
@@ -103,7 +116,6 @@ const RegistroUsuario = () => {
             const query = `?email=${email}`;
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
-            console.log(res.data.success);
             if (res.status === 200) {
                 const { success } = res.data;
                 if (success === true) {setExiste(true); return true}
@@ -113,29 +125,22 @@ const RegistroUsuario = () => {
             return error.message;
         }
     }
-    console.log(existe);
     useEffect(() => {
         if(errors.password || password === "") setIsRepeatPasswordEnabled(false);
         if(!errors.password && password !== "") setIsRepeatPasswordEnabled(true);
       }, [password, errors.password]);
     const passwordMatchRule = (value) => value === password || "Las contraseñas no coinciden"
     const onSubmit = async (data) => {
-        setFormDisabled(true)
-        const fechaNacimiento = new Date(data.birthDate);
-        const fechaActual = new Date();
-        const diferenciaMilisegundos = fechaActual - fechaNacimiento;
-        const edad = Math.floor(diferenciaMilisegundos / (365.25 * 24 * 60 * 60 * 1000));
-        delete data.repeatPassword;
-        data.age = edad
-        console.log(data)
-        dispatch(createUser(data))
-        setTimeout(()=> {reset(); dispatch(closeUser()); setFormDisabled(false); navigate("/login")}, 1000)
+        data.email = userDatos.email
+        data.id = userDatos.id
+        console.log(data);
+        dispatch(actions.modify(data))
+        setTimeout(()=> {dispatch(setModify());setUserMod(null)}, 1000)
     }
     return (
         <div className={style.div}>
             <div className={style.divComplementario}>
-                <img className={style.logo} src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png" alt="Logo" />
-                <h1 className={style.titulo}>Crea tu cuenta</h1>
+                <h1 className={style.titulo}>Actualiza tus datos</h1>
             </div>
             <div className={style.divForm}>
                 <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
@@ -145,10 +150,10 @@ const RegistroUsuario = () => {
                             <div className={style.divInput}>
                                 <Controller name="name"
                                 control={control}
-                                defaultValue=""
+                                defaultValue={userDatos.name || dataProfile.userData.name}
                                 rules={{ required: 'Este campo es obligatorio', maxLength: {value: 30,message: 'El nombre no puede tener más de 30 caracteres'}, minLength: {value: 4,message: 'El nombre no puede tener menos de 4 caracteres'}} }
                                 render={({ field }) => (
-                                <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
+                                <input className={style.input} type="text" {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
                                 <div className={style.errorMenssage}>
                                     {errors.name && <p className={style.simbolo}>¡</p>}
                                     {errors.name && <p className={style.errorText}>{errors.name.message}</p>}
@@ -161,10 +166,10 @@ const RegistroUsuario = () => {
                             <div className={style.divInput}>
                                 <Controller name="surname"
                                 control={control}
-                                defaultValue=""
+                                defaultValue={userDatos.surname || dataProfile.userData.surname}
                                 rules={{ required: 'Este campo es obligatorio', maxLength: {value: 30,message: 'El apellido no puede tener más de 30 caracteres'}, minLength: {value: 4,message: 'El apellido no puede tener menos de 4 caracteres'}} }
                                 render={({ field }) => (
-                                <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("surname"); }}/>)}/>
+                                <input className={style.input} type="text" {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("surname"); }}/>)}/>
                                 <div className={style.errorMenssage}>
                                 {errors.surname&& <p className={style.simbolo}>¡</p>}
                                 {errors.surname && <p className={style.errorText}>{errors.surname.message}</p>}
@@ -173,25 +178,43 @@ const RegistroUsuario = () => {
                             </div>
                         </div>
                         <div className={style.divCampo}>
+                            <label className={style.label} htmlFor="phone">Celular</label>
+                            <div className={style.divInput}>
+                                <Controller name="phone"
+                                control={control}
+                                defaultValue={userDatos.phone || dataProfile.userData.phone}
+                                rules={{ required: 'Este campo es obligatorio', maxLength: {value: 10,message: 'Ingrese un celular válido'}, minLength: {value: 10,message: 'Ingrese un celular válido'}} }
+                                render={({ field }) => (
+                                <input className={style.input} type="number" {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("phone"); }}/>)}/>
+                                <div className={style.errorMenssage}>
+                                {errors.phone && <p className={style.simbolo}>¡</p>}
+                                {errors.phone && <p className={style.errorText}>{errors.phone.message}</p>}
+                                {errors.phone && <p className={style.simbolo}>!</p>}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={style.divCampo}>
                             <label className={style.label} htmlFor="email"> Correo electronico </label>
                             <div className={style.divInput}>
                                 <Controller name="email"
                                 control={control}
-                                defaultValue=""
+                                disabled
+                                defaultValue={userDatos.email || dataProfile.userData.email}
                                 rules={{
-                                    required: 'Este campo es obligatorio',
                                     pattern: {
                                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                                       message: 'Este no es un correo electrónico válido',
                                     },
                                     validate: async (value) =>  {
-                                        const success = await verifyEmail(value)
-                                        if (success) return "Este correo ya registrado, intenta con uno nuevo"
-                                        else return true
+                                        if (value !== userDatos.email) {
+                                            const success = await verifyEmail(value)
+                                            if (success) return "Este correo ya registrado, intenta con uno nuevo"
+                                            else return true
+                                        }
                                     }
                                 }}
                                 render={({ field }) => (
-                                    <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("email")}}/>)}/>
+                                    <input className={style.input} type="text" disabled {...field} value={userDatos.email} onChange={(e) => {field.onChange(e); trigger("email")}}/>)}/>
                                 <div className={style.errorMenssage}>
                                     {errors.email && <p className={style.simbolo}>¡</p>}
                                     {errors.email && <p className={style.errorText}>{errors.email.message}</p>}
@@ -199,7 +222,7 @@ const RegistroUsuario = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={style.divCampo}>
+                        {/* <div className={style.divCampo}>
                             <label className={style.label} htmlFor="password"> Contraseña </label>
                             <div className={style.divInput}>
                                 <div className={style.contraseña}>
@@ -255,14 +278,14 @@ const RegistroUsuario = () => {
                                     {errors.repeatPassword && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className={style.divCampo}>
                             <label className={style.label} htmlFor="birthDate">Fecha de nacimiento:</label>
                             <div className={style.divInput}>
                                 <Controller
                                 name="birthDate"
                                 control={control}
-                                defaultValue={currentDate}
+                                defaultValue={userDatos.birthDate || dataProfile.userData.birthDate}
                                 rules={{ required: 'Este campo es obligatorio', validate: (value) => {
                                     const eighteenYearsAgo = new Date();
                                     eighteenYearsAgo.setFullYear(currentDate.getFullYear() - 18);
@@ -272,7 +295,7 @@ const RegistroUsuario = () => {
                                     return 'Debes ser mayor de 18 años para registrarte.';
                                   }} }
                                 render={({ field }) => (
-                                <input type="date" className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("birthDate"); }} />)}/>
+                                <input type="date" className={style.select} {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("birthDate"); }} />)}/>
                                 <div className={style.errorMenssage}>
                                     {errors.birthDate && <p className={style.simbolo}>¡</p>}
                                     {errors.birthDate && <p className={style.errorText}>{errors.birthDate.message}</p>}
@@ -285,31 +308,32 @@ const RegistroUsuario = () => {
                             <div className={style.divInput}>
                                 <Controller name="gender"
                                 control={control}
-                                defaultValue=""
-                                // rules={{ required: 'Seleccione su género' }}
+                                defaultValue={userDatos.gender || dataProfile.userData.gender}
+                                rules={{ required: 'Seleccione su género' }}
                                 render={({ field }) => (
-                                    <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("gender"); }}> 
-                                        <option value="" disabled> Seleccione su género </option>
+                                    <select className={style.select} {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("gender"); }}> 
+                                        <option value=""> Seleccione su género </option>
                                         <option value="Hombre"> Hombre </option>
                                         <option value="Mujer"> Mujer </option>
                                         <option value="Prefiero no decirlo"> Prefiero no decirlo</option>
                                     </select>)} />
-                                {/* <div className={style.errorMenssage}>
+                                <div className={style.errorMenssage}>
                                     {errors.gender && <p className={style.simbolo}>¡</p>}
                                     {errors.gender && <p className={style.errorText}>{errors.gender.message}</p>}
                                     {errors.gender && <p className={style.simbolo}>!</p>}
-                                </div> */}
+                                </div>
                             </div>
                         </div>
-                        {/* <div className={style.divCampo}>
-                            <label className={style.label} htmlFor="departament"> Departamento </label>
+                        <div className={style.divCampo}>
+                            <label className={style.label} htmlFor="department"> Departamento </label>
                             <div className={style.divInput}>
-                                <Controller name="departament"
+                                <Controller name="department"
                                 control={control}
-                                defaultValue=""
+                                defaultValue={dataProfile.userData.department}
                                 rules={{ required: 'Seleccione un departamento' }}
                                 render={({ field }) => (
-                                    <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("deparment"); handleDepartamentoChange(e) }}> 
+                                    <select className={style.select} {...field} value= {field.value === "" ? (userDatos.departament):(field
+                                    .value)} onChange={(e) => {field.onChange(e); trigger("deparment"); handleDepartamentoChange(e) }}>
                                         <option value="" disabled> Seleccione una Departamento </option>
                                         {departamentos.map((departament) => (
                                         <option value={departament}>
@@ -327,10 +351,10 @@ const RegistroUsuario = () => {
                             <div className={style.divInput}>
                                 <Controller name="city"
                                 control={control}
-                                defaultValue=""
+                                defaultValue={userDatos.city || dataProfile.userData.city}
                                 rules={{ required: 'Seleccione una ciudad/municipio' }}
                                 render={({ field }) => (
-                                    <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("city"); }}> 
+                                    <select className={style.select} {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("city"); }}>
                                         <option value="" disabled> Seleccione una ciudad/municipio </option>
                                         {municipios.map((municipio) => (
                                         <option value={municipio}>
@@ -348,26 +372,25 @@ const RegistroUsuario = () => {
                             <div className={style.divInput}>
                                 <Controller name="address"
                                 control={control}
-                                defaultValue=""
+                                defaultValue={userDatos.address || dataProfile.userData.address}
                                 rules={{ required: 'Este campo es obligatorio', maxLength: {value: 150,message: 'La dirección no puede tener más de 150 caracteres'}, minLength: {value: 10,message: 'La dirección no puede tener menos de 10 caracteres'}} }
                                 render={({ field }) => (
-                                <textarea className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("address"); }}/>)}/>
+                                <textarea className={style.input} type="text" {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("address"); }}/>)}/>
                                 <div className={style.errorMenssage}>
                                     {errors.address && <p className={style.simbolo}>¡</p>}
                                     {errors.address && <p className={style.errorText}>{errors.address.message}</p>}
                                     {errors.address && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
-                    <button type="submit" className={style.formbutton} disabled={formDisabled} >Registrarme</button>
+                    <button type="submit" className={style.formbutton} disabled={formDisabled} >Actualizar datos </button>
                 </form>
                 <div className= {style.mensaje}>
-                    <NavLink to="/login"><button className={style.formbutton}>Volver</button></NavLink>
-                    {confirmRegistro === true ? (<><p className={style.positivo}>Usuario registrado con exito</p></>):(confirmRegistro === false ? (<><p className={style.negativo} >No se pudo registrar, vuelve a intentarlo</p></>):(null))}
+                    {userModify === true ? (<><p className={style.positivo}> Información actualizada con éxito </p></>):(userMod === false ? (<><p className={style.negativo} >No se pudo actualizar, vuelve a intentarlo</p></>):(null))}
                 </div>
             </div>
         </div>
     )
 }
-export default RegistroUsuario
+export default Datos

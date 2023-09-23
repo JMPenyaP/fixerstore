@@ -6,7 +6,7 @@ import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin";
 import Home from "./paginas/Home/Home";
 import Carrito from "./paginas/Carrito/Carrito";
 import Navbar from "./components/NavBar/NavBar";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PassSolicitud from "./paginas/PassSolicitud/PassSolicitud";
@@ -17,17 +17,19 @@ import { agregarAlCarrito } from "./redux/Actions/carrito";
 import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
+import DashUser from "./paginas/DashUser/DashUser";
 
 function App() {
   const navigate = useNavigate();
   const admin = useSelector((state) => state.adminProfile);
+  const client = useSelector((state) => state.clientProfile);
   const carrito = useSelector((state) => state.carrito);
   const [adminPass, setAdminPass] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setAdminPass(admin);
-  }, [admin]);
+  }, [admin, client]);
 
   const location = useLocation();
   const isLoginPage =
@@ -37,12 +39,11 @@ function App() {
     location.pathname === "/resetPass" ||
     location.pathname === "/reset" ||
     location.pathname === "/payment"
-  useEffect(() => {
-    if (!adminPass && location.pathname === "/dashboard") {
-      navigate("/admin");
-    }
-  }, [adminPass, location.pathname, navigate]);
-
+    useEffect(() => {
+      if (!adminPass && location.pathname === "/dashboard") {
+        navigate("/admin");
+      }
+    }, [adminPass, location.pathname, navigate]);
   //MARCOS CARRITO
 
   const guardarCarritoEnLocalStorage = () => {
@@ -84,7 +85,10 @@ function App() {
           <Route path="/carrodecompras" element={<Carrito />} />
           <Route path="/login" element={<LoginUser />}/>
           <Route path="/payment" element={<Pasarela />}/>
-
+          <Route
+          path="/user/:id"
+          element={client === true ? <DashUser /> : <Navigate to="/login" />}
+          />
         </Routes>
     </>
   );
