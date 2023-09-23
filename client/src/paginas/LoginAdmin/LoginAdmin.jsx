@@ -36,11 +36,10 @@ const LoginAdmin = () => {
             const query = `?email=${email}`;
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
-            if (res.status === 200) {
-                const { success, role } = res.data;
+                const { success, userdata } = res.data;
                 if (success === true) {
-                    if (role === "admin") {
-                        setExiste(success);
+                    if (userdata.role === "admin") {
+                        setExiste(true);
                     }
                     else {
                         setExiste(false);
@@ -49,8 +48,6 @@ const LoginAdmin = () => {
                 if (success === false) {
                     setExiste(false)
                 }
-            }
-
         } catch (error) {
             return error.message;
         }

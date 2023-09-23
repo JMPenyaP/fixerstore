@@ -19,7 +19,8 @@ import {
   DECREMENT_QTY,
   REMOVE_PRODUCT,
   USER_PROFILE,
-  USER_CHANGE,
+  USER_CHANGE, 
+  SET_CHANGE
   HISTORIAL,
   FAVORITOS,
 } from "./actionTypes";
@@ -39,6 +40,7 @@ const initialState = {
   allCategories: [],
   carrito: [],
   registerConfirm: null,
+  userChanges: null,
   historial: [],
 };
 
@@ -57,6 +59,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         clientProfile: action.payload.success,
         dataProfile: action.payload,
+      }
+    }
+
+    case USER_CHANGE: {
+      return {
+        ...state,
+        userChanges: action.payload.success,
+        dataProfile: action.payload,
+      }
+    }
+    case SET_CHANGE: {
+      return {
+        ...state,
+        userChanges: action.payload
       }
     }
 
