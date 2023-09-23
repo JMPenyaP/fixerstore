@@ -28,6 +28,10 @@ import { setFilter } from "./Actions/setearFilter";
 import { loginAdmin } from "./Actions/loginAdmin";
 import { loginUser } from './Actions/loginUser'
 import { modifyData } from './Actions/modifyData'
+import { userHistorial } from './Actions/userHistorial'
+import { userFavoritos } from './Actions/userFavoritos'
+import { crearFavoritos } from './Actions/crearFavoritos'
+import { borrarFavoritos } from './Actions/borrarFavoritos'
 
 export const createProd = createProduct;
 export const getProductName = getProductByName;
@@ -35,3 +39,7 @@ export const setFilters = setFilter;
 export const login = loginAdmin;
 export const loginU = loginUser;
 export const modify = modifyData;
+export const historial = userHistorial;
+export const favoritos = userFavoritos;
+export const creaFav = crearFavoritos;
+export const borraFav = borrarFavoritos;

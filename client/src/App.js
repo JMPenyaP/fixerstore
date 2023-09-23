@@ -18,6 +18,7 @@ import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
 import DashUser from "./paginas/DashUser/DashUser";
+import Nosotros from "./paginas/Nosotros/Nosotros";
 
 function App() {
   const navigate = useNavigate();
@@ -88,7 +89,8 @@ function App() {
           <Route
           path="/user/:id"
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
-          />
+          />          <Route path="/us" element={<Nosotros/>}/>
+
         </Routes>
     </>
   );

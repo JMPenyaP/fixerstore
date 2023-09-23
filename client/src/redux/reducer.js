@@ -21,6 +21,8 @@ import {
   USER_PROFILE,
   USER_CHANGE, 
   SET_CHANGE
+  HISTORIAL,
+  FAVORITOS,
 } from "./actionTypes";
 
 const initialState = {
@@ -39,6 +41,7 @@ const initialState = {
   carrito: [],
   registerConfirm: null,
   userChanges: null,
+  historial: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -70,6 +73,30 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userChanges: action.payload
+      }
+    }
+
+    //Marcos
+
+    case USER_CHANGE: {
+      return {
+        ...state,
+        userChanges: action.payload.success,
+        dataProfile: action.payload,
+      }
+    }
+
+    case HISTORIAL: {
+      return {
+        ...state,
+        historial: action.payload,
+      }
+    }
+
+    case FAVORITOS: {
+      return {
+        ...state,
+        favoritos: action.payload,
       }
     }
 

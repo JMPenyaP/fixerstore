@@ -78,9 +78,11 @@ const Navbar = () => {
             <h5>Productos</h5>
           </button>
         </Link>
+        <Link to='/us'>
         <button>
           <h5>Quienes Somos</h5>
         </button>
+        </Link>
       </div>
       <div className={style.searchBarDiv}>
         <input
