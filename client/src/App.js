@@ -39,12 +39,13 @@ function App() {
     location.pathname === "/registro" ||
     location.pathname === "/resetPass" ||
     location.pathname === "/reset" ||
-    location.pathname === "/payment"
-    useEffect(() => {
-      if (!adminPass && location.pathname === "/dashboard") {
-        navigate("/admin");
-      }
-    }, [adminPass, location.pathname, navigate]);
+    location.pathname === "/payment";
+  useEffect(() => {
+    if (!adminPass && location.pathname === "/dashboard") {
+      navigate("/admin");
+    }
+  }, [adminPass, location.pathname, navigate]);
+
   //MARCOS CARRITO
 
   const guardarCarritoEnLocalStorage = () => {
@@ -63,6 +64,7 @@ function App() {
               name: item.name,
               precio: item.precio,
               image: item.image,
+              stock: item.stock,
             },
             item.cantidad
           )
@@ -74,24 +76,23 @@ function App() {
   }, [carrito, dispatch]);
   return (
     <>
-        {!isLoginPage && <Navbar />}
-        <Routes>
-          <Route path="/registro" element={<RegistroUsuario/>}/>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Catalogo />} />
-          <Route path="/detail/:id" element={<DetailPage />} />
-          <Route path="/admin" element={<LoginAdmin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/searchedprod/:name" element={<SearchedProduct />} />
-          <Route path="/carrodecompras" element={<Carrito />} />
-          <Route path="/login" element={<LoginUser />}/>
-          <Route path="/payment" element={<Pasarela />}/>
+      {!isLoginPage && <Navbar />}
+      <Routes>
+        <Route path="/registro" element={<RegistroUsuario />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/productos" element={<Catalogo />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/admin" element={<LoginAdmin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/searchedprod/:name" element={<SearchedProduct />} />
+        <Route path="/carrodecompras" element={<Carrito />} />
+        <Route path="/login" element={<LoginUser />} />
+        <Route path="/payment" element={<Pasarela />} />
           <Route
           path="/user/:id"
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
           />          <Route path="/us" element={<Nosotros/>}/>
-
-        </Routes>
+      </Routes>
     </>
   );
 }

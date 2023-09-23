@@ -12,7 +12,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [letter, setLetter] = useState(null);
   const [cartLong, setCartLong] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const carrito = useSelector((state) => state.carrito);
   const dataProfile = useSelector((state) => state.dataProfile);
@@ -56,7 +56,7 @@ const Navbar = () => {
 
   const handleRedirect = () => {
     dispatch(logOutUser());
-    navigate("/")
+    navigate("/");
     window.location.reload();
   };
 
@@ -78,11 +78,14 @@ const Navbar = () => {
             <h5>Productos</h5>
           </button>
         </Link>
-        <Link to='/us'>
-        <button>
-          <h5>Quienes Somos</h5>
-        </button>
+        <Link to="/us">
+          <button>
+            <h5>Quienes Somos</h5>
+          </button>
         </Link>
+        <button>
+          <h5>Contactanos</h5>
+        </button>
       </div>
       <div className={style.searchBarDiv}>
         <input
@@ -110,27 +113,35 @@ const Navbar = () => {
         )}
       </div>
       <div className={style.containerLogIn}>
-        {dataProfile !== null ? (<>
-        <div className={style.userLetter} onClick={handleMenu}>
-          <h4>{letter}</h4>
-        </div>
-          {showMenu ? (
-            letter !== null ? (
-            <div className={style.divMenuDesplegable}>
-              <Link to={`/user/${dataProfile.userData.id}`}>
-              <button>
-                <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
-              </button>
-              </Link>
-              <button onClick={() => handleRedirect()}>
-                <ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5>
-              </button>
+        {dataProfile !== null ? (
+          <>
+            <div className={style.userLetter} onClick={handleMenu}>
+              <h4>{letter}</h4>
             </div>
-          ) : (null)
+            {showMenu ? (
+              letter !== null ? (
+                <div className={style.divMenuDesplegable}>
+                  <Link to={`/user/${dataProfile.userData.id}`}>
+                    <button>
+                      <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
+                    </button>
+                  </Link>
+                  <button onClick={() => handleRedirect()}>
+                    <ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5>
+                  </button>
+                </div>
+              ) : null
+            ) : (
+              ""
+            )}
+          </>
         ) : (
-          ""
-        )}</>):(<><Link to="/login"><button className={style.botonInicio}>Iniciar sesión</button>
-        </Link></>)}
+          <>
+            <Link to="/login">
+              <button className={style.botonInicio}>Iniciar sesión</button>
+            </Link>
+          </>
+        )}
       </div>
       <Link to="/carrodecompras">
         <div className={style.carritoDiv}>
