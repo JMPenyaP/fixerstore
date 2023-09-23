@@ -5,7 +5,6 @@ export const USER_ADMIN = "ADMIN_PROFILE";
 export const ADMIN_PASS = "ADMIN_PASS";
 export const USER_PROFILE = "USER_PROFILE";
 //Marcos
-export const USER_CHANGE = 'USER_CHANGE';
 export const HISTORIAL = 'HISTORIAL';
 export const FAVORITOS = 'FAVORITOS';
 export const SAVE_FAV = 'SAVE_FAV';

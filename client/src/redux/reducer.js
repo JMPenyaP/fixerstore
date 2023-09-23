@@ -20,7 +20,7 @@ import {
   REMOVE_PRODUCT,
   USER_PROFILE,
   USER_CHANGE, 
-  SET_CHANGE
+  SET_CHANGE,
   HISTORIAL,
   FAVORITOS,
 } from "./actionTypes";
