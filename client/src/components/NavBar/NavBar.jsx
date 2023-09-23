@@ -25,7 +25,7 @@ const Navbar = () => {
       setLetter("i");
     }
 
-    if (carrito.length > 0) {
+    if (carrito.length >= 0) {
       setCartLong(carrito.length);
     }
   }, [dataProfile, carrito]);
@@ -59,7 +59,6 @@ const Navbar = () => {
 
   return (
     <div className={style.divNavBar}>
-      {console.log(carrito)}
       <img
         src="https://s3-alpha-sig.figma.com/img/3833/7eca/e60625366dc9df5f0771fb658c866d39?Expires=1695600000&Signature=p4RVXaHWNaHJrK8200eTzaVVgwGmr0fpTtH8Fafay72nuONitHO-lXBMZwxBk5m02Ovx2QMWa-yYFxSdDw3APSToZoFt15CAVzqRMsQb1cyvtI7OgA~FKgjQbi9KSu6Y5KUjvNBmQcPwnI5Ypkw4dpPCQ9tfoV8UatuWbzeW3aqipK-a3GHtg14kbSqxuvXNe~Wlbv8IBpwoKBr7149G-TkWstKArQgtQqSahwxnt7WL04V7FIN7J2EceOtplXcsOBhbSMUxKu~wyJOJe314XKSHBM1tCA-Coh7jeEGgvA0KwdztsMsuj8KXPlHxJRDuW4dP7RL-Q7S0lSBi4m5A8Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
         alt="Logo Fixer"
@@ -78,6 +77,9 @@ const Navbar = () => {
         </Link>
         <button>
           <h5>Quienes Somos</h5>
+        </button>
+        <button>
+          <h5>Contactanos</h5>
         </button>
       </div>
       <div className={style.searchBarDiv}>

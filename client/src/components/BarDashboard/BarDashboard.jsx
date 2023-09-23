@@ -26,7 +26,7 @@ const BarDashboard = () => {
         if(dataProfileActual) {
             setEmail(dataProfileActual.email)
             setName(dataProfileActual.name)
-            setInicial(dataProfileActual.name.charAt(0).toUpperCase())
+/*             setInicial(dataProfileActual.name.charAt(0).toUpperCase()) */
         }
         setLog(adminProfile)
     }, [dataProfileActual, adminProfile])

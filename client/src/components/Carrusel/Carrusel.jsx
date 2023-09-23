@@ -36,7 +36,7 @@ const Carrusel = () => {
       slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 2700,
+      autoplaySpeed: 2300,
       pauseOnHover: true,
       responsive: [
         {

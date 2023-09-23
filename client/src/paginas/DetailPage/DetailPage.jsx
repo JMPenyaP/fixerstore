@@ -17,6 +17,15 @@ const DetailPage = () => {
   const [mainImage, setMainImage] = useState();
   const [cantidad, setCantidad] = useState(1);
   const [images, setImages] = useState([]);
+  const [cantidadEnCarrito, setCantidadEnCarrito] = useState();
+  //////
+
+  let carritoEnLocalStorage = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  // STATE REDUX
+  const productByName = useSelector((state) => state.productByName);
+  const allCategories = useSelector((state) => state.allCategories);
+  const carrito = useSelector((state) => state.carrito);
   //////
 
   let precioReal;
@@ -27,12 +36,6 @@ const DetailPage = () => {
   } else {
     precioReal = product.priceOfList;
   }
-
-  // STATE REDUX
-  const productByName = useSelector((state) => state.productByName);
-  const allCategories = useSelector((state) => state.allCategories);
-  const carrito = useSelector((state) => state.carrito);
-  //////
 
   // USE PARAMS Y DISPATCH
   const params = useParams();
@@ -47,36 +50,53 @@ const DetailPage = () => {
   );
   //////
 
-  useEffect(() => {
-    try {
-      axios(`http://localhost:3001/products/${id}`).then(({ data }) => {
-        if (data.name) {
-          setProduct(data);
-          setMainImage(data.firstImage);
-          setImages([data.firstImage, ...data.carrouselImage]); // Actualiza el estado de las imágenes
-        }
-        setLoading(false);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, [id]);
+    useEffect(() => {
+      try {
+        axios(`http://localhost:3001/products/${id}`).then(({ data }) => {
+          if (data.name) {
+            setProduct(data);
+            setMainImage(data.firstImage);
+            setImages([data.firstImage, ...data.carrouselImage]); // Actualiza el estado de las imágenes
+          }
+          setLoading(false);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }, [id, carrito]);
 
   useEffect(() => {
     allCategories?.length === 0 && dispatch(getCategories());
-  }, [allCategories, dispatch]);
+
+    carritoEnLocalStorage.map((item) => {
+      if (item.id === product.id) {
+        setCantidadEnCarrito(item.cantidad);
+      } else {
+        setCantidadEnCarrito(0);
+      }
+    });
+  }, [allCategories, dispatch, carritoEnLocalStorage]);
 
   useEffect(() => {
-    
     const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
-    
-    
+
     if (carrito.length === 0 && storedCart.length > 0) {
-      storedCart.forEach(item => {
-        dispatch(agregarAlCarrito({ id: item.id, name: item.name, precio: item.precio, image: item.image }, item.cantidad));
+      storedCart.forEach((item) => {
+        dispatch(
+          agregarAlCarrito(
+            {
+              id: item.id,
+              name: item.name,
+              precio: item.precio,
+              image: item.image,
+              stock: item.stock,
+            },
+            item.cantidad
+          )
+        );
       });
     }
-    
+
     guardarCarritoEnLocalStorage();
   }, [carrito, dispatch]);
 
@@ -94,7 +114,10 @@ const DetailPage = () => {
   };
 
   const handleAumentar = () => {
-    setCantidad(cantidad + 1);
+    if (cantidad + cantidadEnCarrito >= product.stock) {
+    } else {
+      setCantidad(cantidad + 1);
+    }
   };
 
   const handleDisminuir = () => {
@@ -106,10 +129,18 @@ const DetailPage = () => {
   const agregarProductoAlCarrito = () => {
     dispatch(
       agregarAlCarrito(
-        { id: product.id, name: product.name, precio: precioReal, image: product.firstImage },
+        {
+          id: product.id,
+          name: product.name,
+          precio: precioReal,
+          image: product.firstImage,
+          stock: product.stock,
+        },
         cantidad
       )
     );
+
+    setCantidad(1);
 
     guardarCarritoEnLocalStorage();
   };
@@ -136,7 +167,6 @@ const DetailPage = () => {
 
   return (
     <>
-    {console.log(carrito)}
       <div className={style.divDetail}>
         {loading ? (
           <h1>Cargando Producto...</h1>
@@ -203,7 +233,16 @@ const DetailPage = () => {
             </div>
             <div className={style.infoDiv}>
               <div className={style.stockAndCategory}>
-                <h5>Unidades en Stock: {product.stock}</h5>
+                <h5
+                  className={
+                    cantidad + cantidadEnCarrito >= product.stock ||
+                    cantidad >= product.stock
+                      ? style.noStock
+                      : style.stock
+                  }
+                >
+                  Unidades en Stock: {product.stock}
+                </h5>
                 <h5>
                   Categoría:{" "}
                   {productCategory ? productCategory.name : "Sin categoría"}
@@ -260,12 +299,23 @@ const DetailPage = () => {
                   <button
                     onClick={handleAumentar}
                     className={style.buttonCantidad}
+                    disabled={
+                      cantidad + cantidadEnCarrito >= product.stock ||
+                      cantidad >= product.stock
+                    }
                   >
                     <ion-icon name="add-circle"></ion-icon>
                   </button>
                 </div>
                 <div className={style.divButton}>
-                  <button onClick={agregarProductoAlCarrito}>
+                  <button
+                    onClick={agregarProductoAlCarrito}
+                    disabled={
+                      cantidad + cantidadEnCarrito >= product.stock ||
+                      cantidad - 1 > product.stock
+                    }
+                    className={style.buttonAgregar}
+                  >
                     Agregar Al Carrito
                   </button>
                 </div>

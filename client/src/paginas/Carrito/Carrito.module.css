@@ -82,8 +82,27 @@
     gap: 5px;
 }
 
-.editarCtdadDiv span{
+.editarCtdadDiv button{
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editarCtdadDiv button:disabled{
+    cursor: not-allowed;
+    position: relative;
+}
+
+.editarCtdadDiv button:disabled::before{
+    position: absolute;
+    content: "maximo en stock";
+    color: red;
+    top: 180%;
+    left: -330%;
+    width: 500%;
 }
 
 .editarCtdadDiv ion-icon{
