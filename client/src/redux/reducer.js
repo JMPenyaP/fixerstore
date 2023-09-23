@@ -19,6 +19,9 @@ import {
   DECREMENT_QTY,
   REMOVE_PRODUCT,
   USER_PROFILE,
+  USER_CHANGE,
+  HISTORIAL,
+  FAVORITOS,
 } from "./actionTypes";
 
 const initialState = {
@@ -36,7 +39,8 @@ const initialState = {
   allCategories: [],
   carrito: [],
   registerConfirm: null,
-  clientProfile: null,
+  historial: [],
+  favoritos: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -54,6 +58,30 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         clientProfile: action.payload.success,
         dataProfile: action.payload,
+      }
+    }
+
+    //Marcos
+
+    case USER_CHANGE: {
+      return {
+        ...state,
+        userChanges: action.payload.success,
+        dataProfile: action.payload,
+      }
+    }
+
+    case HISTORIAL: {
+      return {
+        ...state,
+        historial: action.payload,
+      }
+    }
+
+    case FAVORITOS: {
+      return {
+        ...state,
+        favoritos: action.payload,
       }
     }
 
