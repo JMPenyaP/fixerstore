@@ -40,7 +40,6 @@ const initialState = {
   carrito: [],
   registerConfirm: null,
   historial: [],
-  favoritos: [],
 };
 
 const rootReducer = (state = initialState, action) => {

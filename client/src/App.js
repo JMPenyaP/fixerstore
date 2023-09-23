@@ -17,6 +17,7 @@ import { agregarAlCarrito } from "./redux/Actions/carrito";
 import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
+import Nosotros from "./paginas/Nosotros/Nosotros";
 
 function App() {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ function App() {
           <Route path="/carrodecompras" element={<Carrito />} />
           <Route path="/login" element={<LoginUser />}/>
           <Route path="/payment" element={<Pasarela />}/>
+          <Route path="/us" element={<Nosotros/>}/>
 
         </Routes>
     </>

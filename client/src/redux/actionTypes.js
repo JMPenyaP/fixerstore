@@ -8,6 +8,8 @@ export const USER_PROFILE = "USER_PROFILE";
 export const USER_CHANGE = 'USER_CHANGE';
 export const HISTORIAL = 'HISTORIAL';
 export const FAVORITOS = 'FAVORITOS';
+export const SAVE_FAV = 'SAVE_FAV';
+export const DELETE_FAV = 'DELETE_FAV';
 //
 export const CREATED_PRODUCT = "CREATED_PRODUCT";
 export const NEW_PRODUCT = "NEW_PRODUCT";
