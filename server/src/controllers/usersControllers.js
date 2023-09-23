@@ -101,6 +101,7 @@ const updateUserController = async (req, res) => {
       .json({
         success: true,
         message: "Datos de usuario actualizados con éxito",
+        userData: user,
       });
   } catch (error) {
     console.error(error);

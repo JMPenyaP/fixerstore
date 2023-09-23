@@ -39,17 +39,8 @@ const LoginUser = () => {
             const query = `?email=${email}`;
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
-            console.log(res);
-            if (res.status === 200) {
-                const { success, role } = res.data;
-                if (success === true) {
-                    setExiste(true);
-                }
-                if (success === false) {
-                    setExiste(false)
-                }
-            }
-
+            const { success } = res.data;
+                setExiste(success);
         } catch (error) {
             return error.message;
         }
@@ -113,7 +104,7 @@ const LoginUser = () => {
                 <h1 className={style.titulo}>Inicia Sesión</h1>
                 <form>
                     <div className={style.form}>
-                    <input type="text" name="email" onChange={handleChange} placeholder="Correo electronico" />
+                    <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Correo electronico" />
                     {existe !== true ? (<button className={style.formbutton} onClick={(event) => userClient(emailInput, event)}>Siguiente</button>) : (null)}
                     {existe === true ? (
                         <div className={style.passwordcontainer}>
@@ -131,28 +122,29 @@ const LoginUser = () => {
                     ) : null}
                     {existe === true ? (<NavLink to="/dashboard"> <button className={style.formbutton} onClick={(event) => loginAdmin(emailInput, password, event)}>Iniciar sesión</button></NavLink>
                     ) : (null)}
-                    <br /><br />
                     <GoogleLogin
                         clientId={clientId}
-                        buttonText="Inicia Sesión o Continuar con Google"
+                        buttonText="Inicia sesión o continuar con Google"
                         onSuccess={onSuccess}
                         onFailure={onFailure}
-                        cookiePolicy={"single_host_policy"}/>
+                        cookiePolicy={"single_host_policy"}
+                        className={style.miClaseDeEstilo}/>
                        {/*  <a href="#" onClick={()=> handleGoogleLoginClick()}>
                         Iniciar sesión con Google
                         </a> */}
-                    <Link to='/' className={style.olvido}><p>¿Olvidó su contraseña?</p></Link>
-                    <Link to='/registro' className={style.olvido}><p>Registrarse</p></Link>
+                    <Link to='/' className={style.olvido}><span>¿Olvidó su contraseña?</span></Link>
+                    <Link to='/registro' className={style.olvido}><span>Registrarse</span></Link>
                     {handleRedirect ()}
                     {clientPass === false ? (
                     <div className={style.divmensajePass}>
                     <span className={style.span}> &#9888; Contraseña incorrecta </span>
                     </div>): (null)}
                     {existe === false ? (<div className={style.divmensaje}>
-                        <span className={style.span}> &#9888; Correo no registrado. <Link to='/registro'>Registrese aquí</Link> para iniciar sesión.</span>           
-                        <button className={style.x}>&#9932;</button>                       
+                        <span className={style.span}> &#9888; Correo no registrado. <Link to='/registro'> <u>Registrese aquí</u></Link> para iniciar sesión.</span>           
+                        <Link to="/"><button className={style.x}>&#9932;</button></Link>                       
                         </div>
                     ): (null)}
+                    <NavLink to="/"><button className={style.formbuttonBack}>Volver</button></NavLink>
                     </div>
                 </form>
             </div>
