@@ -2,10 +2,10 @@ const { createProduct, getAllProducts, getProductByName, getProductById } = requ
 
 
 const createProductsHandler = async (req, res) => {
-    
-    const{ name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock } = req.body;
- try {
-     const newProduct = await createProduct(name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock);
+
+    const { name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock } = req.body;
+    try {
+        const newProduct = await createProduct(name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock);
 
         res.status(200).json({ producto: newProduct, create: true });
     } catch (error) {
@@ -43,9 +43,11 @@ const getProductIdHandler = async (req, res) => {
     }
 }
 
+
 module.exports = {
     createProductsHandler,
     getAllProductsHandler,
     getProductIdHandler,
+
 };
 
