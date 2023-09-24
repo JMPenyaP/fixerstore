@@ -67,6 +67,11 @@
     border-radius: 50%;
 }
 
+.divImgsCarousel h4{
+    color: #00FF00;
+    font-size: 19px;
+}
+
 .carouselImage {
     height: 500px;
     width: 100%;

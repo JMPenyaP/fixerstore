@@ -1,17 +1,18 @@
 import style from "./NavBar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setFilters, getProductName } from "../../redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import logOut from "../../redux/Actions/logOut";
 import { useState } from "react";
+import logOutUser from "../../redux/Actions/logOutUser";
 
 const Navbar = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const [letter, setLetter] = useState("i");
+  const [letter, setLetter] = useState(null);
   const [cartLong, setCartLong] = useState(0);
+  const navigate = useNavigate();
 
   const carrito = useSelector((state) => state.carrito);
   const dataProfile = useSelector((state) => state.dataProfile);
@@ -19,13 +20,13 @@ const Navbar = () => {
   useEffect(() => {
     if (dataProfile !== null) {
       setLetter(
-        dataProfile.success !== null ? dataProfile.name.charAt(0) : "i"
+        dataProfile.success !== null ? dataProfile.userData.name[0] : null
       );
     } else {
-      setLetter("i");
+      setLetter(null);
     }
 
-    if (carrito.length > 0) {
+    if (carrito.length >= 0) {
       setCartLong(carrito.length);
     }
   }, [dataProfile, carrito]);
@@ -54,7 +55,9 @@ const Navbar = () => {
   };
 
   const handleRedirect = () => {
-    dispatch(logOut());
+    dispatch(logOutUser());
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -75,8 +78,13 @@ const Navbar = () => {
             <h5>Productos</h5>
           </button>
         </Link>
+        <Link to="/us">
+          <button>
+            <h5>Quienes Somos</h5>
+          </button>
+        </Link>
         <button>
-          <h5>Quienes Somos</h5>
+          <h5>Contactanos</h5>
         </button>
       </div>
       <div className={style.searchBarDiv}>
@@ -105,28 +113,34 @@ const Navbar = () => {
         )}
       </div>
       <div className={style.containerLogIn}>
-        <div className={style.userLetter} onClick={handleMenu}>
-          <h4>{letter}</h4>
-        </div>
-        {showMenu ? (
-          letter !== "i" ? (
-            <div className={style.divMenuDesplegable}>
-              <button>
-                <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
-              </button>
-              <button onClick={() => handleRedirect()}>
-                <ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5>
-              </button>
+        {dataProfile !== null ? (
+          <>
+            <div className={style.userLetter} onClick={handleMenu}>
+              <h4>{letter}</h4>
             </div>
-          ) : (
-            <div className={style.divMenuDesplegable}>
-              <button>
-                <ion-icon name="person-add"></ion-icon> <h5>Registrarme</h5>
-              </button>
-            </div>
-          )
+            {showMenu ? (
+              letter !== null ? (
+                <div className={style.divMenuDesplegable}>
+                  <Link to={`/user/${dataProfile.userData.id}`}>
+                    <button>
+                      <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
+                    </button>
+                  </Link>
+                  <button onClick={() => handleRedirect()}>
+                    <ion-icon name="log-out"></ion-icon> <h5>Cerrar sesion</h5>
+                  </button>
+                </div>
+              ) : null
+            ) : (
+              ""
+            )}
+          </>
         ) : (
-          ""
+          <>
+            <Link to="/login">
+              <button className={style.botonInicio}>Iniciar sesión</button>
+            </Link>
+          </>
         )}
       </div>
       <Link to="/carrodecompras">

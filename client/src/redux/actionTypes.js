@@ -4,6 +4,12 @@ export const ADMIN_PROFILE = "ADMIN_PROFILE";
 export const USER_ADMIN = "ADMIN_PROFILE";
 export const ADMIN_PASS = "ADMIN_PASS";
 export const USER_PROFILE = "USER_PROFILE";
+//Marcos
+export const HISTORIAL = 'HISTORIAL';
+export const FAVORITOS = 'FAVORITOS';
+export const SAVE_FAV = 'SAVE_FAV';
+export const DELETE_FAV = 'DELETE_FAV';
+//
 export const CREATED_PRODUCT = "CREATED_PRODUCT";
 export const NEW_PRODUCT = "NEW_PRODUCT";
 export const ROLE = "ROLE";
@@ -23,5 +29,5 @@ export const FILTER_BACK = "FILTER_BACK";
 export const INCREMENT_QTY = "INCREMENT_QTY";
 export const DECREMENT_QTY = "DECREMENT_QTY";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
-export const USER_PROFILE = "USER_PROFILE";
-
+export const USER_CHANGE = 'USER_CHANGE';
+export const SET_CHANGE = "SET_CHANGE"

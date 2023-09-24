@@ -1,15 +1,14 @@
-import { USER_PROFILE } from "../actionTypes";
+import { SAVE_FAV } from "../actionTypes";
 import axios from "axios";
 
-export const loginUser = (userData) => {
+export const crearFavoritos = (id) => {
   try {
     return async (dispatch) => {
       const response = await axios.post(
-        "http://localhost:3001/auth/login",
-        userData
+        `http://localhost:3001/favorites/${id}`
       );
       dispatch({
-        type: USER_PROFILE,
+        type: SAVE_FAV,
         payload: response.data,
       });
     };

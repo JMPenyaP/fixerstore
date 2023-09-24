@@ -18,38 +18,34 @@ const user = [{
     surname: "Gomez",
     phone: "3115889778",
     address: "calle 30 Kra 15 #8",
-    city: "Kenedy",
+    city: "Villeta",
     department: "Cundinamarca"
 }];
-
-// const mockRequest = {
-//     body: user // Simula un cuerpo de solicitud con el objeto de usuario
-// };
-
-// const mockResponse = {
-//     status: function (statusCode) {
-//         // Define una función simulada de status que retorna el objeto de respuesta
-//         return mockResponse;
-//     },
-//     json: function (data) {
-//         // Define una función simulada de json que muestra los resultados
-//         console.log(data);
-//     }
-// };
 
 async function createAdmin() {
 
     user.forEach(async(us)=>{
-    try {
-        await User.create(us);
+        const mockRequest = {
+            body: us // Simula un cuerpo de solicitud con el objeto de usuario
+        };
+        const mockResponse = {
+            status: function (statusCode) {
+                return mockResponse;
+            },
+            json: function (data) {
+                console.log(data);
+            }
+        };
+        try {
+            await createUserHandler(mockRequest, mockResponse);
         console.log("Usuario administrador creado con éxito.");
     } catch (error) {
         console.error(error);
         console.log("Error al crear el usuario administrador.");
     }
     })
-    
 }
+
 
 
 module.exports = {
