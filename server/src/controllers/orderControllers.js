@@ -1,4 +1,4 @@
-const { Model } = require("sequelize")
+
 const {Order,OrderItems,Cart,Product}=require("../db")
 
 
