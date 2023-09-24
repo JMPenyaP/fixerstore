@@ -1,5 +1,5 @@
 .cartContainer{
-    min-height: 100vh;
+    min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -17,6 +17,10 @@
     display: flex;
     flex-direction: column;
     gap: 70px;
+}
+
+.cartCardDivContainer h2{
+    text-align: center;
 }
 
 .cardCartContainer{
@@ -40,6 +44,7 @@
 .cardCartContainer h1{
     color: #3cbbed;
     font-size: 27px;
+    width: 300px;
 }
 
 /* DATOS CART Product*/
@@ -77,8 +82,27 @@
     gap: 5px;
 }
 
-.editarCtdadDiv span{
+.editarCtdadDiv button{
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editarCtdadDiv button:disabled{
+    cursor: not-allowed;
+    position: relative;
+}
+
+.editarCtdadDiv button:disabled::before{
+    position: absolute;
+    content: "maximo en stock";
+    color: red;
+    top: 180%;
+    left: -330%;
+    width: 500%;
 }
 
 .editarCtdadDiv ion-icon{
@@ -105,6 +129,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    border-radius: 16px;
 }
 
 .divResumen h2{
@@ -136,6 +161,10 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+
+.divButton button:disabled{
+    cursor: not-allowed;
 }
 
 .divButton button:hover {
@@ -173,4 +202,28 @@
 .divDelete ion-icon{
     color: red;
     font-size: 20px;
+}
+
+/* EMPTY CART */
+
+.divEmptyCart{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.divLinkToProducts{
+    width: 35%;
+    margin: auto;
+}
+
+.divLinkToProducts a{
+    color: #3cbbed;
+    transition: 0.4s;
+}
+
+.divLinkToProducts a:hover{
+    color: #1d8ab5;
 }

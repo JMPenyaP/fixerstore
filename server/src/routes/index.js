@@ -24,7 +24,11 @@ router.use("/message", whatsappRouters);
 router.use("/filtros", filtrosPreciosRouters);
 router.use("/request-reset", requestPasswordReset);
 router.use("/reset/:token", resetPassword);
+<<<<<<< HEAD
 router.use("/order",orderRouter );
+=======
+router.use("/favorites", favoriteRouters);
+>>>>>>> dev
 
 
 module.exports = router; // Exportamos el router configurado

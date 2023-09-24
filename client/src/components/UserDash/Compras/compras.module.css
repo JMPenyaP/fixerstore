@@ -1,0 +1,73 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: "Gotham", sans-serif;
+}
+
+.divComplementario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    border: none;
+    font-size: 12.5px;
+    padding: 8px 28px 8px 28px;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    background-color: #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.th {
+    background-color: #3cbbed;
+    border: 1px solid #dddddd;
+    color: white;
+    text-align: left;
+    padding: 10px;
+  }
+  .th:hover {
+    background-color: #3cbbed;
+    border: 1px solid #dddddd;
+    color: white;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  .td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px;
+  }
+  .tdetail {
+    border: 1px solid #dddddd;
+    text-decoration: underline;
+    text-align: left;
+    padding: 10px;
+  }
+  
+  .tr:hover {
+    background-color: #15214a;
+    color: white;
+  }
+  
+  .table thead th {
+    font-weight: bold;
+    text-transform: uppercase;
+
+  }
