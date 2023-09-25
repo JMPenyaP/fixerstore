@@ -23,6 +23,7 @@ import {
   SET_CHANGE,
   HISTORIAL,
   FAVORITOS,
+  SAVE_FAV,
 } from "./actionTypes";
 
 const initialState = {
@@ -91,6 +92,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         historial: action.payload,
+      }
+    }
+
+    case SAVE_FAV: {
+      return {
+        ...state,
+        favoritos: action.payload,
       }
     }
 

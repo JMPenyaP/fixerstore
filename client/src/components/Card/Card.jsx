@@ -10,9 +10,9 @@ const Card = ({product}) => {
     const [isFav, setIsFav] = useState(false); 
     const user = useSelector((state) => state.clientProfile)
 
-    const handleFavorite = () => {
+    const { userId } = clientProfile
 
-        const { id } = product
+    const handleFavorite = () => {
 
         if(isFav){
            setIsFav(false);
@@ -20,7 +20,7 @@ const Card = ({product}) => {
         }
         else{
            setIsFav(true);
-           dispatch(crearFavoritos({product}))
+           dispatch(crearFavoritos({userId, product}))
         }
      }
 
