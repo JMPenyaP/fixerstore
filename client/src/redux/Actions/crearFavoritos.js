@@ -1,7 +1,7 @@
 import { SAVE_FAV } from "../actionTypes";
 import axios from "axios";
 
-export const crearFavoritos = (id) => {
+export const crearFavoritos = ({product}) => {
   try {
     return async (dispatch) => {
       const response = await axios.post(

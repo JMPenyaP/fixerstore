@@ -42,6 +42,7 @@ const initialState = {
   registerConfirm: null,
   userChanges: null,
   historial: [],
+  favoritos: [],
 };
 
 const rootReducer = (state = initialState, action) => {
