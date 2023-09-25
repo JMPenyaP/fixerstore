@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import { useForm, Controller } from "react-hook-form"
 import style from "./resetPass.module.css"
-import { useNavigate} from "react-router-dom"
+import { useNavigate, useParams} from "react-router-dom"
 import axios from "axios"
 
 
 const ResetPass = () => {
+    const {token} = useParams()
     const {handleSubmit, control, formState: {errors}, trigger, reset, watch} = useForm()
     const [mensaje, setMensaje] = useState("")
     const [formDisabled, setFormDisabled] = useState(false);
@@ -15,7 +16,7 @@ const ResetPass = () => {
     const [erroresPass, setErroresPass] = useState([])
     const [isRepeatPasswordEnabled, setIsRepeatPasswordEnabled] = useState(false);
     const [validate,setValidate] = useState(false)
-    const password = watch("password");
+    const password = watch("newPassword");
     const passwordMatchRule = (value) => value === password || "Las contraseñas no coinciden"
     const togglePasswordVisibilityPass = () => {
         setShowPassword(!showPassword);
@@ -59,8 +60,20 @@ const ResetPass = () => {
       }, [password, errors.password]);
     const onSubmit = async (data) => {
         delete data.repeatPassword;
+
         try {
-            
+            const response = await axios.post(`http://localhost:3001/reset/${token}`, data)
+            const {message, success} = response.data
+            setMensaje(message)
+            setFormDisabled(true)
+            console.log(response);
+            console.log(message);
+            if(success === true) {
+                setTimeout(()=> {
+                    reset()
+                    navigate("/login")
+                    setFormDisabled(false)}, 2000)
+            }
         } 
         catch (error) {    
         }
@@ -74,10 +87,10 @@ const ResetPass = () => {
                 <h3 className={style.titulo2} htmlFor="email"> Ingresa tu contraseña nueva </h3>
                 <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
                     <div className={style.divCampo}>
-                        <label className={style.label} htmlFor="password"> Contraseña </label>
+                        <label className={style.label} htmlFor="newPassword"> Contraseña </label>
                         <div className={style.divInput}>
                             <div className={style.contraseña}>
-                                <Controller name="password"
+                                <Controller name="newPassword"
                                 control={control}
                                 defaultValue=""
                                 rules={{ 
