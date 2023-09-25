@@ -134,6 +134,7 @@ const Carrito = () => {
             <h4>Total de compra: ${total}</h4>
           </div>
           <div className={style.divButton}>
+            <Link to={'/payment'}>
             <button
               disabled={
                 dataProfile === null ||
@@ -143,7 +144,7 @@ const Carrito = () => {
               onClick={agregarCarrito}
             >
               <ion-icon name="cart-outline"></ion-icon> Comprar
-            </button>
+            </button></Link>
           </div>
         </div>
       </div>

@@ -12,16 +12,10 @@ const Pasarela = () => {
         
     // }
 
-    // const carrito = useSelector(state => state.carrito)
-    const carrito = [{name:'calzador de madera',priceOfList:200,firstImage:lock,cantidad:2},
-                    {name:'cepillo de cerdo para zapatos',priceOfList:3000,firstImage:lock,cantidad:1},
-                    {name:'cordones reflextivos',priceOfList:500,firstImage:lock,cantidad:1},
-                    {name:'espuma para zapatillas',priceOfList:3000,firstImage:lock,cantidad:1},
-                    {name:'plantillas',priceOfList:3000,firstImage:lock,cantidad:1}
-                    ]
+    const carrito = useSelector(state => state.carrito)
                 
     const totalCarrito = carrito?.reduce((valorAnterior, valorActual) => {
-                        return valorAnterior + (valorActual.priceOfList * valorActual.cantidad);
+                        return valorAnterior + (valorActual.precio * valorActual.cantidad);
                     }, 0);
     return ( 
         <>
@@ -66,7 +60,8 @@ const Pasarela = () => {
                             
                         <div>
                             <h2>Total</h2>
-                            <span>{totalCarrito}</span>
+                            <h2>${totalCarrito}</h2>
+                            
                         </div>
                     </div>
                 </div>

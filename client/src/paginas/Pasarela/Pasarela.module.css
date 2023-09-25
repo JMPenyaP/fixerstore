@@ -60,3 +60,24 @@
                 align-items: center;
                 flex-wrap: wrap;
             }
+
+.img{
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.span{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.separador{
+    background-color: grey;
+    width: 80%;
+    height: 2px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
