@@ -108,7 +108,7 @@ function App() {
         />{" "}
         <Route path="/us" element={<Nosotros />} />
         <Route path="/reset" element={<PassSolicitud />} />
-        <Route path="/resetPass/:token" element={<ResetPass />} />
+        <Route path="/reset/:token" element={<ResetPass />} />
       </Routes>
     </>
   );
