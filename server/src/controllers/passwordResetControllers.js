@@ -7,7 +7,7 @@ require("dotenv").config();
 //! Controlador para solicitar la recuperación de contraseña
 const requestPasswordReset = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email } = req.query;
         const user = await User.findOne({ where: { email } });
 
         if (!user) {
