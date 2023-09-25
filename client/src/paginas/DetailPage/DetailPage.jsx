@@ -311,8 +311,8 @@ const DetailPage = () => {
                   <button
                     onClick={agregarProductoAlCarrito}
                     disabled={
-                      cantidad + cantidadEnCarrito >= product.stock ||
-                      cantidad - 1 > product.stock
+                      cantidad + cantidadEnCarrito > product.stock ||
+                      cantidad  > product.stock
                     }
                     className={style.buttonAgregar}
                   >

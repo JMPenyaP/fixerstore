@@ -8,19 +8,21 @@ import { borrarFavoritos } from '../../redux/Actions/borrarFavoritos';
 const Card = ({product}) => {
     const dispatch = useDispatch()
     const [isFav, setIsFav] = useState(false); 
-    const user = useSelector((state) => state.clientProfile)
+    const client = useSelector((state) => state.clientProfile)
 
-    const { userId } = clientProfile
+    const dataProfileActual = useSelector((state) => (state.dataProfile === null ? { userData: {id: ''} } : state.dataProfile));
+
+    const { userData } = dataProfileActual
 
     const handleFavorite = () => {
 
         if(isFav){
            setIsFav(false);
-           dispatch(borrarFavoritos(id))
+           dispatch(borrarFavoritos(userData.id))
         }
         else{
            setIsFav(true);
-           dispatch(crearFavoritos({userId, product}))
+           dispatch(crearFavoritos({userData, product}))
         }
      }
 
@@ -52,7 +54,7 @@ const Card = ({product}) => {
                 <button>Ver Producto</button>
                 </div>
             </Link>
-            {user && (
+            {client && (
           <button onClick={() => handleFavorite()}>
             {isFav ? '❤️' : '🤍'}
           </button>
