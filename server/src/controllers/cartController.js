@@ -11,7 +11,9 @@ const addToCartController = async (userId, products) => {
         const user = await User.findByPk(userId);
 
         if (!user) {
+
             return "Usuario no encontrado";
+
         }
 
         const product = await Product.findByPk(id);
@@ -43,7 +45,36 @@ const addToCartController = async (userId, products) => {
 
 };
 
+
+// Función para vaciar el carrito de un usuario después de una compra exitosa
+const emptyCart = async (userId) => {
+
+
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+        return { message: 'Usuario no encontrado' };
+    }
+
+    // Eliminar todas las entradas del carrito asociadas a ese usuario
+    await Cart.destroy({
+        where: {
+            UserId: userId,
+        },
+    });
+
+    return { message: 'Carrito vaciado exitosamente' };
+
+};
+
+
+
+
+
+
 module.exports = {
     addToCartController,
+    emptyCart
     // Agrega más funciones aquí según tus necesidades
 };
