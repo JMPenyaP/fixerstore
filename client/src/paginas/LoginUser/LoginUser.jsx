@@ -132,7 +132,7 @@ const LoginUser = () => {
                        {/*  <a href="#" onClick={()=> handleGoogleLoginClick()}>
                         Iniciar sesión con Google
                         </a> */}
-                    <Link to='/' className={style.olvido}><span>¿Olvidó su contraseña?</span></Link>
+                    <Link to='/reset' className={style.olvido}><span>¿Olvidó su contraseña?</span></Link>
                     <Link to='/registro' className={style.olvido}><span>Registrarse</span></Link>
                     {handleRedirect ()}
                     {clientPass === false ? (

@@ -107,6 +107,8 @@ function App() {
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
         />{" "}
         <Route path="/us" element={<Nosotros />} />
+        <Route path="/reset" element={<PassSolicitud />} />
+        <Route path="/resetPass/:token" element={<ResetPass />} />
       </Routes>
     </>
   );
