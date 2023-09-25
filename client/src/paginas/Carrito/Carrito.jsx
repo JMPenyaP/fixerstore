@@ -34,12 +34,17 @@ const Carrito = () => {
   }, [dataProfile, carrito]);
 
   const agregarCarrito = async () => {
-    const response = await axios.post("http://localhost:3001/car-shop", {
-      userId: idDelUser,
-      products: carrito,
-    });
-
-    return response;
+    try {
+      const response = await axios.post("http://localhost:3001/car-shop", {
+        userId: idDelUser,
+        products: carrito,
+      });
+  
+      console.log(response);
+      window.location.href = "/payment";
+    } catch (error) {
+      
+    }
   };
 
   const removeLastItem = (id) => {
@@ -57,6 +62,7 @@ const Carrito = () => {
 
   return (
     <>
+    {console.log(dataProfile)}
       <div className={style.cartContainer}>
         <div className={style.cartCardDivContainer}>
           {carrito.length > 0 ? (
@@ -134,7 +140,7 @@ const Carrito = () => {
             <h4>Total de compra: ${total}</h4>
           </div>
           <div className={style.divButton}>
-            <Link to={'/payment'}>
+            
             <button
               disabled={
                 dataProfile === null ||
@@ -144,7 +150,8 @@ const Carrito = () => {
               onClick={agregarCarrito}
             >
               <ion-icon name="cart-outline"></ion-icon> Comprar
-            </button></Link>
+            </button>
+            {dataProfile === null || dataProfile.success === null ? <span>Debes Inciar sesion</span> : ""}
           </div>
         </div>
       </div>
