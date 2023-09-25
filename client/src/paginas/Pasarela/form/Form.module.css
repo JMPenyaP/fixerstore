@@ -1,0 +1,128 @@
+/* Form.module.css */
+
+.divForm {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  min-width: 600px;
+  margin: 100px auto;
+  min-height: 600px;
+}
+
+.info {
+  margin-top: 20px;
+}
+
+.subDiv {
+  display: flex; 
+  gap: 10px;
+}
+
+.errors{
+  color: red;
+  font-size: 12px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para los títulos de cada paso */
+.h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los componentes de los pasos */
+/* Puedes personalizar estos estilos según tus necesidades */
+
+/* Estilos para el componente Datas */
+.divDatas {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  min-height: 200px; /* Establece un alto mínimo */
+}
+
+/* Estilos para los campos de entrada de texto */
+.datas[type="text"],
+.datas[type="number"] {
+  width: 80%; /* Ocupa todo el ancho disponible */
+  padding: 10px;
+  margin: 15px 15px 15px 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Estilos para el placeholder de los campos de entrada */
+.datas::placeholder {
+  color: #999;
+}
+
+/* Estilos para el componente Shipment */
+.divShipment {
+  font-size: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  min-height: 200px; /* Establece un alto mínimo */
+}
+
+/* Estilos para los campos de entrada de texto */
+.shipment[type="text"] {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Estilos para el placeholder de los campos de entrada */
+.shipment::placeholder {
+  color: #999;
+}
+
+/* Estilos para los input de radio y sus etiquetas */
+.label {
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Estilos para el componente Pay */
+.pay {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  min-height: 200px;
+  display: flex; /* Utiliza flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
