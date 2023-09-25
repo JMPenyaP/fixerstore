@@ -6,9 +6,7 @@ const Pay = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const handleButtonClick = () => {
-        // Realiza aquí cualquier acción que necesites al hacer clic en el botón
 
-        // Desactiva el botón después de hacer clic
         setIsButtonDisabled(true);
     };
 
