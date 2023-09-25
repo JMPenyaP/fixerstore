@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
   const { email, password, role, name, surname, gender, age, birthDate, phone, address, city, department, country } = req.body;
-
+  
   try {
     if (!email) {
       return res
@@ -58,7 +58,7 @@ const updateUserController = async (req, res) => {
       return res
         .status(404)
         .json({ success: false, message: "Usuario no encontrado" });
-    }
+    } 
 
     // Si se proporciona una nueva dirección de correo electrónico,
     // verifica si ya está en uso por otro usuario
@@ -101,6 +101,7 @@ const updateUserController = async (req, res) => {
       .json({
         success: true,
         message: "Datos de usuario actualizados con éxito",
+        userData: user,
       });
   } catch (error) {
     console.error(error);
@@ -111,7 +112,7 @@ const updateUserController = async (req, res) => {
 //! Obtener todos los Usuarios
 const getAllUsers = async () => {
   const allUsers = await User.findAll();
-  return allUsers;
+  return allUsers; 
 };
 
 //! Obtener Usuario por Nombre
@@ -124,14 +125,9 @@ const getUserByName = async (name) => {
 const getUserByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
   if (user) {
-    console.log("ASÍ TE DEVUELVE EL JSON:", user.toJSON())
-    return {
-      success: true,
-      message: "Email encontrado.",
-      user: user.toJSON()
-    };
+    return user
   } else {
-    return { success: false, message: "Email NO está registrado." };
+    return false 
   }
 }
 

@@ -40,11 +40,11 @@ module.exports = (sequelize) => {
       },
     },
     gender: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     age: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     birthDate: {

@@ -1,15 +1,15 @@
-import { USER_PROFILE } from "../actionTypes";
+import { USER_CHANGE } from "../actionTypes";
 import axios from "axios";
 
-export const loginUser = (userData) => {
+export const modifyData = (userData) => {
   try {
     return async (dispatch) => {
-      const response = await axios.post(
-        "http://localhost:3001/auth/login",
+      const response = await axios.patch(
+        `http://localhost:3001/users/${userData.id}`,
         userData
       );
       dispatch({
-        type: USER_PROFILE,
+        type: USER_CHANGE,
         payload: response.data,
       });
     };

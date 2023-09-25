@@ -1,15 +1,14 @@
-import { USER_PROFILE } from "../actionTypes";
+import { DELETE_FAV } from "../actionTypes";
 import axios from "axios";
 
-export const loginUser = (userData) => {
+export const borrarFavoritos = (id) => {
   try {
     return async (dispatch) => {
       const response = await axios.post(
-        "http://localhost:3001/auth/login",
-        userData
+        `http://localhost:3001/favorites/delete`
       );
       dispatch({
-        type: USER_PROFILE,
+        type: DELETE_FAV,
         payload: response.data,
       });
     };

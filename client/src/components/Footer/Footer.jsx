@@ -1,7 +1,20 @@
 import style from "./Footer.module.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [idClient, setIdClient] = useState("")
+  const dataProfileActual = useSelector((state) => state.dataProfile ?? null);
+  useEffect(()=> {
+    if (dataProfileActual !== null ) {
+      if (dataProfileActual.userData) {
+        const {userData} = dataProfileActual
+        const id = userData.id
+        setIdClient(id)
+      }
+    }
+  }, [dataProfileActual])
   return (
     <>
       <div className={style.contact}>
@@ -38,11 +51,6 @@ export default function Footer() {
                   <ion-icon name="logo-instagram"></ion-icon>
                   Instagram
                 </div>
-              </Link>
-            </tr>
-            <tr>
-              <Link to="/login" className={style.link}>
-                Ingresar
               </Link>
             </tr>
             {/*<tr>

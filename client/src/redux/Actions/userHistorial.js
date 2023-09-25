@@ -1,15 +1,12 @@
-import { USER_PROFILE } from "../actionTypes";
+import { HISTORIAL } from "../actionTypes";
 import axios from "axios";
 
-export const loginUser = (userData) => {
+export const userHistorial = (id) => {
   try {
     return async (dispatch) => {
-      const response = await axios.post(
-        "http://localhost:3001/auth/login",
-        userData
-      );
+      const response = await axios.get(`http://localhost:3001/`);
       dispatch({
-        type: USER_PROFILE,
+        type: HISTORIAL,
         payload: response.data,
       });
     };
