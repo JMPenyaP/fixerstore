@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 const { v4: uuidv4 } = require('uuid');
 const { User, PasswordReset } = require('../db');
 const bcrypt = require('bcryptjs');
+require("dotenv").config();
 
 //! Controlador para solicitar la recuperación de contraseña
 const requestPasswordReset = async (req, res) => {
@@ -21,14 +22,14 @@ const requestPasswordReset = async (req, res) => {
             status: 'pending',
             userId: user.id,
         });
-
+        const { EMAIL_HOST, EMAIL_RESET, EMAIL_RESET_PASS } = process.env;
         const transporter = nodemailer.createTransport({
-            host: 'mail.fixershoes.com',
+            host: EMAIL_HOST,
             port: 465,
             secure: true,
             auth: {
-                user: 'no-reply@fixershoes.com',
-                pass: 'lC!(7$5RGC[m{FX9jk',
+                user: EMAIL_RESET,
+                pass: EMAIL_RESET_PASS,
             },
         });
 
