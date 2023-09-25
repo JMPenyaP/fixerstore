@@ -19,10 +19,11 @@ import {
   DECREMENT_QTY,
   REMOVE_PRODUCT,
   USER_PROFILE,
-  USER_CHANGE, 
+  USER_CHANGE,
   SET_CHANGE,
   HISTORIAL,
   FAVORITOS,
+  SET_DATA_PROFILE,
 } from "./actionTypes";
 
 const initialState = {
@@ -59,7 +60,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         clientProfile: action.payload.success,
         dataProfile: action.payload,
-      }
+      };
     }
 
     case USER_CHANGE: {
@@ -67,13 +68,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userChanges: action.payload.success,
         dataProfile: action.payload,
-      }
+      };
     }
     case SET_CHANGE: {
       return {
         ...state,
-        userChanges: action.payload
-      }
+        userChanges: action.payload,
+      };
     }
 
     //Marcos
@@ -83,21 +84,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userChanges: action.payload.success,
         dataProfile: action.payload,
-      }
+      };
     }
 
     case HISTORIAL: {
       return {
         ...state,
         historial: action.payload,
-      }
+      };
     }
 
     case FAVORITOS: {
       return {
         ...state,
         favoritos: action.payload,
-      }
+      };
     }
 
     case NEW_PRODUCT: {
@@ -305,6 +306,14 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case USER_PROFILE: {
+      return {
+        ...state,
+        clientProfile: action.payload.success,
+        dataProfile: action.payload,
+      };
+    }
+
+    case SET_DATA_PROFILE: {
       return {
         ...state,
         clientProfile: action.payload.success,
