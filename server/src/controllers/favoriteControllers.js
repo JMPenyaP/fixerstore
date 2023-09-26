@@ -36,24 +36,38 @@ const addfavoriteControllers = async (userId, products) => {
                 status,
             } = product;
 
-            // Crea el favorito asociado al usuario
-            await user.addFavorite(
-                await Favorites.create({
+
+            const existingFavorite = await Favorites.findOne({
+                where: {
                     id,
-                    name,
-                    categoryId,
-                    firstImage,
-                    carrouselImage,
-                    description,
-                    date,
-                    priceOfList,
-                    statusOffer,
-                    offer,
-                    stock,
-                    status,
-                }),
-                { transaction: t }
-            );
+                    // Agrega cualquier otra condición necesaria para verificar la igualdad del producto
+                },
+                transaction: t,
+            });
+
+
+            // Crea el favorito asociado al usuario
+            if (!existingFavorite) {
+
+
+                await user.addFavorite(
+                    await Favorites.create({
+                        id,
+                        name,
+                        categoryId,
+                        firstImage,
+                        carrouselImage,
+                        description,
+                        date,
+                        priceOfList,
+                        statusOffer,
+                        offer,
+                        stock,
+                        status,
+                    }),
+                    { transaction: t }
+                );
+            }
         }
     });
 
@@ -66,7 +80,6 @@ const addfavoriteControllers = async (userId, products) => {
 
 
 const getFavoriteControllers = async (userId) => {
-
 
     const user = await User.findByPk(userId);
 
@@ -87,6 +100,12 @@ const deleteFavoriteControllers = async (userId, favoriteId) => {
 
     const favorite = await Favorites.findByPk(favoriteId);
 
+    await Favorites.destroy({
+        where: {
+            id: favoriteId
+        }
+    })
+
     if (!favorite) return "El favorito no existe";
 
     await user.removeFavorite(favorite);
@@ -94,6 +113,7 @@ const deleteFavoriteControllers = async (userId, favoriteId) => {
     return { message: "Favorito Eliminado Correctamente" }
 
 }
+
 
 
 module.exports = {

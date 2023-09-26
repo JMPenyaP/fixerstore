@@ -35,7 +35,7 @@ const getProductByName = async (name) => {
 
 const getProductById = async (id) => {
   const productId = await Product.findByPk(id)
-  console.log(productId)
+
 
   return productId
 }

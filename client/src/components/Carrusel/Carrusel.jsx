@@ -1,7 +1,8 @@
-import "./carrusel.css";
+import style from "./carrusel.css";
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import axios from "axios";
+import { Spinner } from "../../components/Carga/Carga";
 import { Link } from "react-router-dom";
 
 const Carrusel = () => {
@@ -100,7 +101,9 @@ const Carrusel = () => {
           })}
         </Slider>
       ) : (
-        <h1>hola</h1>
+        <div className={style.divCarga}>
+          <Spinner />
+        </div>
       )}
     </div>
   );
