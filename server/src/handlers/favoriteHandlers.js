@@ -3,7 +3,8 @@ const { getFavoriteControllers, addfavoriteControllers, deleteFavoriteController
 
 const getFavoriteHandlers = async (req, res) => {
 
-    const { userId } = req.body;
+    const { userId } = req.params;
+    console.log(userId);
 
     try {
 
@@ -26,11 +27,11 @@ const getFavoriteHandlers = async (req, res) => {
 
 
 const addfavoriteHandlers = async (req, res) => {
-
+    
     const { userId, products } = req.body;
     try {
 
-
+        console.log(userId, products);
         const favorite = await addfavoriteControllers(userId, products);
 
 
@@ -51,7 +52,6 @@ const deleteFavoriteHandlers = async (req, res) => {
     try {
 
         const { userId, favoriteId } = req.body;
-
 
         const deleteFav = await deleteFavoriteControllers(userId, favoriteId);
 

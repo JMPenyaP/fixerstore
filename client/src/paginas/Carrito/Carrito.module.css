@@ -107,6 +107,7 @@
 
 .editarCtdadDiv ion-icon{
     color: #3cbbed;
+    font-size: 20px;
 }
 
 /* RESUMEN */
@@ -140,6 +141,13 @@
 
 
 /* BUTTON RESUMEN */
+
+.divButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+}
 
 .divButton button {
     border: none;
@@ -188,6 +196,11 @@
 .divButton button:hover::before {
     width: 100%;
     opacity: 1;
+}
+
+.divButton span{
+    color: rgb(255, 191, 0);
+    font-weight: bold;
 }
 
 /* DELETE */

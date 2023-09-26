@@ -81,7 +81,6 @@ const addfavoriteControllers = async (userId, products) => {
 
 const getFavoriteControllers = async (userId) => {
 
-
     const user = await User.findByPk(userId);
 
     if (!user) return "El usuario no existe";

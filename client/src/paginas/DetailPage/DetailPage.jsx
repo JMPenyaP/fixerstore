@@ -9,6 +9,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DetailPage = () => {
   // ESTADOS ///
@@ -50,20 +52,20 @@ const DetailPage = () => {
   );
   //////
 
-    useEffect(() => {
-      try {
-        axios(`http://localhost:3001/products/${id}`).then(({ data }) => {
-          if (data.name) {
-            setProduct(data);
-            setMainImage(data.firstImage);
-            setImages([data.firstImage, ...data.carrouselImage]); // Actualiza el estado de las imágenes
-          }
-          setLoading(false);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }, [id, carrito]);
+  useEffect(() => {
+    try {
+      axios(`http://localhost:3001/products/${id}`).then(({ data }) => {
+        if (data.name) {
+          setProduct(data);
+          setMainImage(data.firstImage);
+          setImages([data.firstImage, ...data.carrouselImage]); // Actualiza el estado de las imágenes
+        }
+        setLoading(false);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, carrito]);
 
   useEffect(() => {
     allCategories?.length === 0 && dispatch(getCategories());
@@ -143,6 +145,17 @@ const DetailPage = () => {
     setCantidad(1);
 
     guardarCarritoEnLocalStorage();
+
+    toast.success("Producto agregado al carrito !", {
+      icon: "🚀",
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+    });
   };
   ///////
 
@@ -312,7 +325,7 @@ const DetailPage = () => {
                     onClick={agregarProductoAlCarrito}
                     disabled={
                       cantidad + cantidadEnCarrito > product.stock ||
-                      cantidad  > product.stock
+                      cantidad > product.stock
                     }
                     className={style.buttonAgregar}
                   >
@@ -324,6 +337,7 @@ const DetailPage = () => {
           </div>
         )}
       </div>
+      <ToastContainer />
       <Footer />
     </>
   );
