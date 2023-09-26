@@ -40,10 +40,11 @@ const Datas = ({errors,formData, onInputChange}) => {
                         id="phone"
                         name="phoneNumber"
                         className={styles.datas}
-                        type="number"
+                        type="text"
                         placeholder="Ingresar N° Celular"
                         value={formData.phoneNumber}
                         onChange={onInputChange}
+                        maxLength={10}
                     /></label>
                     
             </div>
@@ -54,10 +55,11 @@ const Datas = ({errors,formData, onInputChange}) => {
                         id="CC"
                         name="dni"
                         className={styles.datas}
-                        type="number"
+                        type="text"
                         placeholder="Ingresar CC / DNI"
                         value={formData.dni}
                         onChange={onInputChange}
+                        maxLength={10}
                     /></label>
                     
             </div>
