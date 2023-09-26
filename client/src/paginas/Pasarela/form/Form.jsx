@@ -36,7 +36,7 @@ const Form = () => {
         setErrors({ ...errors, [name]: fieldErrors[name] });
         
         setFormData({ ...formData, [name]: value });
-        console.log(formData)
+        
     };
 
 
@@ -55,10 +55,10 @@ const Form = () => {
         }
     }
     useEffect(() => {
-        // Realiza las validaciones iniciales cuando se carga la página
-        const initialErrors = validate(formData);
+        
+        const initialErrors = validate(formData,page);
         setErrors(initialErrors);
-      }, [formData]);
+      }, [formData,page]);
 
     return ( 
         <>
