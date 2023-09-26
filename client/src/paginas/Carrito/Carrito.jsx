@@ -140,6 +140,7 @@ const Carrito = () => {
             <h4>Total de compra: ${total}</h4>
           </div>
           <div className={style.divButton}>
+            
             <button
               disabled={
                 dataProfile === null ||

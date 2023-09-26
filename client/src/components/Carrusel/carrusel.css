@@ -127,3 +127,10 @@
     width: 100%;
     opacity: 1;
 }
+
+.divCarga{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
