@@ -1,22 +1,24 @@
 import styles from './Form.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const Shipment = ({errors,formData,onInputChange}) => {
 
-    const [selectedOption, setSelectedOption] = useState('C.C. Centro Mayor');
+    const [selectedOption, setSelectedOption] = useState('');
 
-    const handleRadioChange = (event) => {
-        
+    const handleRadioChange = (event) => {  
         setSelectedOption(event.target.value);
-        onInputChange("place", event.target.value); // Llamar a la función onInputChange para actualizar el formData
     };
+
+    useEffect(()=>{
+        onInputChange("place", selectedOption);
+    },[selectedOption])
     return ( 
         <>
         <div className={styles.divShipment}>
         
 
-
+            {errors.place && <span className={styles.errors}>{errors.place}</span>}
             <label className={styles.label}>
                 <input
                 className={styles.inputRadio}

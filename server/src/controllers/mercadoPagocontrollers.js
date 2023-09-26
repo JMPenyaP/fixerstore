@@ -6,31 +6,35 @@ if (ACCESS_TOKEN) {
         access_token: ACCESS_TOKEN,
     })
 }
+const pagoOrder = (req, res) => {
 
-const pagoOrder = async (req, res) => {
-    const producto = req.body;
-    try {
-        const preference = {
-            items: [
-                {
-                    title: producto.name,
-                    unit_price: 1000,
-                    currency_id: "COP",
-                    quantity: 1,
-                },
-            ],
-            back_urls: {
-                success: "https://fixershoes.com/",
-                failure: "https://fixershoes.com/error",
-                pending: "https://fixershoes.com/pending",
-            },
-            auto_return: "approved",
-        }
-        const response = await mercadopago.preferences.create(preference);
-    } catch (error) {
-        return res.status(201).json(error.message);
-    }
-};
+	let preference = {
+		items: [
+			{
+				title: req.body.description,
+				unit_price: Number(req.body.price),
+				quantity: Number(req.body.quantity),
+                currency_id:"COP"
+			}
+		],
+		back_urls: {
+			"success": "http://localhost:3000/",
+			"failure": "http://localhost:3000/",
+			"pending": "http://localhost:3000/"
+		},
+		auto_return: "approved",
+	};
+
+	mercadopago.preferences.create(preference)
+		.then(function (response) {
+			res.json({
+				id: response.body.id
+			});
+		}).catch(function (error) {
+            console.error("Error al crear la preferencia de pago:", error);
+            res.status(500).json({ error: "Error al crear la preferencia de pago", message: error.message });
+          });
+}
 
 module.exports = {
     pagoOrder: pagoOrder
