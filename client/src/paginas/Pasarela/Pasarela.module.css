@@ -29,53 +29,26 @@
     gap: 10px;
 }
 
-
-
-
-.divContenedor{
+.contenedor{
     display: flex;
-    margin: auto;
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: 200px;
 }
 
-            .divDatos{
-                width: 320px;
-                height: 500px;
-                background-color: red;
-                margin: 15px;
-                padding: 5px;
-            }
 
-            .divEnvio{
-                width: 320px;
-                height: 500px;
-                background-color: blue;
-                margin: 15px;
-                padding: 5px;
-            }
 
-            .divPago{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 320px;
-                height: 500px;
-                background-color: green;
-                margin: 15px;
-                padding: 5px;
-            }
 
             .divDetalle{
+                border-radius: 15px;
                 display: flex;
                 flex-direction: column;
                 width: 300px;
-                height: auto;
-                background-color: gray;
+                max-height: 800px;
+                background-color: lightblue;
                 margin: 0px 10px;
                 padding: 20px;
                 align-items: center;
-                
+                height: 700px;
             }
 
             
@@ -87,3 +60,24 @@
                 align-items: center;
                 flex-wrap: wrap;
             }
+
+.img{
+    background-color: gray;
+    border-radius: 5px;
+}
+
+.span{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.separador{
+    background-color: grey;
+    width: 80%;
+    height: 2px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}

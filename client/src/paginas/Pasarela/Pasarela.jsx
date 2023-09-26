@@ -3,6 +3,7 @@ import lock from '../../assets/Vector.png'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Ticket from './Ticket';
+import  Form  from './form/Form'
 
 
 const Pasarela = () => {
@@ -11,16 +12,10 @@ const Pasarela = () => {
         
     // }
 
-    // const carrito = useSelector(state => state.carrito)
-    const carrito = [{name:'calzador de madera',priceOfList:200,firstImage:lock,cantidad:2},
-                    {name:'cepillo de cerdo para zapatos',priceOfList:3000,firstImage:lock,cantidad:1},
-                    {name:'cordones reflextivos',priceOfList:500,firstImage:lock,cantidad:1},
-                    {name:'espuma para zapatillas',priceOfList:3000,firstImage:lock,cantidad:1},
-                    {name:'plantillas',priceOfList:3000,firstImage:lock,cantidad:1}
-                    ]
+    const carrito = useSelector(state => state.carrito)
                 
     const totalCarrito = carrito?.reduce((valorAnterior, valorActual) => {
-                        return valorAnterior + (valorActual.priceOfList * valorActual.cantidad);
+                        return valorAnterior + (valorActual.precio * valorActual.cantidad);
                     }, 0);
     return ( 
         <>
@@ -50,86 +45,27 @@ const Pasarela = () => {
                 <div>
                     <h2>Finalizar Compra</h2>
                 </div>
-                <div className={styles.title}>
-                    
-                    
-                    
-                    
-                </div>
-                <div className={styles.divContenedor}>
-                    
-                    <div >
-                        <h2>1-Datos Personales</h2>
-                        <div className={styles.divDatos}>
-                            <h4>Nombre</h4>
-                            <input type="text" />
-                            <h4>Apellido</h4>
-                            <input type="text" />
-                            <h4>N° de Celular</h4>
-                            <input type="text" />
-                            <h4>CC / DNI</h4>
-                            <input type="text" />
-                        </div>
-                    </div>
 
-                    <div>
-                    <h2>2-Direccion y Entrega</h2>
-                        <div className={styles.divEnvio}>
-                        <h4>Ciudad</h4>
-                        <input type="text" />
-                        <h4>Localidad</h4>
-                        <input type="text" />
-                        <h4>Calle</h4>
-                        <input type="text" />
-                        <h4>numero</h4>
-                        <input type="text" />
-                        <h3>Envio a Domicilio</h3>
-                        <label>
-                            <input type="radio" name='sucursal' />Enviar a mi domicilio
-                        </label>
-
-                                <div>
-                                    <h3>Retiro en Sucursal</h3>
-                                        <div>
-                                            <label>
-                                                <input type="radio" name='sucursal'/>C.C. Centro Mayor
-                                            </label>
-                                            <label>
-                                                <input type="radio" name='sucursal' />C.C. Plaza Americas
-                                            </label>
-                                        </div>
-                                </div>
-                        </div>
-                    </div>
+                        
                     
-                    <div>
-                        <h2>3-Metodo de Pago</h2>
-                        <div className={styles.divPago}>
-                            
-                                    <label>
-                                        <input type="radio" name='sucursal'/>Mercado Pago
-                                    </label>
-                                    <label>
-                                        <input disabled type="radio" name='sucursal' />Otro
-                                    </label>
-                        </div>
-                    </div>
-
+                <div className={styles.contenedor}>
+                    <Form />
                     <div className={styles.divDetalle}>
+                        
                         <h2>Detalle</h2>
+
                         <div>
                             <Ticket carrito={carrito} /> 
                         </div>
                             
                         <div>
                             <h2>Total</h2>
-                            <span>{totalCarrito}</span>
-                            <button>Pagar</button>
+                            <h2>${totalCarrito}</h2>
+                            
                         </div>
                     </div>
-                    
                 </div>
-
+                    
             </div>
         </>
      );

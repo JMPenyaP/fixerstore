@@ -6,6 +6,7 @@ import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin";
 import Home from "./paginas/Home/Home";
 import Carrito from "./paginas/Carrito/Carrito";
 import Navbar from "./components/NavBar/NavBar";
+import Nosotros from "./paginas/Nosotros/Nosotros"
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +19,7 @@ import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
 import DashUser from "./paginas/DashUser/DashUser";
-import Nosotros from "./paginas/Nosotros/Nosotros";
+import { setDataProfile } from "./redux/Actions/setDataProfile";
 
 function App() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ function App() {
   const carrito = useSelector((state) => state.carrito);
   const [adminPass, setAdminPass] = useState(null);
   const dispatch = useDispatch();
+  const dataProfile = useSelector((state) => state.dataProfile);
 
   useEffect(() => {
     setAdminPass(admin);
@@ -74,6 +76,18 @@ function App() {
 
     guardarCarritoEnLocalStorage();
   }, [carrito, dispatch]);
+
+  useEffect(() => {
+    if (dataProfile != null) {
+      localStorage.setItem("dataProfile", JSON.stringify(dataProfile));
+    } else {
+      const storedData = JSON.parse(localStorage.getItem("dataProfile")) || [];
+      if (storedData.success === true) {
+        dispatch(setDataProfile(storedData));
+      }
+    }
+  }, [dataProfile]);
+
   return (
     <>
       {!isLoginPage && <Navbar />}
@@ -88,10 +102,13 @@ function App() {
         <Route path="/carrodecompras" element={<Carrito />} />
         <Route path="/login" element={<LoginUser />} />
         <Route path="/payment" element={<Pasarela />} />
-          <Route
+        <Route
           path="/user/:id"
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
-          />          <Route path="/us" element={<Nosotros/>}/>
+        />{" "}
+        <Route path="/us" element={<Nosotros />} />
+        <Route path="/reset" element={<PassSolicitud />} />
+        <Route path="/reset/:token" element={<ResetPass />} />
       </Routes>
     </>
   );

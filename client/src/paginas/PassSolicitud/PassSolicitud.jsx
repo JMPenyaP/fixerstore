@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import style from "./passSolicitud.module.css"
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 
 const PassSolicitud = () => {
-    const {handleSubmit, control, formState: {errors}, trigger, reset, watch} = useForm()
+    const { handleSubmit, control, formState: { errors }, trigger, reset, watch } = useForm()
     const [mensaje, setMensaje] = useState("")
     const [formDisabled, setFormDisabled] = useState(false);
     const navigate = useNavigate()
@@ -20,7 +20,8 @@ const PassSolicitud = () => {
                 const { success } = res.data;
                 if (success === true) {
                     return true
-                }else return false}
+                } else return false
+            }
 
         } catch (error) {
             return error.message;
@@ -28,26 +29,29 @@ const PassSolicitud = () => {
     }
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post("http://localhost:3001/request-reset/", data)
-            const {message, success} = response.data
+            console.log(data);
+            const response = await axios.get(`http://localhost:3001/request-reset?email=${data.email}`)
+            
+            const { message, success } = response.data
             setMensaje(message)
             setFormDisabled(true)
             console.log(response);
             console.log(message);
-            if(success === true) {
-                setTimeout(()=> {
+            if (success === true) {
+                setTimeout(() => {
                     reset()
                     navigate("/login")
-                    setFormDisabled(false)}, 2000)
+                    setFormDisabled(false)
+                }, 2000)
             }
-          } catch (error) {
+        } catch (error) {
             console.error("Error:", error);
-          }
         }
+    }
     console.log(mensaje);
     return (
         <div>
-            <div className={style.div}>                
+            <div className={style.div}>
                 <img className={style.logo} src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png" alt="Logo" />
                 <h2 className={style.titulo1} htmlFor="email"> ¿Olvidaste tu contraseña? </h2>
                 <h3 className={style.titulo2} htmlFor="email"> Recupera tu contraseña por medio de tu correo electronico </h3>
@@ -56,36 +60,36 @@ const PassSolicitud = () => {
                         <label className={style.label} htmlFor="email"> Ingresa el correo electronico asociado a tu cuenta </label>
                         <div className={style.divInput}>
                             <Controller name="email"
-                            control={control}
-                            defaultValue=""
-                            rules={{
+                                control={control}
+                                defaultValue=""
+                                rules={{
                                     required: 'Este campo es obligatorio',
                                     pattern: {
-                                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                      message: 'Este no es un correo electrónico válido',
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                        message: 'Este no es un correo electrónico válido',
                                     },
                                     validate: async (value) => {
-                                      if (value) {
-                                        const existe = await verifyEmail(value);
-                                        if (!existe) {
-                                          return 'Este correo electrónico no está registrado';
+                                        if (value) {
+                                            const existe = await verifyEmail(value);
+                                            if (!existe) {
+                                                return 'Este correo electrónico no está registrado';
+                                            }
                                         }
-                                      }
-                                      return true;
+                                        return true;
                                     },
-                                  }}
+                                }}
                                 render={({ field }) => (
-                                    <input className={style.input} type="text" placeholder="Tu correo" {...field} onChange={(e) => {field.onChange(e); trigger("email"); }}/>)}/>
-                                <div className={style.errorMenssage}>
-                                    {errors.email && <p className={style.simbolo}>¡</p>}
-                                    {errors.email && <p className={style.errorText}>{errors.email.message}</p>}
-                                    {errors.email && <p className={style.simbolo}>!</p>}
-                                </div>
+                                    <input className={style.input} type="text" placeholder="Tu correo" {...field} onChange={(e) => { field.onChange(e); trigger("email"); }} />)} />
+                            <div className={style.errorMenssage}>
+                                {errors.email && <p className={style.simbolo}>¡</p>}
+                                {errors.email && <p className={style.errorText}>{errors.email.message}</p>}
+                                {errors.email && <p className={style.simbolo}>!</p>}
+                            </div>
                         </div>
                     </div>
-                <button type="submit" className={style.formbutton} disabled={formDisabled} > Enviar link de recuperación </button>
+                    <button type="submit" className={style.formbutton} disabled={formDisabled} > Enviar link de recuperación </button>
                 </form>
-                <div className= {style.mensaje}>
+                <div className={style.mensaje}>
                     {mensaje && <p className={style.positivo}>{mensaje}</p>}
                 </div>
                 <div>
