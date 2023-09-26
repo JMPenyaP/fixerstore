@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const crearFavoritos = ({ userData, product}) => {
   try {
-    const fav = {userId: userData.id, product}
+    const fav = {userId: userData.id, products: product}
     return async (dispatch) => {
       const response = await axios.post(
         `http://localhost:3001/favorites/`,fav 

@@ -1,16 +1,29 @@
 import styles from './Card.module.css'
 import { Link } from 'react-router-dom';
-import { useDebugValue, useState } from 'react';
+import { useDebugValue, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { crearFavoritos } from '../../redux/Actions/crearFavoritos';
 import { borrarFavoritos } from '../../redux/Actions/borrarFavoritos';
 
 const Card = ({product}) => {
-    const dispatch = useDispatch()
     const [isFav, setIsFav] = useState(false); 
+    const dispatch = useDispatch()
+    const favoritos = useSelector((state) => state.favoritos)
+
+    useEffect(() => {
+        if (Array.isArray(favoritos)) {
+            favoritos.forEach(favorito => {
+                if (favorito.id === product.id) {
+                    setIsFav(true);
+                }
+            });
+        }
+    }, [favoritos]);
+
     const client = useSelector((state) => state.clientProfile)
 
     const dataProfileActual = useSelector((state) => (state.dataProfile === null ? { userData: {id: ''} } : state.dataProfile));
+    
 
     const { userData } = dataProfileActual
 
@@ -18,13 +31,13 @@ const Card = ({product}) => {
 
         if(isFav){
            setIsFav(false);
-           dispatch(borrarFavoritos(userData.id))
+           dispatch(borrarFavoritos({userData, product}))
         }
         else{
            setIsFav(true);
            dispatch(crearFavoritos({userData, product}))
         }
-     }
+    }
 
     return ( 
     <>

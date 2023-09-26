@@ -25,6 +25,7 @@ import {
   FAVORITOS,
   SET_DATA_PROFILE,
   SAVE_FAV,
+  DELETE_FAV
 } from "./actionTypes";
 
 const initialState = {
@@ -103,10 +104,20 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    case DELETE_FAV: {
+      const productIdRemove = action.payload.favId
+      const favActualizado = state.favoritos.filter(producto => producto.id !== productIdRemove)
+
+      return {
+        ...state,
+        favoritos: favActualizado,
+      }
+    }
+
     case FAVORITOS: {
       return {
         ...state,
-        favoritos: action.payload,
+        favoritos: action.payload
       };
     }
 
