@@ -5,7 +5,7 @@ import { Spinner } from "../../components/Carga/Carga";
 import Footer from "../../components/Footer/Footer";
 import CardsArr from "../../components/Cards/CardsArr";
 import Filtros from "../../components/Filtros/Filtros";
-import { useState } from "react";
+import { useState, useEffect } from "react"; 
 import { useParams } from "react-router-dom";
 
 const SearchedProduct = () => {
@@ -15,17 +15,14 @@ const SearchedProduct = () => {
 
   const products = useSelector((state) => state.productByName);
   const productName = useSelector((state) => state.productName);
-  const productsData = products && products.data; // Asegurarse de que products no sea undefined
-  let showNoProductsMessage = true;
-  /*   console.log(productsData);
-  console.log(productName); */
+  const productsData = products && products.data; 
+  const [isLoading, setIsLoading] = useState(true); 
 
-  if (!productName || productsData.length < 1) {
-    showNoProductsMessage = false;
-  }
-  // const handleCheckboxChange = (event) => {
-  //   setFiltroActivo(!filtroActivo);
-  // };
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); 
+  }, []);
 
   return (
     <>
@@ -39,15 +36,22 @@ const SearchedProduct = () => {
           /> */}
       </div>
       <div className={style.divSearchedProduct}>
-        {showNoProductsMessage ? (
-          <div>
-            <h1>resultados con : {name}</h1>
-            <CardsArr allProducts={productsData} />
-          </div>
-        ) : (
+        {isLoading ? (
           <div className={style.container}>
             <Spinner />
-            <h1>¡No se Encontraron Productos!</h1>
+          </div>
+        ) : (
+          <div>
+            {productName && (
+              <h1>resultados con : {name}</h1>
+            )}
+            {productsData && productsData.length > 0 ? (
+              <CardsArr allProducts={productsData} />
+            ) : (
+              <div className={style.container}>
+                <h1>¡No se Encontraron Productos!</h1>
+              </div>
+            )}
           </div>
         )}
       </div>
