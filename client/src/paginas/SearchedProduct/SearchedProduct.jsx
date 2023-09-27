@@ -45,6 +45,7 @@ const SearchedProduct = () => {
             {productName && (
               <h1>resultados con : {name}</h1>
             )}
+            <Filtros/>
             {productsData && productsData.length > 0 ? (
               <CardsArr allProducts={productsData} />
             ) : (
