@@ -23,6 +23,7 @@ const getOrderForId = async (req, res) => {
       return res.status(200).json({
         order,
       });
+
     } else {
       // Si no se encuentra la orden, responde con un mensaje de error
       return res.status(200).json({
