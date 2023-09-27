@@ -9,6 +9,6 @@ const { addfavoriteHandlers, deleteFavoriteHandlers, getFavoriteHandlers } = req
 
 favoriteRouters.post('/', addfavoriteHandlers);
 favoriteRouters.post('/delete', deleteFavoriteHandlers)
-favoriteRouters.get('/', getFavoriteHandlers);
+favoriteRouters.get('/:userId', getFavoriteHandlers);
 module.exports = favoriteRouters;
 

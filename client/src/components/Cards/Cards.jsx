@@ -4,9 +4,20 @@ import axios from 'axios';
 import { Spinner } from "../Carga/Carga";
 import Card from "../Card/Card";
 import styles from './Cards.module.css'
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { userFavoritos } from "../../redux/Actions/userFavoritos";
 
 
 const Cards = () => {
+    const dispatch = useDispatch()
+
+    const dataProfileActual = useSelector((state) =>
+    state.dataProfile === null ? { userData: { id: "" } } : state.dataProfile
+  );
+
+  const { userData } = dataProfileActual;
+
     const {
         data,
         isLoading,
@@ -33,7 +44,11 @@ const Cards = () => {
     ? data.pages.flatMap((page) => page.products).filter((product) => product.status === true)
     : [];
     
-    
+    useEffect(()=> {
+        if(userData.id){
+            dispatch(userFavoritos(userData.id))
+        }
+    },[dispatch, userData.id])
 
     return (
         <>

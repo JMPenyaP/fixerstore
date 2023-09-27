@@ -1,11 +1,12 @@
 import { FAVORITOS } from "../actionTypes";
 import axios from "axios";
 
-export const userFavoritos = (id) => {
+export const userFavoritos = (userId) => {
+  console.log(userId);
   try {
     return async (dispatch) => {
       const response = await axios.get(
-        `http://localhost:3001/favoritos/${id}`
+        `http://localhost:3001/favorites/${userId}` 
       );
       dispatch({
         type: FAVORITOS,

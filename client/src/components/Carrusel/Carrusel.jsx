@@ -102,7 +102,7 @@ const Carrusel = () => {
         </Slider>
       ) : (
         <div className={style.divCarga}>
-          <Spinner/>
+          <Spinner />
         </div>
       )}
     </div>

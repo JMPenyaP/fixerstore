@@ -24,6 +24,8 @@ import {
   HISTORIAL,
   FAVORITOS,
   SET_DATA_PROFILE,
+  SAVE_FAV,
+  DELETE_FAV
 } from "./actionTypes";
 
 const initialState = {
@@ -43,6 +45,7 @@ const initialState = {
   registerConfirm: null,
   userChanges: null,
   historial: [],
+  favoritos: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -91,13 +94,30 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         historial: action.payload,
-      };
+      }
+    }
+
+    case SAVE_FAV: {
+      return {
+        ...state,
+        favoritos: action.payload,
+      }
+    }
+
+    case DELETE_FAV: {
+      const productIdRemove = action.payload.favId
+      const favActualizado = state.favoritos.filter(producto => producto.id !== productIdRemove)
+
+      return {
+        ...state,
+        favoritos: favActualizado,
+      }
     }
 
     case FAVORITOS: {
       return {
         ...state,
-        favoritos: action.payload,
+        favoritos: action.payload
       };
     }
 
