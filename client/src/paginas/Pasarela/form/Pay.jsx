@@ -15,7 +15,7 @@ const Pay = ({formData}) => {
 
     console.log(publicKey)
     useEffect(() => {
-        initMercadoPago(publicKey);
+        initMercadoPago('APP_USR-34521d68-fb93-4dfe-af28-f0507c066d01');
     }, []);
 
     const createPreference = async () => {
