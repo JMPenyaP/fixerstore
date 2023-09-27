@@ -15,7 +15,7 @@ const createReview = async (req, res) => {
         res.status(201).json({ success: true, message: 'Reseña creada con éxito', review });
     } catch (error) {
         console.error(error);
-        res.status(202).json({ success: false, message: 'Error 500 en el servidor' });
+        res.status(500).json({ success: false, message: 'Error 500 en el servidor' });
     }
 };
 
