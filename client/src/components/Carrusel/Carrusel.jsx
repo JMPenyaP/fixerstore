@@ -1,4 +1,4 @@
-import style from "./Carrusel.css";
+import style from "./carrusel.css";
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import axios from "axios";
