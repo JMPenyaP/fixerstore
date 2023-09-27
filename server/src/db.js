@@ -45,6 +45,10 @@ User.hasMany(Order);
 User.belongsToMany(Favorites, { through: "userFavorite" }, { timestamps: false });
 Favorites.belongsToMany(User, { through: "userFavorite" }, { timestamps: false });
 
+
+Product.belongsTo(Category, { foreignKey: 'categoryId' });
+
+
 module.exports = {
     ...sequelize.models, // exporta los modelos
     conn: sequelize,     // exporta la conexión { conn } = require('./db.js');
