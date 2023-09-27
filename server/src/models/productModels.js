@@ -11,12 +11,6 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: {
-          args: [10, 45],
-          msg: "El nombre del producto debe tener entre 10 y 45 caracteres."
-        }
-      }
     },
     categoryId: {
       type: DataTypes.INTEGER,
