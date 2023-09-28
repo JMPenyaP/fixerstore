@@ -429,13 +429,20 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case SET_DATA_PROFILE: {
-      return {
-        ...state,
-        clientProfile: action.payload.success,
-        dataProfile: action.payload,
-      };
+      if (action.payload.userData.role === "admin") {
+        return {
+          ...state,
+          dataProfile: action.payload,
+          adminProfile: true,
+        };
+      } else {
+        return {
+          ...state,
+          dataProfile: action.payload,
+          clientProfile: action.payload.success,
+        };
+      }
     }
-
     default:
       return {
         ...state,

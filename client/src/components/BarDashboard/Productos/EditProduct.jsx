@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { useForm, Controller} from "react-hook-form"
-import style from "../../FormProduct/FormProduct.module.css"
+import style from "./edit.module.css"
+import { getCategories } from "../../../redux/Actions/getCategories"
+import axios from "axios"
 
 const EditProduct = (props) => {
     // Importaciones
@@ -19,6 +21,7 @@ const EditProduct = (props) => {
     const [carrusel, setCarrusel] = useState(product.carrouselImage)
     const [createOptions, setCreateOptions] = useState(null)
     const [showPercentageInput, setShowPercentageInput] = useState(product.statusOffer);
+    const [mensaje, setMensaje] = useState("")
     //Función ocultar porcentjae
     const togglePercentageInput = (value) => {setShowPercentageInput(value);};
     useEffect(()=> {setCreado(createProduct)}, [createProduct])
@@ -82,34 +85,32 @@ const EditProduct = (props) => {
       }
     };
     // Enviar formulario
-    const onSubmit = async (data) => {
-      data.firstImage = principal
-      data.carrouselImage = carrusel
-      if(data.offer === undefined) {
-        data.offer = "0"
+    const onSubmit = async (datas) => {
+      datas.firstImage = principal
+      datas.carrouselImage = carrusel
+      if(datas.offer === undefined) {
+        datas.offer = "0"
       }
-      dispatch(actions.createProd(data))
-      setCreateOptions(true)
-    }
-    // Funciones de limpieza y cierre de form
-    const [botonLimpiar, setBotonLimpiar] = useState(null)
-    const handleCancel = () => {setBotonLimpiar(true)}
-    const handleNo = () => {setBotonLimpiar(false)}
-    const handleYes = () => {    
-        setBotonLimpiar(null)
-        setCarrusel([])
-        setPrincipal("")
-        setCreado(null)
-        reset()}
-    const handleOptionsClean = () => {
-      setCreateOptions(null)
-      handleYes()}
-    const handleCleanState = () => {
+      datas.date = product.date
+      console.log(datas);
+      try {
+        const endpoint = `http://localhost:3001/products/update/${product.id}`
+        const response = await axios.patch(endpoint, datas)
+        console.log(response);
+        const {data} = response
+        const {message} = data
+        if(message) {
+            setMensaje("Producto actualizado con exito")
+        }
+      } 
+      catch (error) {
+        setMensaje("Hubo un error, intentalo de nuevo") 
+      }
     }
     //Renderizado
     return (
         <div className={style.div}>
-            <h2 className={style.titulo}>Editar producto: {product.name}</h2>
+            <h2 className={style.tituloEdit}>Editar producto: <strong>{product.name}</strong></h2>
             <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
               <div className={style.container}>
               <div className={style.divCampo}>
@@ -156,8 +157,7 @@ const EditProduct = (props) => {
                     <Controller
                     name="firstImage"
                     control={control}
-                    defaultValue=""
-                    rules={{ required: 'Este campo es obligatorio',}}
+                    defaultValue={product.firstImage}
                     render={({ field }) => (
                     <input
                     type="file"
@@ -180,8 +180,7 @@ const EditProduct = (props) => {
                     <Controller
                     name="carrouselImage"
                     control={control}
-                    defaultValue=""
-                    rules={{ required: 'Este campo es obligatorio',}}
+                    defaultValue={product.firstImage}
                     render={({ field }) => (
                     <input
                     type="file"
@@ -366,24 +365,23 @@ const EditProduct = (props) => {
                 </div>
             <div className={style.mensajeProducto}>
               <button type="submit" className={style.formbutton} >Actualizar producto</button>
-              {creado === true ? (<><span className={style.mensajeCreated}> <img src="https://api.iconify.design/material-symbols:check-circle-outline-rounded.svg?color=%23ffffff" alt="" /> Producto creado con éxito</span></>) : (creado === false ? (<><span className={style.mensajeNoCreated}> <img src="https://api.iconify.design/icon-park-outline:file-failed.svg?color=%23ffffff" alt="" />El producto ya existe</span></>) : (null))}
+              {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>):(null)}
             </div>
             </div>
             </form>
-            <div className={style.mensajeProducto}>
+            {/* <div className={style.mensajeProducto}>
             {createOptions === true ? (<div className={style.aviso}>
               <button onClick={handleOptionsClean} className={style.formbuttonClean}>Crea otro producto</button>
               <NavLink to="/productos">
               <button className={style.formbuttonClean} onClick={()=> {setCreateOptions(null); handleCleanState()}} >Ir al catalogo</button>
               </NavLink>
-            </div>):(null)}
-            <button className={style.formbuttonClean} onClick={handleYes}>Limpiar/Cancelar</button>
+            </div>):(null)} */}
+            {/* <button className={style.formbuttonClean} onClick={handleYes}>Limpiar/Cancelar</button>
             {botonLimpiar === true ? (<div className={style.aviso}>
               <h5 className={style.mensajeAviso}>¿Seguro que quiere cancelar la subida de productos?</h5>
               <button onClick={handleYes} className={style.botonYes}>Sí</button>
               <button onClick={handleNo} className={style.botonNo} >No</button>
-            </div>): (null)}
-            </div>
+            </div>): (null)} */}
         </div>
     )
 }
