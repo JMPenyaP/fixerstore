@@ -456,7 +456,7 @@ const products = [
     stock: 15
 
   },
-  
+
   {
 
     name: "Grasa Fina Para Cuero",
@@ -563,7 +563,7 @@ const products = [
     stock: 15
 
   },
-  
+
 ]
 
 const createProducts = async () => {
