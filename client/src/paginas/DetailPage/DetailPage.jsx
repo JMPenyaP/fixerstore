@@ -20,6 +20,8 @@ const DetailPage = () => {
   const [cantidad, setCantidad] = useState(1);
   const [images, setImages] = useState([]);
   const [cantidadEnCarrito, setCantidadEnCarrito] = useState();
+  const [idVariable, setIdVariable] = useState(null);
+  const dataProfile = useSelector((state) => state.dataProfile);
   //////
 
   let carritoEnLocalStorage = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -71,36 +73,19 @@ const DetailPage = () => {
     allCategories?.length === 0 && dispatch(getCategories());
 
     carritoEnLocalStorage.map((item) => {
-      if (item.id === product.id) {
+      if (item.id === product.id && item.idUser === idVariable) {
         setCantidadEnCarrito(item.cantidad);
       } else {
         setCantidadEnCarrito(0);
       }
     });
-  }, [allCategories, dispatch, carritoEnLocalStorage]);
 
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    if (carrito.length === 0 && storedCart.length > 0) {
-      storedCart.forEach((item) => {
-        dispatch(
-          agregarAlCarrito(
-            {
-              id: item.id,
-              name: item.name,
-              precio: item.precio,
-              image: item.image,
-              stock: item.stock,
-            },
-            item.cantidad
-          )
-        );
-      });
+    if (dataProfile != null) {
+      setIdVariable(dataProfile.userData.id);
+    } else {
+      setIdVariable(null);
     }
-
-    guardarCarritoEnLocalStorage();
-  }, [carrito, dispatch]);
+  }, [allCategories, dispatch, carritoEnLocalStorage, dataProfile]);
 
   // ONCLICK FUNCTIONS
   const setImage = (url) => {
@@ -131,6 +116,7 @@ const DetailPage = () => {
   const agregarProductoAlCarrito = () => {
     dispatch(
       agregarAlCarrito(
+        idVariable,
         {
           id: product.id,
           name: product.name,
@@ -148,7 +134,7 @@ const DetailPage = () => {
 
     toast.success("Producto agregado al carrito !", {
       icon: "🚀",
-      position: "top-right",
+      position: "top-left",
       autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
@@ -337,7 +323,19 @@ const DetailPage = () => {
           </div>
         )}
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Footer />
     </>
   );

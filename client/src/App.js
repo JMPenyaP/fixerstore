@@ -6,7 +6,7 @@ import LoginAdmin from "./paginas/LoginAdmin/LoginAdmin";
 import Home from "./paginas/Home/Home";
 import Carrito from "./paginas/Carrito/Carrito";
 import Navbar from "./components/NavBar/NavBar";
-import Nosotros from "./paginas/Nosotros/Nosotros"
+import Nosotros from "./paginas/Nosotros/Nosotros";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,9 @@ import ResetPass from "./paginas/ResetPass/ResetPass";
 import { useState, useEffect } from "react";
 import SearchedProduct from "./paginas/SearchedProduct/SearchedProduct";
 import { agregarAlCarrito } from "./redux/Actions/carrito";
+import { getCarritoById } from "./redux/Actions/carrito";
+import { actualizarUserIdEnCarrito } from "./redux/Actions/carrito";
+import { vaciarCarrito } from "./redux/Actions/carrito";
 import LoginUser from "./paginas/LoginUser/LoginUser";
 import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
@@ -25,11 +28,16 @@ import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
 function App() {
   const navigate = useNavigate();
   const admin = useSelector((state) => state.adminProfile);
+  const carritoById = useSelector((state) => state.carritoById);
   const client = useSelector((state) => state.clientProfile);
   const carrito = useSelector((state) => state.carrito);
   const [adminPass, setAdminPass] = useState(null);
+  const [idVariable, setIdVariable] = useState(null);
   const dispatch = useDispatch();
   const dataProfile = useSelector((state) => state.dataProfile);
+
+  console.log(carrito);
+  console.log(carritoById);
 
   useEffect(() => {
     setAdminPass(admin);
@@ -62,6 +70,7 @@ function App() {
       storedCart.forEach((item) => {
         dispatch(
           agregarAlCarrito(
+            item.idUser,
             {
               id: item.id,
               name: item.name,
@@ -75,14 +84,29 @@ function App() {
       });
     }
 
+    if (dataProfile != null) {
+      carrito.forEach((prod) => {
+        if (prod.idUser === null) {
+          dispatch(actualizarUserIdEnCarrito(prod.id, dataProfile.userData.id));
+        } else {
+          return console.log("no era null");
+        }
+      });
+    } else {
+      console.log("data profile es null");
+    }
+
+    dispatch(getCarritoById(idVariable));
     guardarCarritoEnLocalStorage();
-  }, [carrito, dispatch]);
+  }, [carrito, dispatch, dataProfile, actualizarUserIdEnCarrito, idVariable]);
 
   useEffect(() => {
     if (dataProfile != null) {
       localStorage.setItem("dataProfile", JSON.stringify(dataProfile));
+      setIdVariable(dataProfile.userData.id);
     } else {
       const storedData = JSON.parse(localStorage.getItem("dataProfile")) || [];
+      setIdVariable(null);
       if (storedData.success === true) {
         dispatch(setDataProfile(storedData));
       }
