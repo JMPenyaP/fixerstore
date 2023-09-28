@@ -55,9 +55,7 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    carItemId: {
-      type: DataTypes.INTEGER,
-    }
+
 
   }, { timestamps: false })
 }
