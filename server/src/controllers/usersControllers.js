@@ -1,6 +1,6 @@
 const { User } = require("../db");
 const bcrypt = require("bcryptjs");
-const nodemailer = require('nodemailer');
+const { createTransporter, sendEmail } = require('./utils/emailTransporter');
 
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
@@ -36,13 +36,29 @@ const createUserHandler = async (req, res) => {
       department,
       country,
     });
-
+    //================================================
+    const transporter = createTransporter();
+    const mailOptions = {
+      from: '"Fixer Shoes" <no-reply@fixershoes.com>',
+      to: email,
+      subject: '¡Bienvenido/a a nuestra comunidad en línea!',
+      text: `¡Bienvenido/a a nuestra comunidad en línea!`,
+      html: `
+                <p>Estimado/a ${name},</p>
+                <p>Estamos emocionados de tenerte como parte de nuestra comunidad. Tu cuenta ha sido creada con éxito y ahora tienes acceso a todas las características emocionantes de nuestro sitio web. Esperamos que disfrutes de tu tiempo aquí y encuentres contenido interesante y útil.</p>
+                <p>Siempre estamos trabajando para mejorar tu experiencia, así que no dudes en proporcionarnos comentarios o sugerencias mediante el formulario de contacto. Queremos que tu tiempo aquí sea excepcional.</p>                
+                <p>¡Gracias por unirte a nosotros y esperamos verte activamente en nuestro sitio web!</p>
+                <p>Saludos,</p>
+                <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>`,
+    };
+    await sendEmail(transporter, mailOptions);
+    //================================================
     res
       .status(201)
       .json({ success: true, message: "Registro de usuario exitoso" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Error en el servidor" });
+    res.status(500).json({ success: false, message: "Error 500 en el servidor" });
   }
 };
 
