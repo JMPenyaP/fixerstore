@@ -4,35 +4,37 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import { useSelector } from 'react-redux';
 import axios from 'axios'
 
-const publicKey = process.env.REACT_APP_PUBLIC_KEY;
-
 const Pay = ({formData}) => {
 
-    const carrito = useSelector(state=>state.carrito)
+    const carritoById = useSelector(state=>state.carritoById)
     
     const [preferenceId, setPreferenceId] = useState(null);
     const [isButtonDisabled,setIsButtonDisabled]= useState('')
 
-    console.log(publicKey)
+
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         initMercadoPago('APP_USR-34521d68-fb93-4dfe-af28-f0507c066d01');
     }, []);
 
     const createPreference = async () => {
-        const totalCarrito = carrito?.reduce((valorAnterior, valorActual) => {
+        const totalcarrito = carritoById?.reduce((valorAnterior, valorActual) => {
             return valorAnterior + (valorActual.precio * valorActual.cantidad);
         }, 0);
         try {
-
+            
             const response = await axios.post('http://localhost:3001/users/mercadopago', {
                 description: "Compra FixerShoes",
-                price: totalCarrito,
+                price: totalcarrito,
                 quantity: 1,
                 formData
             });
             const { id } = response.data;
             return id;
         } catch (error) {
+            setError("Error al crear la preferencia de pago");
+            
             return null;
         }
     };
@@ -50,7 +52,17 @@ const Pay = ({formData}) => {
         <div className={styles.pay}>
 
             <button className={styles.btn} onClick={handleBuy} disabled={isButtonDisabled}>Ir a Pagar</button>
-            {preferenceId && <Wallet initialization={{ preferenceId }} />}
+            {preferenceId && <Wallet
+                        initialization={{ preferenceId }}
+                        onPayment={() => {
+                            // Manejar el pago completado aquí
+                            console.log("Pago completado");
+                        }}
+                        onError={(error) => {
+                            // Manejar errores de pago aquí
+                            console.error("Error de pago:", error);
+                        }}
+                    />}
         </div>
         </>
      );

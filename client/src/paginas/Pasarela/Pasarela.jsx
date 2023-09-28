@@ -8,13 +8,10 @@ import  Form  from './form/Form'
 
 const Pasarela = () => {
 
-    // const handleInputs = ()={
-        
-    // }
 
-    const carrito = useSelector(state => state.carrito)
-                
-    const totalCarrito = carrito?.reduce((valorAnterior, valorActual) => {
+    const carritoById = useSelector(state => state.carritoById)
+    
+    const totalCarrito = carritoById?.reduce((valorAnterior, valorActual) => {
                         return valorAnterior + (valorActual.precio * valorActual.cantidad);
                     }, 0);
     return ( 
@@ -55,11 +52,11 @@ const Pasarela = () => {
                         <h2>Detalle</h2>
 
                         <div>
-                            <Ticket carrito={carrito} /> 
+                            <Ticket carrito={carritoById} /> 
                         </div>
                             
                         <div>
-                            <h2>Total</h2>
+                            <h3>Total</h3>
                             <h2>${totalCarrito}</h2>
                             
                         </div>
