@@ -8,7 +8,7 @@ const publicKey = process.env.REACT_APP_PUBLIC_KEY;
 
 const Pay = ({formData}) => {
 
-    const carrito = useSelector(state=>state.carrito)
+    const carritoById = useSelector(state=>state.carritoById)
     
     const [preferenceId, setPreferenceId] = useState(null);
     const [isButtonDisabled,setIsButtonDisabled]= useState('')
@@ -18,8 +18,10 @@ const Pay = ({formData}) => {
         initMercadoPago('APP_USR-34521d68-fb93-4dfe-af28-f0507c066d01');
     }, []);
 
-    const createPreference = async () => {
-        const totalCarrito = carrito?.reduce((valorAnterior, valorActual) => {
+    initMercadoPago("TEST-c9dd176d-cc5f-4e29-a050-e1ab097d6333")
+
+    const createPreference = async()=>{
+        const totalCarrito = carritoById?.reduce((valorAnterior, valorActual) => {
             return valorAnterior + (valorActual.precio * valorActual.cantidad);
         }, 0);
         try {
