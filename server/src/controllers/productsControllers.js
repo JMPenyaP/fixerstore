@@ -35,6 +35,20 @@ const eraseLogicProduct = async (id) => {
 
 }
 
+const destroyProduct = async (id) => {
+
+  const product = await Product.findByPk(id);
+
+  if (!product) return "No se encontro el producto";
+
+  await product.destroy();
+
+
+  return "Producto Eliminado Correctamente"
+
+
+}
+
 const updateProduct = async (id, name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
 
   const product = await Product.findByPk(id);
@@ -108,5 +122,6 @@ module.exports = {
   getProductById,
   updateProduct,
   eraseLogicProduct,
-  activeLogicProduct
+  activeLogicProduct,
+  destroyProduct
 };

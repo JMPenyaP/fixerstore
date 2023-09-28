@@ -1,5 +1,23 @@
-const { createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct } = require("../controllers/productsControllers");
+const { destroyProduct, createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct } = require("../controllers/productsControllers");
 
+
+const destroyPorductHandler = async (req, res) => {
+
+    const { id } = req.params;
+
+    try {
+
+        const destroyProd = await destroyProduct(id);
+
+        res.status(200).json({ message: destroyProd });
+
+    } catch (error) {
+
+        res.status(404).json({ error: error.message });
+
+    }
+
+}
 
 const activeLogicProductHandler = async (req, res) => {
 
@@ -125,7 +143,8 @@ module.exports = {
     getProductIdHandler,
     updateProductHandler,
     eraseLogicProductHandler,
-    activeLogicProductHandler
+    activeLogicProductHandler,
+    destroyPorductHandler
 
 };
 
