@@ -11,6 +11,7 @@ mercadopago.configure({
 
 const pagoOrder = (req, res) => {
 
+
 	let preference = {
 		items: [
 			{
