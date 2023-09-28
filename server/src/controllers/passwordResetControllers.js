@@ -2,39 +2,37 @@ const nodemailer = require('nodemailer');
 const { v4: uuidv4 } = require('uuid');
 const { User, PasswordReset } = require('../db');
 const bcrypt = require('bcryptjs');
-require("dotenv").config();
 
 //! Controlador para solicitar la recuperación de contraseña
 const requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
     try {
-        const { email } = req.query;
         const user = await User.findOne({ where: { email } });
-
         if (!user) {
             return res.status(400).json({ success: false, message: 'El correo electrónico no está registrado' });
         }
 
         const token = uuidv4();
-
         await PasswordReset.create({
             token,
             expirationDate: new Date(Date.now() + 3600000),
             status: 'pending',
             userId: user.id,
         });
-        const { EMAIL_HOST, EMAIL_RESET, EMAIL_RESET_PASS } = process.env;
+
         const transporter = nodemailer.createTransport({
-            host: EMAIL_HOST,
+            host: "mi3-sr2.supercp.com",
             port: 465,
             secure: true,
             auth: {
-                user: EMAIL_RESET,
-                pass: EMAIL_RESET_PASS,
+                user: "no-reply@fixershoes.com",
+                pass: "lC!(7$5RGC[m{FX9jk"
             },
-        });
+            tls: { rejectUnauthorized: false }
+        })
 
         const mailOptions = {
-            from: 'Fixer Shoes no-reply@fixershoes.com',
+            from: '"Fixer Shoes" <no-reply@fixershoes.com>',
             to: email,
             subject: 'Recuperación de contraseña',
             text: `Haga clic en el siguiente enlace para restablecer su contraseña: https://fixershoes.com/reset/${token}`,

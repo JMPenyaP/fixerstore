@@ -30,7 +30,7 @@ const PassSolicitud = () => {
     const onSubmit = async (data) => {
         try {
             console.log(data);
-            const response = await axios.post(`http://localhost:3001/passuser/request-reset?email=${data.email}`)
+            const response = await axios.post(`http://localhost:3001/passuser/request-reset`, { email: data.email })
 
             const { message, success } = response.data
             setMensaje(message)

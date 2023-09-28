@@ -1,10 +1,11 @@
 const { User } = require("../db");
 const bcrypt = require("bcryptjs");
+const nodemailer = require('nodemailer');
 
 //! Crear Usuario Cliente
 const createUserHandler = async (req, res) => {
   const { email, password, role, name, surname, gender, age, birthDate, phone, address, city, department, country } = req.body;
-  
+
   try {
     if (!email) {
       return res
@@ -58,7 +59,7 @@ const updateUserController = async (req, res) => {
       return res
         .status(404)
         .json({ success: false, message: "Usuario no encontrado" });
-    } 
+    }
 
     // Si se proporciona una nueva dirección de correo electrónico,
     // verifica si ya está en uso por otro usuario
@@ -112,7 +113,7 @@ const updateUserController = async (req, res) => {
 //! Obtener todos los Usuarios
 const getAllUsers = async () => {
   const allUsers = await User.findAll();
-  return allUsers; 
+  return allUsers;
 };
 
 //! Obtener Usuario por Nombre
@@ -127,7 +128,7 @@ const getUserByEmail = async (email) => {
   if (user) {
     return user
   } else {
-    return false 
+    return false
   }
 }
 
