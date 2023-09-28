@@ -36,7 +36,6 @@ const requestPasswordReset = async (req, res) => {
                 <p>Atentamente,</p>
                 <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>`,
         };
-        //await transporter.sendMail(mailOptions);
         await sendEmail(transporter, mailOptions);
         //===================================================
         res.status(200).json({ success: true, message: 'Se ha enviado un correo electrónico para restablecer la contraseña' });
