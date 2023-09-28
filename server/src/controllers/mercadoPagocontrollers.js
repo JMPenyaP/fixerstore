@@ -1,11 +1,14 @@
 require('dotenv').config();
-const mercadopago = require('mercadopago');
+
+const cors = require("cors");
+const mercadopago = require("mercadopago");
 const { ACCESS_TOKEN } = process.env;
-if (ACCESS_TOKEN) {
-    mercadopago.configure({
-        access_token: ACCESS_TOKEN,
-    })
-}
+
+	mercadopago.configure({
+		access_token: ACCESS_TOKEN,
+	});
+
+
 const pagoOrder = (req, res) => {
 
 	let preference = {
@@ -23,6 +26,7 @@ const pagoOrder = (req, res) => {
 			"pending": "http://localhost:3000/"
 		},
 		auto_return: "approved",
+		form:req.body.formData.place
 	};
 
 	mercadopago.preferences.create(preference)
@@ -31,9 +35,8 @@ const pagoOrder = (req, res) => {
 				id: response.body.id
 			});
 		}).catch(function (error) {
-            console.error("Error al crear la preferencia de pago:", error);
-            res.status(500).json({ error: "Error al crear la preferencia de pago", message: error.message });
-          });
+			console.log(error);
+		});
 }
 
 module.exports = {
