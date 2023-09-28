@@ -1,9 +1,12 @@
 const { Router } = require("express");
 const productsRouters = Router();
-const { createProductsHandler, getAllProductsHandler, getProductIdHandler } = require("../handlers/productsHandlers");
+const { createProductsHandler, getAllProductsHandler, activeLogicProductHandler, getProductIdHandler, updateProductHandler, eraseLogicProductHandler } = require("../handlers/productsHandlers");
 
 productsRouters.post("/", createProductsHandler);
 productsRouters.get("/", getAllProductsHandler);
 productsRouters.get("/:id", getProductIdHandler);
+productsRouters.patch("/update/:id", updateProductHandler)
+productsRouters.patch("/soft-delete/:id", eraseLogicProductHandler)
+productsRouters.patch("/soft-active/:id", activeLogicProductHandler)
 
 module.exports = productsRouters;

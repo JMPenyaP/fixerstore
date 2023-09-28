@@ -3,6 +3,65 @@ const { Product } = require("../db");
 //! Crear Producto
 
 
+const activeLogicProduct = async (id) => {
+
+  const product = await Product.findByPk(id);
+
+  if (!product) return "No se encontro el producto";
+
+  // se realiza el borrado logico seteando su status 
+
+  product.status = true;
+  await product.save();
+
+  return "Se activo el producto correctamente";
+
+}
+
+const eraseLogicProduct = async (id) => {
+
+  const product = await Product.findByPk(id);
+
+  if (!product) return "No se encontro el producto";
+
+  // se realiza el borrado logico seteando su status 
+
+  product.status = false;
+  await product.save();
+
+
+  return "Producto Eliminado Correctamente";
+
+
+}
+
+const updateProduct = async (id, name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
+
+  const product = await Product.findByPk(id);
+
+  if (!product) {
+
+    return "Producto no encontrado";
+
+  }
+  product.name = name;
+  product.categoryId = categoryId;
+  product.firstImage = firstImage;
+  product.carrouselImage = carrouselImage;
+  product.description = description;
+  product.date = date;
+  product.priceOfList = priceOfList;
+  product.statusOffer = statusOffer;
+  product.offer = offer;
+  product.status = status;
+  product.stock = stock;
+
+
+  await product.save();
+
+  return "Producto Actualizado Correctamente";
+
+}
 
 const createProduct = async (name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
 
@@ -40,9 +99,14 @@ const getProductById = async (id) => {
   return productId
 }
 
+
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductByName,
-  getProductById
+  getProductById,
+  updateProduct,
+  eraseLogicProduct,
+  activeLogicProduct
 };
