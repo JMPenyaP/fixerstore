@@ -23,6 +23,7 @@ import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
 import DashUser from "./paginas/DashUser/DashUser";
 import { setDataProfile } from "./redux/Actions/setDataProfile";
+import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
 
 function App() {
   const navigate = useNavigate();
@@ -133,6 +134,7 @@ function App() {
         <Route path="/us" element={<Nosotros />} />
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
+        <Route path="/resetAnsony" element={<PassAnsony />} />
       </Routes>
     </>
   );
