@@ -244,11 +244,13 @@
 }
 
 
-/* ///////        RESPONSIVE           ///////// */
+/* ///////        RESPONSIVE MOBILE          ///////// */
 
 
 
 @media (max-width: 768px) {
+
+    /* NAVBAR */
     .divNavBar {
         display: none;
     }
@@ -256,9 +258,96 @@
     .resNavBar{
         display: flex;
         padding: 10px;
-        justify-content: space-between;
+        gap: 5px;
+        justify-content: center;
+        flex-direction: column;
         align-items: center;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .resNavBarNoSearch{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .resNavBarNoSearch img{
+        width: 170px;
+    }
+
+    /* searchbar */
+
+    .resSearchBarDiv input {
+        display: flex;
+        width: 270px;
+        padding: 4px;
+        align-items: center;
+        gap: 12px;
+        border-radius: 20px;
+        background: transparent;
+        border: 1px solid #3cbbed;
+    }
+    
+    .resSearchBarDiv input:focus {
+        outline: none;
+        border: 2px solid #3cbbed;
+    }
+    
+    .resSearchBarDiv {
+        display: flex;
+        gap: 9px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .resSearchBarDiv button {
+        background-color: #3cbbed;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        border: none;
+        padding: 2px;
+        cursor: pointer;
+    }
+    
+    .resSearchBarDiv button:disabled {
+        cursor: not-allowed;
+    }
+    
+    .resSearchBarDiv button h5 {
+        font-family: 'Gotham Black', sans-serif;
+    }
+    
+    .resSearchBarDiv button ion-icon {
+        font-size: 16px;
+    }
+
+    /* BUTTON */
+
+    .buttonShowMenu{
+        background-color: transparent;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10%;
+        padding: 3px;
+        transition: 0.3s;
+    }
+
+    .buttonShowMenu ion-icon{
+        font-size: 20px;
+    }
+
+    .actived{
+        background-color: #86c4dc;
+        border-radius: 50%;
+        padding: 3px;
+    }
+
+    .actived ion-icon{
+        font-size: 20px;
     }
 
     /* LOGO */

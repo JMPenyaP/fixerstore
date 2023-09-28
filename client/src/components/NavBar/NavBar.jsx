@@ -16,6 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const carrito = useSelector((state) => state.carrito);
+  const carritoById = useSelector((state) => state.carritoById);
   const dataProfile = useSelector((state) => state.dataProfile);
 
   useEffect(() => {
@@ -27,10 +28,10 @@ const Navbar = () => {
       setLetter(null);
     }
 
-    if (carrito.length >= 0) {
-      setCartLong(carrito.length);
+    if (carritoById.length >= 0) {
+      setCartLong(carritoById.length);
     }
-  }, [dataProfile, carrito]);
+  }, [dataProfile, carrito, carritoById]);
 
   // ON CHANGE Y ON CLICK
 
@@ -152,39 +153,68 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
+
+      {/* RESPONSIVE NAVBAR ////////////////////////////////////////////////////////////////////////////////*/}
+
       <div className={style.resNavBar}>
-        <button onClick={showHideMenu}>
-          <ion-icon name="menu-outline"></ion-icon>
-        </button>
-        <Link to="/">
-          <img
-            src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png"
-            alt="Logo Fixer"
-            className={style.resLogo}
-          />
-        </Link>
-        <Link to="/carrodecompras">
-          <div className={style.carritoDiv}>
-            <ion-icon name="cart-outline"></ion-icon>
-            <div className={style.cartCounter}>{cartLong}</div>
-          </div>
-        </Link>
-        <div
-          className={`${style.menuDisplay} ${displayMenu ? style.show : ""}`}
-        >
-          {dataProfile !== null ? (
-            <div className={style.resUserLetter}>
-              <h4>{letter}</h4>
+        <div className={style.resNavBarNoSearch}>
+          <button
+            onClick={showHideMenu}
+            className={`${style.buttonShowMenu} ${
+              displayMenu ? style.actived : ""
+            }`}
+          >
+            <ion-icon name="menu-outline"></ion-icon>
+          </button>
+          <Link to="/">
+            <img
+              src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png"
+              alt="Logo Fixer"
+              className={style.resLogo}
+            />
+          </Link>
+          <Link to="/carrodecompras">
+            <div className={style.carritoDiv}>
+              <ion-icon name="cart-outline"></ion-icon>
+              <div className={style.cartCounter}>{cartLong}</div>
             </div>
+          </Link>
+          <div
+            className={`${style.menuDisplay} ${displayMenu ? style.show : ""}`}
+          >
+            {dataProfile !== null ? (
+              <div className={style.resUserLetter}>
+                <h4>{letter}</h4>
+              </div>
+            ) : (
+              <h2>inicia sesion</h2>
+            )}
+            <ul>
+              <li>te</li>
+              <li>tet</li>
+              <li>tet</li>
+              <li>tt</li>
+            </ul>
+          </div>
+        </div>
+        <div className={style.resSearchBarDiv}>
+          <input
+            type="search"
+            placeholder="Buscar Productos"
+            value={name}
+            onChange={handleChange}
+          />
+          {name.length > 0 ? (
+            <Link to={`/searchedprod/${name}`}>
+              <button onClick={searchName}>
+                <ion-icon name="search-outline"></ion-icon>
+              </button>
+            </Link>
           ) : (
-            <h2>inicia sesion</h2>
+            <button disabled>
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
           )}
-          <ul>
-            <li>te</li>
-            <li>tet</li>
-            <li>tet</li>
-            <li>tt</li>
-          </ul>
         </div>
       </div>
     </>

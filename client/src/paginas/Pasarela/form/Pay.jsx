@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const Pay = () => {
 
-    const carrito = useSelector(state=>state.carrito)
+    const carritoById = useSelector(state=>state.carritoById)
     
     const [preferenceId,setPreferenceId]= useState(null)
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -15,7 +15,7 @@ const Pay = () => {
     initMercadoPago("TEST-c9dd176d-cc5f-4e29-a050-e1ab097d6333")
 
     const createPreference = async()=>{
-        const totalCarrito = carrito?.reduce((valorAnterior, valorActual) => {
+        const totalCarrito = carritoById?.reduce((valorAnterior, valorActual) => {
             return valorAnterior + (valorActual.precio * valorActual.cantidad);
         }, 0);
         try {
