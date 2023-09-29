@@ -13,7 +13,7 @@ const SearchedProduct = () => {
 
   const [filtroActivo, setFiltroActivo] = useState(false);
 
-  const products = useSelector((state) => state.productByName);
+  const products = useSelector((state) => state.prodBuscaComb);
   const productName = useSelector((state) => state.productName);
   const productsData = products && products.data; 
   const [isLoading, setIsLoading] = useState(true); 
@@ -45,6 +45,7 @@ const SearchedProduct = () => {
             {productName && (
               <h1>resultados con : {name}</h1>
             )}
+            <Filtros/>
             {productsData && productsData.length > 0 ? (
               <CardsArr allProducts={productsData} />
             ) : (

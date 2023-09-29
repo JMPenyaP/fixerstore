@@ -1,4 +1,4 @@
-const { destroyProduct, createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct } = require("../controllers/productsControllers");
+const { destroyProduct, createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct, getFilteredProducts } = require("../controllers/productsControllers");
 
 
 const destroyPorductHandler = async (req, res) => {
@@ -118,6 +118,7 @@ const getAllProductsHandler = async (req, res) => {
             const response = await getAllProducts();
             res.status(200).json({ success: true, data: response });
         }
+
     }
     catch (error) {
         res.status(400).json({ success: false, message: "Error getting Product(s). " + error.message });
@@ -136,6 +137,16 @@ const getProductIdHandler = async (req, res) => {
     }
 }
 
+const getFilteredProductsHandler = async (req, res) => {
+    
+    try {
+        const result = await getFilteredProducts(req.query)
+        res.status(200).json({data: result})
+    } catch (error) {
+        
+    }
+}
+
 
 module.exports = {
     createProductsHandler,
@@ -144,7 +155,7 @@ module.exports = {
     updateProductHandler,
     eraseLogicProductHandler,
     activeLogicProductHandler,
-    destroyPorductHandler
-
+    destroyPorductHandler,
+    getFilteredProductsHandler,
 };
 

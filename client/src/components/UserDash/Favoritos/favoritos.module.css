@@ -41,7 +41,6 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    border: 2px solid #15214a;
     transform: scale(0.8);
     margin:0px;
 }

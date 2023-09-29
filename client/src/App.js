@@ -131,7 +131,7 @@ function App() {
           path="/user/:id"
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
         />{" "}
-        <Route path="/us" element={<Nosotros />} />
+        <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
