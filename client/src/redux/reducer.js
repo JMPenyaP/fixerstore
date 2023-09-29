@@ -304,42 +304,78 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case INCREMENT_QTY: {
+      const updatedCarritoById = state.carritoById.map((item) => {
+        if (
+          item.id === action.payload.productId &&
+          item.idUser === action.payload.idUser
+        ) {
+          return {
+            ...item,
+            cantidad: item.cantidad + 1,
+          };
+        } else {
+          return item;
+        }
+      });
+
+      const updatedCarrito = state.carrito.map((item) => {
+        if (
+          item.id === action.payload.productId &&
+          item.idUser === action.payload.idUser
+        ) {
+          return {
+            ...item,
+            cantidad: item.cantidad + 1,
+          };
+        } else {
+          return item;
+        }
+      });
+
       return {
         ...state,
-        carritoById: state.carritoById.map((item) => {
-          if (
-            item.id === action.payload.productId &&
-            item.idUser === action.payload.idUser
-          ) {
-            return {
-              ...item,
-              cantidad: item.cantidad + 1,
-            };
-          } else {
-            return item;
-          }
-        }),
+        carritoById: updatedCarritoById,
+        carrito: updatedCarrito,
       };
     }
 
-    case DECREMENT_QTY:
+    case DECREMENT_QTY: {
+      const updatedCarritoById = state.carritoById.map((producto) => {
+        if (
+          producto.id === action.payload.productId &&
+          producto.idUser === action.payload.idUser
+        ) {
+          const nuevaCantidad = Math.max(1, producto.cantidad - 1);
+
+          return {
+            ...producto,
+            cantidad: nuevaCantidad,
+          };
+        }
+        return producto;
+      });
+
+      const updatedCarrito = state.carrito.map((producto) => {
+        if (
+          producto.id === action.payload.productId &&
+          producto.idUser === action.payload.idUser
+        ) {
+          const nuevaCantidad = Math.max(1, producto.cantidad - 1);
+
+          return {
+            ...producto,
+            cantidad: nuevaCantidad,
+          };
+        }
+        return producto;
+      });
+
       return {
         ...state,
-        carritoById: state.carritoById.map((producto) => {
-          if (
-            producto.id === action.payload.productId &&
-            producto.idUser === action.payload.idUser
-          ) {
-            const nuevaCantidad = Math.max(1, producto.cantidad - 1);
-
-            return {
-              ...producto,
-              cantidad: nuevaCantidad,
-            };
-          }
-          return producto;
-        }),
+        carritoById: updatedCarritoById,
+        carrito: updatedCarrito,
       };
+    }
 
     case REMOVE_PRODUCT:
       return {
@@ -369,29 +405,23 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_CARRITO_BY_ID:
-      // Inicializar un objeto para almacenar productos únicos por id y sumar las cantidades
       const carritoById = {};
 
-      // Iterar sobre los productos y acumular las cantidades
       state.carrito.forEach((prod) => {
         if (prod.idUser === action.payload) {
           const existingProduct = carritoById[prod.id];
           if (existingProduct) {
-            // Si ya existe un producto con este id, sumar la cantidad
             existingProduct.cantidad += prod.cantidad;
-            // Asegurarse de que la cantidad no supere el stock
             existingProduct.cantidad = Math.min(
               existingProduct.cantidad,
               existingProduct.stock
             );
           } else {
-            // Si es un nuevo producto, agregarlo al objeto
             carritoById[prod.id] = { ...prod };
           }
         }
       });
 
-      // Convertir el objeto de productos únicos de vuelta a un array
       const carritoByIdArray = Object.values(carritoById);
 
       return {
@@ -429,11 +459,20 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case SET_DATA_PROFILE: {
-      return {
-        ...state,
-        clientProfile: action.payload.success,
-        dataProfile: action.payload,
-      };
+      if (action.payload.userData.role === "admin") {
+        return {
+          ...state,
+          dataProfile: action.payload,
+          adminProfile: true,
+        };
+      } else {
+        return {
+          ...state,
+          dataProfile: action.payload,
+          clientProfile: action.payload.success,
+          adminProfile: false,
+        };
+      }
     }
 
     default:

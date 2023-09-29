@@ -21,6 +21,8 @@ const Carrito = () => {
     return accumulator + item.precio * item.cantidad;
   }, 0);
 
+  console.log(carritoById);
+
   useEffect(() => {
     if (dataProfile) {
       if (dataProfile === null) {
@@ -40,7 +42,6 @@ const Carrito = () => {
         products: carritoById,
       });
 
-      console.log(response);
       window.location.href = "/payment";
     } catch (error) {}
   };
