@@ -1,7 +1,7 @@
 /* Estilos para el contenedor principal */
 .container {
     text-align: center;
-    margin: 50px auto;
+    margin: 100px auto;
     padding: 20px;
     border: 1px solid #ccc;
     max-width: 400px;
@@ -53,7 +53,7 @@
   /* Estilos para el contenedor principal del mensaje de Pago Rechazado */
 .containerR {
     text-align: center;
-    margin: 50px auto;
+    margin: 100px auto;
     padding: 20px;
     border: 1px solid #ccc;
     max-width: 400px;

@@ -52,7 +52,9 @@ function App() {
     location.pathname === "/registro" ||
     location.pathname === "/resetPass" ||
     location.pathname === "/reset" ||
-    location.pathname === "/payment";
+    location.pathname === "/payment" ||
+    location.pathname === "/payment/success" ||
+    location.pathname === "/payment/failured"
   useEffect(() => {
     if (!adminPass && location.pathname === "/dashboard") {
       navigate("/admin");
