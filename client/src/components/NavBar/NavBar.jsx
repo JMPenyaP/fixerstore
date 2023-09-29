@@ -86,7 +86,7 @@ const Navbar = () => {
               <h5>Productos</h5>
             </button>
           </Link>
-          <Link to="/us">
+          <Link to="/nosotros">
             <button>
               <h5>Quienes Somos</h5>
             </button>
@@ -160,9 +160,8 @@ const Navbar = () => {
         <div className={style.resNavBarNoSearch}>
           <button
             onClick={showHideMenu}
-            className={`${style.buttonShowMenu} ${
-              displayMenu ? style.actived : ""
-            }`}
+            className={`${style.buttonShowMenu} ${displayMenu ? style.actived : ""
+              }`}
           >
             <ion-icon name="menu-outline"></ion-icon>
           </button>
