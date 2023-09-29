@@ -174,7 +174,6 @@
     justify-items: center;
     text-align: center;
     padding: 10px;
-
 }
 .mensajeCreated {
     font-family: "Gotham", sans-serif;
@@ -358,9 +357,10 @@
 .errorMenssage {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-content: flex-start;
     padding: 0px;
     text-align: left;
+    margin: 0px;
 }
 .simbolo {
     font-family: "Gotham", sans-serif;
@@ -372,7 +372,7 @@
 }
 
 .errorText {
-    font-size: 13.5px;
+    font-size: 12px;
     margin: 0px;
     transition: opacity 0.3s ease;
     font-family: "Gotham", sans-serif;
