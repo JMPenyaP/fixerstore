@@ -1,0 +1,100 @@
+/* Estilos para el contenedor principal */
+.container {
+    text-align: center;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    max-width: 400px;
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilos para el encabezado (h1) */
+  .h1 {
+    font-size: 24px;
+    color:#3CBBED ;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para los párrafos (p) */
+  .p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para el mensaje de redirección */
+  .redirect {
+    font-weight: bold;
+    color: #3CBBED; /* Color azul brillante, puedes cambiarlo según tus preferencias */
+  }
+  
+  /* Animación de redirección */
+  @keyframes redirectTo {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Aplicar animación al mensaje de redirección */
+  .redirect {
+    animation: redirectTo 2s linear infinite; /* Cambia la duración y el estilo de animación según tus preferencias */
+  }
+  
+
+
+
+  /* Estilos para el contenedor principal del mensaje de Pago Rechazado */
+.containerR {
+    text-align: center;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    max-width: 400px;
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilos para el encabezado (h1) del mensaje de Pago Rechazado */
+  .h1R {
+    font-size: 24px;
+    color: #FF5733; /* Color rojo, puedes cambiarlo según tus preferencias */
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para los párrafos (p) del mensaje de Pago Rechazado */
+  .pR {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para el mensaje de redirección en el mensaje de Pago Rechazado */
+  .redirectR {
+    font-weight: bold;
+    color: #FF5733; /* Color rojo, puedes cambiarlo según tus preferencias */
+  }
+  
+  /* Animación de redirección en el mensaje de Pago Rechazado */
+  @keyframes redirectToRejected {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Aplicar animación al mensaje de redirección en el mensaje de Pago Rechazado */
+  .redirectR {
+    animation: redirectToRejected 2s linear infinite; /* Cambia la duración y el estilo de animación según tus preferencias */
+  }
