@@ -63,6 +63,7 @@ const Pay = ({formData}) => {
                             console.error("Error de pago:", error);
                         }}
                     />}
+                    {error && <p>{error}</p>}
         </div>
         </>
      );

@@ -21,12 +21,12 @@ const pagoOrder = (req, res) => {
 			}
 		],
 		back_urls: {
-			"success": "http://localhost:3000/",
-			"failure": "http://localhost:3000/",
-			"pending": "http://localhost:3000/"
+			"success": "http://localhost:3000/payment/success",
+			"failure": "http://localhost:3000/payment/failured",
+			"pending": "http://localhost:3000/",
 		},
 		auto_return: "approved",
-		form:req.body.formData.place
+		external_reference:`name:${req.body.formData.name},surname:${req.body.formData.lastName},phone:${req.body.formData.phoneNumber},retiro:${req.body.formData.place},cc:${req.body.formData.dni},total:${Number(req.body.price)}`,
 	};
 
 	mercadopago.preferences.create(preference)
