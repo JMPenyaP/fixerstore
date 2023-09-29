@@ -18,17 +18,16 @@
 }
 
 .titulo {
-    border: none;
-    font-size: 15px;
-    padding: 8px 28px 8px 28px;
-    border-radius: 50px;
-    position: relative;
-    color: white;
-    transition: 0.2s;
-    background-color: #3cbbed;
-    transition: 0.3s;
-    font-family: "Gotham", sans-serif;
-    width: auto;
+  border: none;
+  font-size: 15px;
+  padding: 8px 28px 8px 28px;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  background-color: #15214a;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
 }
 
 .img {

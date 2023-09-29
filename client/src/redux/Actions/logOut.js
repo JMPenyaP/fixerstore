@@ -4,8 +4,7 @@ const logOut = () => {
     return (dispatch) => {
       const response = {
         success: null,
-        email: "",
-        name: ""
+        userData: {}
       };
       dispatch({
         type: ADMIN_PROFILE,

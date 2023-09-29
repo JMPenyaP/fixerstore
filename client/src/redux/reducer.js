@@ -26,6 +26,9 @@ import {
   SET_DATA_PROFILE,
   SAVE_FAV,
   DELETE_FAV,
+  ACTUALIZAR_USER_ID_EN_CARRITO,
+  GET_CARRITO_BY_ID,
+  VACIAR_CARRITO,
   SET_NAME_SEARCH,
   SET_CAT,
   BUSCA_COMB,
@@ -50,6 +53,7 @@ const initialState = {
   userChanges: null,
   historial: [],
   favoritos: [],
+  carritoById: [],
   search: '',
   categoryId: 0,
   order: '',
@@ -102,31 +106,33 @@ const rootReducer = (state = initialState, action) => {
     case HISTORIAL: {
       return {
         ...state,
-        historial: action.payload.orders,
-      }
+        historial: action.payload,
+      };
     }
 
     case SAVE_FAV: {
       return {
         ...state,
         favoritos: action.payload,
-      }
+      };
     }
 
     case DELETE_FAV: {
-      const productIdRemove = action.payload.favId
-      const favActualizado = state.favoritos.filter(producto => producto.id !== productIdRemove)
+      const productIdRemove = action.payload.favId;
+      const favActualizado = state.favoritos.filter(
+        (producto) => producto.id !== productIdRemove
+      );
 
       return {
         ...state,
         favoritos: favActualizado,
-      }
+      };
     }
 
     case FAVORITOS: {
       return {
         ...state,
-        favoritos: action.payload
+        favoritos: action.payload,
       };
     }
 
@@ -193,17 +199,33 @@ const rootReducer = (state = initialState, action) => {
     // CARRITO
 
     case AGREGAR_AL_CARRITO:
-      const { producto, cantidad } = action.payload;
-      const productoExistente = state.carrito.find(
-        (item) => item.id === producto.id
+      const productoExistenteAgregar = state.carrito.find(
+        (item) =>
+          item.id === action.payload.producto.id &&
+          item.idUser === action.payload.idUser
       );
 
-      if (productoExistente) {
+      const cantidadNueva =
+        (productoExistenteAgregar ? productoExistenteAgregar.cantidad : 0) +
+        action.payload.cantidad;
+
+      const cantidadMaxima = Math.min(
+        cantidadNueva,
+        action.payload.producto.stock
+      );
+
+      if (productoExistenteAgregar) {
         return {
           ...state,
           carrito: state.carrito.map((item) => {
-            if (item.id === producto.id) {
-              return { ...item, cantidad: item.cantidad + cantidad };
+            if (
+              item.id === action.payload.producto.id &&
+              item.idUser === action.payload.idUser
+            ) {
+              return {
+                ...item,
+                cantidad: cantidadMaxima,
+              };
             }
             return item;
           }),
@@ -211,17 +233,26 @@ const rootReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          carrito: [...state.carrito, { ...producto, cantidad }],
+          carrito: [
+            ...state.carrito,
+            {
+              ...action.payload.producto,
+              cantidad: cantidadMaxima,
+              idUser: action.payload.idUser,
+            },
+          ],
         };
       }
 
     case ACTUALIZAR_CANTIDAD_EN_CARRITO:
-      const { productoId, nuevaCantidad } = action.payload;
       return {
         ...state,
         carrito: state.carrito.map((item) => {
-          if (item.id === productoId) {
-            return { ...item, cantidad: nuevaCantidad };
+          if (
+            item.id === action.payload.productoId &&
+            item.idUser === action.payload.idUser
+          ) {
+            return { ...item, cantidad: action.payload.nuevaCantidad };
           }
           return item;
         }),
@@ -230,8 +261,11 @@ const rootReducer = (state = initialState, action) => {
     case INCREMENT_QTY: {
       return {
         ...state,
-        carrito: state.carrito.map((item) => {
-          if (item.id === action.payload.productId) {
+        carritoById: state.carritoById.map((item) => {
+          if (
+            item.id === action.payload.productId &&
+            item.idUser === action.payload.idUser
+          ) {
             return {
               ...item,
               cantidad: item.cantidad + 1,
@@ -246,11 +280,16 @@ const rootReducer = (state = initialState, action) => {
     case DECREMENT_QTY:
       return {
         ...state,
-        carrito: state.carrito.map((producto) => {
-          if (producto.id === action.payload.productId) {
+        carritoById: state.carritoById.map((producto) => {
+          if (
+            producto.id === action.payload.productId &&
+            producto.idUser === action.payload.idUser
+          ) {
+            const nuevaCantidad = Math.max(1, producto.cantidad - 1);
+
             return {
               ...producto,
-              cantidad: Math.max(1, producto.cantidad - 1),
+              cantidad: nuevaCantidad,
             };
           }
           return producto;
@@ -261,8 +300,64 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         carrito: state.carrito.filter(
-          (producto) => producto.id !== action.payload.productId
+          (producto) =>
+            producto.id !== action.payload.productId ||
+            producto.idUser !== action.payload.idUser
         ),
+      };
+
+    case ACTUALIZAR_USER_ID_EN_CARRITO:
+      return {
+        ...state,
+        carrito: state.carrito.map((producto) => {
+          if (
+            producto.id === action.payload.productId &&
+            producto.idUser === null
+          ) {
+            return {
+              ...producto,
+              idUser: action.payload.newUserId,
+            };
+          }
+          return producto;
+        }),
+      };
+
+    case GET_CARRITO_BY_ID:
+      // Inicializar un objeto para almacenar productos únicos por id y sumar las cantidades
+      const carritoById = {};
+
+      // Iterar sobre los productos y acumular las cantidades
+      state.carrito.forEach((prod) => {
+        if (prod.idUser === action.payload) {
+          const existingProduct = carritoById[prod.id];
+          if (existingProduct) {
+            // Si ya existe un producto con este id, sumar la cantidad
+            existingProduct.cantidad += prod.cantidad;
+            // Asegurarse de que la cantidad no supere el stock
+            existingProduct.cantidad = Math.min(
+              existingProduct.cantidad,
+              existingProduct.stock
+            );
+          } else {
+            // Si es un nuevo producto, agregarlo al objeto
+            carritoById[prod.id] = { ...prod };
+          }
+        }
+      });
+
+      // Convertir el objeto de productos únicos de vuelta a un array
+      const carritoByIdArray = Object.values(carritoById);
+
+      return {
+        ...state,
+        carritoById: carritoByIdArray,
+      };
+
+    case VACIAR_CARRITO:
+      return {
+        ...state,
+        carrito: [],
       };
 
     ////////////
@@ -318,13 +413,20 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case SET_DATA_PROFILE: {
-      return {
-        ...state,
-        clientProfile: action.payload.success,
-        dataProfile: action.payload,
-      };
+      if (action.payload.userData.role === "admin") {
+        return {
+          ...state,
+          dataProfile: action.payload,
+          adminProfile: true,
+        };
+      } else {
+        return {
+          ...state,
+          dataProfile: action.payload,
+          clientProfile: action.payload.success,
+        };
+      }
     }
-
     default:
       return {
         ...state,

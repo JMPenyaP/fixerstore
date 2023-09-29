@@ -17,7 +17,7 @@ const LoginAdmin = () => {
     setShowPassword(!showPassword);
   };
   const dispatch = useDispatch();
-  let admin = useSelector((state) => state.adminProfile);
+  const admin = useSelector((state) => state.adminProfile);
   useEffect(() => {
     setAdminPass(admin);
   }, [admin]);

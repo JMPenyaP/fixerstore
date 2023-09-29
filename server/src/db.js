@@ -29,8 +29,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Obtener el modelos desde sequelize
 const { User, Product, Category, Cart, PasswordReset, UserReviews, Order, OrderItems, Favorites } = sequelize.models;
 // Aca vendrian las relaciones/asociaciones
-/*Country.belongsToMany(Activity, { through: 'Country_Activities' });
-Activity.belongsToMany(Country, { through: 'Country_Activities' });*/
 User.hasMany(PasswordReset, { foreignKey: 'userId' });
 User.hasMany(UserReviews, { foreignKey: 'userId' });
 Category.hasMany(Product, { foreignKey: 'categoryId' });
@@ -44,9 +42,10 @@ Product.belongsToMany(Order, { through: OrderItems });
 User.hasMany(Order);
 User.belongsToMany(Favorites, { through: "userFavorite" }, { timestamps: false });
 Favorites.belongsToMany(User, { through: "userFavorite" }, { timestamps: false });
-
+OrderItems.belongsTo(UserReviews, { foreignKey: 'orderedProductoId' });
 
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
+
 
 
 module.exports = {

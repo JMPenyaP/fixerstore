@@ -39,3 +39,6 @@ export const BUSCA_COMB = 'BUSCA_COMB'
 export const SET_CAT = 'SET_CAT'
 export const SET_ORDER = 'SET_ORDER'
 export const SHOW_FILTERS = 'SHOW_FILTERS'
+export const ACTUALIZAR_USER_ID_EN_CARRITO = "ACTUALIZAR_USER_ID_EN_CARRITO";
+export const GET_CARRITO_BY_ID = "GET_CARRITO_BY_ID";
+export const VACIAR_CARRITO = 'VACIAR_CARRITO';

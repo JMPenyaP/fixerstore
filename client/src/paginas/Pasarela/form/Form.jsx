@@ -4,6 +4,8 @@ import Shipment from "./Shipment";
 import Pay from "./Pay";
 import styles from './Form.module.css'
 import { validate } from './validate'
+import { useSelector } from "react-redux";
+
 
 
 
@@ -11,9 +13,26 @@ const Form = () => {
 
     const [page,setPage]= useState(0)
 
+    const dataProfile = useSelector((state) => state.dataProfile);
+    useEffect(() => {
+        if (dataProfile !== null) {
+          const { userData } = dataProfile;
+      
+          setFormData({
+            ...formData,
+            name: userData.name,
+            lastName: userData.surname,
+            phoneNumber:userData.phone
+          });
+        }
+      }, [dataProfile]);
+
+
+    
+    console.log(dataProfile) 
     const [errors, setErrors] = useState({});
     const [formData,setFormData]= useState({
-        name: "",
+        name: '',
         lastName: "",
         phoneNumber: "",
         dni: "",
@@ -51,7 +70,7 @@ const Form = () => {
 
         />
         } else {
-            return <Pay />;
+            return <Pay formData={formData}/>;
         }
     }
     useEffect(() => {
