@@ -1,6 +1,5 @@
-
-const { Order, OrderItems, Cart, Product, Category } = require("../db")
-
+const { Order, OrderItems, Cart, Product, Category, User } = require("../db")
+const { createTransporter, sendEmail } = require('./utils/emailTransporter');
 
 const getOrderForId = async (req, res) => {
   const { id } = req.params;
@@ -80,12 +79,9 @@ const getOrderId = async (req, res) => {
   }
 };
 
-
 const createOrder = async (req, res) => {
   // datos que recibira por body 
   const { id, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body
-
-
 
   try {
     const carItems = await Cart.findAll({ where: { UserId: userId } })
@@ -112,6 +108,32 @@ const createOrder = async (req, res) => {
       await car.destroy()
     }
     await order.update({ totalAmount })
+    //================================================
+    const user = await User.findByPk(userId);
+    const email = user.email;
+    const transporter = createTransporter();
+    const mailOptions = {
+      from: '"Fixer Shoes" <no-reply@fixershoes.com>',
+      to: email,
+      subject: 'Orden de compra creada',
+      text: `Nos complace confirmarte que tu orden de compra ha sido creada con éxito. ¡Gracias por elegir Fixer Shoes!`,
+      html: `
+            <p>Estimado/a ${name},</p>
+            <p>Nos complace confirmarte que tu orden de compra ha sido creada con éxito. ¡Gracias por elegir Fixer Shoes!</p>
+            <p><b>Detalles de la orden:</b></p>
+            <ul>
+            <li>Número de Orden: ${order.id}</li>
+            <li>Fecha de Creación: ${order.createdAt}</li>
+            <li>Total de la Orden: $ ${totalAmount}</li>
+            </ul>
+            <p>Por favor, conserva este correo electrónico como confirmación. En breve, recibirás información adicional sobre el estado de tu orden y los detalles de envío.</p>
+            <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en contactarnos a través de pedidos@fixershoes.com o al +57 (312)5402667. Estamos aquí para ayudarte.</p>
+            <p>Gracias por confiar en nosotros para tus necesidades de compra. Esperamos que disfrutes de tus productos.</p>
+            <p>Atentamente,</p>
+            <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>`,
+    };
+    await sendEmail(transporter, mailOptions);
+    //===================================================
     res.status(200).json({ message: "Orden creada con exito" })
   } catch (error) {
     res.status(400).json({ error: error.message })
@@ -162,11 +184,25 @@ const getOrdersbyId = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+const updateOrderStatus = async(req,res)=>{
+ 
+  const {id, status} = req.body
 
+  try {
+    const order = await Order.findByPk(id)
+    console.log(order) 
+    if(!order){
+      res.status(200).json("Orden no encontrada")
+    }
 
+   order.status=status;
+   await order.save()
 
-
-
+    res.status(200).json(`Orden estado de la orden modiicada a ${status}`)
+  } catch (error) {
+  res.status(400).json({error:error.message})
+  }
+}
 module.exports = {
-  getOrderForId, createOrder, getOrdersbyId, getAllOrders, getOrderId
+  getOrderForId, createOrder, getOrdersbyId, getAllOrders, getOrderId,updateOrderStatus 
 }

@@ -44,8 +44,8 @@ User.belongsToMany(Favorites, { through: "userFavorite" }, { timestamps: false }
 Favorites.belongsToMany(User, { through: "userFavorite" }, { timestamps: false });
 OrderItems.belongsTo(UserReviews, { foreignKey: 'orderedProductoId' });
 
-
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
+
 
 
 module.exports = {

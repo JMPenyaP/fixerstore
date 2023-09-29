@@ -1,40 +1,28 @@
-const nodemailer = require('nodemailer');
 const { v4: uuidv4 } = require('uuid');
 const { User, PasswordReset } = require('../db');
 const bcrypt = require('bcryptjs');
-require("dotenv").config();
+const { createTransporter, sendEmail } = require('./utils/emailTransporter');
 
 //! Controlador para solicitar la recuperación de contraseña
 const requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
     try {
-        const { email } = req.query;
         const user = await User.findOne({ where: { email } });
-
         if (!user) {
             return res.status(400).json({ success: false, message: 'El correo electrónico no está registrado' });
         }
 
         const token = uuidv4();
-
         await PasswordReset.create({
             token,
             expirationDate: new Date(Date.now() + 3600000),
             status: 'pending',
             userId: user.id,
         });
-        const { EMAIL_HOST, EMAIL_RESET, EMAIL_RESET_PASS } = process.env;
-        const transporter = nodemailer.createTransport({
-            host: EMAIL_HOST,
-            port: 465,
-            secure: true,
-            auth: {
-                user: EMAIL_RESET,
-                pass: EMAIL_RESET_PASS,
-            },
-        });
-
+        //================================================
+        const transporter = createTransporter();
         const mailOptions = {
-            from: 'Fixer Shoes no-reply@fixershoes.com',
+            from: '"Fixer Shoes" <no-reply@fixershoes.com>',
             to: email,
             subject: 'Recuperación de contraseña',
             text: `Haga clic en el siguiente enlace para restablecer su contraseña: https://fixershoes.com/reset/${token}`,
@@ -48,9 +36,8 @@ const requestPasswordReset = async (req, res) => {
                 <p>Atentamente,</p>
                 <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>`,
         };
-
-        await transporter.sendMail(mailOptions);
-
+        await sendEmail(transporter, mailOptions);
+        //===================================================
         res.status(200).json({ success: true, message: 'Se ha enviado un correo electrónico para restablecer la contraseña' });
     } catch (error) {
         console.error(error);
@@ -65,7 +52,6 @@ const resetPassword = async (req, res) => {
         const { newPassword } = req.body;
 
         const resetToken = await PasswordReset.findOne({ where: { token } });
-
 
         if (!resetToken || resetToken.expirationDate < new Date() || resetToken.status !== 'pending') {
             return res.status(201).json({ success: false, message: 'Token inválido o expirado' });
@@ -84,7 +70,24 @@ const resetPassword = async (req, res) => {
 
         resetToken.status = 'completed';
         await resetToken.save();
-
+        //=================================================
+        const transporter = createTransporter();
+        const mailOptions = {
+            from: '"Fixer Shoes" <no-reply@fixershoes.com>',
+            to: user.email,
+            subject: 'Tu contraseña ha sido restablecida',
+            text: `Tu contraseña ha sido restablecida con éxito.`,
+            html: `
+                <p>Estimado/a ${user.name},</p>
+                <p>Tu contraseña ha sido restablecida con éxito.</p>
+                <p>Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nuestro equipo de soporte.</p>
+                <p>Gracias por confiar en nosotros.</p>
+                <p>Atentamente,</p>
+                <p><img src="https://fixershoes.com/assets/LOGO-FIXER-8-X-8-PNG.png"></p>`,
+        };
+        //await transporter.sendMail(mailOptions);
+        await sendEmail(transporter, mailOptions);
+        //=================================================
         res.status(200).json({ success: true, message: 'Contraseña restablecida con éxito' });
     } catch (error) {
         console.error(error);
