@@ -29,8 +29,6 @@ const getBuyTopUsersControllers = async () => {
 
     return userBuyCounts;
 
-
-
 }
 
 const getTopSoldProductsControllers = async (date, datetwo) => {
