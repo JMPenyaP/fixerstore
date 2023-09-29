@@ -1,38 +1,67 @@
-/* Contenedor principal */
+.global-container {
+  align-content: center;
+  background-color: #ffffff;
+}
+
+.cabecera {
+  width: 100%;
+  min-height: 90px;
+  height: auto;
+  background-color: #202549;
+  align-content: center;
+}
+
+.titulo-cabecera {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-cabecera {
+  float: left;
+  padding-left: 1em;
+}
+
+.slogan-cabecera {
+  float: right;
+  padding-left: 1em;
+  font-size: 1.6em;
+  color: white;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 .nosotros-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   text-align: left;
-  background-color: #f8f8f8;
-  border-top: 1px solid #0093d9;
-  border-bottom: 1px solid #0093d9;
+  background-color: #fffdfd;
+  /*      border-top: 1px solid #0093d9; 
+     border-bottom: 1px solid #0093d9;  */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
-  /* Evitar que los bordes agreguen al ancho máximo */
+  ;
 }
 
-/* Título de la sección */
 .titulo-seccion {
   font-size: 2em;
-  color: #0093d9;
+  color: #3cbbed;
   margin-bottom: 10px;
 }
 
-/* Texto importante */
 .texto-importante {
-  font-size: 1.2em;
+  font-size: 1.0em;
   line-height: 1.6;
-  color: #121212;
-  /* Cambiar el color de texto para mayor legibilidad */
 }
 
-/* Mision, Visión y Razón */
 .mision-vision-razon {
   margin-bottom: 30px;
+  font-size: 1.0em;
+  line-height: 1.6;
 }
 
 .mision-vision-razon h2 {
@@ -44,11 +73,8 @@
 .mision-vision-razon p {
   font-size: 1.2em;
   line-height: 1.6;
-  color: #121212;
-  /* Cambiar el color de texto para mayor legibilidad */
 }
 
-/* Lista de valores */
 .valores {
   font-size: 1.2em;
   line-height: 1.6;
@@ -75,25 +101,14 @@
   margin-top: 10px;
 }
 
-/* Hacerlo responsive */
-@media (max-width: 768px) {
+.imagen-derecha {
+  float: right;
+  margin-left: 20px;
+  max-width: 50%;
+}
 
-  /* Cambios para pantallas más pequeñas */
-  .nosotros-container {
-    padding: 10px;
-  }
-
-  .titulo-seccion {
-    font-size: 1.5em;
-  }
-
-  .texto-importante,
-  .mision-vision-razon p,
-  .valores li {
-    font-size: 1em;
-  }
-
-  .mision-vision-razon h2 {
-    font-size: 1.2em;
-  }
+.imagen-izquierda {
+  float: left;
+  margin-right: 20px;
+  max-width: 50%;
 }
