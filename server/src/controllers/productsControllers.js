@@ -49,15 +49,18 @@ const destroyProduct = async (id) => {
 
 }
 
+
 const updateProduct = async (id, name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {
 
   const product = await Product.findByPk(id);
 
   if (!product) {
-
     return "Producto no encontrado";
-
   }
+
+
+
+  // Asigna los valores actualizados
   product.name = name;
   product.categoryId = categoryId;
   product.firstImage = firstImage;
@@ -70,11 +73,9 @@ const updateProduct = async (id, name, categoryId, firstImage, carrouselImage, d
   product.status = status;
   product.stock = stock;
 
-
   await product.save();
 
   return "Producto Actualizado Correctamente";
-
 }
 
 const createProduct = async (name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock) => {

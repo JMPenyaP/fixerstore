@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     priceOfList: {
-      type: DataTypes.DECIMAL(10, 3), // 10 dígitos en total, 3 dígitos después del punto decimal
+      type: DataTypes.DECIMAL(10, 0), // Hasta 10 dígitos en total, sin decimales
       allowNull: false
     },
     statusOffer: {
