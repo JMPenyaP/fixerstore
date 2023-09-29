@@ -1,4 +1,97 @@
-const { createProduct, getAllProducts, getProductByName, getProductById } = require("../controllers/productsControllers");
+const { destroyProduct, createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct, getFilteredProducts } = require("../controllers/productsControllers");
+
+
+const destroyPorductHandler = async (req, res) => {
+
+    const { id } = req.params;
+
+    try {
+
+        const destroyProd = await destroyProduct(id);
+
+        res.status(200).json({ message: destroyProd });
+
+    } catch (error) {
+
+        res.status(404).json({ error: error.message });
+
+    }
+
+}
+
+const activeLogicProductHandler = async (req, res) => {
+
+    const { id } = req.params;
+
+    try {
+
+        const response = await activeLogicProduct(id);
+
+        res.status(200).json({ message: response })
+
+
+    } catch (error) {
+
+        res.status(404).json({ error: error.message });
+
+    }
+
+}
+
+const eraseLogicProductHandler = async (req, res) => {
+
+    const { id } = req.params;
+
+    try {
+
+        const response = await eraseLogicProduct(id);
+
+        res.status(200).json({ message: response })
+
+
+    } catch (error) {
+
+        res.status(404).json({ error: error.message });
+
+    }
+
+}
+
+const updateProductHandler = async (req, res) => {
+    const { id } = req.params;
+    const {
+        name,
+        categoryId,
+        firstImage,
+        carrouselImage,
+        description,
+        date,
+        priceOfList,
+        statusOffer,
+        offer,
+        status,
+        stock,
+    } = req.body;
+
+    try {
+
+        const response = await updateProduct(id, name, categoryId, firstImage, carrouselImage, description, date, priceOfList, statusOffer, offer, status, stock);
+
+        return res.status(200).json({ message: response });
+
+    } catch (error) {
+
+        return res.status(500).json({ error: error.message });
+    }
+};
+
+
+
+
+
+
+
+
 
 
 const createProductsHandler = async (req, res) => {
@@ -25,6 +118,7 @@ const getAllProductsHandler = async (req, res) => {
             const response = await getAllProducts();
             res.status(200).json({ success: true, data: response });
         }
+
     }
     catch (error) {
         res.status(400).json({ success: false, message: "Error getting Product(s). " + error.message });
@@ -43,11 +137,25 @@ const getProductIdHandler = async (req, res) => {
     }
 }
 
+const getFilteredProductsHandler = async (req, res) => {
+    
+    try {
+        const result = await getFilteredProducts(req.query)
+        res.status(200).json({data: result})
+    } catch (error) {
+        
+    }
+}
+
 
 module.exports = {
     createProductsHandler,
     getAllProductsHandler,
     getProductIdHandler,
-
+    updateProductHandler,
+    eraseLogicProductHandler,
+    activeLogicProductHandler,
+    destroyPorductHandler,
+    getFilteredProductsHandler,
 };
 

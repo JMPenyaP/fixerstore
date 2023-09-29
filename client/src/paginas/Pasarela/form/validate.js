@@ -7,7 +7,7 @@ export const validate =(formData,page)=>{
           errors.name = "El nombre es obligatorio.";
         } else if (formData.name.length < 3) {
           errors.name = "El nombre debe tener al menos 3 caracteres.";
-        } else if (!/^[a-zA-Z]+$/.test(formData.name)) {
+        } else if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
           errors.name = "El nombre solo debe contener letras.";
         }
         

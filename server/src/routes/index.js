@@ -11,6 +11,7 @@ const CartRouter = require('../routes/cartRouters');
 const orderRouter = require("../routes/orderRoutes")
 const favoriteRouters = require('../routes/favoriteRouters');
 const passRouter = require("./passRouters");
+const calculateMetricsRouter = require("./calculateMetricsRouters");
 const router = Router();
 
 router.use("/users", usersRouters);
@@ -24,5 +25,5 @@ router.use("/filtros", filtrosPreciosRouters);
 router.use("/order", orderRouter);
 router.use("/favorites", favoriteRouters);
 router.use("/passuser", passRouter);
-
+router.use('/metrics', calculateMetricsRouter);
 module.exports = router; // Exportamos el router configurado

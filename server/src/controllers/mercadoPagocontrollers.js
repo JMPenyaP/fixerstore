@@ -4,12 +4,13 @@ const cors = require("cors");
 const mercadopago = require("mercadopago");
 const { ACCESS_TOKEN } = process.env;
 
-	mercadopago.configure({
-		access_token: ACCESS_TOKEN,
-	});
+mercadopago.configure({
+	access_token: ACCESS_TOKEN,
+});
 
 
 const pagoOrder = (req, res) => {
+
 
 	let preference = {
 		items: [
@@ -17,16 +18,16 @@ const pagoOrder = (req, res) => {
 				title: req.body.description,
 				unit_price: Number(req.body.price),
 				quantity: Number(req.body.quantity),
-                currency_id:"COP"
+				currency_id: "COP"
 			}
 		],
 		back_urls: {
-			"success": "http://localhost:3000/",
-			"failure": "http://localhost:3000/",
-			"pending": "http://localhost:3000/"
+			"success": "http://localhost:3000/payment/success",
+			"failure": "http://localhost:3000/payment/failured",
+			"pending": "http://localhost:3000/",
 		},
 		auto_return: "approved",
-		form:req.body.formData.place
+		external_reference:`name:${req.body.formData.name},surname:${req.body.formData.lastName},phone:${req.body.formData.phoneNumber},retiro:${req.body.formData.place},cc:${req.body.formData.dni},total:${Number(req.body.price)}`,
 	};
 
 	mercadopago.preferences.create(preference)
@@ -40,5 +41,5 @@ const pagoOrder = (req, res) => {
 }
 
 module.exports = {
-    pagoOrder: pagoOrder
+	pagoOrder: pagoOrder
 };

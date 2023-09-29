@@ -2,7 +2,7 @@
 const { User, Product, Cart } = require('../db');
 
 const addToCartController = async (userId, products) => {
-
+    
     // Recorremos la lista de productos y los agregamos al carrito
     for (const productData of products) {
         const { id, cantidad } = productData; // Extraemos id y cantidad de cada producto

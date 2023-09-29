@@ -24,8 +24,8 @@ const Shipment = ({errors,formData,onInputChange}) => {
                 className={styles.inputRadio}
                 type="radio"
                 name="place"
-                value="C.C. Centro Mayor"
-                checked={selectedOption === "C.C. Centro Mayor"}
+                value="C.C.CentroMayor"
+                checked={selectedOption === "C.C.CentroMayor"}
                 onChange={handleRadioChange}
                 />C.C. Centro Mayor
             </label>
@@ -35,8 +35,8 @@ const Shipment = ({errors,formData,onInputChange}) => {
                 className={styles.inputRadio}
                 type="radio"
                 name="place"
-                value="C.C. Plaza Americas"
-                checked={selectedOption === "C.C. Plaza Americas"}
+                value="C.C.PlazaAmericas"
+                checked={selectedOption === "C.C.PlazaAmericas"}
                 onChange={handleRadioChange}
                 />C.C. Plaza Americas
             </label>

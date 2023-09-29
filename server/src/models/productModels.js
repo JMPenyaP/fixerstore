@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     priceOfList: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(10, 0), // Hasta 10 dígitos en total, sin decimales
       allowNull: false
     },
     statusOffer: {
@@ -55,9 +55,7 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    carItemId: {
-      type: DataTypes.INTEGER,
-    }
+
 
   }, { timestamps: false })
 }

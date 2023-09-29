@@ -6,11 +6,19 @@ import { clearProductName } from "../../redux/Actions/clearProductName";
 import style from "./Catalogo.module.css";
 import Footer from "../../components/Footer/Footer";
 import CardsArr from "../../components/Cards/CardsArr";
+import { setOrder } from "../../redux/Actions/setOrder";
+import { setNameSearch } from "../../redux/Actions/setNameSearch";
+import { setCategoryId } from "../../redux/Actions/setCategoryId";
+import { showFilters } from "../../redux/Actions/showFilters";
+import { setOrder2 } from "../../redux/Actions/setOrder2";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
 
-  const productosFiltrados = useSelector((state) => state.productosFiltrados);
+  // const productosFiltrados = useSelector((state) => state.productosFiltrados);
+  const productosFiltrados = useSelector((state) => state.prodBuscaComb);
+  const Products = useSelector((state) => state.showFilters)
+  console.log(productosFiltrados);
 
   /*  const handlerFilter = () => {
     dispatch(setFiltros())
@@ -18,7 +26,14 @@ const Catalogo = () => {
 
   useEffect(() => {
     dispatch(clearProductName());
-  }, [dispatch]);
+    return () => {
+      dispatch(showFilters(false))
+      dispatch(setOrder(''))
+      dispatch(setOrder2(''))
+      dispatch(setNameSearch(''))
+      dispatch(setCategoryId(0))
+    }
+  }, []);
 
   return (
     <>
@@ -29,12 +44,13 @@ const Catalogo = () => {
               <Filtros />
             </div>
 
-            {productosFiltrados.length ? 
+            {Products ?
             
               <CardsArr allProducts={productosFiltrados} />
             
             :
             <div >
+
               <Cards />
             </div>
             }
