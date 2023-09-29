@@ -33,6 +33,8 @@ import {
   SET_CAT,
   BUSCA_COMB,
   SHOW_FILTERS,
+  SET_ORDER,
+  SET_ORDER2,
 } from "./actionTypes";
 
 const initialState = {
@@ -57,6 +59,7 @@ const initialState = {
   search: '',
   categoryId: 0,
   order: '',
+  order2: '',
   prodBuscaComb: [],
   showFilters: false,
 };
@@ -401,6 +404,20 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         showFilters: action.payload,
+      }
+    }
+
+    case SET_ORDER: {
+      return {
+        ...state,
+        order: action.payload,
+      }
+    }
+
+    case SET_ORDER2: {
+      return {
+        ...state,
+        order2: action.payload,
       }
     }
 

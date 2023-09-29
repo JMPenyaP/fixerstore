@@ -37,6 +37,7 @@ import { setNameSearch } from './Actions/setNameSearch'
 import { buscaComb } from './Actions/buscaComb'
 import { setCategoryId } from './Actions/setCategoryId'
 import { setOrder } from './Actions/setOrder'
+import { setOrder2 } from "./Actions/setOrder2";
 import { showFilters } from './Actions/showFilters'
 
 export const createProd = createProduct;
@@ -54,4 +55,5 @@ export const setNameS = setNameSearch;
 export const busq = buscaComb;
 export const setCat = setCategoryId
 export const setOr = setOrder;
+export const setOr2 = setOrder2;
 export const show = showFilters;

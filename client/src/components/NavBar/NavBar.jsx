@@ -9,6 +9,7 @@ import logOutUser from "../../redux/Actions/logOutUser";
 import { buscaComb } from "../../redux/Actions/buscaComb";
 import { showFilters } from "../../redux/Actions/showFilters";
 import { setOrder } from "../../redux/Actions/setOrder";
+import { setOrder2 } from "../../redux/Actions/setOrder2";
 import { setCategoryId } from "../../redux/Actions/setCategoryId";
 
 const Navbar = () => {
@@ -28,6 +29,7 @@ const Navbar = () => {
   const dataProfile = useSelector((state) => state.dataProfile);
   const categoryId = useSelector((state) => state.categoryId)
   const order = useSelector((state) => state.order)
+  const order2 = useSelector((state) => state.order2)
   const search = useSelector((state) => state.search)
 
   useEffect(() => {
@@ -59,6 +61,7 @@ const Navbar = () => {
     dispatch(showFilters(false)); //
     dispatch(setNameSearch(''))
     dispatch(setOrder(''))
+    dispatch(setOrder2(''))
     dispatch(setCategoryId(0))
   }
 
@@ -66,14 +69,16 @@ const Navbar = () => {
     setShowMenu(!showMenu);
   };
 
-  const searchName = (name, categoryId, order) => {
+  const searchName = (name, categoryId, order, order2) => {
     /* setName(""); */
     /* dispatch(setNameSearch('')) */
     if (name.length < 1) {
       alert("debe buscar algo");
     } else {
+      dispatch(setOrder(''))
+      dispatch(setOrder2(''))
       dispatch(showFilters(true))
-      dispatch(buscaComb(name, categoryId, order))
+      dispatch(buscaComb(name, categoryId, order, order2))
       /* dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product */
     }
   };
@@ -125,7 +130,7 @@ const Navbar = () => {
           />
           {name.length > 0 ? (
             <Link to={currentPath === '/productos' ? '#' : '/productos'}>
-              <button onClick={() => searchName(name, categoryId, order )}>
+              <button onClick={() => searchName(name, categoryId, order, order2 )}>
                 <ion-icon name="search-outline"></ion-icon>
               </button>
             </Link>

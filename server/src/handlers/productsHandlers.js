@@ -1,4 +1,4 @@
-const { destroyProduct, createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct } = require("../controllers/productsControllers");
+const { destroyProduct, createProduct, getAllProducts, getProductByName, getProductById, updateProduct, eraseLogicProduct, activeLogicProduct, getFilteredProducts } = require("../controllers/productsControllers");
 
 
 const destroyPorductHandler = async (req, res) => {

@@ -111,7 +111,7 @@ const getProductById = async (id) => {
 };
 
 const getFilteredProducts = async (filters) => {
-  const { name, categoryId, order } = filters;
+  const { name, categoryId, order, order2 } = filters;
   const query = {};
   if (name) {
     query.name = {
@@ -124,7 +124,7 @@ const getFilteredProducts = async (filters) => {
     include: !categoryId || categoryId === '0'
       ? []
       : [{ model: Category, where: { id: categoryId } }],
-    order: order ? [["name", order]] : [],
+    order: order ? [["name", order]] : order2 ? [["priceOfList", order2]] : [] ,
   });
 
   return products;

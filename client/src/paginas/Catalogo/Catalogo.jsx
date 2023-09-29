@@ -10,6 +10,7 @@ import { setOrder } from "../../redux/Actions/setOrder";
 import { setNameSearch } from "../../redux/Actions/setNameSearch";
 import { setCategoryId } from "../../redux/Actions/setCategoryId";
 import { showFilters } from "../../redux/Actions/showFilters";
+import { setOrder2 } from "../../redux/Actions/setOrder2";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const Catalogo = () => {
     return () => {
       dispatch(showFilters(false))
       dispatch(setOrder(''))
+      dispatch(setOrder2(''))
       dispatch(setNameSearch(''))
       dispatch(setCategoryId(0))
     }
