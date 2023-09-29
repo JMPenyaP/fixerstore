@@ -184,11 +184,25 @@ const getOrdersbyId = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+const updateOrderStatus = async(req,res)=>{
+ 
+  const {id, status} = req.body
 
+  try {
+    const order = await Order.findByPk(id)
+    console.log(order) 
+    if(!order){
+      res.status(200).json("Orden no encontrada")
+    }
 
+   order.status=status;
+   await order.save()
 
-
-
+    res.status(200).json(`Orden estado de la orden modiicada a ${status}`)
+  } catch (error) {
+  res.status(400).json({error:error.message})
+  }
+}
 module.exports = {
-  getOrderForId, createOrder, getOrdersbyId, getAllOrders, getOrderId
+  getOrderForId, createOrder, getOrdersbyId, getAllOrders, getOrderId,updateOrderStatus 
 }

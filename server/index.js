@@ -5,7 +5,7 @@ const { createCategories } = require("./src/hardcoded/categories")
 const { createProducts } = require("./src/hardcoded/products")
 const { createAdmin } = require("./src/hardcoded/user")
 conn
-   .sync({ force: true })
+   .sync({ force: false })
    .then(() => {
       server.listen(PORT, () => {
          console.log(`Server listening on port ${PORT}`);
