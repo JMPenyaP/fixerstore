@@ -38,8 +38,8 @@
   padding: 20px;
   text-align: left;
   background-color: #fffdfd;
-  border-top: 1px solid #0093d9;
-  border-bottom: 1px solid #0093d9;
+  /*      border-top: 1px solid #0093d9; 
+     border-bottom: 1px solid #0093d9;  */
   min-height: 100vh;
   display: flex;
   flex-direction: column;

@@ -31,6 +31,8 @@ export default function Nosotros() {
                             <img src="https://fixershoes.com/assets/reciclar.jpg" alt="Economía circular" width="80px" />
                         </div>
                     </div>
+                    <br />
+                    <br />
                     <div className="mision-vision-razon">
                         <img src="https://fixershoes.com/assets/vitrina1.jpg" alt="Vitrina Fixer" className='imagen-izquierda' />
                         <h2>Misión:</h2>
@@ -38,6 +40,8 @@ export default function Nosotros() {
                         <h2>Visión:</h2>
                         <p>Ser reconocidos por nuestro compromiso con las personas y con el planeta.</p>
                     </div>
+                    <br />
+                    <br />
                     <div>
                         <img src="https://fixershoes.com/assets/puerta_fixer.jpg" alt="Puerta Fixer" className='imagen-derecha' />
                         <h3>Razón de ser:</h3>
