@@ -7,6 +7,8 @@
     gap: 5px;
 }
 
+
+
 .titulo {
     border: none;
     font-size: 15px;
@@ -14,11 +16,10 @@
     position: relative;
     color: white;
     transition: 0.2s;
-    background-color: #3cbbed;
+    background-color: #15214a;
     transition: 0.3s;
     font-family: "Gotham", sans-serif;
     width: auto;
-    margin: 0px;
 }
 
 .form {
