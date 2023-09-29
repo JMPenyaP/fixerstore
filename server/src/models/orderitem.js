@@ -7,8 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define("OrderItems", {
 
     OrderId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     ProductId: {

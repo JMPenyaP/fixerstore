@@ -81,16 +81,16 @@ const getOrderId = async (req, res) => {
 
 const createOrder = async (req, res) => {
   // datos que recibira por body 
-  const { id, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body
+  const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body.form
 
   try {
     const carItems = await Cart.findAll({ where: { UserId: userId } })
-
+    console.log(carItems)
     if (carItems.length === 0) {
       return res.status(400).json({ message: 'El carrito está vacío' });
     }
     let totalAmount = 0;
-    const order = await Order.create({ id, totalAmount, status: "pending", UserId: userId, name, surname, phone, cc, payment, retiro, city, address, department });
+    const order = await Order.create({ idMp, totalAmount, status: "pending", UserId: userId, name, surname, phone, cc, payment, retiro, city, address, department });
     for (const car of carItems) {
       const product = await Product.findByPk(car.ProductId)
       if (!product) {
