@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Product } = require("../db");
+const { Product, Category } = require("../db");
 //! Crear Producto
 
 
@@ -85,21 +85,18 @@ const createProduct = async (name, categoryId, firstImage, carrouselImage, descr
 
 };
 
-
 //! Obtener todos los Productos
 const getAllProducts = async () => {
   const allProducts = await Product.findAll();
   return allProducts;
-
 };
 
-//! Obtener Producto por Nombre
+//! Obtener Producto por name
 const getProductByName = async (name) => {
-
   const productName = await Product.findAll({
     where: {
       name: {
-        [Op.iLike]: '%' + name + '%',
+        [Op.iLike]: "%" + name + "%",
       },
     },
   });
@@ -108,13 +105,37 @@ const getProductByName = async (name) => {
 };
 
 const getProductById = async (id) => {
-  const productId = await Product.findByPk(id)
+  const productId = await Product.findByPk(id);
 
+  return productId;
+};
 
-  return productId
-}
+const getFilteredProducts = async (filters) => {
+  const { name, categoryId, order, order2 } = filters;
+  const query = {};
+  if (name) {
+    query.name = {
+      [Op.iLike]: `%${name}%`,
+    };
+  }
+  
+  const products = await Product.findAll({
+    where: query,
+    include: !categoryId || categoryId === '0'
+      ? []
+      : [{ model: Category, where: { id: categoryId } }],
+    order: order ? [["name", order]] : order2 ? [["priceOfList", order2]] : [] ,
+  });
 
+  return products;
+};
 
+/* User.findAndCountAll({
+  include: [
+    { model: Profile, where: { active: true } }
+  ],
+  limit: 3
+}); */
 
 module.exports = {
   createProduct,
@@ -124,5 +145,6 @@ module.exports = {
   updateProduct,
   eraseLogicProduct,
   activeLogicProduct,
-  destroyProduct
+  destroyProduct,
+  getFilteredProducts,
 };

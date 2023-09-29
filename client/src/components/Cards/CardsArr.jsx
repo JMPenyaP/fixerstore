@@ -1,33 +1,32 @@
 import Card from "../Card/Card";
-import styles from './Cards.module.css'
+import styles from "./Cards.module.css";
 
-const CardsArr = ({allProducts}) => {
-    const allProductsFiltrado = allProducts?.filter(product => product.status === true)
-    return ( 
-        <>
-            <div className={styles.divMain}>
-                 {allProducts.length === 0 ? (
-                     <div>
-                         <span>LOADING...</span>
-                     </div>
-                 ) : (
-                 <div className={styles.divCardsArr}>
-                     {allProductsFiltrado?.map((product) => (
+const CardsArr = ({ allProducts }) => {
+  const allProductsFiltrado = allProducts?.filter(
+    (product) => product.status === true
+  );
+  return (
+    <>
+      <div className={styles.divMain}>
+        {allProductsFiltrado.length === 0 ? (
+          <div>
+            <span>No se encontraron productos</span>
+          </div>
+        ) : (
+          <div className={styles.divCardsArr}>
+            {allProductsFiltrado.map((product) => (
+              <div key={product.id}>
+                <Card product={product} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
 
-                        <div key={product.id}>
-                            <Card product={product} />
-                        </div>
-                        
-                     ))}
-                </div>
-                 )}
-            </div>
-        </>
-     );
-}
- 
 export default CardsArr;
-
 
 // import React from 'react';
 // import { Link } from 'react-router-dom'; // Import the Link component from your routing library
@@ -42,7 +41,6 @@ export default CardsArr;
 
 //     const shouldRenderPage = allVideoGames.length > perPage;
 
-
 //     return (
 //         <>
 //             <div className={styles.divCards}>
@@ -55,7 +53,7 @@ export default CardsArr;
 //                     allVideoGames.slice((page - 1) * perPage, (page - 1) * perPage + perPage)?.map((elemt) => (
 //                         <div className={styles.divCard} key={elemt.id}>
 //                                 <Link to={`/detail/${elemt.id}`}>
-                                    
+
 //                                     <Card name={elemt.name} image={elemt.image} genres={elemt.genres} key={elemt.id} />
 //                                 </Link>
 //                             </div>
