@@ -1,47 +1,35 @@
-// import React from "react";
-// import { useDispatch } from "react-redux";
-// import { orderPrice } from "../../redux/Actions/orderPrice";
-// import { useState } from "react";
-// import style from './select.module.css'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrder2 } from "../../redux/Actions/setOrder2";
+import { buscaComb } from "../../redux/Actions/buscaComb";
+import { setOrder } from "../../redux/Actions/setOrder";
 
-// export default function OrderPrecio({orderName,
-//   setOrderName,
-//   orderPrecio,
-//   setOrderPrecio,}) {
+export default function OrderPrecio() {
+  const dispatch = useDispatch();
 
-//   const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.categoryId)
+  const name = useSelector((state) => state.search)
+  const order2 = useSelector((state) => state.order2)
 
-//   const handleSelect = (value) => {
-//     setOrderName("DEFAULT");
-//     switch (value) {
-//       case "Ascendente":
-//         setOrderPrecio("Ascendente");
-//         dispatch(orderPrice(value));
-//         break;
+  const handleSelect = (value) => {
+    dispatch(setOrder(''))
+    dispatch(setOrder2(value));
+    dispatch(buscaComb(name, categoryId, '', value));
+  };
 
-//       default:
-//         setOrderPrecio("Descendente");
-//         dispatch(orderPrice(value));
-//         break;
-//     }
-//   };
-
-//   return (
-//     <>
-//       <div>
-//       <select
-//           onChange={(event) => handleSelect(event.target.value)}
-//           defaultValue="DEFAULT"
-//           value={orderPrecio}
-//           className={style.selectBox}
-//         >
-//           <option value="DEFAULT" disabled>
-//             Precio
-//           </option>
-//           <option value="Ascendente">Ascendente</option>
-//           <option value="Descendente">Descendente</option>
-//         </select>
-//       </div>
-//     </>
-//   );
-// }
+  return (
+    <>
+      <div>
+        <select
+          onChange={(event) => handleSelect(event.target.value)}
+          defaultValue="DEFAULT"
+          value={order2}
+        >
+          <option value="DEFAULT">Precio</option>
+          <option value="ASC">Ascendente</option>
+          <option value="DESC">Descendente</option>
+        </select>
+      </div>
+    </>
+  );
+}

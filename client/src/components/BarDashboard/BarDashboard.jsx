@@ -24,7 +24,7 @@ const BarDashboard = () => {
     const [inicial, setInicial] = useState(null)
     useEffect(()=> {
         if(dataProfileActual !== null) {
-            if (dataProfileActual.userData) {
+            if (dataProfileActual.userData.name) {
                 setEmail(dataProfileActual.userData.email)
                 setName(dataProfileActual.userData.name + " " + dataProfileActual.userData.surname)
                 setInicial(dataProfileActual.userData.name[0])

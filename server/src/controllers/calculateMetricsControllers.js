@@ -3,6 +3,36 @@ const { Op } = require('sequelize');
 
 
 
+const getBuyTopUsersControllers = async () => {
+
+
+    const buyCounts = await Order.findAll({
+        attributes: [
+            'UserId', // ID del usuario
+            [conn.fn('COUNT', conn.col('id')), 'totalOrders'], // Conteo de órdenes por usuario
+        ],
+        group: ['UserId'], // Agrupar por ID de usuario
+    });
+
+    // Mapear los resultados para obtener información adicional de los usuarios
+    const userBuyCounts = await Promise.all(
+        buyCounts.map(async (result) => {
+            const userId = result.UserId;
+            const totalOrders = parseInt(result.dataValues.totalOrders);
+            const user = await User.findByPk(userId);
+            return {
+                user,
+                totalOrders,
+            };
+        })
+    );
+
+    return userBuyCounts;
+
+
+
+}
+
 const getTopSoldProductsControllers = async (date, datetwo) => {
 
 
@@ -59,7 +89,8 @@ const calculateMetricsControllers = async () => {
 module.exports = {
 
     calculateMetricsControllers,
-    getTopSoldProductsControllers
+    getTopSoldProductsControllers,
+    getBuyTopUsersControllers
 
 }
 

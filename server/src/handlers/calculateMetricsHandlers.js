@@ -1,5 +1,23 @@
-const { calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
+const { getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
 
+
+
+const getBuyTopUsersHandlers = async (req, res) => {
+
+    try {
+
+        const response = await getBuyTopUsersControllers();
+
+        return res.status(200).json(response);
+
+    } catch (error) {
+
+        return res.status(404).json({ error: error.message });
+
+    }
+
+
+}
 
 const getTopSoldProductsHandlers = async (req, res) => {
 
@@ -52,6 +70,7 @@ const calculateMetricsHandlers = async (req, res) => {
 module.exports = {
 
     calculateMetricsHandlers,
-    getTopSoldProductsHandlers
+    getTopSoldProductsHandlers,
+    getBuyTopUsersHandlers
 
 }
