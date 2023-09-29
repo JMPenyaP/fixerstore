@@ -24,6 +24,8 @@ import Pasarela from "./paginas/Pasarela/Pasarela";
 import DashUser from "./paginas/DashUser/DashUser";
 import { setDataProfile } from "./redux/Actions/setDataProfile";
 import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
+import Success from "./paginas/Pasarela/payStatus/Success";
+import Failured from './paginas/Pasarela/payStatus/Failured'
 
 function App() {
   const navigate = useNavigate();
@@ -50,7 +52,9 @@ function App() {
     location.pathname === "/registro" ||
     location.pathname === "/resetPass" ||
     location.pathname === "/reset" ||
-    location.pathname === "/payment";
+    location.pathname === "/payment" ||
+    location.pathname === "/payment/success" ||
+    location.pathname === "/payment/failured"
   useEffect(() => {
     if (!adminPass && location.pathname === "/dashboard") {
       navigate("/admin");
@@ -113,6 +117,8 @@ function App() {
     }
   }, [dataProfile]);
 
+  console.log(client)
+
   return (
     <>
       {!isLoginPage && <Navbar />}
@@ -126,15 +132,29 @@ function App() {
         <Route path="/searchedprod/:name" element={<SearchedProduct />} />
         <Route path="/carrodecompras" element={<Carrito />} />
         <Route path="/login" element={<LoginUser />} />
-        <Route path="/payment" element={<Pasarela />} />
         <Route
           path="/user/:id"
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
-        />{" "}
-        <Route path="/nosotros" element={<Nosotros />} />
+        />
+        <Route path="/us" element={<Nosotros />} />
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
+        
+        <Route 
+        path="/payment"
+        element={true===true ? <Pasarela /> : <Navigate to="/" />}
+        />
+        <Route 
+        path="/payment/success"
+        element={true===true ? <Success /> : <Navigate to="/" />}
+        />
+        <Route 
+        path="/payment/failured"
+        element={true===true ? <Failured /> : <Navigate to="/" />}
+        />   
+            
+            
       </Routes>
     </>
   );
