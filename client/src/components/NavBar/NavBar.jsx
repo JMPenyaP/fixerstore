@@ -1,10 +1,15 @@
 import style from "./NavBar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { setFilters, getProductName } from "../../redux/actions";
+import { setNameSearch } from "../../redux/Actions/setNameSearch";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import logOutUser from "../../redux/Actions/logOutUser";
+import { buscaComb } from "../../redux/Actions/buscaComb";
+import { showFilters } from "../../redux/Actions/showFilters";
+import { setOrder } from "../../redux/Actions/setOrder";
+import { setCategoryId } from "../../redux/Actions/setCategoryId";
 
 const Navbar = () => {
   const [name, setName] = useState("");
@@ -14,8 +19,14 @@ const Navbar = () => {
   const [cartLong, setCartLong] = useState(0);
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const carrito = useSelector((state) => state.carrito);
   const dataProfile = useSelector((state) => state.dataProfile);
+  const categoryId = useSelector((state) => state.categoryId)
+  const order = useSelector((state) => state.order)
+  const search = useSelector((state) => state.search)
 
   useEffect(() => {
     if (dataProfile !== null) {
@@ -30,26 +41,36 @@ const Navbar = () => {
       setCartLong(carrito.length);
     }
   }, [dataProfile, carrito]);
-
+  
   const handleChange = (event) => {
     const updatedName = event.target.value; // MIENTRAS CAMBIA EL INPUT TAMBIEN LO HACE EL NAME
     setName(updatedName);
-
+    dispatch(setNameSearch(updatedName))
     if (updatedName.length === 0) {
       dispatch(setFilters(false)); //
     }
   };
+  
+  const handleClick = () => {
+    dispatch(showFilters(false)); //
+    dispatch(setNameSearch(''))
+    dispatch(setOrder(''))
+    dispatch(setCategoryId(0))
+  }
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const searchName = () => {
-    setName("");
+  const searchName = (name, categoryId, order) => {
+    /* setName(""); */
+    /* dispatch(setNameSearch('')) */
     if (name.length < 1) {
       alert("debe buscar algo");
     } else {
-      dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product
+      dispatch(showFilters(true))
+      dispatch(buscaComb(name, categoryId, order))
+      /* dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product */
     }
   };
 
@@ -73,7 +94,7 @@ const Navbar = () => {
           </button>
         </Link>
         <Link to="/productos">
-          <button>
+          <button onClick={() => handleClick()}>
             <h5>Productos</h5>
           </button>
         </Link>
@@ -90,12 +111,12 @@ const Navbar = () => {
         <input
           type="search"
           placeholder="Buscar Productos"
-          value={name}
+          value={search}
           onChange={handleChange}
         />
         {name.length > 0 ? (
-          <Link to={`/searchedprod/${name}`}>
-            <button onClick={searchName}>
+          <Link to={currentPath === '/productos' ? '#' : '/productos'}>
+            <button onClick={() => searchName(name, categoryId, order )}>
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </Link>

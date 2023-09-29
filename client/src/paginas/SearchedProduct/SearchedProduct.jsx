@@ -13,7 +13,7 @@ const SearchedProduct = () => {
 
   const [filtroActivo, setFiltroActivo] = useState(false);
 
-  const products = useSelector((state) => state.productByName);
+  const products = useSelector((state) => state.prodBuscaComb);
   const productName = useSelector((state) => state.productName);
   const productsData = products && products.data; 
   const [isLoading, setIsLoading] = useState(true); 

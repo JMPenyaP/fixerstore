@@ -9,6 +9,7 @@ export const HISTORIAL = "HISTORIAL";
 export const FAVORITOS = "FAVORITOS";
 export const SAVE_FAV = "SAVE_FAV";
 export const DELETE_FAV = "DELETE_FAV";
+
 //
 export const CREATED_PRODUCT = "CREATED_PRODUCT";
 export const NEW_PRODUCT = "NEW_PRODUCT";
@@ -32,3 +33,9 @@ export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const USER_CHANGE = "USER_CHANGE";
 export const SET_CHANGE = "SET_CHANGE";
 export const SET_DATA_PROFILE = "SET_DATA_PROFILE";
+//
+export const SET_NAME_SEARCH = 'SET_NAME_SEARCH'
+export const BUSCA_COMB = 'BUSCA_COMB'
+export const SET_CAT = 'SET_CAT'
+export const SET_ORDER = 'SET_ORDER'
+export const SHOW_FILTERS = 'SHOW_FILTERS'

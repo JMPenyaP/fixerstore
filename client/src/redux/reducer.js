@@ -25,7 +25,11 @@ import {
   FAVORITOS,
   SET_DATA_PROFILE,
   SAVE_FAV,
-  DELETE_FAV
+  DELETE_FAV,
+  SET_NAME_SEARCH,
+  SET_CAT,
+  BUSCA_COMB,
+  SHOW_FILTERS,
 } from "./actionTypes";
 
 const initialState = {
@@ -46,6 +50,11 @@ const initialState = {
   userChanges: null,
   historial: [],
   favoritos: [],
+  search: '',
+  categoryId: 0,
+  order: '',
+  prodBuscaComb: [],
+  showFilters: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -93,7 +102,7 @@ const rootReducer = (state = initialState, action) => {
     case HISTORIAL: {
       return {
         ...state,
-        historial: action.payload,
+        historial: action.payload.orders,
       }
     }
 
@@ -172,62 +181,8 @@ const rootReducer = (state = initialState, action) => {
         productosFiltrados: filteredProductsByCategory,
       };
 
-    case ORDER_LETTER: {
-      const order = action.payload;
-      if (order === "Ascendente") {
-        const filtroAsc = [...state.productosFiltrados];
-        filtroAsc.sort((a, b) => a.name.localeCompare(b.name));
-        console.log(filtroAsc);
-        return {
-          ...state,
-          productosFiltrados: filtroAsc,
-        };
-      } else if (order === "Descendente") {
-        const filtroDesc = [...state.productosFiltrados];
-        filtroDesc.sort((a, b) => a.name.localeCompare(b.name));
-        filtroDesc.reverse();
-        console.log(filtroDesc);
-        return {
-          ...state,
-          productosFiltrados: filtroDesc,
-        };
-      } else {
-        console.log(state.allProducts);
-        return {
-          ...state,
-          productosFiltrados: state.productosFiltrados,
-        };
-      }
-    }
-
-    case ORDER_PRICE: {
-      const precio = action.payload;
-      if (precio === "Ascendente") {
-        const precioAsc = [...state.productosFiltrados];
-        precioAsc.sort((a, b) => a.priceOfList - b.priceOfList);
-        console.log(precioAsc);
-        return {
-          ...state,
-          productosFiltrados: precioAsc,
-        };
-      } else if (precio === "Descendente") {
-        const precioDesc = [...state.productosFiltrados];
-        precioDesc.sort((a, b) => b.priceOfList - a.priceOfList);
-        console.log(precioDesc);
-        return {
-          ...state,
-          productosFiltrados: precioDesc,
-        };
-      } else {
-        console.log(state.allProducts);
-        return {
-          ...state,
-          productosFiltrados: state.productosFiltrados,
-        };
-      }
-    }
-
-    case CLEAR_PRODUCT_NAME: {
+      
+      case CLEAR_PRODUCT_NAME: {
       return {
         ...state,
         productName: false,
@@ -325,6 +280,35 @@ const rootReducer = (state = initialState, action) => {
         productosFiltrados: action.payload,
       };
 
+    case SET_NAME_SEARCH: {
+      return {
+        ...state,
+        search: action.payload
+      }
+    }
+
+    case SET_CAT: {
+      return {
+        ...state,
+        categoryId: action.payload,
+      }
+    }
+
+    case BUSCA_COMB: {
+      return {
+        ...state,
+        prodBuscaComb:action.payload,
+        showFilters: true,
+      }
+    }
+
+    case SHOW_FILTERS: {
+      return {
+        ...state,
+        showFilters: action.payload,
+      }
+    }
+
     case USER_PROFILE: {
       return {
         ...state,
@@ -349,3 +333,58 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
+
+      // case ORDER_LETTER: {
+      //   const order = action.payload;
+      //   if (order === "Ascendente") {
+      //     const filtroAsc = [...state.productosFiltrados];
+      //     filtroAsc.sort((a, b) => a.name.localeCompare(b.name));
+      //     console.log(filtroAsc);
+      //     return {
+      //       ...state,
+      //       productosFiltrados: filtroAsc,
+      //     };
+      //   } else if (order === "Descendente") {
+      //     const filtroDesc = [...state.productosFiltrados];
+      //     filtroDesc.sort((a, b) => a.name.localeCompare(b.name));
+      //     filtroDesc.reverse();
+      //     console.log(filtroDesc);
+      //     return {
+      //       ...state,
+      //       productosFiltrados: filtroDesc,
+      //     };
+      //   } else {
+      //     console.log(state.allProducts);
+      //     return {
+      //       ...state,
+      //       productosFiltrados: state.productosFiltrados,
+      //     };
+      //   }
+      // }
+  
+      // case ORDER_PRICE: {
+      //   const precio = action.payload;
+      //   if (precio === "Ascendente") {
+      //     const precioAsc = [...state.productosFiltrados];
+      //     precioAsc.sort((a, b) => a.priceOfList - b.priceOfList);
+      //     console.log(precioAsc);
+      //     return {
+      //       ...state,
+      //       productosFiltrados: precioAsc,
+      //     };
+      //   } else if (precio === "Descendente") {
+      //     const precioDesc = [...state.productosFiltrados];
+      //     precioDesc.sort((a, b) => b.priceOfList - a.priceOfList);
+      //     console.log(precioDesc);
+      //     return {
+      //       ...state,
+      //       productosFiltrados: precioDesc,
+      //     };
+      //   } else {
+      //     console.log(state.allProducts);
+      //     return {
+      //       ...state,
+      //       productosFiltrados: state.productosFiltrados,
+      //     };
+      //   }
+      // }

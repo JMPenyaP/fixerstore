@@ -28,10 +28,16 @@ import { setFilter } from "./Actions/setearFilter";
 import { loginAdmin } from "./Actions/loginAdmin";
 import { loginUser } from './Actions/loginUser'
 import { modifyData } from './Actions/modifyData'
-import { userHistorial } from './Actions/userHistorial'
 import { userFavoritos } from './Actions/userFavoritos'
 import { crearFavoritos } from './Actions/crearFavoritos'
 import { borrarFavoritos } from './Actions/borrarFavoritos'
+//
+import { userHistorial } from './Actions/userHistorial'
+import { setNameSearch } from './Actions/setNameSearch' 
+import { buscaComb } from './Actions/buscaComb'
+import { setCategoryId } from './Actions/setCategoryId'
+import { setOrder } from './Actions/setOrder'
+import { showFilters } from './Actions/showFilters'
 
 export const createProd = createProduct;
 export const getProductName = getProductByName;
@@ -39,7 +45,13 @@ export const setFilters = setFilter;
 export const login = loginAdmin;
 export const loginU = loginUser;
 export const modify = modifyData;
-export const historial = userHistorial;
 export const favoritos = userFavoritos;
 export const creaFav = crearFavoritos;
 export const borraFav = borrarFavoritos;
+//
+export const historial = userHistorial;
+export const setNameS = setNameSearch;
+export const busq = buscaComb;
+export const setCat = setCategoryId
+export const setOr = setOrder;
+export const show = showFilters;
