@@ -26,6 +26,8 @@ import { setDataProfile } from "./redux/Actions/setDataProfile";
 import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
 import Success from "./paginas/Pasarela/payStatus/Success";
 import Failured from './paginas/Pasarela/payStatus/Failured'
+import ContactForm from './paginas/Contactanos/ContactForm'; 
+
 
 function App() {
   const navigate = useNavigate();
@@ -142,6 +144,9 @@ function App() {
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
+        <Route path="/contactanos" element={<ContactForm/>} />
+
+
 
         <Route
           path="/payment"
