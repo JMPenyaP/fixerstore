@@ -46,6 +46,7 @@ OrderItems.belongsTo(UserReviews, { foreignKey: 'ProductId' });
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
 Favorites.belongsTo(User);
 Favorites.belongsTo(Product);
+
 module.exports = {
     ...sequelize.models, // exporta los modelos
     conn: sequelize,     // exporta la conexión { conn } = require('./db.js');
