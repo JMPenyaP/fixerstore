@@ -37,6 +37,7 @@ export const SET_DATA_PROFILE = "SET_DATA_PROFILE";
 export const SET_NAME_SEARCH = 'SET_NAME_SEARCH'
 export const BUSCA_COMB = 'BUSCA_COMB'
 export const SET_CAT = 'SET_CAT'
+export const SET_BUSCA_COMB = 'SET_BUSCA_COMB'
 export const SET_ORDER = 'SET_ORDER'
 export const SET_ORDER2 = 'SET_ORDER2'
 export const SHOW_FILTERS = 'SHOW_FILTERS'

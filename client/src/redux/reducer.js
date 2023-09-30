@@ -35,6 +35,7 @@ import {
   SHOW_FILTERS,
   SET_ORDER,
   SET_ORDER2,
+  SET_BUSCA_COMB,
 } from "./actionTypes";
 
 const initialState = {
@@ -397,6 +398,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         prodBuscaComb:action.payload,
         showFilters: true,
+      }
+    }
+
+    case SET_BUSCA_COMB: {
+      return {
+        ...state,
+        prodBuscaComb: [],
       }
     }
 

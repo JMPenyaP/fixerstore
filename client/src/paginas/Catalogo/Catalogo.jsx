@@ -11,6 +11,7 @@ import { setNameSearch } from "../../redux/Actions/setNameSearch";
 import { setCategoryId } from "../../redux/Actions/setCategoryId";
 import { showFilters } from "../../redux/Actions/showFilters";
 import { setOrder2 } from "../../redux/Actions/setOrder2";
+import { setBuscaComb } from "../../redux/Actions/setBuscaComb";
 
 const Catalogo = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,9 @@ const Catalogo = () => {
       dispatch(setOrder2(''))
       dispatch(setNameSearch(''))
       dispatch(setCategoryId(0))
+      dispatch(setBuscaComb([]))
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

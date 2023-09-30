@@ -20,12 +20,13 @@ export default function OrderPrecio() {
   return (
     <>
       <div>
+        <h2>PRECIO</h2>
         <select
           onChange={(event) => handleSelect(event.target.value)}
           defaultValue="DEFAULT"
           value={order2}
         >
-          <option value="DEFAULT">Precio</option>
+          <option value="DEFAULT" disabled>Selecciona</option>
           <option value="ASC">Ascendente</option>
           <option value="DESC">Descendente</option>
         </select>
