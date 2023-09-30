@@ -31,9 +31,10 @@ const Favoritos = () => {
       setVisibleCards((prevVisibleCards) => prevVisibleCards + cardsPerPage);
     };
 
-    if (dataProfileActual && favoritos.length === 0) {
-      dispatch(getFav({ userData }));
-    }
+
+
+    dispatch(getFav({ userData }));
+
 
     // Agrega un evento de desplazamiento para cargar más cards cuando sea necesario
     window.addEventListener("scroll", loadMoreCards);
@@ -41,7 +42,7 @@ const Favoritos = () => {
       // Limpia el evento de desplazamiento al desmontar el componente
       window.removeEventListener("scroll", loadMoreCards);
     };
-  }, [dispatch, favoritos, userData, visibleCards]);
+  }, [dispatch, visibleCards]);
 
   return (
     <div className={style.contenedor}>
@@ -53,18 +54,19 @@ const Favoritos = () => {
         dataLength={visibleCards}
         next={() => { }}
         hasMore={hasMore}
-        loader={<Spinner />}
+        loader={favoritos.length > 0 && <Spinner />}
       >
         <div className={style.cards}>
-          {favoritos.slice(0, visibleCards).map((card) => (
-            <div key={card.id} className={style.cardWrapper}>
-              <Card product={card} isFavorito={true} className={style.card} />
-            </div>
-          ))}
+          {favoritos?.length > 0 ? (
+            favoritos.slice(0, visibleCards)?.map((card) => (
+              <div key={card.id} className={style.cardWrapper}>
+                <Card product={card} isFavorito={true} className={style.card} />
+              </div>
+            ))
+          ) : <p>No tienes productos favoritos.</p>}
         </div>
       </InfiniteScroll>
 
-      {favoritos.length === 0 && <p>No tienes productos favoritos.</p>}
     </div >
   );
 };
