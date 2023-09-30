@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './ContanctForm.css';
-
+import axios from "axios";
 
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
-    mensaje: '',
     telefono: '',
+    mensaje: '',
   });
 
   const handleChange = (e) => {
@@ -16,22 +16,35 @@ const ContactForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
+      console.log(formData);
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos del formulario
-    alert(`Mensaje enviado:\nNombre: ${formData.nombre}\nEmail: ${formData.email}\nTeléfono: ${formData.telefono}\nMensaje: ${formData.mensaje}`);
-    // Puedes utilizar fetch() o axios para realizar una solicitud al servidor
+    try {
+      const response = await axios.post('http://localhost:3001/mailing/contact', 
+       formData,
+      );
 
-    //Limpiar el formulario
-    console.log('Formulario enviado:', formData);
-    setFormData({
-      nombre: '',
-      email: '',
-      mensaje: '',
-      telefono: '',
-    });
+      if (response.status === 200) {
+        // La solicitud se completó con éxito, puedes mostrar un mensaje de éxito
+        alert('Mensaje enviado con éxito');
+        
+        // Limpiar el formulario
+        setFormData({
+          nombre: '',
+          email: '',
+          telefono: '',
+          mensaje: '',
+        });
+      } else {
+        // La solicitud no se completó con éxito, maneja el error según tus necesidades
+        alert('Error al enviar el formulario');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
   };
-
+  
   return (
     
     <div className="container">
@@ -65,6 +78,7 @@ const ContactForm = () => {
           onChange={handleChange}
           required
         />
+  
 
         <label htmlFor="telefono">Teléfono:</label>
         <input
