@@ -22,7 +22,6 @@ const getFavoriteHandlers = async (req, res) => {
     }
 
 
-
 }
 
 
@@ -31,9 +30,7 @@ const addfavoriteHandlers = async (req, res) => {
     const { userId, products } = req.body;
     try {
 
-        console.log(userId, products);
         const favorite = await addfavoriteControllers(userId, products);
-
 
         return res.status(200).json(favorite);
 
