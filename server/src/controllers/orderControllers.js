@@ -81,7 +81,7 @@ const getOrderId = async (req, res) => {
 
 const createOrder = async (req, res) => {
   // datos que recibira por body 
-  const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body.form
+  const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body
 
   try {
     const carItems = await Cart.findAll({ where: { UserId: userId } })
@@ -132,7 +132,7 @@ const createOrder = async (req, res) => {
       subject: 'Orden de compra creada',
       text: `Nos complace confirmarte que tu orden de compra ha sido creada con éxito. ¡Gracias por elegir Fixer Shoes!`,
       html: `
-            <p>Estimado/a ${name},</p>
+            <p>Hola ${name},</p>
             <p>Nos complace confirmarte que tu orden de compra ha sido creada con éxito. ¡Gracias por elegir Fixer Shoes!</p>
             <p><b>Detalles de la orden:</b></p>
             <ul>

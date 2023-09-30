@@ -10,8 +10,8 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true
     },
-    idMp:{
-      type:DataTypes.STRING,
+    idMp: {
+      type: DataTypes.STRING,
       allowNull: false
     },
     status: {
@@ -65,9 +65,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
 
-    }
-
+    },
   })
-
-
 }
