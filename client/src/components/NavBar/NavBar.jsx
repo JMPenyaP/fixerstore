@@ -56,7 +56,7 @@ const Navbar = () => {
       dispatch(setFilters(false)); //
     }
   };
-  
+
   const handleClick = () => {
     dispatch(showFilters(false)); //
     dispatch(setNameSearch(''))
@@ -96,10 +96,10 @@ const Navbar = () => {
   return (
     <>
       <div className={style.divNavBar}>
-        <img
-          src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png"
+        <img className={style.logo}
+          src="https://fixershoes.com/assets/fixer-227x78.jpg"
           alt="Logo Fixer"
-          className={style.logo}
+
         />
         <div className={style.divButtonsNav}>
           <Link to="/">
@@ -112,7 +112,7 @@ const Navbar = () => {
               <h5>Productos</h5>
             </button>
           </Link>
-          <Link to="/us">
+          <Link to="/nosotros">
             <button>
               <h5>Quienes Somos</h5>
             </button>
@@ -130,7 +130,7 @@ const Navbar = () => {
           />
           {name.length > 0 ? (
             <Link to={currentPath === '/productos' ? '#' : '/productos'}>
-              <button onClick={() => searchName(name, categoryId, order, order2 )}>
+              <button onClick={() => searchName(name, categoryId, order, order2)}>
                 <ion-icon name="search-outline"></ion-icon>
               </button>
             </Link>
@@ -186,9 +186,8 @@ const Navbar = () => {
         <div className={style.resNavBarNoSearch}>
           <button
             onClick={showHideMenu}
-            className={`${style.buttonShowMenu} ${
-              displayMenu ? style.actived : ""
-            }`}
+            className={`${style.buttonShowMenu} ${displayMenu ? style.actived : ""
+              }`}
           >
             <ion-icon name="menu-outline"></ion-icon>
           </button>

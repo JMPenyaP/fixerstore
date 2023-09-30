@@ -16,9 +16,9 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        orderedProductoId: {
-            type: DataTypes.UUID,
-            allowNull: true,
+        ProductId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
         userId: {
             type: DataTypes.UUID,

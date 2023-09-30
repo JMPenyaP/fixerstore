@@ -3,21 +3,18 @@ import lock from '../../assets/Vector.png'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Ticket from './Ticket';
-import  Form  from './form/Form'
+import Form from './form/Form'
 
 
 const Pasarela = () => {
 
-    // const handleInputs = ()={
-        
-    // }
 
     const carritoById = useSelector(state => state.carritoById)
-                
+
     const totalCarrito = carritoById?.reduce((valorAnterior, valorActual) => {
-                        return valorAnterior + (valorActual.precio * valorActual.cantidad);
-                    }, 0);
-    return ( 
+        return valorAnterior + (valorActual.precio * valorActual.cantidad);
+    }, 0);
+    return (
         <>
             <div className={styles.divMain}>
 
@@ -25,50 +22,49 @@ const Pasarela = () => {
                     <Link to="/">
                         <div className={styles.logo}>
                             <img
-                                src="https://s3-alpha-sig.figma.com/img/3833/7eca/e60625366dc9df5f0771fb658c866d39?Expires=1695600000&Signature=p4RVXaHWNaHJrK8200eTzaVVgwGmr0fpTtH8Fafay72nuONitHO-lXBMZwxBk5m02Ovx2QMWa-yYFxSdDw3APSToZoFt15CAVzqRMsQb1cyvtI7OgA~FKgjQbi9KSu6Y5KUjvNBmQcPwnI5Ypkw4dpPCQ9tfoV8UatuWbzeW3aqipK-a3GHtg14kbSqxuvXNe~Wlbv8IBpwoKBr7149G-TkWstKArQgtQqSahwxnt7WL04V7FIN7J2EceOtplXcsOBhbSMUxKu~wyJOJe314XKSHBM1tCA-Coh7jeEGgvA0KwdztsMsuj8KXPlHxJRDuW4dP7RL-Q7S0lSBi4m5A8Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                                src="https://fixershoes.com/assets/fixer-227x78.jpg"
                                 alt="Logo Fixer"
-                                width={'250px'}
-                                height={'60px'}
-
+                                width={'227px'}
+                                height={'78px'}
                             />
                         </div>
                     </Link>
                     <div className={styles.seguro}>
-                        
-                            <img src={lock} alt="candado" width={'32px'} height={'35px'} />
-                        
-                            <h2>Compra segura</h2>
-                        
-                        
+
+                        <img src={lock} alt="candado" width={'32px'} height={'35px'} />
+
+                        <h2>Compra segura</h2>
+
+
                     </div>
                 </div>
                 <div>
                     <h2>Finalizar Compra</h2>
                 </div>
 
-                        
-                    
+
+
                 <div className={styles.contenedor}>
                     <Form />
                     <div className={styles.divDetalle}>
-                        
+
                         <h2>Detalle</h2>
 
                         <div>
-                            <Ticket carrito={carritoById} /> 
+                            <Ticket carrito={carritoById} />
                         </div>
-                            
+
                         <div>
-                            <h2>Total</h2>
+                            <h3>Total</h3>
                             <h2>${totalCarrito}</h2>
-                            
+
                         </div>
                     </div>
                 </div>
-                    
+
             </div>
         </>
-     );
+    );
 }
- 
+
 export default Pasarela;

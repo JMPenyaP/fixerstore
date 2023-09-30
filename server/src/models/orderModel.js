@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true
     },
+    idMp: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     status: {
       type: DataTypes.ENUM('pending', 'in progress', 'delivered'),
       allowNull: false,
@@ -61,9 +65,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
 
-    }
-
+    },
   })
-
-
 }

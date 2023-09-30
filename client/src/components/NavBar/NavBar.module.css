@@ -14,8 +14,9 @@
 /* IMAGEN LOGO */
 
 .logo {
-    height: 60px;
-    width: 250px;
+    height: 78px;
+    width: 227px;
+    padding-left: 20px;
 }
 
 /* BUTTONS */
@@ -128,7 +129,7 @@
     border-radius: 16px;
     color: white;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: column;
     align-content: center;
     justify-content: center;
@@ -139,19 +140,20 @@
 .divMenuDesplegable ion-icon {
     color: #3cbbed;
     font-size: 20px;
+    padding-left: 10px;
 }
 
 .divMenuDesplegable h5 {
-    text-align: center;
+    text-align: left;
     margin: 0;
     color: #3cbbed;
 }
 
 .divMenuDesplegable button {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    gap: 10%;
+    justify-content: left;
+    text-align: left;
+    gap: 6%;
     align-items: center;
     border-radius: 16px;
     width: 85%;
@@ -160,10 +162,11 @@
     background-color: white;
     cursor: pointer;
     padding: 5px;
+    margin-left: 18px;
 }
 
 .divMenuDesplegable button h5 {
-    padding: 5px;
+    /*padding: 5px;*/
     font-size: 12.5px;
     color: white;
     color: #3cbbed;
@@ -255,7 +258,7 @@
         display: none;
     }
 
-    .resNavBar{
+    .resNavBar {
         display: flex;
         padding: 10px;
         gap: 5px;
@@ -265,14 +268,14 @@
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 
-    .resNavBarNoSearch{
+    .resNavBarNoSearch {
         display: flex;
         width: 100%;
         justify-content: space-between;
         align-items: center;
     }
 
-    .resNavBarNoSearch img{
+    .resNavBarNoSearch img {
         width: 170px;
     }
 
@@ -288,19 +291,19 @@
         background: transparent;
         border: 1px solid #3cbbed;
     }
-    
+
     .resSearchBarDiv input:focus {
         outline: none;
         border: 2px solid #3cbbed;
     }
-    
+
     .resSearchBarDiv {
         display: flex;
         gap: 9px;
         justify-content: center;
         align-items: center;
     }
-    
+
     .resSearchBarDiv button {
         background-color: #3cbbed;
         border-radius: 50%;
@@ -310,22 +313,22 @@
         padding: 2px;
         cursor: pointer;
     }
-    
+
     .resSearchBarDiv button:disabled {
         cursor: not-allowed;
     }
-    
+
     .resSearchBarDiv button h5 {
         font-family: 'Gotham Black', sans-serif;
     }
-    
+
     .resSearchBarDiv button ion-icon {
         font-size: 16px;
     }
 
     /* BUTTON */
 
-    .buttonShowMenu{
+    .buttonShowMenu {
         background-color: transparent;
         border: none;
         display: flex;
@@ -336,23 +339,23 @@
         transition: 0.3s;
     }
 
-    .buttonShowMenu ion-icon{
+    .buttonShowMenu ion-icon {
         font-size: 20px;
     }
 
-    .actived{
+    .actived {
         background-color: #86c4dc;
         border-radius: 50%;
         padding: 3px;
     }
 
-    .actived ion-icon{
+    .actived ion-icon {
         font-size: 20px;
     }
 
     /* LOGO */
 
-    .resLogo{
+    .resLogo {
         height: 60px;
         width: 180px;
     }
@@ -363,12 +366,12 @@
         position: relative;
         cursor: pointer;
     }
-    
+
     .carritoDiv ion-icon {
         color: black;
         font-size: 29px;
     }
-    
+
     .cartCounter {
         background-color: #3cbbed;
         border-radius: 50%;
@@ -382,11 +385,11 @@
         justify-content: center;
         align-items: center;
     }
-    
+
 
     /* DISPLAY NAV */
 
-    .menuDisplay{
+    .menuDisplay {
         position: absolute;
         top: 0%;
         right: 0px;
@@ -404,15 +407,15 @@
         padding: 10px;
     }
 
-    .menuDisplay li{
+    .menuDisplay li {
         display: none;
     }
 
-    .menuDisplay .resUserLetter{
+    .menuDisplay .resUserLetter {
         display: none;
     }
 
-    .show{
+    .show {
         position: absolute;
         opacity: 1;
         width: 50%;
@@ -442,8 +445,8 @@
         font-family: 'Gotham Black', sans-serif;
         cursor: pointer;
     }
-    
-    .show li{
+
+    .show li {
         display: block;
     }
 }
