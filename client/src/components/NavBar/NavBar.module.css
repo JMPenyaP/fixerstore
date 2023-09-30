@@ -129,7 +129,7 @@
     border-radius: 16px;
     color: white;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: column;
     align-content: center;
     justify-content: center;
@@ -140,19 +140,20 @@
 .divMenuDesplegable ion-icon {
     color: #3cbbed;
     font-size: 20px;
+    padding-left: 10px;
 }
 
 .divMenuDesplegable h5 {
-    text-align: center;
+    text-align: left;
     margin: 0;
     color: #3cbbed;
 }
 
 .divMenuDesplegable button {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    gap: 10%;
+    justify-content: left;
+    text-align: left;
+    gap: 6%;
     align-items: center;
     border-radius: 16px;
     width: 85%;
@@ -161,10 +162,11 @@
     background-color: white;
     cursor: pointer;
     padding: 5px;
+    margin-left: 18px;
 }
 
 .divMenuDesplegable button h5 {
-    padding: 5px;
+    /*padding: 5px;*/
     font-size: 12.5px;
     color: white;
     color: #3cbbed;
