@@ -14,7 +14,7 @@
 /* IMAGEN LOGO */
 
 .logo {
-    height: 60px;
+    height: 100px;
     width: 250px;
 }
 
@@ -141,20 +141,14 @@
     font-size: 20px;
 }
 
-.divMenuDesplegable h5 {
-    text-align: center;
-    margin: 0;
-    color: #3cbbed;
-}
-
 .divMenuDesplegable button {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     gap: 10%;
     align-items: center;
     border-radius: 16px;
-    width: 85%;
+    width: 200px;
     height: 25px;
     border: 1px solid #3cbbed;
     background-color: white;
@@ -165,7 +159,8 @@
 .divMenuDesplegable button h5 {
     padding: 5px;
     font-size: 12.5px;
-    color: white;
+    text-align: start;
+    margin: 0;
     color: #3cbbed;
 }
 

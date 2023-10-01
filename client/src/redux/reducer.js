@@ -35,6 +35,7 @@ import {
   SHOW_FILTERS,
   SET_ORDER,
   SET_ORDER2,
+  SET_USER_MENU,
 } from "./actionTypes";
 
 const initialState = {
@@ -56,12 +57,13 @@ const initialState = {
   historial: [],
   favoritos: [],
   carritoById: [],
-  search: '',
+  search: "",
   categoryId: 0,
-  order: '',
-  order2: '',
+  order: "",
+  order2: "",
   prodBuscaComb: [],
   showFilters: false,
+  userMenu: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -190,8 +192,7 @@ const rootReducer = (state = initialState, action) => {
         productosFiltrados: filteredProductsByCategory,
       };
 
-      
-      case CLEAR_PRODUCT_NAME: {
+    case CLEAR_PRODUCT_NAME: {
       return {
         ...state,
         productName: false,
@@ -411,44 +412,44 @@ const rootReducer = (state = initialState, action) => {
     case SET_NAME_SEARCH: {
       return {
         ...state,
-        search: action.payload
-      }
+        search: action.payload,
+      };
     }
 
     case SET_CAT: {
       return {
         ...state,
         categoryId: action.payload,
-      }
+      };
     }
 
     case BUSCA_COMB: {
       return {
         ...state,
-        prodBuscaComb:action.payload,
+        prodBuscaComb: action.payload,
         showFilters: true,
-      }
+      };
     }
 
     case SHOW_FILTERS: {
       return {
         ...state,
         showFilters: action.payload,
-      }
+      };
     }
 
     case SET_ORDER: {
       return {
         ...state,
         order: action.payload,
-      }
+      };
     }
 
     case SET_ORDER2: {
       return {
         ...state,
         order2: action.payload,
-      }
+      };
     }
 
     case USER_PROFILE: {
@@ -476,6 +477,13 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    case SET_USER_MENU: {
+      return {
+        ...state,
+        userMenu: action.payload,
+      };
+    }
+
     default:
       return {
         ...state,
@@ -485,57 +493,57 @@ const rootReducer = (state = initialState, action) => {
 
 export default rootReducer;
 
-      // case ORDER_LETTER: {
-      //   const order = action.payload;
-      //   if (order === "Ascendente") {
-      //     const filtroAsc = [...state.productosFiltrados];
-      //     filtroAsc.sort((a, b) => a.name.localeCompare(b.name));
-      //     console.log(filtroAsc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: filtroAsc,
-      //     };
-      //   } else if (order === "Descendente") {
-      //     const filtroDesc = [...state.productosFiltrados];
-      //     filtroDesc.sort((a, b) => a.name.localeCompare(b.name));
-      //     filtroDesc.reverse();
-      //     console.log(filtroDesc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: filtroDesc,
-      //     };
-      //   } else {
-      //     console.log(state.allProducts);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: state.productosFiltrados,
-      //     };
-      //   }
-      // }
-  
-      // case ORDER_PRICE: {
-      //   const precio = action.payload;
-      //   if (precio === "Ascendente") {
-      //     const precioAsc = [...state.productosFiltrados];
-      //     precioAsc.sort((a, b) => a.priceOfList - b.priceOfList);
-      //     console.log(precioAsc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: precioAsc,
-      //     };
-      //   } else if (precio === "Descendente") {
-      //     const precioDesc = [...state.productosFiltrados];
-      //     precioDesc.sort((a, b) => b.priceOfList - a.priceOfList);
-      //     console.log(precioDesc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: precioDesc,
-      //     };
-      //   } else {
-      //     console.log(state.allProducts);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: state.productosFiltrados,
-      //     };
-      //   }
-      // }
+// case ORDER_LETTER: {
+//   const order = action.payload;
+//   if (order === "Ascendente") {
+//     const filtroAsc = [...state.productosFiltrados];
+//     filtroAsc.sort((a, b) => a.name.localeCompare(b.name));
+//     console.log(filtroAsc);
+//     return {
+//       ...state,
+//       productosFiltrados: filtroAsc,
+//     };
+//   } else if (order === "Descendente") {
+//     const filtroDesc = [...state.productosFiltrados];
+//     filtroDesc.sort((a, b) => a.name.localeCompare(b.name));
+//     filtroDesc.reverse();
+//     console.log(filtroDesc);
+//     return {
+//       ...state,
+//       productosFiltrados: filtroDesc,
+//     };
+//   } else {
+//     console.log(state.allProducts);
+//     return {
+//       ...state,
+//       productosFiltrados: state.productosFiltrados,
+//     };
+//   }
+// }
+
+// case ORDER_PRICE: {
+//   const precio = action.payload;
+//   if (precio === "Ascendente") {
+//     const precioAsc = [...state.productosFiltrados];
+//     precioAsc.sort((a, b) => a.priceOfList - b.priceOfList);
+//     console.log(precioAsc);
+//     return {
+//       ...state,
+//       productosFiltrados: precioAsc,
+//     };
+//   } else if (precio === "Descendente") {
+//     const precioDesc = [...state.productosFiltrados];
+//     precioDesc.sort((a, b) => b.priceOfList - a.priceOfList);
+//     console.log(precioDesc);
+//     return {
+//       ...state,
+//       productosFiltrados: precioDesc,
+//     };
+//   } else {
+//     console.log(state.allProducts);
+//     return {
+//       ...state,
+//       productosFiltrados: state.productosFiltrados,
+//     };
+//   }
+// }
