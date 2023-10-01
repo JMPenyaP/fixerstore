@@ -8,6 +8,7 @@ import imagenIzq from "../../assets/Fondolaterallogin.png";
 import { createUser } from "../../redux/Actions/createUser";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+import { setDataProfile } from "../../redux/Actions/setDataProfile";
 
 const LoginUser = () => {
     const [existe, setExiste] = useState(null);
@@ -26,6 +27,9 @@ const LoginUser = () => {
     let user = useSelector((state) => state.clientProfile)
     useEffect(() => {
         setClientPass(user)
+        return () => {
+            setClientPass(null)
+        }
     }, [user])
     const handleChange = (e) => {
         setEmailInput(e.target.value);
@@ -90,10 +94,10 @@ const LoginUser = () => {
         <div className={style.contenedorMayor}>
             <div className={style.contenedor} >
                 <img className={style.logo} src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png" alt="Logo" />
-                <h1 className={style.titulo}>Inicia Sesión</h1>
+                <h1 className={style.titulo}>Inicia sesión</h1>
                 <form>
                     <div className={style.form}>
-                        <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Correo electronico" />
+                        <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Correo electronico"/>
                         {existe !== true ? (<button className={style.formbutton} onClick={(event) => userClient(emailInput, event)}>Siguiente</button>) : (null)}
                         {existe === true ? (
                             <div className={style.passwordcontainer}>

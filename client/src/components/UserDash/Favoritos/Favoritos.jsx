@@ -11,7 +11,7 @@ const Favoritos = () => {
   );
   const products = useSelector((state) => state.allProducts);
   const favoritos = useSelector((state) => state.favoritos);
-  const [favorite, setFavorite] = useState([]);
+  const [favorite, setFavorite] = useState(favoritos);
   const { userData } = dataProfileActual;
 
   useEffect(() => {
@@ -20,8 +20,7 @@ const Favoritos = () => {
     } else {
         setFavorite(favoritos);
     }
-    
-  }, []);
+  }, [dispatch, favoritos, userData.id]);
 
   return (
     <div className={style.contenedor}>

@@ -11,6 +11,7 @@ import { showFilters } from "../../redux/Actions/showFilters";
 import { setOrder } from "../../redux/Actions/setOrder";
 import { setOrder2 } from "../../redux/Actions/setOrder2";
 import { setCategoryId } from "../../redux/Actions/setCategoryId";
+import { setDataProfile } from "../../redux/Actions/setDataProfile";
 
 const Navbar = () => {
   const [name, setName] = useState("");
@@ -40,6 +41,7 @@ const Navbar = () => {
     } else {
       setLetter(null);
     }
+
 
     if (carritoById.length >= 0) {
       setCartLong(carritoById.length);
