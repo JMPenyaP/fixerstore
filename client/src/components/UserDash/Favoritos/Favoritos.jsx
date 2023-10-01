@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import style from "./favoritos.module.css";
 import Card from "../../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { userFavoritos } from "../../../redux/Actions/userFavoritos";
 import { getFav } from "../../../redux/Actions/getFav";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Spinner } from "../../Carga/Carga";
 
 const Favoritos = () => {
   const dispatch = useDispatch();
-  const dataProfileActual = useSelector((state) =>
-    state.dataProfile === null ? { userData: { id: "" } } : state.dataProfile
-  );
+  const dataProfileActual = useSelector((state) => state.dataProfile) || {
+    userData: { id: "" },
+  };
   const favoritos = useSelector((state) => state.fav);
   const { userData } = dataProfileActual;
 
@@ -20,29 +19,39 @@ const Favoritos = () => {
   const cardsPerPage = 5;
 
   useEffect(() => {
-    // Función para cargar más cards
-    const loadMoreCards = () => {
-      if (visibleCards + cardsPerPage >= favoritos.length) {
-        // Todos los cards han sido cargados
-        setHasMore(false);
-        return;
-      }
-      // Incrementa el número de cards visibles
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + cardsPerPage);
-    };
+    // Fetch initial data when the component mounts
+    dispatch(getFav({ userData, page: 1 })); // Assuming the API supports pagination
 
-
-
-    dispatch(getFav({ userData }));
-
-
-    // Agrega un evento de desplazamiento para cargar más cards cuando sea necesario
-    window.addEventListener("scroll", loadMoreCards);
+    // Clean up the component when unmounting
     return () => {
-      // Limpia el evento de desplazamiento al desmontar el componente
-      window.removeEventListener("scroll", loadMoreCards);
+      // Remove the scroll event listener
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [dispatch, visibleCards]);
+  }, [dispatch, userData]);
+
+  const loadMoreCards = () => {
+    if (visibleCards + cardsPerPage >= favoritos.length) {
+      // All cards have been loaded
+      setHasMore(false);
+      return;
+    }
+    // Increment the number of visible cards
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + cardsPerPage);
+  };
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.scrollHeight - 100
+    ) {
+      loadMoreCards();
+    }
+  };
+
+  useEffect(() => {
+    // Add a scroll event listener to load more cards when needed
+    window.addEventListener("scroll", handleScroll);
+  }, [visibleCards, favoritos]);
 
   return (
     <div className={style.contenedor}>
@@ -58,18 +67,18 @@ const Favoritos = () => {
       >
         <div className={style.cards}>
           {favoritos?.length > 0 ? (
-            favoritos.slice(0, visibleCards)?.map((card) => (
+            favoritos.slice(0, visibleCards).map((card) => (
               <div key={card.id} className={style.cardWrapper}>
                 <Card product={card} isFavorito={true} className={style.card} />
               </div>
             ))
-          ) : <p>No tienes productos favoritos.</p>}
+          ) : (
+            <p>No tienes productos favoritos.</p>
+          )}
         </div>
       </InfiniteScroll>
-
-    </div >
+    </div>
   );
 };
-
 
 export default Favoritos;

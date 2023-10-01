@@ -93,6 +93,14 @@ const Navbar = () => {
     setDisplayMenu(!displayMenu);
   };
 
+  const handleSearchKeyPress = (event) => {
+    if (event.key === "Enter") {
+      // Realizar búsqueda cuando se presiona "Enter"
+      searchName(name, categoryId, order, order2);
+    }
+  };
+
+
   return (
     <>
       <div className={style.divNavBar}>
@@ -127,6 +135,8 @@ const Navbar = () => {
             placeholder="Buscar Productos"
             value={search}
             onChange={handleChange}
+            onKeyPress={handleSearchKeyPress} // Agrega el manejador de eventos
+
           />
           {name.length > 0 ? (
             <Link to={currentPath === '/productos' ? '#' : '/productos'}>
