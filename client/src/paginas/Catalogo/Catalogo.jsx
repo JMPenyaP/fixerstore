@@ -40,24 +40,24 @@ const Catalogo = () => {
   return (
     <>
       <div>
-          <div className={style.divMain}>
+        <div className={style.divMain}>
 
-            <div className={style.divFiltros}>
-              <Filtros />
-            </div>
+          <div className={style.divFiltros}>
+            <Filtros />
+          </div>
 
-            {Products ?
-            
-              <CardsArr allProducts={productosFiltrados} />
-            
+          {Products ?
+
+            <CardsArr allProducts={productosFiltrados} />
+
             :
             <div >
 
               <Cards />
             </div>
-            }
-            
-          </div>
+          }
+
+        </div>
 
         <div>
           <Footer />

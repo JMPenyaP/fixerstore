@@ -9,6 +9,7 @@ export const HISTORIAL = "HISTORIAL";
 export const FAVORITOS = "FAVORITOS";
 export const SAVE_FAV = "SAVE_FAV";
 export const DELETE_FAV = "DELETE_FAV";
+export const GET_FAV = "GET_FAV";
 
 //
 export const CREATED_PRODUCT = "CREATED_PRODUCT";
