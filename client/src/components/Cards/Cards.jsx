@@ -13,10 +13,10 @@ const Cards = () => {
     const dispatch = useDispatch()
 
     const dataProfileActual = useSelector((state) =>
-    state.dataProfile === null ? { userData: { id: "" } } : state.dataProfile
-  );
+        state.dataProfile === null ? { userData: { id: "" } } : state.dataProfile
+    );
 
-  const { userData } = dataProfileActual;
+    const { userData } = dataProfileActual;
 
     const {
         data,
@@ -38,17 +38,17 @@ const Cards = () => {
             },
         }
     );
-    
+
 
     const products = data
-    ? data.pages.flatMap((page) => page.products).filter((product) => product.status === true)
-    : [];
-    
-    useEffect(()=> {
-        if(userData.id){
+        ? data.pages.flatMap((page) => page.products).filter((product) => product.status === true)
+        : [];
+
+    useEffect(() => {
+        if (userData.id) {
             dispatch(userFavoritos(userData.id))
         }
-    },[dispatch, userData.id])
+    }, [dispatch, userData.id])
 
     return (
         <>
@@ -60,8 +60,8 @@ const Cards = () => {
                 loader={<Spinner />}
             >
                 <div className={styles.divCards}>
-                    {products.map((product) => 
-                    
+                    {products.map((product) =>
+
                     (
                         <div key={product.id}>
                             <Card product={product} />
@@ -69,7 +69,7 @@ const Cards = () => {
                     )
                     )}
                 </div>
-                
+
             </InfiniteScroll>
         </>
     );

@@ -1,116 +1,75 @@
 
-const { User, Favorites, conn } = require('../db');
+const { User, Favorites, Product } = require('../db');
 
 
-const addfavoriteControllers = async (userId, products) => {
+const addfavoriteControllers = async (UserId, ProductId) => {
 
 
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-        return "El usuario no existe";
-    }
-
-    // Verifica si 'products' es un objeto en lugar de un array
-    if (!Array.isArray(products)) {
-        // Convierte el objeto en un array con un solo elemento
-        products = [products];
-    }
-
-    // Usar una transacción para asegurarse de que todas las operaciones sean atómicas
-    await conn.transaction(async (t) => {
-        // Iterar sobre los productos y agregarlos a la lista de favoritos del usuario
-        for (const product of products) {
-            const {
-                id,
-                name,
-                categoryId,
-                firstImage,
-                carrouselImage,
-                description,
-                date,
-                priceOfList,
-                statusOffer,
-                offer,
-                stock,
-                status,
-            } = product;
-
-
-            const existingFavorite = await Favorites.findOne({
-                where: {
-                    id,
-                    // Agrega cualquier otra condición necesaria para verificar la igualdad del producto
-                },
-                transaction: t,
-            });
-
-
-            // Crea el favorito asociado al usuario
-            if (!existingFavorite) {
-
-
-                await user.addFavorite(
-                    await Favorites.create({
-                        id,
-                        name,
-                        categoryId,
-                        firstImage,
-                        carrouselImage,
-                        description,
-                        date,
-                        priceOfList,
-                        statusOffer,
-                        offer,
-                        stock,
-                        status,
-                    }),
-                    { transaction: t }
-                );
-            }
-        }
+    const existingFavorite = await Favorites.findOne({
+        where: {
+            UserId,
+            ProductId,
+        },
     });
 
-    const favorites = await user.getFavorites();
+    if (existingFavorite) {
+        // El producto ya está en la lista de favoritos, puedes manejarlo aquí
+        return { message: 'El producto ya está en la lista de favoritos.' };
+    }
 
-    return favorites;
+    // Si no existe, crea una nueva entrada en la tabla Favorites
+    await Favorites.create({
+        UserId,
+        ProductId,
+    });
+
+    return { message: 'Producto agregado a favoritos con éxito.' };
 
 
 }
 
 
-const getFavoriteControllers = async (userId) => {
+const getFavoriteControllers = async (UserId) => {
 
-    const user = await User.findByPk(userId);
-
-    if (!user) return "El usuario no existe";
-
-    const favorites = await user.getFavorites();
-
-    return favorites;
-}
-
-
-const deleteFavoriteControllers = async (userId, favoriteId) => {
-
-
-    const user = await User.findByPk(userId);
-
-    if (!user) return "El usuario no existe";
-
-    const favorite = await Favorites.findByPk(favoriteId);
-
-    await Favorites.destroy({
+    // Busca los productos favoritos del usuario en la tabla Favorites
+    const favorites = await Favorites.findAll({
         where: {
-            id: favoriteId
-        }
-    })
+            UserId,
+        },
+        include: [{ model: Product }], // Incluye la información del producto favorito
+    });
 
-    if (!favorite) return "El favorito no existe";
+    if (!favorites || favorites.length === 0) {
+        return { message: 'El usuario no tiene productos favoritos.' };
+    }
 
-    await user.removeFavorite(favorite);
+    // Mapea la información de los productos favoritos
+    const favoriteProducts = favorites.map((favorite) => favorite.Product);
 
-    return { message: "Favorito Eliminado Correctamente" }
+    return favoriteProducts;
+
+
+}
+
+
+const deleteFavoriteControllers = async (UserId, ProductId) => {
+
+    const favoriteEntry = await Favorites.findOne({
+        where: {
+            UserId,
+            ProductId,
+        },
+    });
+
+    if (!favoriteEntry) {
+        // La entrada no existe, puedes manejarlo aquí
+        return { message: 'El producto no está en la lista de favoritos.' };
+    }
+
+    // Si existe, elimina la entrada de la tabla Favorites
+    await favoriteEntry.destroy();
+
+    return { message: "Producto Eliminado de Favoritos" }
 
 }
 
