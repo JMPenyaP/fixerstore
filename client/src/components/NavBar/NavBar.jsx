@@ -117,9 +117,11 @@ const Navbar = () => {
               <h5>Quienes Somos</h5>
             </button>
           </Link>
+          <Link to="/contactanos">
           <button>
             <h5>Contactanos</h5>
           </button>
+          </Link>
         </div>
         <div className={style.searchBarDiv}>
           <input
