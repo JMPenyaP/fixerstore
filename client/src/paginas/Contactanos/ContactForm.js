@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './ContanctForm.css';
-import axios from "axios";
+
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
-    telefono: '',
     mensaje: '',
+    telefono: '',
   });
 
   const [enviado, setEnviado] = useState(false); // Estado para controlar el mensaje de envío
@@ -17,6 +17,7 @@ const ContactForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+<<<<<<< Updated upstream
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,8 +41,24 @@ const ContactForm = () => {
     } catch (error) {
       console.error('Error en la solicitud:', error);
     }
+=======
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí puedes agregar la lógica para enviar los datos del formulario
+    alert(`Mensaje enviado:\nNombre: ${formData.nombre}\nEmail: ${formData.email}\nTeléfono: ${formData.telefono}\nMensaje: ${formData.mensaje}`);
+    // Puedes utilizar fetch() o axios para realizar una solicitud al servidor
+
+    //Limpiar el formulario
+    console.log('Formulario enviado:', formData);
+    setFormData({
+      nombre: '',
+      email: '',
+      mensaje: '',
+      telefono: '',
+    });
+>>>>>>> Stashed changes
   };
-  
+
   return (
     <div className="containerContactanos">
       <div className='titulo-cabecera'>
@@ -74,7 +91,11 @@ const ContactForm = () => {
           onChange={handleChange}
           required
         />
+<<<<<<< Updated upstream
   
+=======
+
+>>>>>>> Stashed changes
         <label htmlFor="telefono">Teléfono:</label>
         <input
           type="tel"
