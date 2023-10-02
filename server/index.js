@@ -10,7 +10,7 @@ conn
       server.listen(PORT, () => {
          console.log(`Server listening on port ${PORT}`);
       })
-       createCategories()
-       createProducts()
-       createAdmin()
+      createCategories()
+      createProducts()
+      createAdmin()
    })

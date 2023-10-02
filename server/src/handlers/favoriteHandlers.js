@@ -3,12 +3,12 @@ const { getFavoriteControllers, addfavoriteControllers, deleteFavoriteController
 
 const getFavoriteHandlers = async (req, res) => {
 
-    const { userId } = req.params;
+    const { UserId } = req.params;
 
 
     try {
 
-        const getAllFav = await getFavoriteControllers(userId);
+        const getAllFav = await getFavoriteControllers(UserId);
 
 
         res.status(200).json(getAllFav);
@@ -22,18 +22,17 @@ const getFavoriteHandlers = async (req, res) => {
     }
 
 
-
 }
 
 
 const addfavoriteHandlers = async (req, res) => {
 
-    const { userId, products } = req.body;
+    const { UserId, ProductId } = req.body;
+
+    console.log(UserId, ProductId)
     try {
 
-        console.log(userId, products);
-        const favorite = await addfavoriteControllers(userId, products);
-
+        const favorite = await addfavoriteControllers(UserId, ProductId);
 
         return res.status(200).json(favorite);
 
@@ -51,12 +50,12 @@ const deleteFavoriteHandlers = async (req, res) => {
 
     try {
 
-        const { userId, favoriteId } = req.body;
+        const { UserId, ProductId } = req.body;
 
-        const deleteFav = await deleteFavoriteControllers(userId, favoriteId);
+        const deleteFav = await deleteFavoriteControllers(UserId, ProductId);
 
 
-        res.status(200).json({ message: deleteFav });
+        res.status(200).json(deleteFav);
 
     } catch (error) {
 

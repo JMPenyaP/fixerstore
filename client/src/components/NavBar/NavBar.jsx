@@ -98,10 +98,10 @@ const Navbar = () => {
   return (
     <>
       <div className={style.divNavBar}>
-        <img
-          src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png"
+        <img className={style.logo}
+          src="https://fixershoes.com/assets/fixer-227x78.jpg"
           alt="Logo Fixer"
-          className={style.logo}
+
         />
         <div className={style.divButtonsNav}>
           <Link to="/">

@@ -81,13 +81,13 @@ const getOrderId = async (req, res) => {
 
 const createOrder = async (req, res) => {
   // datos que recibira por body 
-  const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body.form
+  const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department } = req.body
 
   try {
     const carItems = await Cart.findAll({ where: { UserId: userId } })
-    console.log(carItems)
+
     if (carItems.length === 0) {
-      return res.status(400).json({ message: 'El carrito está vacío' });
+      return res.status(200).json({ message: 'El carrito está vacío' });
     }
     let totalAmount = 0;
     const order = await Order.create({ idMp, totalAmount, status: "pending", UserId: userId, name, surname, phone, cc, payment, retiro, city, address, department });
@@ -96,18 +96,32 @@ const createOrder = async (req, res) => {
       if (!product) {
         return res.status(200).json({ succes: false, message: "no se encontro el producto" })
       }
+
       const price = product.priceOfList
       const quantity = car.quantity
-      await OrderItems.create({
-        OrderId: order.id,
-        ProductId: car.ProductId,
-        quantity,
-        price,
-      });
-      totalAmount += price * quantity;
-      await car.destroy()
+
+      if (product.stock >= quantity) {
+
+        await product.update({ stock: product.stock - quantity });
+
+
+        await OrderItems.create({
+          OrderId: order.id,
+          ProductId: car.ProductId,
+          quantity,
+          price,
+        });
+        totalAmount += price * quantity;
+        await car.destroy()
+
+      } else {
+
+        return res.status(200).json({ message: `No hay suficiente stock para el producto: ${product.name}` });
+
+      }
+
+      await order.update({ totalAmount })
     }
-    await order.update({ totalAmount })
     //================================================
     const user = await User.findByPk(userId);
     const email = user.email;
@@ -118,7 +132,7 @@ const createOrder = async (req, res) => {
       subject: 'Orden de compra creada',
       text: `Nos complace confirmarte que tu orden de compra ha sido creada con éxito. ¡Gracias por elegir Fixer Shoes!`,
       html: `
-            <p>Estimado/a ${name},</p>
+            <p>Hola ${name},</p>
             <p>Nos complace confirmarte que tu orden de compra ha sido creada con éxito. ¡Gracias por elegir Fixer Shoes!</p>
             <p><b>Detalles de la orden:</b></p>
             <ul>
@@ -184,25 +198,25 @@ const getOrdersbyId = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-const updateOrderStatus = async(req,res)=>{
- 
-  const {id, status} = req.body
+const updateOrderStatus = async (req, res) => {
+
+  const { id, status } = req.body
 
   try {
     const order = await Order.findByPk(id)
-    console.log(order) 
-    if(!order){
+    console.log(order)
+    if (!order) {
       res.status(200).json("Orden no encontrada")
     }
 
-   order.status=status;
-   await order.save()
+    order.status = status;
+    await order.save()
 
     res.status(200).json(`Orden estado de la orden modiicada a ${status}`)
   } catch (error) {
-  res.status(400).json({error:error.message})
+    res.status(400).json({ error: error.message })
   }
 }
 module.exports = {
-  getOrderForId, createOrder, getOrdersbyId, getAllOrders, getOrderId,updateOrderStatus 
+  getOrderForId, createOrder, getOrdersbyId, getAllOrders, getOrderId, updateOrderStatus
 }

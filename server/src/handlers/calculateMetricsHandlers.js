@@ -1,6 +1,25 @@
-const { getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
+const { howManyOrderMonthControllers, getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
 
 
+
+const howManyOrderMonthHandlers = async (req, res) => {
+
+    const { month } = req.query;
+
+    try {
+
+        const howManyMonth = await howManyOrderMonthControllers(month)
+
+        return res.status(200).json(howManyMonth);
+
+    } catch (error) {
+
+        return res.status(404).json({ error: error.message });
+
+    }
+
+
+}
 
 const getBuyTopUsersHandlers = async (req, res) => {
 
@@ -71,6 +90,7 @@ module.exports = {
 
     calculateMetricsHandlers,
     getTopSoldProductsHandlers,
-    getBuyTopUsersHandlers
+    getBuyTopUsersHandlers,
+    howManyOrderMonthHandlers
 
 }
