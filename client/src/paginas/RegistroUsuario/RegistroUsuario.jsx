@@ -104,11 +104,9 @@ const RegistroUsuario = () => {
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
             console.log(res.data.success);
-            if (res.status === 200) {
                 const { success } = res.data;
                 if (success === true) {setExiste(true); return true}
                 else setExiste(false);return false
-            }
         } catch (error) {
             return error.message;
         }
