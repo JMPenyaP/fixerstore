@@ -56,7 +56,7 @@ const Navbar = () => {
       dispatch(setFilters(false)); //
     }
   };
-  
+
   const handleClick = () => {
     dispatch(showFilters(false)); //
     dispatch(setNameSearch(''))
@@ -96,10 +96,10 @@ const Navbar = () => {
   return (
     <>
       <div className={style.divNavBar}>
-        <img
-          src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png"
+        <img className={style.logo}
+          src="https://fixershoes.com/assets/fixer-227x78.jpg"
           alt="Logo Fixer"
-          className={style.logo}
+
         />
         <div className={style.divButtonsNav}>
           <Link to="/">
@@ -130,7 +130,7 @@ const Navbar = () => {
           />
           {name.length > 0 ? (
             <Link to={currentPath === '/productos' ? '#' : '/productos'}>
-              <button onClick={() => searchName(name, categoryId, order, order2 )}>
+              <button onClick={() => searchName(name, categoryId, order, order2)}>
                 <ion-icon name="search-outline"></ion-icon>
               </button>
             </Link>
@@ -149,11 +149,16 @@ const Navbar = () => {
               {showMenu ? (
                 letter !== null ? (
                   <div className={style.divMenuDesplegable}>
-                    <Link to={`/user/${dataProfile.userData.id}`}>
+                    {dataProfile.userData.role === "admin" ? (<Link to={`/dashboard`}>
+                      <button>
+                        <ion-icon name="person"></ion-icon> <h5>Dashboard</h5>
+                      </button>
+                    </Link>): (<Link to={`/user/${dataProfile.userData.id}`}>
                       <button>
                         <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
                       </button>
-                    </Link>
+                    </Link>)
+                    }
                     <button onClick={() => handleRedirect()}>
                       <ion-icon name="log-out"></ion-icon>{" "}
                       <h5>Cerrar sesion</h5>
@@ -167,7 +172,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <button className={style.botonInicio}>Iniciar sesión</button>
+                <button className={style.botonInicio}>Ingresar</button>
               </Link>
             </>
           )}
@@ -212,7 +217,7 @@ const Navbar = () => {
                 <h4>{letter}</h4>
               </div>
             ) : (
-              <h2>inicia sesion</h2>
+              <h2>Ingresar</h2>
             )}
             <ul>
               <li>te</li>

@@ -2,13 +2,13 @@ const { UserReviews } = require("../db");
 
 //! Crear una reseña
 const createReview = async (req, res) => {
-    const { ratingValue, comment, orderedProductId, userId } = req.body;
+    const { ratingValue, comment, ProductId, userId } = req.body;
 
     try {
         const review = await UserReviews.create({
             ratingValue,
             comment,
-            orderedProductId,
+            ProductId,
             userId,
         });
 

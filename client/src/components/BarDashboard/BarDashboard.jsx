@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"
 import logOut from "../../redux/Actions/logOut"
 import { NavLink, useNavigate } from "react-router-dom";
 import { set } from "react-hook-form"
+import sectionAdmin from "../../redux/Actions/sectionAdmin"
 
 const BarDashboard = () => {
     //Importar estos datos de los estados globales
@@ -32,13 +33,25 @@ const BarDashboard = () => {
         }
         setLog(adminProfile)
     }, [dataProfileActual, adminProfile])
-    const [actualSection, setActualSection] = useState(<DefaultView name = {name}/>)
-    const [actualBoton, setActualBoton] = useState(null)
+    const section = useSelector((state)=> state.section_admin)
+    const storedSection = JSON.parse(localStorage.getItem("section_admin")) || "Est";
+    const [actualSection, setActualSection] = useState(<Estadisticas/>)
+    useEffect(()=> {
+        if(section === "Est") setActualSection(<Estadisticas/>)
+        if(section === "Ped") setActualSection(<Pedidos/>)
+        if(section === "Prod") setActualSection(<Productos/>)
+        if(section === "Crear") setActualSection(<FormProduct/>)
+        if(section === "Perf") setActualSection(<Perfiles/>)
+    }, [section])
+    useEffect(()=> {
+        if (section === "Est" && storedSection !== "Est" && storedSection !== "" ) {
+            dispatch(sectionAdmin(storedSection))
+        }
+    }, [section, storedSection])
     const handleSection = (contenido, boton) => {
-        setActualSection(contenido)
-        setActualBoton(boton)
+        dispatch(sectionAdmin(boton))
+        localStorage.setItem("section_admin", JSON.stringify(boton));
     }
-    console.log(log);
     const handleRedirect = () => {
         dispatch(logOut())
         setEmail(null)
@@ -62,11 +75,11 @@ const BarDashboard = () => {
                     </div>
                 </div>
                 <div className={style.divbotones}>
-                    <button onClick={() => handleSection(<Estadisticas/>, "Est")} className={actualBoton === "Est" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:query-stats.svg?color=%233cbbed" alt="" />  Estadisticas </button>
-                    <button onClick={() => handleSection(<Pedidos/>, "Ped")} className={actualBoton === "Ped" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:shop-sharp.svg?color=%233cbbed" alt="" />  Pedidos</button>
-                    <button onClick={() => handleSection(<Productos/>, "Prod")} className={actualBoton === "Prod" ? style.onBoton : style.offBoton} ><img className={style.logoboton} src="https://api.iconify.design/material-symbols:production-quantity-limits.svg?color=%233cbbed" alt="" />  Productos</button>
-                    <button onClick={() => handleSection(<FormProduct/>, "Crear")} className={actualBoton === "Crear" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:create-new-folder-outline.svg?color=%233cbbed" alt="" />  Nuevo producto</button>
-                    <button onClick={() => handleSection(<Perfiles/>, "Perf")} className={actualBoton === "Perf" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:manage-accounts.svg?color=%233cbbed" alt="" />  Perfiles</button>
+                    <button onClick={() => handleSection(<Estadisticas/>, "Est")} className={section === "Est" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:query-stats.svg?color=%233cbbed" alt="" />  Estadisticas </button>
+                    <button onClick={() => handleSection(<Pedidos/>, "Ped")} className={section === "Ped" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:shop-sharp.svg?color=%233cbbed" alt="" />  Pedidos</button>
+                    <button onClick={() => handleSection(<Productos/>, "Prod")} className={section === "Prod" ? style.onBoton : style.offBoton} ><img className={style.logoboton} src="https://api.iconify.design/material-symbols:production-quantity-limits.svg?color=%233cbbed" alt="" />  Productos</button>
+                    <button onClick={() => handleSection(<FormProduct/>, "Crear")} className={section === "Crear" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:create-new-folder-outline.svg?color=%233cbbed" alt="" />  Nuevo producto</button>
+                    <button onClick={() => handleSection(<Perfiles/>, "Perf")} className={section === "Perf" ? style.onBoton : style.offBoton}><img className={style.logoboton} src="https://api.iconify.design/material-symbols:manage-accounts.svg?color=%233cbbed" alt="" />  Perfiles</button>
                     <button onClick={()=> handleRedirect()} className={style.offBoton2}><img className={style.logoboton} src="https://api.iconify.design/tabler:logout-2.svg?color=%233cbbed" alt="" />  Cerrar sesión </button>
                 </div>
             </div>

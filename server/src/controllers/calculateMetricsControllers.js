@@ -1,5 +1,60 @@
 const { Order, User, conn, Product, OrderItems } = require('../db');
 const { Op } = require('sequelize');
+const { format } = require('date-fns-tz');
+
+// Configura la zona horaria en español (por ejemplo, 'es-ES')
+const spanishTimeZone = 'es-ES';
+
+/* Cuantos pedidos se hicieron este mes*/
+
+
+
+const howManyOrderMonthControllers = async (month) => {
+
+
+
+
+    const monthMappings = {
+        enero: 'January',
+        febrero: 'February',
+        marzo: 'March',
+        abril: 'April',
+        mayo: 'May',
+        junio: 'June',
+        julio: 'July',
+        agosto: 'August',
+        septiembre: 'September',
+        octubre: 'October',
+        noviembre: 'November',
+        diciembre: 'December',
+    };
+
+
+
+    const englishMonth = monthMappings[month.toLowerCase()];
+    if (!englishMonth) {
+        throw new Error('Nombre de mes no válido');
+    }
+
+    // Obtiene el año actual
+    const year = new Date().getFullYear();
+
+    // Formatea las fechas en español
+    const startDate = format(new Date(`${englishMonth} 1, ${year}`), 'yyyy-MM-dd', { timeZone: spanishTimeZone });
+    const endDate = format(new Date(`${englishMonth} 31, ${year}`), 'yyyy-MM-dd', { timeZone: spanishTimeZone });
+
+    const orders = await Order.findAll({
+        where: {
+            createdAt: {
+                [Op.between]: [startDate, endDate],
+            },
+        },
+    });
+
+    return orders;
+
+}
+
 
 
 
@@ -79,6 +134,7 @@ const calculateMetricsControllers = async () => {
     const totalOrders = await Order.count()
     const totalUsers = await User.count();
 
+
     return { orders: totalOrders, users: totalUsers };
 
 }
@@ -88,7 +144,8 @@ module.exports = {
 
     calculateMetricsControllers,
     getTopSoldProductsControllers,
-    getBuyTopUsersControllers
+    getBuyTopUsersControllers,
+    howManyOrderMonthControllers
 
 }
 

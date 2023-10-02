@@ -16,6 +16,7 @@ import {
   REGISTER,
   FILTER_BACK,
   INCREMENT_QTY,
+  GET_FAV,
   DECREMENT_QTY,
   REMOVE_PRODUCT,
   USER_PROFILE,
@@ -35,6 +36,8 @@ import {
   SHOW_FILTERS,
   SET_ORDER,
   SET_ORDER2,
+  SECTION_ADMIN,
+  GET_ALL_ORDERS,
 } from "./actionTypes";
 
 const initialState = {
@@ -55,6 +58,7 @@ const initialState = {
   userChanges: null,
   historial: [],
   favoritos: [],
+  fav:[],
   carritoById: [],
   search: '',
   categoryId: 0,
@@ -62,6 +66,8 @@ const initialState = {
   order2: '',
   prodBuscaComb: [],
   showFilters: false,
+  section_admin: "Est",
+  allOrders: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -98,13 +104,13 @@ const rootReducer = (state = initialState, action) => {
 
     //Marcos
 
-    case USER_CHANGE: {
-      return {
-        ...state,
-        userChanges: action.payload.success,
-        dataProfile: action.payload,
-      };
-    }
+    // case USER_CHANGE: {
+    //   return {
+    //     ...state,
+    //     userChanges: action.payload.success,
+    //     dataProfile: action.payload,
+    //   };
+    // }
 
     case HISTORIAL: {
       return {
@@ -120,17 +126,27 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case DELETE_FAV: {
-      const productIdRemove = action.payload.favId;
-      const favActualizado = state.favoritos.filter(
-        (producto) => producto.id !== productIdRemove
-      );
+    case GET_FAV:{
 
       return {
-        ...state,
-        favoritos: favActualizado,
-      };
+          ...state,
+          fav: action.payload,
+      }
+
     }
+
+
+    case DELETE_FAV: {
+      const productIdRemove = action.payload.favId;
+      const favActualizado = Array.isArray(state.fav)
+        ? [...state.fav].filter((producto) => producto.id !== productIdRemove)
+        : [];
+      
+      return {
+        ...state,
+        fav: favActualizado,
+      };
+    }      
 
     case FAVORITOS: {
       return {
@@ -442,6 +458,18 @@ const rootReducer = (state = initialState, action) => {
           dataProfile: action.payload,
           clientProfile: action.payload.success,
         };
+      }
+    }
+    case SECTION_ADMIN: {
+      return {
+        ...state,
+        section_admin: action.payload
+      }
+    }
+    case GET_ALL_ORDERS: {
+      return {
+        ...state, 
+        allOrders: action.payload
       }
     }
     default:

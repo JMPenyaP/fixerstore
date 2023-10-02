@@ -4,23 +4,22 @@ import { useDebugValue, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { crearFavoritos } from "../../redux/Actions/crearFavoritos";
 import { borrarFavoritos } from "../../redux/Actions/borrarFavoritos";
+import { getFav } from "../../redux/Actions/getFav";
+
 
 const Card = ({ product }) => {
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
-  const favoritos = useSelector((state) => state.favoritos);
+  let favoritos = useSelector((state) => state.fav);
 
-  useEffect(() => {
-    if (Array.isArray(favoritos)) {
-      favoritos.forEach((favorito) => {
-        if (favorito.id === product.id) {
-          setIsFav(true);
-        }
-      });
-    }
-  }, [favoritos]);
+
+  // console.log(favoritos, "Producs >>", product)
+
+
+
 
   const client = useSelector((state) => state.clientProfile);
+
 
   const dataProfileActual = useSelector((state) =>
     state.dataProfile === null ? { userData: { id: "" } } : state.dataProfile
@@ -28,12 +27,37 @@ const Card = ({ product }) => {
 
   const { userData } = dataProfileActual;
 
+  useEffect(() => {
+    // Si el usuario está autenticado, obtén los favoritos
+    if (client && userData) {
+      dispatch(getFav({ userData }));
+    }
+  }, [dispatch, client, userData]);
+
+  useEffect(() => {
+    // Verifica si favoritos es un array antes de usar some
+    if (Array.isArray(favoritos)) {
+      const isFavorite = favoritos.some((favorito) => favorito.id === product.id);
+
+      // Solo actualiza el estado si es necesario (para evitar el bucle)
+      if (isFavorite !== isFav) {
+        setIsFav(true);
+      }
+    }
+
+    // Retorna una función de limpieza para ejecutar cuando el componente se desmonte
+
+  }, [favoritos, product, isFav]);
+
+
+
   const handleFavorite = () => {
     if (isFav) {
       setIsFav(false);
       dispatch(borrarFavoritos({ userData, product }));
     } else {
       setIsFav(true);
+
       dispatch(crearFavoritos({ userData, product }));
     }
   };
