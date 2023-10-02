@@ -47,3 +47,4 @@ export const VACIAR_CARRITO = 'VACIAR_CARRITO';
 export const SECTION_ADMIN = "SECTION_ADMIN";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
 export const SET_USER_MENU = "SET_USER_MENU";
+export const GET_ALL_USERS = "GET_ALL_USERS";

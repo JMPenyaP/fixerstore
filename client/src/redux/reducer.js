@@ -39,6 +39,7 @@ import {
   SECTION_ADMIN,
   GET_ALL_ORDERS,
   SET_USER_MENU,
+  GET_ALL_USERS
 } from "./actionTypes";
 
 const initialState = {
@@ -70,6 +71,7 @@ const initialState = {
   section_admin: "Est",
   allOrders: [],
   userMenu: false,
+  allUsers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -510,6 +512,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userMenu: action.payload,
       };
+    }
+    case GET_ALL_USERS: {
+      return {
+        ...state,
+        allUsers: action.payload
+      }
     }
 
     default:
