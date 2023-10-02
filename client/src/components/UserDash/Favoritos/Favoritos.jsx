@@ -15,7 +15,7 @@ const Favoritos = () => {
   const { userData } = dataProfileActual;
 
   const [hasMore, setHasMore] = useState(true); // Indica si hay más elementos para cargar
-  const [visibleCards, setVisibleCards] = useState(5); // Número inicial de cards visibles
+  const [visibleCards, setVisibleCards] = useState(6); // Número inicial de cards visibles
   const cardsPerPage = 5;
 
   useEffect(() => {
