@@ -31,7 +31,7 @@ const howManyOrderMonthControllers = async (month) => {
 
 
 
-    const englishMonth = monthMappings[month.toLowerCase()];
+    const englishMonth = monthMappings[month].toLowerCase();
     if (!englishMonth) {
         throw new Error('Nombre de mes no válido');
     }
