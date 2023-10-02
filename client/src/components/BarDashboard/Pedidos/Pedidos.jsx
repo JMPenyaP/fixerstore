@@ -1,10 +1,16 @@
-
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector} from "react-redux"
 import style from "./pedidos.module.css"
+import { getAllOrders } from "../../../redux/Actions/getAllOrders";
+import axios from "axios";
 
 
 const Pedidos = () => {
-    const [orders, setOrders] = useState([])
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAllOrders());
+  }, [dispatch]);
+  const allOrders = useSelector((state) => (state.allOrders))
     const ordenes = [
       {
         "id": 101,
@@ -176,6 +182,8 @@ const Pedidos = () => {
           createdAt: "2023-09-27 15:17:26.026-05" 
         },
       ];
+    const [orders, setOrders] = useState([])
+    const [origen, setOrigen] = useState("")
     const [mensaje, setMensaje] = useState("")
     const [idOrden, setIdOrden] = useState("")
     const [isDetail, setIsDetail] = useState(false)
@@ -200,41 +208,61 @@ const Pedidos = () => {
       }
     }, [statusModify])
 
-    const handleDetail = (id) => {
-
-      
-
-
-
-      const orden = ordenes.filter((or) => or.id === id)
-      setDetailOrder(orden[0])
-      if (isDetail) {
-        setIsDetail(false)
-        setDetailOrder({})
-        setStatusModify("")
-      }
-      else {
-        setIsDetail(true)
+    const handleDetail = async (id) => {
+      if (allOrders.length === 0) {
+        setOrders(ordenes)
+        const orden = orders.filter((or) => or.id === id)
         setDetailOrder(orden[0])
-        setStatusModify(orden[0].status)
-        setIdOrden(orden[0].id)
+        if (isDetail) {
+          setIsDetail(false)
+          setDetailOrder({})
+          setStatusModify("")
+        }
+        else {
+          setIsDetail(true)
+          setDetailOrder(orden[0])
+          setStatusModify(orden[0].status)
+          setIdOrden(orden[0].id)
+        }
+      }
+      else if (allOrders.length > 0) {
+        setOrders(allOrders)
+        const endpoint = `http://localhost:3001/order/id/${id}`
+        const response = await axios.get(endpoint)
+        const orden = response.data
+        if (isDetail) {
+          setIsDetail(false)
+          setDetailOrder({})
+          setStatusModify("")
+          setOrigen("")
+        }
+        else {
+          setIsDetail(true)
+          setDetailOrder(orden)
+          setStatusModify(orden.status)
+          setIdOrden(orden.id)
+          setOrigen("DB")
+        }
       }
     }
     const updateState = async (e) => {
       const status = e.target.value
       const id = idOrden
-      try {
-        const endpoint = "http://localhost:3001/order/update"
-        const body = {
-          status: status,
-          id: id
+      if (origen === "DB") {
+        try {
+          const endpoint = "http://localhost:3001/order/update"
+          const body = {
+            status: status,
+            id: id
+          }
+          const response = await axios.patch(endpoint, body)
+          const {data} = response
+          setMensaje(data)
+          dispatch(getAllOrders())
         }
-        const response = await axios.patch(endpoint, body)
-        const {data} = response
-        setMensaje(data)
-      }
-      catch (error) {
-        setMensaje("Hubo un error, vuelve a intentarlo")
+        catch (error) {
+          setMensaje("Hubo un error, vuelve a intentarlo")
+        }
       }
     }
     console.log(statusModify);
@@ -281,8 +309,8 @@ const Pedidos = () => {
                       <p className={style.mensajeProductos}><strong>Valor total: </strong> ${detailOrder.totalAmount}</p>
                       <p className={style.mensajeProductos}><strong>Método de pago:</strong> {detailOrder.payment}</p>
                       <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status === 'pending' ? 'Pendiente' : detailOrder.status === 'in progress' ? 'Enviado' : detailOrder.status === 'delivered' ? 'Entregado' : ''}</p>
-                      {nextStatus !== "" ? (nextStatus === "in progress" ? (<button value="in progress" className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button value="delivered" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
-                      {backStatus !== "" ? (backStatus === "pending" ? (<button value="pending" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button value="in progress" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
+                      {nextStatus !== "" ? (nextStatus === "in progress" ? (<button value="in progress" onClick={updateState} className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button onClick={updateState} value="delivered" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
+                      {backStatus !== "" ? (backStatus === "pending" ? (<button onClick={updateState} value="pending" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button onClick={updateState} value="in progress" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
                       {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>):(null)}
                     </div>
                     <div>
