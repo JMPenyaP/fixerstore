@@ -47,7 +47,7 @@ const ContactForm = () => {
   
   return (
     
-    <div className="container">
+    <div className="containerContactanos">
     <div className='titulo-cabecera'>
     <div className='logo-cabecera'>
         <img src="https://fixershoes.com/assets/logo-slogan.png" alt="Logo" width="80px" height="70px" />
