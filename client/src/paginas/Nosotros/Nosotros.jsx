@@ -15,7 +15,7 @@ export default function Nosotros() {
                         </div>
                     </div>
                     <div>
-                        <img src='https://fixershoes.com/assets/bg_nosotros3.jpg' alt="nosotros" width="100%" />
+                        <img src='https://fixershoes.com/assets/bg_nosotros3.jpg' alt="nosotros" width="80%" />
                     </div>
                 </div>
                 <div className="nosotros-container">

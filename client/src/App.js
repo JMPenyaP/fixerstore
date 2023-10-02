@@ -23,23 +23,48 @@ import RegistroUsuario from "./paginas/RegistroUsuario/RegistroUsuario";
 import Pasarela from "./paginas/Pasarela/Pasarela";
 import DashUser from "./paginas/DashUser/DashUser";
 import { setDataProfile } from "./redux/Actions/setDataProfile";
+import { setUserMenu } from "./redux/Actions/setUserMenu";
 import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
 import Success from "./paginas/Pasarela/payStatus/Success";
 import Failured from './paginas/Pasarela/payStatus/Failured'
+import ContactForm from './paginas/Contactanos/ContactForm';
+
 
 function App() {
   const navigate = useNavigate();
   const admin = useSelector((state) => state.adminProfile);
-  const carritoById = useSelector((state) => state.carritoById);
   const client = useSelector((state) => state.clientProfile);
   const carrito = useSelector((state) => state.carrito);
   const [adminPass, setAdminPass] = useState(null);
   const [idVariable, setIdVariable] = useState(null);
   const dispatch = useDispatch();
   const dataProfile = useSelector((state) => state.dataProfile);
+  const userMenu = useSelector((state) => state.userMenu)
 
-  console.log(carrito);
-  console.log(carritoById);
+  useEffect(() => {
+    const handleClick = (event) => {
+      // Verificar si el clic ocurrió dentro del elemento que activa el menú de usuario
+      // o dentro del elemento con el ID "letterId"
+      if (
+        userMenu &&
+        event.target.id !== 'user-menu-button' &&
+        event.target.id !== 'letterId'
+      ) {
+        dispatch(setUserMenu(false));
+        console.log("hola");
+      }
+    };
+
+    // Agregar el EventListener al montar el componente
+    document.addEventListener("click", handleClick);
+
+    // Limpiar el EventListener al desmontar el componente
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [userMenu, dispatch]);
+
+
 
   useEffect(() => {
     setAdminPass(admin);
@@ -118,8 +143,6 @@ function App() {
     }
   }, [dataProfile]);
 
-  console.log(client)
-
   return (
     <>
       {!isLoginPage && <Navbar />}
@@ -141,18 +164,21 @@ function App() {
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
+        <Route path="/contactanos" element={<ContactForm />} />
+
+
 
         <Route
           path="/payment"
-          element={true === true ? <Pasarela /> : <Navigate to="/" />}
+          element={<Pasarela />}
         />
         <Route
           path="/payment/success"
-          element={true === true ? <Success /> : <Navigate to="/" />}
+          element={<Success />}
         />
         <Route
           path="/payment/failured"
-          element={true === true ? <Failured /> : <Navigate to="/" />}
+          element={<Failured />}
         />
 
 
