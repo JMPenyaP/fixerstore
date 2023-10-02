@@ -40,8 +40,9 @@ const Pay = ({formData}) => {
     };
 
     const handleBuy = async()=>{
-        const id = await createPreference();
         setIsButtonDisabled(true);
+        const id = await createPreference();
+        
         if(id){
             setPreferenceId(id)
         }
