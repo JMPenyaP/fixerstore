@@ -183,7 +183,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <button className={style.botonInicio}>Iniciar sesión</button>
+                <button className={style.botonInicio}>Ingresar</button>
               </Link>
             </>
           )}
@@ -229,7 +229,7 @@ const Navbar = () => {
                 <h4>{letter}</h4>
               </div>
             ) : (
-              <h2>inicia sesion</h2>
+              <h2>Ingresar</h2>
             )}
             <ul>
               <li>te</li>

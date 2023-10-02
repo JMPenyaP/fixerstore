@@ -73,8 +73,7 @@ function App() {
     location.pathname === "/admin" ||
     location.pathname === "/login" ||
     location.pathname === "/registro" ||
-    location.pathname === "/resetPass" ||
-    location.pathname === "/reset" ||
+    location.pathname.includes("/reset") ||
     location.pathname === "/payment" ||
     location.pathname === "/payment/success" ||
     location.pathname === "/payment/failured";

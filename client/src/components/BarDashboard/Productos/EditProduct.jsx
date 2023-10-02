@@ -3,18 +3,21 @@ import { useState, useEffect } from "react"
 import { useForm, Controller} from "react-hook-form"
 import style from "./edit.module.css"
 import { getCategories } from "../../../redux/Actions/getCategories"
+import { getAllProducts } from "../../../redux/Actions/getAllProducts"
 import axios from "axios"
 
 const EditProduct = (props) => {
     // Importaciones
-    const {product} = props
+    const {product, onModify} = props
     const dispatch = useDispatch()
     const {handleSubmit, control, formState: {errors}, trigger, setValue, reset} = useForm()
     //Estados globales
     const createProduct = useSelector(state => state.createdProduct) //Cambiar por Modify Product
     //Categorias
-    let categorias = useSelector(state => state.allCategories)
-    if (categorias.length < 1) {dispatch(getCategories())}
+    const categorias = useSelector(state => state.allCategories)
+    useEffect(()=> {
+      if (categorias.length < 1) {dispatch(getCategories())}
+    }, [categorias])
     //Estados locales
     const [creado, setCreado] = useState(createProduct) //Cambiar por modify
     const [principal, setPrincipal] = useState(product.firstImage)
@@ -102,6 +105,10 @@ const EditProduct = (props) => {
         if(message) {
             setMensaje("Producto actualizado con exito")
         }
+        dispatch(getAllProducts())
+        setTimeout(()=> {
+          onModify()
+        }, 1000)
       } 
       catch (error) {
         setMensaje("Hubo un error, intentalo de nuevo") 
@@ -123,7 +130,6 @@ const EditProduct = (props) => {
                     render={({ field }) => (
                     <input className={style.input} type="text" {...field} value={field.value} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
                     <div className={style.errorMenssage}>
-                    {errors.name && <p className={style.simbolo}>!</p>}
                     {errors.name && <p className={style.errorText}>{errors.name.message}</p>}
                     </div>
                     </div>
@@ -144,7 +150,6 @@ const EditProduct = (props) => {
                             {categoria.name.charAt(0).toUpperCase() + categoria.name.slice(1)}</option>))}
                     </select>)} />
                     <div className={style.errorMenssage}>
-                    {errors.categoryId && <p className={style.simbolo}>!</p>}
                     {errors.categoryId && <p className={style.errorText}>{errors.categoryId.message}</p>}
                     </div>
                     </div>
@@ -169,7 +174,6 @@ const EditProduct = (props) => {
                     />
                     )}/>
                     <div className={style.errorMenssage}>
-                    {errors.firstImage && <p className={style.simbolo}>!</p>}
                     {errors.firstImage && <p className={style.errorText}>{errors.firstImage.message}</p>}
                     </div>
                     </div>
@@ -193,8 +197,7 @@ const EditProduct = (props) => {
                     />
                     )}/>
                     <div className={style.errorMenssage}>
-                    {errors.carrouselImage && <p className={style.simbolo}>!</p>}
-                      {errors.carrouselImage && <p className={style.errorText}>{errors.carrouselImage.message}</p>}
+                    {errors.carrouselImage && <p className={style.errorText}>{errors.carrouselImage.message}</p>}
                     </div>
                     </div>
                 </div>
@@ -216,7 +219,7 @@ const EditProduct = (props) => {
                     <Controller
                     name="priceOfList"
                     control={control}
-                    defaultValue={product.priceOfList*1000}
+                    defaultValue={product.priceOfList}
                     rules={{
                         required: 'Este campo es obligatorio',
                         pattern: {
@@ -227,7 +230,6 @@ const EditProduct = (props) => {
                     <input className={style.input} min="0" type="number" placeholder='$' {...field} onChange={(e) => {field.onChange(e); trigger('priceOfList'); }}/>)}
                     />
                     <div className={style.errorMenssage}>
-                    {errors.priceOfList && <p className={style.simbolo}>!</p>}
                     {errors.priceOfList && <p className={style.errorText} >{errors.priceOfList.message}</p>}
                     </div>
                     </div>
@@ -242,10 +244,10 @@ const EditProduct = (props) => {
                     control={control}
                     defaultValue={product.description}
                     rules={{ required: 'Este campo es obligatorio', maxLength: {value: 200,message: 'La descripción no puede tener más de 200 caracteres'}, minLength: {value: 50,message: 'La descripción no puede tener menos de 50 caracteres'}}}
-                    render={({ field }) => <textarea className={style.inputext} {...field} onChange={(e) => {field.onChange(e); trigger('description'); }} />}
+                    render={({ field }) => <textarea cols="40"
+                    rows="5" className={style.inputext} {...field} onChange={(e) => {field.onChange(e); trigger('description'); }} />}
                     />
                     <div className={style.errorMenssage}>
-                    {errors.description && <p className={style.simbolo}>!</p>}
                     {errors.description && <p className={style.errorText}>{errors.description.message}</p>}
                     </div>
                   </div>
@@ -287,7 +289,6 @@ const EditProduct = (props) => {
                     </select>)}
                     />
                     <div className={style.errorMenssage}>
-                    {errors.statusOffer && <p className={style.simbolo}>!</p>}
                     {errors.statusOffer && <p className={style.errorText}>{errors.statusOffer.message}</p>}
                     </div>
                     </div>
@@ -313,7 +314,6 @@ const EditProduct = (props) => {
                     )}
                     />
                     <div className={style.errorMenssage}>
-                    {errors.offer && <p className={style.simbolo}>!</p>}
                     {errors.offer && <p className={style.errorText}>{errors.offer.message}</p>}
                     </div>
                     </div>
@@ -325,18 +325,16 @@ const EditProduct = (props) => {
                     name="status"
                     control={control}
                     defaultValue={product.status}
-                    rules={{ required: 'Este campo es obligatorio' }}
                     render={({ field }) => (
                     <select className={style.select} {...field} onChange={(e) => {
                         field.onChange(e);
                         trigger('status');}}>
-                            <option value="" disabled>Seleccione un estado</option>
+                            <option value=""disabled>Seleccione un estado</option>
                             <option value="true">Disponible</option>
                             <option value="false">No disponible</option>
                     </select>)}
                     />
                     <div className={style.errorMenssage}>
-                    {errors.status && <p className={style.simbolo}>!</p>}
                     {errors.status && <p className={style.errorText}>{errors.status.message}</p>}
                     </div>
                     </div>
@@ -358,7 +356,6 @@ const EditProduct = (props) => {
                     )}
                     />
                     <div className={style.errorMenssage}>
-                    {errors.stock && <p className={style.simbolo}>!</p>}
                     {errors.stock && <p className={style.errorText}>{errors.stock.message}</p>}
                     </div>
                     </div>

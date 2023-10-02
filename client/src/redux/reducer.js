@@ -36,6 +36,8 @@ import {
   SHOW_FILTERS,
   SET_ORDER,
   SET_ORDER2,
+  SECTION_ADMIN,
+  GET_ALL_ORDERS,
   SET_USER_MENU,
 } from "./actionTypes";
 
@@ -65,6 +67,8 @@ const initialState = {
   order2: "",
   prodBuscaComb: [],
   showFilters: false,
+  section_admin: "Est",
+  allOrders: [],
   userMenu: false,
 };
 
@@ -486,6 +490,18 @@ const rootReducer = (state = initialState, action) => {
           clientProfile: action.payload.success,
           adminProfile: false,
         };
+      }
+    }
+    case SECTION_ADMIN: {
+      return {
+        ...state,
+        section_admin: action.payload
+      }
+    }
+    case GET_ALL_ORDERS: {
+      return {
+        ...state, 
+        allOrders: action.payload
       }
     }
 

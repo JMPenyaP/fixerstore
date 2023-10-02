@@ -31,6 +31,10 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 14.5px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 .th {
@@ -38,28 +42,28 @@
     border: 1px solid #dddddd;
     color: white;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
   }
   .th:hover {
     background-color: #3cbbed;
     border: 1px solid #dddddd;
     color: white;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
   }
   
   .td {
     border: 1px solid #dddddd;
-    text-align: left;
-    padding: 3px;
+    text-align: center;
+    padding: 5px;
   }
   .tdetail {
     border: 1px solid #dddddd;
     text-decoration: underline;
     text-align: center;
-    padding: 3px;
+    padding: 5px;
   }
-  
+
   .tr:hover {
     background-color: #c4dae2;
     font-weight: bold;
@@ -70,6 +74,8 @@
     font-weight: bold;
     text-transform: uppercase;
   }
+
+
 
 .botonEdit {
     border: none;
@@ -137,14 +143,14 @@
 .mensajeConfirmacion {
   margin: 0%;
   font-family: "Gotham", sans-serif;
-  font-size: 12px;
+  font-size: 11.5px;
   color: white;
 }
 
 .botonDeleteConfirm{
   border: none;
-  font-size: 12px;
-  padding: 5px 5px 5px 5px;
+  font-size: 11.5px;
+  padding: 3px 5px 3px 5px;
   border-radius: 50px;
   cursor: pointer;
   position: relative;
@@ -164,8 +170,8 @@
 
 .botonCancelConfirm{
   border: none;
-  font-size: 12px;
-  padding: 5px 5px 5px 5px;
+  font-size: 11.5px;
+  padding: 3px 5px 3px 5px;
   border-radius: 50px;
   cursor: pointer;
   position: relative;
@@ -179,7 +185,7 @@
 }
 .botonCancelConfirm:hover{
   color: white;
-  background-color: green;
+  background-color: #15214a;
   border: 2px solid white;
 }
 
