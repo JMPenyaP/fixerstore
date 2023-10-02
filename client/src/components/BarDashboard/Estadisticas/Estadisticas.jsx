@@ -1,5 +1,13 @@
 import style from "../Constru.module.css";
-import { Card, Text, Metric, Title, BarChart, Subtitle } from "@tremor/react";
+import {
+  Card,
+  Text,
+  Metric,
+  Title,
+  BarChart,
+  Subtitle,
+  DonutChart,
+} from "@tremor/react";
 
 const Estadisticas = () => {
   const chartdata = [
@@ -41,16 +49,63 @@ const Estadisticas = () => {
     },
   ];
 
+  const cities = [
+    {
+      name: "New York",
+      sales: 9800,
+    },
+    {
+      name: "London",
+      sales: 4567,
+    },
+    {
+      name: "Hong Kong",
+      sales: 3908,
+    },
+    {
+      name: "San Francisco",
+      sales: 2400,
+    },
+    {
+      name: "Singapore",
+      sales: 1908,
+    },
+    {
+      name: "Zurich",
+      sales: 1200,
+    },
+  ];
+
+  const valueFormatter = (number) =>
+    `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
+
   const dataFormatter = (number) => {
     return new Intl.NumberFormat("us").format(number).toString();
   };
 
   return (
     <div className={style.divEstadisticas}>
-      <Card className="max-w-xs mx-auto">
-        <Text>Sales</Text>
-        <Metric>$ 34,743</Metric>
-      </Card>
+      <div className="flex flex-row mb-5">
+        <Card className="max-w-xs mx-auto">
+          <Text>Ingresos totales</Text>
+          <Metric>$ 34,743</Metric>
+        </Card>
+        <Card className="max-w-xs mx-auto">
+          <Text>Ingresos este mes</Text>
+          <Metric>$ 34,743</Metric>
+        </Card>
+        <Card className="max-w-lg">
+          <Title>Usuarios</Title>
+          <DonutChart
+            className="mt-6"
+            data={cities}
+            category="sales"
+            index="name"
+            valueFormatter={valueFormatter}
+            colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
+          />
+        </Card>
+      </div>
       <Card className="w-70">
         <Title>Number of species threatened with extinction (2021)</Title>
         <Subtitle>

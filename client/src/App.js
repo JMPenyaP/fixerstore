@@ -166,15 +166,15 @@ function App() {
 
         <Route
           path="/payment"
-          element={true === true ? <Pasarela /> : <Navigate to="/" />}
+          element={<Pasarela />}
         />
         <Route
           path="/payment/success"
-          element={true === true ? <Success /> : <Navigate to="/" />}
+          element={<Success />}
         />
         <Route
           path="/payment/failured"
-          element={true === true ? <Failured /> : <Navigate to="/" />}
+          element={<Failured />}
         />
 
 
