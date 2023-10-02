@@ -40,13 +40,12 @@ Order.belongsTo(User);
 Order.belongsToMany(Product, { through: OrderItems });
 Product.belongsToMany(Order, { through: OrderItems });
 User.hasMany(Order);
-User.belongsToMany(Favorites, { through: "userFavorite" }, { timestamps: false });
-Favorites.belongsToMany(User, { through: "userFavorite" }, { timestamps: false });
-OrderItems.belongsTo(UserReviews, { foreignKey: 'orderedProductoId' });
-
+User.belongsToMany(Product, { through: Favorites });
+Product.belongsToMany(User, { through: Favorites });
+OrderItems.belongsTo(UserReviews, { foreignKey: 'ProductId' });
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
-
-
+Favorites.belongsTo(User);
+Favorites.belongsTo(Product);
 
 module.exports = {
     ...sequelize.models, // exporta los modelos

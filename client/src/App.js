@@ -106,8 +106,10 @@ function App() {
 
   useEffect(() => {
     if (dataProfile != null) {
-      localStorage.setItem("dataProfile", JSON.stringify(dataProfile));
-      setIdVariable(dataProfile.userData.id);
+      if (dataProfile.userData) {
+        localStorage.setItem("dataProfile", JSON.stringify(dataProfile));
+        setIdVariable(dataProfile.userData.id);
+      }
     } else {
       const storedData = JSON.parse(localStorage.getItem("dataProfile")) || [];
       setIdVariable(null);
@@ -136,25 +138,25 @@ function App() {
           path="/user/:id"
           element={client === true ? <DashUser /> : <Navigate to="/login" />}
         />
-        <Route path="/us" element={<Nosotros />} />
+        <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
-        
-        <Route 
-        path="/payment"
-        element={true===true ? <Pasarela /> : <Navigate to="/" />}
+
+        <Route
+          path="/payment"
+          element={true === true ? <Pasarela /> : <Navigate to="/" />}
         />
-        <Route 
-        path="/payment/success"
-        element={true===true ? <Success /> : <Navigate to="/" />}
+        <Route
+          path="/payment/success"
+          element={true === true ? <Success /> : <Navigate to="/" />}
         />
-        <Route 
-        path="/payment/failured"
-        element={true===true ? <Failured /> : <Navigate to="/" />}
-        />   
-            
-            
+        <Route
+          path="/payment/failured"
+          element={true === true ? <Failured /> : <Navigate to="/" />}
+        />
+
+
       </Routes>
     </>
   );

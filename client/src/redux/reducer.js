@@ -16,6 +16,7 @@ import {
   REGISTER,
   FILTER_BACK,
   INCREMENT_QTY,
+  GET_FAV,
   DECREMENT_QTY,
   REMOVE_PRODUCT,
   USER_PROFILE,
@@ -56,6 +57,7 @@ const initialState = {
   userChanges: null,
   historial: [],
   favoritos: [],
+  fav:[],
   carritoById: [],
   search: '',
   categoryId: 0,
@@ -100,13 +102,13 @@ const rootReducer = (state = initialState, action) => {
 
     //Marcos
 
-    case USER_CHANGE: {
-      return {
-        ...state,
-        userChanges: action.payload.success,
-        dataProfile: action.payload,
-      };
-    }
+    // case USER_CHANGE: {
+    //   return {
+    //     ...state,
+    //     userChanges: action.payload.success,
+    //     dataProfile: action.payload,
+    //   };
+    // }
 
     case HISTORIAL: {
       return {
@@ -122,17 +124,27 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case DELETE_FAV: {
-      const productIdRemove = action.payload.favId;
-      const favActualizado = state.favoritos.filter(
-        (producto) => producto.id !== productIdRemove
-      );
+    case GET_FAV:{
 
       return {
-        ...state,
-        favoritos: favActualizado,
-      };
+          ...state,
+          fav: action.payload,
+      }
+
     }
+
+
+    case DELETE_FAV: {
+      const productIdRemove = action.payload.favId;
+      const favActualizado = Array.isArray(state.fav)
+        ? [...state.fav].filter((producto) => producto.id !== productIdRemove)
+        : [];
+      
+      return {
+        ...state,
+        fav: favActualizado,
+      };
+    }      
 
     case FAVORITOS: {
       return {

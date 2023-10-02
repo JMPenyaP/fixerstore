@@ -1,12 +1,13 @@
 import { SAVE_FAV } from "../actionTypes";
 import axios from "axios";
 
-export const crearFavoritos = ({ userData, product}) => {
+export const crearFavoritos = ({ userData, product }) => {
   try {
-    const fav = {userId: userData.id, products: product}
+
+    const fav = { UserId: userData.id, ProductId: product.id }
     return async (dispatch) => {
       const response = await axios.post(
-        `http://localhost:3001/favorites/`,fav 
+        `http://localhost:3001/favorites/`, fav
       );
       dispatch({
         type: SAVE_FAV,
@@ -19,3 +20,4 @@ export const crearFavoritos = ({ userData, product}) => {
     return errorResponse;
   }
 };
+
