@@ -149,11 +149,16 @@ const Navbar = () => {
               {showMenu ? (
                 letter !== null ? (
                   <div className={style.divMenuDesplegable}>
-                    <Link to={`/user/${dataProfile.userData.id}`}>
+                    {dataProfile.userData.role === "admin" ? (<Link to={`/dashboard`}>
+                      <button>
+                        <ion-icon name="person"></ion-icon> <h5>Dashboard</h5>
+                      </button>
+                    </Link>): (<Link to={`/user/${dataProfile.userData.id}`}>
                       <button>
                         <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
                       </button>
-                    </Link>
+                    </Link>)
+                    }
                     <button onClick={() => handleRedirect()}>
                       <ion-icon name="log-out"></ion-icon>{" "}
                       <h5>Cerrar sesion</h5>
@@ -167,7 +172,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <button className={style.botonInicio}>Iniciar sesión</button>
+                <button className={style.botonInicio}>Ingresar</button>
               </Link>
             </>
           )}
@@ -212,7 +217,7 @@ const Navbar = () => {
                 <h4>{letter}</h4>
               </div>
             ) : (
-              <h2>inicia sesion</h2>
+              <h2>Ingresar</h2>
             )}
             <ul>
               <li>te</li>

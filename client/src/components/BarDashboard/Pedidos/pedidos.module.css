@@ -240,10 +240,10 @@
   margin: 0px;
 }
 
-.modifyOrden {
+.modifyOrdenBack {
   border: none;
-  font-size: 18px;
-  padding: 2px 20px 2px 20px;
+  font-size: 12px;
+  padding: 2px 10px 2px 10px;
   border-radius: 50px;
   cursor: pointer;
   position: relative;
@@ -255,13 +255,14 @@
   font-family: "Gotham", sans-serif;
   text-align: center;
   margin-top: 3px;
-  width: 50%;
+  width: 40%;
 }
 
-.modifyOrden:hover{
+.modifyOrdenBack:hover{
   color: white;
+  border: 2px solid white;
 }
-.modifyOrden::before{
+.modifyOrdenBack::before{
   content: "";
   position: absolute;
   height: 100%;
@@ -269,13 +270,54 @@
   top: 0%;
   left: 0;
   border-radius: 50px;
-  background-color: #3cbbed;
+  background-color: #15214a;
   z-index: -1;
   transition: 0.6s;
   opacity: 0;
 }
 
-.modifyOrden:hover::before{
+.modifyOrdenBack:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+.modifyOrdenNext {
+  border: none;
+  font-size: 12px;
+  padding: 2px 10px 2px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  border: 2px solid #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: center;
+  margin-top: 3px;
+  width: 40%;
+}
+
+.modifyOrdenNext:hover{
+  color: white;
+  border: 2px solid white;
+}
+.modifyOrdenNext::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: green;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.modifyOrdenNext:hover::before{
   width: 100%;
   opacity: 1;
 }

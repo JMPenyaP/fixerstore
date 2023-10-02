@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 5px;
 }
 
@@ -341,32 +340,16 @@
 
 .errorMenssage {
     display: flex;
-    flex-direction: row;
-    align-items: left;
-    justify-content: flex-start;
-    padding: 0px;
-    text-align: left;
-}
-.errorMenssagePass {
-    display: flex;
     flex-direction: column;
     align-items: left;
-    justify-items: left;
-    padding: 0px;
-    text-align: left;
+    justify-content: left;
+    gap: 1px;
+    align-content: flex-start;
 }
-.simbolo {
-    font-family: "Gotham", sans-serif;
-        color: red;
-        font-weight: bolder;
-        margin: 0px;
-        padding: 0px;
-        font-size: 9px;
-}
-
 .errorText {
-    font-size: 9px;
-    margin: 0px;
+    font-size: 10px;
+    margin-top: 5px;
+    padding: 0px 4px 0px 4px;
     transition: opacity 0.3s ease;
     font-family: "Gotham", sans-serif;
     color: red;
@@ -394,6 +377,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    padding: 10px;
     .positivo {
         font-family: "Gotham", sans-serif;
         color: white;
@@ -422,4 +410,39 @@
     align-items: center;
 
     gap: 10px;
+}
+
+.formbuttonBack {
+    border: none;
+    font-size: 12px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbuttonBack:hover{
+    color: white;
+}
+.formbuttonBack::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #15214a;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbuttonBack:hover::before{
+    width: 100%;
+    opacity: 1;
 }
