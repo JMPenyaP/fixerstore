@@ -29,25 +29,25 @@ const Failured = () => {
             return acc;
           }, {});
 
-          const {name,surname,phone,cc,retiro} = externalReferenceData
+        const { name, surname, phone, cc, retiro } = externalReferenceData
         const updatedForm = {
           idMp: id,
-          userId:dataProfile.userData.id,
-          name:name,
-          surname:surname,
-          phone:phone,
-          cc:cc,
-          payment:payment,
-          retiro:retiro,
+          userId: dataProfile.userData.id,
+          name: name,
+          surname: surname,
+          phone: phone,
+          cc: cc,
+          payment: payment,
+          retiro: retiro,
           city: "",
           address: "",
           department: "",
           payStatus,
         };
         setForm(updatedForm); // Actualiza el estado con los valores extraídos
-        
+
       }
-      
+
     } catch (error) {
 
       console.error("Error al analizar la cadena JSON:", error);
@@ -55,7 +55,7 @@ const Failured = () => {
   };
 
   useEffect(() => {
-    
+
     extractValuesFromQuery();
 
     const timer = setInterval(() => {
@@ -77,23 +77,23 @@ const Failured = () => {
   }, [navigate, secondsRemaining]);
 
   const [form, setForm] = useState({
-    idMp:'', 
-    userId:'',
-    name:'', 
-    surname:'', 
-    phone:'', 
-    cc:'', 
-    payment:'', 
-    retiro:'', 
-    city:'', 
-    address:'',
-    department:''
+    idMp: '',
+    userId: '',
+    name: '',
+    surname: '',
+    phone: '',
+    cc: '',
+    payment: '',
+    retiro: '',
+    city: '',
+    address: '',
+    department: ''
   });
 
   useEffect(() => {
     if (secondsRemaining === 0) {
       console.log(form)
-      axios.post('http://localhost:3001/order/',{form})
+      axios.post('http://localhost:3001/order/', { form })
       navigate("/");
     }
   }, [navigate, secondsRemaining]);
@@ -110,4 +110,4 @@ const Failured = () => {
   );
 };
 
-export default Success;
+export default Failured;
