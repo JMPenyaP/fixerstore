@@ -8,7 +8,7 @@ export default function Nosotros() {
                 <div className='cabecera'>
                     <div className='titulo-cabecera'>
                         <div className='logo-cabecera'>
-                            <img src="https://fixershoes.com/assets/logo-slogan.png" alt="Logo" width="80px" height="70px" />
+                            <img src="https://fixershoes.com/assets/logo-slogan.png" alt="Logo" width="100px" height="90px"/>
                         </div>
                         <div className='slogan-cabecera'>
                             Cuidado y Restauración de Calzado

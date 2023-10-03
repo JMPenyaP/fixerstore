@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from 'axios'
-import styles from './Pay.module.css'
+import axios from "axios";
+import styles from "./Pay.module.css";
 
-const Success = () => {
-
+const Failured = () => {
   const dataProfile = useSelector((state) => state.dataProfile);
   const [secondsRemaining, setSecondsRemaining] = useState(5);
 

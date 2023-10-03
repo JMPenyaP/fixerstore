@@ -35,14 +35,21 @@ export const USER_CHANGE = "USER_CHANGE";
 export const SET_CHANGE = "SET_CHANGE";
 export const SET_DATA_PROFILE = "SET_DATA_PROFILE";
 //
-export const SET_NAME_SEARCH = 'SET_NAME_SEARCH'
-export const BUSCA_COMB = 'BUSCA_COMB'
-export const SET_CAT = 'SET_CAT'
-export const SET_ORDER = 'SET_ORDER'
-export const SET_ORDER2 = 'SET_ORDER2'
-export const SHOW_FILTERS = 'SHOW_FILTERS'
+export const SET_NAME_SEARCH = "SET_NAME_SEARCH";
+export const BUSCA_COMB = "BUSCA_COMB";
+export const SET_CAT = "SET_CAT";
+export const SET_BUSCA_COMB = 'SET_BUSCA_COMB'
+export const SET_ORDER = "SET_ORDER";
+export const SET_ORDER2 = "SET_ORDER2";
+export const SHOW_FILTERS = "SHOW_FILTERS";
 export const ACTUALIZAR_USER_ID_EN_CARRITO = "ACTUALIZAR_USER_ID_EN_CARRITO";
 export const GET_CARRITO_BY_ID = "GET_CARRITO_BY_ID";
 export const VACIAR_CARRITO = 'VACIAR_CARRITO';
 export const SECTION_ADMIN = "SECTION_ADMIN";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
+export const SET_USER_MENU = "SET_USER_MENU";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+// Reviews
+export const SEND_REVIEW = 'SEND_REVIEW';
+//
+export const REVIEWS = 'REVIEWS';

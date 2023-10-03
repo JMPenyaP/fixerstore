@@ -8,6 +8,7 @@ import imagenIzq from "../../assets/Fondolaterallogin.png";
 import { createUser } from "../../redux/Actions/createUser";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+import { setDataProfile } from "../../redux/Actions/setDataProfile";
 
 const LoginUser = () => {
     const [existe, setExiste] = useState(null);
@@ -26,6 +27,9 @@ const LoginUser = () => {
     let user = useSelector((state) => state.clientProfile)
     useEffect(() => {
         setClientPass(user)
+        return () => {
+            setClientPass(null)
+        }
     }, [user])
     const handleChange = (e) => {
         setEmailInput(e.target.value);
@@ -93,7 +97,7 @@ const LoginUser = () => {
                 <h1 className={style.titulo}>Iniciar sesión</h1>
                 <form>
                     <div className={style.form}>
-                        <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Correo electronico" />
+                        <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Correo electronico"/>
                         {existe !== true ? (<button className={style.formbutton} onClick={(event) => userClient(emailInput, event)}>Siguiente</button>) : (null)}
                         {existe === true ? (
                             <div className={style.passwordcontainer}>

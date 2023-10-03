@@ -1,0 +1,86 @@
+.containerContactanos {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: transparent;
+  gap: 10px;
+}
+.Form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 3px;
+}
+
+.containerContactanos .cabecera {
+  grid-column: span 1; 
+  min-height: 90px;
+  background-color: #1d2fb5;
+  display: flex;
+  align-items: center;
+}
+.titulo-cabecera {
+display: flex;
+flex-direction: column;
+}
+
+.containerContactanos label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.containerContactanos input[type="text"],
+.containerContactanos input[type="email"],
+.containerContactanos input[type="tel"], /* Cambiado de "telefono" a "tel" */
+.containerContactanos textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.containerContactanos button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.containerContactanos button:hover {
+  background-color: #0056b3;
+}
+
+.sede-maps {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Espacio entre los mapas */
+}
+
+.map {
+  width: 70%;
+  border-radius: 5px;
+  gap: 20px;
+}
+
+/* Estilo específico para los iframes de Google Maps */
+.map iframe {
+  width: 100%;
+  height: 300px; /* Ajusta la altura según tus necesidades */
+  border: none;
+  border-radius: 5px;
+}
+/* Estilo para los títulos de los mapas */
+.map label {
+  font-size: 20px; /* Cambia el tamaño de letra según tus preferencias */
+  font-weight: bold; /* Opcional: Puedes hacer que los títulos sean negrita */
+}
+.slogan-cabecera {
+  color: #5f70c6; /* Color del texto en negro */
+}
+

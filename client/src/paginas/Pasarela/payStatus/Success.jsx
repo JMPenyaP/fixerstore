@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from 'axios'
-import styles from './Pay.module.css'
+import axios from "axios";
+import styles from "./Pay.module.css";
 
 const Success = () => {
 
@@ -30,27 +30,24 @@ const Success = () => {
             return acc;
           }, {});
 
-          const {name,surname,phone,cc,retiro} = externalReferenceData
+        const { name, surname, phone, cc, retiro } = externalReferenceData;
         const updatedForm = {
           idMp: id,
-          userId:dataProfile.userData.id,
-          name:name,
-          surname:surname,
-          phone:phone,
-          cc:cc,
-          payment:payment,
-          retiro:retiro,
+          userId: dataProfile.userData.id,
+          name: name,
+          surname: surname,
+          phone: phone,
+          cc: cc,
+          payment: payment,
+          retiro: retiro,
           city: "",
           address: "",
           department: "",
           payStatus,
         };
         setForm(updatedForm); // Actualiza el estado con los valores extraídos
-        
       }
-      
     } catch (error) {
-
       console.error("Error al analizar la cadena JSON:", error);
     }
   };
@@ -77,37 +74,47 @@ const Success = () => {
     };
   }, [navigate, secondsRemaining]);
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (dataProfile === null) {
+        window.location.href = "/";
+      }
+    }, 10);
+
+    return () => clearTimeout(timeoutId);
+  }, [dataProfile]);
+
   const [form, setForm] = useState({
-    idMp:'', 
-    userId:'',
-    name:'', 
-    surname:'', 
-    phone:'', 
-    cc:'', 
-    payment:'', 
-    retiro:'', 
-    city:'', 
-    address:'',
-    department:''
+    idMp: "",
+    userId: "",
+    name: "",
+    surname: "",
+    phone: "",
+    cc: "",
+    payment: "",
+    retiro: "",
+    city: "",
+    address: "",
+    department: "",
   });
 
   useEffect(() => {
     if (secondsRemaining === 0) {
-      console.log(form)
-      axios.post('http://localhost:3001/order/',{form})
+      axios.post("http://localhost:3001/order/", { form });
       navigate("/");
     }
   }, [navigate, secondsRemaining]);
-
-
 
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Pago Exitoso</h1>
       <p className={styles.p}>¡Gracias por su compra!</p>
-      <p className={styles.redirect}>Redireccionando en <span className={styles.secondsRemaining}>{secondsRemaining}</span> segundos...</p>
+      <p className={styles.redirect}>
+        Redireccionando en{" "}
+        <span className={styles.secondsRemaining}>{secondsRemaining}</span>{" "}
+        segundos...
+      </p>
     </div>
-
   );
 };
 
