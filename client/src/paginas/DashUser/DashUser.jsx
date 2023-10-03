@@ -39,7 +39,7 @@ const DashUser = () => {
         dispatch(logOutUser())
         navigate("/")
         window.location.reload();
-    }
+    };
 
     //Renderizado de barra 
     return (
