@@ -119,6 +119,10 @@
     border-radius: 50%;
 }
 
+.infoDiv h6:first-of-type{
+    font-size: 15px;
+}
+
 /* BUTTON */
 
 .divButton button {
@@ -255,6 +259,8 @@
 
 .imgNoCarousel {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .imgNoCarousel img{
@@ -297,6 +303,9 @@
     font-size: 25px;
     color: #3cbbed;
 }
+
+
+
 /* Reviews */
 .mainContRev{
     max-width: 800px;

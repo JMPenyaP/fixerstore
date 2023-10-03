@@ -8,6 +8,8 @@ import {
   Subtitle,
   DonutChart,
   DateRangePicker,
+  List,
+  ListItem,
 } from "@tremor/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -18,9 +20,23 @@ const Estadisticas = () => {
     to: "",
   });
 
+  const [ordersGender, setOrdersGender] = useState();
+
   useEffect(() => {
-    console.log(value);
-  }, [value]);
+    const response = async () => {
+      const apiResponse = await axios.get(
+        "http://localhost:3001/metrics/count-orders-by-gender"
+      );
+
+      const dataResponse = apiResponse.data;
+
+      setOrdersGender(dataResponse);
+      console.log(dataResponse);
+    };
+
+    response();
+  }, []);
+
   const chartdata = [
     {
       name: "enero",
@@ -82,36 +98,28 @@ const Estadisticas = () => {
     return new Intl.NumberFormat("us").format(number).toString();
   };
 
-  const response = async () => {
-    const apiResponse = await axios.get("http://localhost:3001/metrics/");
-  };
-
   return (
     <div className={style.divEstadisticas}>
       <div className="flex flex-row justify-around mb-5">
         <Card className="w-6/12">
-          <DateRangePicker
+          <Title>Ingresos este mes</Title>
+          <Metric>$ 34,743</Metric>
+        </Card>
+        <DateRangePicker
             className="max-w-sm mx-auto"
             enableSelect={true}
             value={value}
             onValueChange={setValue}
             selectPlaceholder="Seleccionar"
           />
-          <Title>Ingresos totales</Title>
-          <Metric>$ 34,743</Metric>
-        </Card>
         <Card className="w-6/12">
-          <Title>Ingresos este mes</Title>
-          <Metric>$ 34,743</Metric>
-        </Card>
-        <Card className="w-6/12">
-          <Title>Usuarios</Title>
+          <Title>Cantidad de Compras</Title>
           <DonutChart
             className="mt-6"
-            data={cities}
+            data={ordersGender}
             category="cantidad"
             index="name"
-            colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
+            colors={["sky", "teal", "indigo", "rose", "cyan", "amber"]}
           />
         </Card>
       </div>

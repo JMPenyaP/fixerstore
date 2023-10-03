@@ -290,7 +290,7 @@ const DetailPage = () => {
                   <h2>$ {product.priceOfList}</h2>
                 )}
               </div>
-              <h3>Descripcion Del Producto :</h3>
+              <h6 className={style.descriptionProduct}>Descripcion Del Producto :</h6>
               <h3>{product.description}</h3>
               <div className={style.divButton}>
                 {/*               <button>Agregar Al Carrito</button> */}
