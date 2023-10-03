@@ -1,22 +1,12 @@
 import styles from './Form.module.css'
 import { useState , useEffect } from 'react';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import { useSelector } from 'react-redux';
 import axios from 'axios'
 
 const Pay = ({formData}) => {
 
     const carritoById = useSelector(state=>state.carritoById)
-    
-    const [preferenceId, setPreferenceId] = useState(null);
-    const [isButtonDisabled,setIsButtonDisabled]= useState('')
 
-
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        initMercadoPago('APP_USR-34521d68-fb93-4dfe-af28-f0507c066d01');
-    }, []);
 
     const createPreference = async () => {
         const totalcarrito = carritoById?.reduce((valorAnterior, valorActual) => {
@@ -30,40 +20,22 @@ const Pay = ({formData}) => {
                 quantity: 1,
                 formData
             });
-            const { id } = response.data;
-            return id;
+
+            window.location.href = response.data.response.body.init_point;
+
         } catch (error) {
-            setError("Error al crear la preferencia de pago");
             
-            return null;
+            return alert(error);
         }
     };
 
-    const handleBuy = async()=>{
-        const id = await createPreference();
-        setIsButtonDisabled(true);
-        if(id){
-            setPreferenceId(id)
-        }
-    }
 
     return ( 
         <>
         <div className={styles.pay}>
 
-            <button className={styles.btn} onClick={handleBuy} disabled={isButtonDisabled}>Ir a Pagar</button>
-            {preferenceId && <Wallet
-                        initialization={{ preferenceId }}
-                        onPayment={() => {
-                            // Manejar el pago completado aquí
-                            console.log("Pago completado");
-                        }}
-                        onError={(error) => {
-                            // Manejar errores de pago aquí
-                            console.error("Error de pago:", error);
-                        }}
-                    />}
-                    {error && <p>{error}</p>}
+            <button className={styles.btn} onClick={createPreference} >Ir a Pagar</button>
+
         </div>
         </>
      );

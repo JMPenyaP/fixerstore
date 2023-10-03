@@ -48,6 +48,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    payStatus:{
+      type: DataTypes.STRING,
+      allowNull:false
+    },
     retiro: {
       type: DataTypes.STRING,
       allowNull: true
