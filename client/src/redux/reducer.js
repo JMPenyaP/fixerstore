@@ -42,6 +42,7 @@ import {
   GET_ALL_USERS,
   SET_BUSCA_COMB,
   SEND_REVIEW,
+  REVIEWS
 } from "./actionTypes";
 
 const initialState = {
@@ -75,6 +76,7 @@ const initialState = {
   allOrders: [],
   userMenu: false,
   allUsers: [],
+  reviews:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -537,6 +539,12 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    case REVIEWS:{
+      return {
+        ...state,
+        reviews:action.payload
+      }
+    }
     default:
       return {
         ...state,

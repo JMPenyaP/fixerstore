@@ -11,8 +11,28 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import React from 'react';
+import { getReviews } from "../../redux/Actions/getReviews";
 
 const DetailPage = () => {
+  
+  const opinion = [{
+    ratingValue: 4.0,
+    comment: "malisimo pesimo producto no lorecomiendo",
+    ProductId: 5
+  }, {
+    ratingValue: 3.0,
+    comment: "bueno que lindo",
+    ProductId: 5
+  }, {
+    ratingValue: 3.0,
+    comment: "recomendado",
+    ProductId: 5
+  }, {
+    ratingValue: 1.0, 
+    comment: "que buen producto",
+    ProductId: 5
+  }]
   // ESTADOS ///
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
@@ -23,13 +43,14 @@ const DetailPage = () => {
   const [idVariable, setIdVariable] = useState(null);
   const dataProfile = useSelector((state) => state.dataProfile);
   //////
-
+  
   let carritoEnLocalStorage = JSON.parse(localStorage.getItem("carrito")) || [];
-
+  
   // STATE REDUX
   const productByName = useSelector((state) => state.productByName);
   const allCategories = useSelector((state) => state.allCategories);
   const carrito = useSelector((state) => state.carrito);
+  const reviews = useSelector((state)=>state.reviews)
   //////
 
   let precioReal;
@@ -86,6 +107,11 @@ const DetailPage = () => {
       setIdVariable(null);
     }
   }, [allCategories, dispatch, carritoEnLocalStorage, dataProfile]);
+
+ // Reviews
+  useEffect(()=>{
+     dispatch(getReviews)
+  },[])
 
   // ONCLICK FUNCTIONS
   const setImage = (url) => {
@@ -163,7 +189,9 @@ const DetailPage = () => {
     carousel = false;
   }
   ///////
-
+  
+ 
+  
   return (
     <>
       <div className={style.divDetail}>
@@ -235,7 +263,7 @@ const DetailPage = () => {
                 <h5
                   className={
                     cantidad + cantidadEnCarrito >= product.stock ||
-                    cantidad >= product.stock
+                      cantidad >= product.stock
                       ? style.noStock
                       : style.stock
                   }
@@ -320,9 +348,13 @@ const DetailPage = () => {
                 </div>
               </div>
             </div>
+
           </div>
+
         )}
+
       </div>
+
       <ToastContainer
         position="top-left"
         autoClose={5000}
@@ -336,9 +368,25 @@ const DetailPage = () => {
         pauseOnHover
         theme="light"
       />
+      <div className={style.mainContRev}>
+        <h1>Opiniones acerca de este producto:</h1>
+        {opinion.map((op) => (
+        <div className={style.reviewCont}>
+          <h3>{op.ratingValue}</h3>
+          <p>{op.comment}</p>
+
+         </div>
+        ))}
+      </div>
       <Footer />
     </>
   );
 };
 
 export default DetailPage;
+//       <div className={style.grade} >
+//   </div>
+//   <div className={style.coment}>
+//     <h1>comentarios review
+//     </h1>
+//  </div>

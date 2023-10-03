@@ -41,6 +41,8 @@ import { setOrder2 } from "./Actions/setOrder2";
 import { showFilters } from './Actions/showFilters'
 import { setBuscaComb } from './Actions/setBuscaComb'
 import { sendReview } from './Actions/sendReview'
+import { getReviews } from './Actions/getReviews'
+
 
 export const createProd = createProduct;
 export const getProductName = getProductByName;
@@ -61,3 +63,5 @@ export const setOr = setOrder;
 export const setOr2 = setOrder2;
 export const show = showFilters;
 export const sendRev = sendReview;
+//
+export const review = getReviews;

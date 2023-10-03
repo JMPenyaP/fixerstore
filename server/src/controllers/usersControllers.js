@@ -1,5 +1,6 @@
 const { User } = require("../db");
 const bcrypt = require("bcryptjs");
+const Sequelize = require('sequelize');
 const { createTransporter, sendEmail } = require('./utils/emailTransporter');
 
 //! Crear Usuario Cliente
@@ -147,6 +148,26 @@ const getUserByEmail = async (email) => {
     return false
   }
 }
+ const deleteUser = async(req,res)=>{
+     const {id}=req.body
+     console.log(id)
+     try {
+      const result = await User.destroy({
+        where: {
+          id: {
+            [Sequelize.Op.eq]: id, // Busca el usuario por su ID
+          },
+        },
+      });
+      if(result===1){
+        return res.status(200).json("Usuario eliminado")
+      }else{
+        res.status(200).json({message:"no se pudo eliminar el usuario "})
+      }
+     } catch (error) {
+      res.status(500).json({ success: false, message: "Error en el servidor" })
+     }
+ }
 
 module.exports = {
   getAllUsers,
@@ -154,4 +175,5 @@ module.exports = {
   createUserHandler,
   getUserByEmail,
   updateUserController,
+  deleteUser
 };

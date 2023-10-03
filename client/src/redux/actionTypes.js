@@ -51,3 +51,5 @@ export const SET_USER_MENU = "SET_USER_MENU";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 // Reviews
 export const SEND_REVIEW = 'SEND_REVIEW';
+//
+export const REVIEWS = 'REVIEWS';
