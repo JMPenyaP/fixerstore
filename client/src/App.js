@@ -28,6 +28,7 @@ import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
 import Success from "./paginas/Pasarela/payStatus/Success";
 import Failured from './paginas/Pasarela/payStatus/Failured'
 import ContactForm from './paginas/Contactanos/ContactForm';
+import Error from "./paginas/Error/Error";
 
 
 function App() {
@@ -165,9 +166,6 @@ function App() {
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
         <Route path="/contactanos" element={<ContactForm />} />
-
-
-
         <Route
           path="/payment"
           element={<Pasarela />}
@@ -180,7 +178,9 @@ function App() {
           path="/payment/failured"
           element={<Failured />}
         />
-
+        <Route
+            path='*'
+        element={<Error/>}/>
 
       </Routes>
     </>

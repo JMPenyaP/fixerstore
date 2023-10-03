@@ -27,12 +27,12 @@ body {
 
 .divInfo {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 90%;
-    color: #2C2D32;
     font-family: 'AntipastoPro', sans-serif;
-    font-size: 18px;
     align-items: center;
+    gap: 5px;
 }
 
 .divName {
@@ -98,4 +98,23 @@ body {
 .divFavoriteButtton ion-icon {
     color: #3cbbed;
     font-size: 29px;
+}
+
+.span {
+    border: none;
+    font-size: 14px;
+    position: relative;
+    font-weight: light;
+    color: #15214a;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}
+.spanPrice {
+    border: none;
+    font-size: 18px;
+    position: relative;
+    font-weight: bolder;
+    color: #15214a;
+    font-family: "Gotham", sans-serif;
+    width: auto;
 }

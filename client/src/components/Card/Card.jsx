@@ -82,7 +82,7 @@ const Card = ({ product }) => {
             <span className={styles.span}>{product.name}</span>
           </div>
           <div>
-            <span>${product.priceOfList}</span>
+            <span className={styles.spanPrice}>${product.priceOfList}</span>
           </div>
         </div>
         <Link to={`/detail/${product.id}`}>
