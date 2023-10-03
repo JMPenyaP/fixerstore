@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ContanctForm.css';
-import axios from "axios";
+import axios from 'axios'
 
 
 const ContactForm = () => {
@@ -75,6 +75,11 @@ const ContactForm = () => {
           onChange={handleChange}
           required
         />
+<<<<<<< Updated upstream
+  
+=======
+
+>>>>>>> Stashed changes
         <label htmlFor="telefono">Teléfono:</label>
         <input
           type="tel"

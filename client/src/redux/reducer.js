@@ -39,7 +39,10 @@ import {
   SECTION_ADMIN,
   GET_ALL_ORDERS,
   SET_USER_MENU,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  SET_BUSCA_COMB,
+  SEND_REVIEW,
+  REVIEWS
 } from "./actionTypes";
 
 const initialState = {
@@ -52,6 +55,7 @@ const initialState = {
   product_creado: null,
   dataProfile: null,
   createdProfile: null,
+  createdReview: null,
   allProducts: [],
   productosFiltrados: [],
   allCategories: [],
@@ -72,6 +76,7 @@ const initialState = {
   allOrders: [],
   userMenu: false,
   allUsers: [],
+  reviews:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -216,7 +221,14 @@ const rootReducer = (state = initialState, action) => {
         productName: false,
         productByName: [],
       };
-    }
+      }
+
+      case SEND_REVIEW: {
+        return {
+          ...state,
+          createdReview: action.payload,
+        }
+      }
 
     // CARRITO
 
@@ -446,7 +458,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         prodBuscaComb: action.payload,
         showFilters: true,
-      };
+      }
+    }
+
+    case SET_BUSCA_COMB: {
+      return {
+        ...state,
+        prodBuscaComb: [],
+      }
     }
 
     case SHOW_FILTERS: {
@@ -520,6 +539,12 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    case REVIEWS:{
+      return {
+        ...state,
+        reviews:action.payload
+      }
+    }
     default:
       return {
         ...state,
