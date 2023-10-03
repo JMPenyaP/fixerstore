@@ -39,6 +39,8 @@ import { setCategoryId } from './Actions/setCategoryId'
 import { setOrder } from './Actions/setOrder'
 import { setOrder2 } from "./Actions/setOrder2";
 import { showFilters } from './Actions/showFilters'
+import { setBuscaComb } from './Actions/setBuscaComb'
+import { sendReview } from './Actions/sendReview'
 import { getReviews } from './Actions/getReviews'
 
 
@@ -55,9 +57,11 @@ export const borraFav = borrarFavoritos;
 export const historial = userHistorial;
 export const setNameS = setNameSearch;
 export const busq = buscaComb;
+export const setbusq = setBuscaComb;
 export const setCat = setCategoryId
 export const setOr = setOrder;
 export const setOr2 = setOrder2;
 export const show = showFilters;
+export const sendRev = sendReview;
 //
 export const review = getReviews;

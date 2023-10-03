@@ -1,0 +1,783 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: "Gotham", sans-serif;
+}
+
+.divComplementario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tituloProduct {
+    border: none;
+    font-size: 15px;
+    padding: 8px 28px 8px 28px;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    background-color: #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}
+
+.table {
+    border-collapse: collapse;
+    font-size: 14.5px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.th {
+    background-color: #3cbbed;
+    border: 1px solid #dddddd;
+    color: white;
+    text-align: center;
+    padding: 5px;
+  }
+  .th:hover {
+    background-color: #3cbbed;
+    border: 1px solid #dddddd;
+    color: white;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 5px;
+  }
+  .tdetail {
+    border: 1px solid #dddddd;
+    text-decoration: underline;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .tr:hover {
+    background-color: #c4dae2;
+    font-weight: bold;
+    cursor:auto;
+  }
+  
+  .table thead th {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+
+
+.botonEdit {
+    border: none;
+    font-size: 12.5px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: white;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonEdit:hover{
+    color: white;
+    background-color: #15214a;
+    border: 2px solid white;
+}
+.botonEdit[disabled] {
+  color: gray; /* You can choose the color you prefer for disabled text */
+  background-color: lightgray; /* You can choose the color you prefer for disabled background */
+  cursor: not-allowed;
+  border: none;
+}
+
+.botonDelete{
+    border: none;
+    font-size: 12.5px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: white;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonDelete:hover{
+    color: white;
+    background-color: red;
+    border: 2px solid white;
+}
+.botonDelete[disabled] {
+  color: gray; /* You can choose the color you prefer for disabled text */
+  background-color: lightgray; /* You can choose the color you prefer for disabled background */
+  cursor: not-allowed;
+  border: none;
+}
+.mensajeDelete{
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: #1d4ef0;
+}
+
+.mensajeConfirmacion {
+  margin: 0%;
+  font-family: "Gotham", sans-serif;
+  font-size: 11.5px;
+  color: white;
+}
+
+.botonDeleteConfirm{
+  border: none;
+  font-size: 11.5px;
+  padding: 3px 5px 3px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #1d4ef0;
+  background-color: white;
+  border: 2px solid white;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+.botonDeleteConfirm:hover{
+  color: white;
+  background-color: red;
+  border: 2px solid white;
+}
+
+.botonCancelConfirm{
+  border: none;
+  font-size: 11.5px;
+  padding: 3px 5px 3px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #1d4ef0;
+  background-color: white;
+  border: 2px solid white;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+.botonCancelConfirm:hover{
+  color: white;
+  background-color: #15214a;
+  border: 2px solid white;
+}
+
+.divModify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
+
+.editBoton {
+  border: none;
+  font-size: 13px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #14a314;
+  border: 2px solid #14a314;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.editBoton:hover{
+  color: white;
+}
+.editBoton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #14a314;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.editBoton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+.closeEditBoton {
+  border: none;
+  font-size: 13px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #bb1919;
+  border: 2px solid #bb1919;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.closeEditBoton:hover{
+  color: white;
+}
+.closeEditBoton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #bb1919;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.closeEditBoton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+.mensajeCreated {
+  font-family: "Gotham", sans-serif;
+  color: white;
+  background-color: rgb(74, 134, 74);
+  padding: 5px;
+  border-radius: 10px;
+  align-items: center;
+  align-content: center;
+
+}
+
+.backBoton {
+  border: none;
+  font-size: 35px;
+  padding: 3px 20px 3px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #15214a;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.backBoton:hover{
+  color: white;
+}
+.backBoton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 25px;
+  background-color: #15214a;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.backBoton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+
+.div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.divComplementario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo {
+    margin-top: 10px;
+    width: 15%;
+}
+
+.titulo {
+    font-family: "Gotham", sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #15214a;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items:center;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.divCampo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+    .label {
+        font-family: "Gotham", sans-serif;
+        color: #15214a;
+        font-size: 15px;
+        font-weight: bolder;
+        padding-left: 5px;
+    }
+}
+
+.divInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    gap: 1px;
+    .p {
+        font-family: "Gotham", sans-serif;
+        color: #15214a;
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: 1px;
+    }
+    .input {
+        width: 400px;
+        height: auto;
+        padding: 4px;
+        font-family: "Gotham", sans-serif;
+        font-size: 17px;
+        align-items: center;
+        border-radius: 10px;
+        background: transparent;
+        border: 0.5px solid #3cbbed;
+        text-align: center;
+    }
+    .input::placeholder {
+        font-size: 12.5px;
+    }
+    .input:focus {
+        outline: none;
+        border: 2px solid #3cbbed;
+    }
+    .select {
+        font-family: "Gotham", sans-serif;
+        background-color: white;
+        width: 400px;
+        height: auto;
+        padding: 4px;
+        color: #2f92b9;
+        text-align: center;
+        font-size: 17px;
+        border: solid #3cbbed 1.8px;
+        border-radius: 10px;
+    }
+    .select:focus {
+        background-color: #3cbbed;
+        color: white;
+        outline: none; 
+        border-color: #15214a;
+    }
+}
+
+
+
+.inputext {
+    width: 400px;
+    height: auto;
+    padding: 4px;
+    font-family: "Gotham", sans-serif;
+    font-size: 15px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    background: transparent;
+    border: 0.5px solid #3cbbed;
+    text-align: center;
+    font-weight: bold;
+}
+.inputext::placeholder {
+    font-size: 12.5px;
+}
+.inputext:focus {
+    outline: none;
+    border: 2px solid #3cbbed;
+}
+
+
+.divVistaPrevia {
+    width: 400px;
+    border: 2px solid #15214a;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+
+.divImagenes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.miniatura {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+}
+
+
+.mensajeProducto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+
+}
+.mensajeCreated {
+    font-family: "Gotham", sans-serif;
+    color: white;
+    background-color: rgb(74, 134, 74);
+    padding: 5px;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+
+}
+.mensajeNoCreated {
+    font-family: "Gotham", sans-serif;
+    color: white;
+    background-color: rgb(134, 74, 74);
+    padding: 5px;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+
+}
+
+.formbutton {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    border: 2px solid #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbutton:hover{
+    color: white;
+}
+.formbutton::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #15214a;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbutton:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+
+.formbuttonClean {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    border: 2px solid #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbuttonClean:hover{
+    color: white;
+}
+.formbuttonClean::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #15214a;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbuttonClean:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+.aviso {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.botonYes  {
+    border: none;
+    font-size: 12px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    border: 2px solid #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonYes:hover{
+    color: white;
+}
+.botonYes::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #2954e2;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.botonYes:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+.botonNo  {
+    border: none;
+    font-size: 12px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    border: 2px solid #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonNo:hover{
+    color: white;
+}
+.botonNo::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #01165a;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.botonNo:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+.mensajeAviso {
+    font-size: 13.5px;
+    font-family: "Gotham", sans-serif;
+}
+
+
+.errorMenssage {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    gap: 1px;
+    align-content: flex-start;
+}
+.errorText {
+    font-size: 10px;
+    margin-top: 5px;
+    padding: 0px 4px 0px 4px;
+    transition: opacity 0.3s ease;
+    font-family: "Gotham", sans-serif;
+    color: red;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+}
+
+
+/* Passowrd */
+.passOn {
+    color: green;
+}
+.passOff {
+    color: red;
+}
+
+
+.mensaje {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    padding: 10px;
+    .positivo {
+        font-family: "Gotham", sans-serif;
+        color: white;
+        background-color: rgb(74, 134, 74);
+        padding: 5px;
+        border-radius: 10px;
+        align-items: center;
+        align-content: center;
+    
+    }
+    .negativo {
+        font-family: "Gotham", sans-serif;
+        color: white;
+        background-color: rgb(134, 74, 74);
+        padding: 5px;
+        border-radius: 10px;
+        align-items: center;
+        align-content: center;
+    
+    }
+}
+
+.contraseña {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.formbuttonBack {
+    border: none;
+    font-size: 12px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbuttonBack:hover{
+    color: white;
+}
+.formbuttonBack::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #15214a;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbuttonBack:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+
+.newUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: "Gotham", sans-serif;
+}

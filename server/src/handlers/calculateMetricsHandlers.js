@@ -1,7 +1,44 @@
-const { getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
+const { ordersByMenOrWoman, howManyOrderMonthControllers, getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
 
 
 
+const ordersByMenOrWomanHandlers = async (req, res) => {
+
+    try {
+
+        const countMenOrWorman = await ordersByMenOrWoman();
+
+        return res.status(200).json(countMenOrWorman)
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+
+}
+
+// Ordenes por mes 
+const howManyOrderMonthHandlers = async (req, res) => {
+
+    const { month } = req.query;
+
+    try {
+
+        const howManyMonth = await howManyOrderMonthControllers(month)
+
+        return res.status(200).json(howManyMonth);
+
+    } catch (error) {
+
+        return res.status(404).json({ error: error.message });
+
+    }
+
+
+}
+
+// usuarios que mas han comprado
 const getBuyTopUsersHandlers = async (req, res) => {
 
     try {
@@ -19,6 +56,7 @@ const getBuyTopUsersHandlers = async (req, res) => {
 
 }
 
+// Producto mas vendido
 const getTopSoldProductsHandlers = async (req, res) => {
 
     const { date, datetwo } = req.query;
@@ -40,6 +78,7 @@ const getTopSoldProductsHandlers = async (req, res) => {
 }
 
 
+// cantidad de usuarios registrados, productos, ordenes
 
 const calculateMetricsHandlers = async (req, res) => {
 
@@ -71,6 +110,8 @@ module.exports = {
 
     calculateMetricsHandlers,
     getTopSoldProductsHandlers,
-    getBuyTopUsersHandlers
+    getBuyTopUsersHandlers,
+    howManyOrderMonthHandlers,
+    ordersByMenOrWomanHandlers
 
 }

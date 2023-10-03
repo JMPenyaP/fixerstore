@@ -87,7 +87,7 @@ const ResetPass = () => {
                 <h3 className={style.titulo2} htmlFor="email"> Ingresa tu contraseña nueva </h3>
                 <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
                     <div className={style.divCampo}>
-                        <label className={style.label} htmlFor="newPassword"> Contraseña </label>
+                        <label className={style.label} htmlFor="newPassword"> Nueva contraseña </label>
                         <div className={style.divInput}>
                             <div className={style.contraseña}>
                                 <Controller name="newPassword"
@@ -120,7 +120,7 @@ const ResetPass = () => {
                             </div>
                         </div>
                         <div className={style.divCampo}>
-                            <label className={style.label} htmlFor="repeatPassword"> Repetir contraseña </label>
+                            <label className={style.label} htmlFor="repeatPassword"> Repetir nueva contraseña </label>
                             <div className={style.divInput}>
                                 <div className={style.contraseña}>
                                     <Controller name="repeatPassword"

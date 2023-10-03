@@ -1,10 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import style from "./logicdelete.module.css"
+import { useDispatch } from "react-redux"
+import { getAllProducts } from "../../../redux/Actions/getAllProducts"
 
 
 const LogicDelete = (props) => {
-    const {product} = props
+    const dispatch = useDispatch()
+    const {product, onModify} = props
     const [change, setChange] = useState(false)
     const [statusSend, setStatusSend] = useState(null)
     const [valueSelect, setValueSelect] = useState(product.status)
@@ -23,6 +26,10 @@ const LogicDelete = (props) => {
                 if(message !== "") {
                     setMensaje("Producto deshabilitado correctamente")
                 }
+                dispatch(getAllProducts())
+                setTimeout(()=> {
+                    onModify()
+                  }, 1000)
             } 
             catch (error) {
                 setMensaje("Hubo un error, intentalo de nuevo") 
@@ -37,6 +44,10 @@ const LogicDelete = (props) => {
                 if(message !== "") {
                     setMensaje("Producto habilitado correctamente")
                 }
+                dispatch(getAllProducts())
+                setTimeout(()=> {
+                    onModify()
+                  }, 1000)
             } 
             catch (error) {
                 setMensaje("Hubo un error, intentalo de nuevo") 

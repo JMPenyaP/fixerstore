@@ -1,15 +1,20 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector} from "react-redux"
 import style from "./pedidos.module.css"
+import { getAllOrders } from "../../../redux/Actions/getAllOrders";
+import axios from "axios";
 
 
 const Pedidos = () => {
-    const [orders, setOrders] = useState([])
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAllOrders());
+  }, [dispatch]);
+  const allOrders = useSelector((state) => (state.allOrders))
     const ordenes = [
       {
-        "id": 10,
-        "status": "pending",
+        "id": 101,
+        "status": "delivered",
         "totalAmount": "725.00",
         "UserId": "5f341d06-f7bc-4eaa-837c-efe7c2f67f27",
         "name": "Ansony",
@@ -46,7 +51,6 @@ const Pedidos = () => {
               "price": "15.00",
               "createdAt": "2023-09-28T22:55:37.348Z",
               "updatedAt": "2023-09-28T22:55:37.348Z",
-              "orderedProductoId": null
             },
             "Category": {
               "id": 2,
@@ -114,8 +118,8 @@ const Pedidos = () => {
         ]
       },
         {
-          id: 11,
-          status: "completed",
+          id: 111,
+          status: "in progress",
           totalAmount: 220000,
           userId: "hgfdsjkwqwe",
           name: "Maria",
@@ -130,8 +134,8 @@ const Pedidos = () => {
           createdAt: "2023-09-27 15:17:26.026-05" 
         },
         {
-          id: 12,
-          status: "shipped",
+          id: 121,
+          status: "pending",
           totalAmount: 85000,
           userId: "asdfghjkl",
           name: "Carlos",
@@ -146,8 +150,8 @@ const Pedidos = () => {
           createdAt: "2023-09-27 15:17:26.026-05" 
         },
         {
-          id: 13,
-          status: "canceled",
+          id: 131,
+          status: "delivered",
           totalAmount: 75000,
           userId: "qwertyuiop",
           name: "Ana",
@@ -162,8 +166,8 @@ const Pedidos = () => {
           createdAt: "2023-09-27 15:17:26.026-05" 
         },
         {
-          id: 14,
-          status: "processing",
+          id: 141,
+          status: "delivered",
           totalAmount: 320000,
           userId: "zxcvbnmasd",
           name: "Luis",
@@ -178,22 +182,90 @@ const Pedidos = () => {
           createdAt: "2023-09-27 15:17:26.026-05" 
         },
       ];
+    const [orders, setOrders] = useState([])
+    const [origen, setOrigen] = useState("")
+    const [mensaje, setMensaje] = useState("")
+    const [idOrden, setIdOrden] = useState("")
     const [isDetail, setIsDetail] = useState(false)
     const [detailOrder, setDetailOrder] = useState({})
-    const handleDetail = (id) => {
-      //Solo habria que cambiar la manera en que se obtiene la orden especifica, por medio de la ruta y setearla igual en detailOrder
-      const orden = ordenes.filter((or) => or.id === id)
-      setDetailOrder(orden[0])
-      if (isDetail) {
-        setIsDetail(false)
-        setDetailOrder({})
+    const [statusModify, setStatusModify] = useState("")
+    const [nextStatus, setNextStatus] = useState("")
+    const [backStatus, setBackStatus] = useState("")
+    useEffect(()=> {
+      if(statusModify !== "") {
+        if (statusModify === "pending") {
+          setNextStatus("in progress")
+          setBackStatus("")
+        }
+        if (statusModify === "in progress") {
+          setNextStatus("delivered")
+          setBackStatus("pending")
+        }
+        if (statusModify === "delivered") {
+          setNextStatus("")
+          setBackStatus("in progress")
+        }
       }
-      else {
-        setIsDetail(true)
-        setDetailOrder(orden[0])
-      }
+    }, [statusModify])
 
+    const handleDetail = async (id) => {
+      if (allOrders.length === 0) {
+        setOrders(ordenes)
+        const orden = orders.filter((or) => or.id === id)
+        setDetailOrder(orden[0])
+        if (isDetail) {
+          setIsDetail(false)
+          setDetailOrder({})
+          setStatusModify("")
+        }
+        else {
+          setIsDetail(true)
+          setDetailOrder(orden[0])
+          setStatusModify(orden[0].status)
+          setIdOrden(orden[0].id)
+        }
+      }
+      else if (allOrders.length > 0) {
+        setOrders(allOrders)
+        const endpoint = `http://localhost:3001/order/id/${id}`
+        const response = await axios.get(endpoint)
+        const orden = response.data
+        if (isDetail) {
+          setIsDetail(false)
+          setDetailOrder({})
+          setStatusModify("")
+          setOrigen("")
+        }
+        else {
+          setIsDetail(true)
+          setDetailOrder(orden)
+          setStatusModify(orden.status)
+          setIdOrden(orden.id)
+          setOrigen("DB")
+        }
+      }
     }
+    const updateState = async (e) => {
+      const status = e.target.value
+      const id = idOrden
+      if (origen === "DB") {
+        try {
+          const endpoint = "http://localhost:3001/order/update"
+          const body = {
+            status: status,
+            id: id
+          }
+          const response = await axios.patch(endpoint, body)
+          const {data} = response
+          setMensaje(data)
+          dispatch(getAllOrders())
+        }
+        catch (error) {
+          setMensaje("Hubo un error, vuelve a intentarlo")
+        }
+      }
+    }
+    console.log(statusModify);
     return (
         <div className={style.contenedor}>
             <div className={style.divComplementario}>
@@ -203,7 +275,7 @@ const Pedidos = () => {
             (            <div className={style.divTabla}>
               <table className={style.table}>
                   <tr className={style.tr}> 
-                      <th className={style.th}>Orden ID</th>
+                      <th className={style.th}>ID</th>
                       <th className={style.th}>Cliente</th>
                       <th className={style.th}>Estado</th>
                       <th className={style.th}>Fecha</th>
@@ -215,7 +287,7 @@ const Pedidos = () => {
                   <tr className={style.tr} key={orden.id}>
                       <td className={style.td}>{orden.id}</td>
                       <td className={style.td}>{orden.name + " " + orden.surname}</td>
-                      <td className={style.td}>{orden.status}</td>
+                      <td className={style.td}>{orden.status === 'pending' ? 'Pendiente' : orden.status === 'in progress' ? 'Enviado' : orden.status === 'delivered' ? 'Entregado' : ''}</td>
                       <td className={style.td}>{new Date(orden.createdAt).toLocaleString('es-CO', {year: 'numeric',month: 'numeric',day: 'numeric',hour: 'numeric',minute: 'numeric',hour12: false})}</td>
                       <td className={style.td}>${orden.totalAmount}</td>
                       <td className={style.td}>{orden.payment}</td>
@@ -236,8 +308,29 @@ const Pedidos = () => {
                       <p className={style.mensajeProductos}><strong>Fecha de creación: </strong>{new Date(detailOrder.createdAt).toLocaleString('es-CO', {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false})}</p>
                       <p className={style.mensajeProductos}><strong>Valor total: </strong> ${detailOrder.totalAmount}</p>
                       <p className={style.mensajeProductos}><strong>Método de pago:</strong> {detailOrder.payment}</p>
-                      <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status}</p>
-                      <button className={style.modifyOrden}>Modificar estado de orden</button>
+                      <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status === 'pending' ? 'Pendiente' : detailOrder.status === 'in progress' ? 'Enviado' : detailOrder.status === 'delivered' ? 'Entregado' : ''}</p>
+                      {nextStatus !== "" ? (nextStatus === "in progress" ? (<button value="in progress" onClick={updateState} className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button onClick={updateState} value="delivered" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
+                      {backStatus !== "" ? (backStatus === "pending" ? (<button onClick={updateState} value="pending" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button onClick={updateState} value="in progress" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
+                      {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>):(null)}
+                    </div>
+                    <div>
+                        <h5 className={style.tituloSeccion}>Productos de la orden</h5>
+                        <div className={style.divProductos}>
+                          {detailOrder.Products && detailOrder.Products.length > 0 ? (
+                            detailOrder.Products.map((product) => {
+                              return (
+                              <div className={style.divProduct} key={product.id}>
+                                <div className={style.divProductImage}>
+                                <img className={style.productImage}src={product.firstImage} alt="" />
+                                </div>
+                                <p className={style.mensajeProductosLittle}> <strong>{product.name}</strong></p>
+                                <p className={style.mensajeProductosLittle}> <strong>Cantidad:</strong> {product.OrderItems.quantity} unidades</p>
+                                <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.priceOfList} </p>
+                                <p className={style.mensajeProductosLittle}> <strong>Subtotal producto: </strong> $ {product.priceOfList * product.OrderItems.quantity}</p>
+                              </div>
+                              );})
+                              ) : (null)}
+                          </div>
                     </div>
                     <div className={style.divInformacion}>
                         <h5 className={style.tituloSeccion}>Información del cliente</h5>
@@ -263,43 +356,11 @@ const Pedidos = () => {
                             </div>
                         )}
                     </div>
-                    <div>
-                        <h5 className={style.tituloSeccion}>Productos de la orden</h5>
-                        <div className={style.divProductos}>
-                          {detailOrder.Products && detailOrder.Products.length > 0 ? (
-                            detailOrder.Products.map((product) => {
-                              return (
-                              <div className={style.divProduct} key={product.id}>
-                                <div className={style.divProductImage}>
-                                <img className={style.productImage}src={product.firstImage} alt="" />
-                                </div>
-                                <p className={style.mensajeProductosLittle}> <strong>{product.name}</strong></p>
-                                <p className={style.mensajeProductosLittle}> <strong>Cantidad:</strong> {product.OrderItems.quantity} unidades</p>
-                                <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.priceOfList} </p>
-                                <p className={style.mensajeProductosLittle}> <strong>Subtotal producto: </strong> $ {product.priceOfList * product.OrderItems.quantity}</p>
-                              </div>
-                              );})
-                              ) : (null)}
-                        </div>
-
-                    </div>
                 </div>
               )}
         </div>
     )
 }
-// status: "pending",
-// totalAmount: 150000,
-// userId: "gvdghrtfghrtgerg",
-// name: "Juan",
-// surname: "Perez",
-// phone: "3136146431",
-// cc: "152684512",
-// payment: "MercadoPago",
-// retiro: "",
-// city: "Medellín",
-// department: "Antioquia",
-// address: "Carrera 26 #14-15 2do piso",
 export default Pedidos
 
 
