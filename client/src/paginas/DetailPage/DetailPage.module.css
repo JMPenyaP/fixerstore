@@ -297,3 +297,31 @@
     font-size: 25px;
     color: #3cbbed;
 }
+/* Reviews */
+.mainContRev{
+    max-width: 800px;
+    margin-left: 400px;
+}
+.reviewContainer {
+    max-width: 780px; /* Ajusta el ancho máximo según tu diseño */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+  }
+  
+  .reviewCont {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+   border-radius: 10px;
+  }
+  
+  .reviewCont h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .reviewCont p {
+    font-size: 16px;
+    color: #666;
+  }
