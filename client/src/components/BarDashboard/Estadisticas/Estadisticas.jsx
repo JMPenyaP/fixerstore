@@ -7,9 +7,20 @@ import {
   BarChart,
   Subtitle,
   DonutChart,
+  DateRangePicker,
 } from "@tremor/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Estadisticas = () => {
+  const [value, setValue] = useState({
+    from: "",
+    to: "",
+  });
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
   const chartdata = [
     {
       name: "enero",
@@ -51,28 +62,16 @@ const Estadisticas = () => {
 
   const cities = [
     {
-      name: "New York",
-      sales: 9800,
+      name: "Masculino",
+      cantidad: 122,
     },
     {
-      name: "London",
-      sales: 4567,
+      name: "Femenino",
+      cantidad: 182,
     },
     {
-      name: "Hong Kong",
-      sales: 3908,
-    },
-    {
-      name: "San Francisco",
-      sales: 2400,
-    },
-    {
-      name: "Singapore",
-      sales: 1908,
-    },
-    {
-      name: "Zurich",
-      sales: 1200,
+      name: "No definido",
+      cantidad: 37,
     },
   ];
 
@@ -83,25 +82,35 @@ const Estadisticas = () => {
     return new Intl.NumberFormat("us").format(number).toString();
   };
 
+  const response = async () => {
+    const apiResponse = await axios.get("http://localhost:3001/metrics/");
+  };
+
   return (
     <div className={style.divEstadisticas}>
-      <div className="flex flex-row mb-5">
-        <Card className="max-w-xs mx-auto">
-          <Text>Ingresos totales</Text>
+      <div className="flex flex-row justify-around mb-5">
+        <Card className="w-6/12">
+          <DateRangePicker
+            className="max-w-sm mx-auto"
+            enableSelect={true}
+            value={value}
+            onValueChange={setValue}
+            selectPlaceholder="Seleccionar"
+          />
+          <Title>Ingresos totales</Title>
           <Metric>$ 34,743</Metric>
         </Card>
-        <Card className="max-w-xs mx-auto">
-          <Text>Ingresos este mes</Text>
+        <Card className="w-6/12">
+          <Title>Ingresos este mes</Title>
           <Metric>$ 34,743</Metric>
         </Card>
-        <Card className="max-w-lg">
+        <Card className="w-6/12">
           <Title>Usuarios</Title>
           <DonutChart
             className="mt-6"
             data={cities}
-            category="sales"
+            category="cantidad"
             index="name"
-            valueFormatter={valueFormatter}
             colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
           />
         </Card>

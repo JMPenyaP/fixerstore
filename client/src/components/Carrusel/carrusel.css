@@ -230,11 +230,12 @@
         content: "<";
         color: #3cbbed;
         font-size: 20px;
-      }
-      
-      .slick-next:before {
+    }
+
+    .slick-next:before {
         content: ">";
         color: #3cbbed;
         font-size: 20px;
-      }
+    }
+
 }
