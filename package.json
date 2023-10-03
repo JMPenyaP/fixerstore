@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@tremor/react": "^3.8.2",
     "infinite-scroll": "^4.0.1",
     "react-infinite-scroll-component": "^6.1.0"
   },

@@ -36,6 +36,10 @@ import {
   SHOW_FILTERS,
   SET_ORDER,
   SET_ORDER2,
+  SECTION_ADMIN,
+  GET_ALL_ORDERS,
+  SET_USER_MENU,
+  GET_ALL_USERS
 } from "./actionTypes";
 
 const initialState = {
@@ -58,12 +62,16 @@ const initialState = {
   favoritos: [],
   fav:[],
   carritoById: [],
-  search: '',
+  search: "",
   categoryId: 0,
-  order: '',
-  order2: '',
+  order: "",
+  order2: "",
   prodBuscaComb: [],
   showFilters: false,
+  section_admin: "Est",
+  allOrders: [],
+  userMenu: false,
+  allUsers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -202,8 +210,7 @@ const rootReducer = (state = initialState, action) => {
         productosFiltrados: filteredProductsByCategory,
       };
 
-      
-      case CLEAR_PRODUCT_NAME: {
+    case CLEAR_PRODUCT_NAME: {
       return {
         ...state,
         productName: false,
@@ -274,42 +281,78 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case INCREMENT_QTY: {
+      const updatedCarritoById = state.carritoById.map((item) => {
+        if (
+          item.id === action.payload.productId &&
+          item.idUser === action.payload.idUser
+        ) {
+          return {
+            ...item,
+            cantidad: item.cantidad + 1,
+          };
+        } else {
+          return item;
+        }
+      });
+
+      const updatedCarrito = state.carrito.map((item) => {
+        if (
+          item.id === action.payload.productId &&
+          item.idUser === action.payload.idUser
+        ) {
+          return {
+            ...item,
+            cantidad: item.cantidad + 1,
+          };
+        } else {
+          return item;
+        }
+      });
+
       return {
         ...state,
-        carritoById: state.carritoById.map((item) => {
-          if (
-            item.id === action.payload.productId &&
-            item.idUser === action.payload.idUser
-          ) {
-            return {
-              ...item,
-              cantidad: item.cantidad + 1,
-            };
-          } else {
-            return item;
-          }
-        }),
+        carritoById: updatedCarritoById,
+        carrito: updatedCarrito,
       };
     }
 
-    case DECREMENT_QTY:
+    case DECREMENT_QTY: {
+      const updatedCarritoById = state.carritoById.map((producto) => {
+        if (
+          producto.id === action.payload.productId &&
+          producto.idUser === action.payload.idUser
+        ) {
+          const nuevaCantidad = Math.max(1, producto.cantidad - 1);
+
+          return {
+            ...producto,
+            cantidad: nuevaCantidad,
+          };
+        }
+        return producto;
+      });
+
+      const updatedCarrito = state.carrito.map((producto) => {
+        if (
+          producto.id === action.payload.productId &&
+          producto.idUser === action.payload.idUser
+        ) {
+          const nuevaCantidad = Math.max(1, producto.cantidad - 1);
+
+          return {
+            ...producto,
+            cantidad: nuevaCantidad,
+          };
+        }
+        return producto;
+      });
+
       return {
         ...state,
-        carritoById: state.carritoById.map((producto) => {
-          if (
-            producto.id === action.payload.productId &&
-            producto.idUser === action.payload.idUser
-          ) {
-            const nuevaCantidad = Math.max(1, producto.cantidad - 1);
-
-            return {
-              ...producto,
-              cantidad: nuevaCantidad,
-            };
-          }
-          return producto;
-        }),
+        carritoById: updatedCarritoById,
+        carrito: updatedCarrito,
       };
+    }
 
     case REMOVE_PRODUCT:
       return {
@@ -339,29 +382,23 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_CARRITO_BY_ID:
-      // Inicializar un objeto para almacenar productos únicos por id y sumar las cantidades
       const carritoById = {};
 
-      // Iterar sobre los productos y acumular las cantidades
       state.carrito.forEach((prod) => {
         if (prod.idUser === action.payload) {
           const existingProduct = carritoById[prod.id];
           if (existingProduct) {
-            // Si ya existe un producto con este id, sumar la cantidad
             existingProduct.cantidad += prod.cantidad;
-            // Asegurarse de que la cantidad no supere el stock
             existingProduct.cantidad = Math.min(
               existingProduct.cantidad,
               existingProduct.stock
             );
           } else {
-            // Si es un nuevo producto, agregarlo al objeto
             carritoById[prod.id] = { ...prod };
           }
         }
       });
 
-      // Convertir el objeto de productos únicos de vuelta a un array
       const carritoByIdArray = Object.values(carritoById);
 
       return {
@@ -393,44 +430,44 @@ const rootReducer = (state = initialState, action) => {
     case SET_NAME_SEARCH: {
       return {
         ...state,
-        search: action.payload
-      }
+        search: action.payload,
+      };
     }
 
     case SET_CAT: {
       return {
         ...state,
         categoryId: action.payload,
-      }
+      };
     }
 
     case BUSCA_COMB: {
       return {
         ...state,
-        prodBuscaComb:action.payload,
+        prodBuscaComb: action.payload,
         showFilters: true,
-      }
+      };
     }
 
     case SHOW_FILTERS: {
       return {
         ...state,
         showFilters: action.payload,
-      }
+      };
     }
 
     case SET_ORDER: {
       return {
         ...state,
         order: action.payload,
-      }
+      };
     }
 
     case SET_ORDER2: {
       return {
         ...state,
         order2: action.payload,
-      }
+      };
     }
 
     case USER_PROFILE: {
@@ -453,9 +490,36 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           dataProfile: action.payload,
           clientProfile: action.payload.success,
+          adminProfile: false,
         };
       }
     }
+    case SECTION_ADMIN: {
+      return {
+        ...state,
+        section_admin: action.payload
+      }
+    }
+    case GET_ALL_ORDERS: {
+      return {
+        ...state, 
+        allOrders: action.payload
+      }
+    }
+
+    case SET_USER_MENU: {
+      return {
+        ...state,
+        userMenu: action.payload,
+      };
+    }
+    case GET_ALL_USERS: {
+      return {
+        ...state,
+        allUsers: action.payload
+      }
+    }
+
     default:
       return {
         ...state,
@@ -465,57 +529,57 @@ const rootReducer = (state = initialState, action) => {
 
 export default rootReducer;
 
-      // case ORDER_LETTER: {
-      //   const order = action.payload;
-      //   if (order === "Ascendente") {
-      //     const filtroAsc = [...state.productosFiltrados];
-      //     filtroAsc.sort((a, b) => a.name.localeCompare(b.name));
-      //     console.log(filtroAsc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: filtroAsc,
-      //     };
-      //   } else if (order === "Descendente") {
-      //     const filtroDesc = [...state.productosFiltrados];
-      //     filtroDesc.sort((a, b) => a.name.localeCompare(b.name));
-      //     filtroDesc.reverse();
-      //     console.log(filtroDesc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: filtroDesc,
-      //     };
-      //   } else {
-      //     console.log(state.allProducts);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: state.productosFiltrados,
-      //     };
-      //   }
-      // }
-  
-      // case ORDER_PRICE: {
-      //   const precio = action.payload;
-      //   if (precio === "Ascendente") {
-      //     const precioAsc = [...state.productosFiltrados];
-      //     precioAsc.sort((a, b) => a.priceOfList - b.priceOfList);
-      //     console.log(precioAsc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: precioAsc,
-      //     };
-      //   } else if (precio === "Descendente") {
-      //     const precioDesc = [...state.productosFiltrados];
-      //     precioDesc.sort((a, b) => b.priceOfList - a.priceOfList);
-      //     console.log(precioDesc);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: precioDesc,
-      //     };
-      //   } else {
-      //     console.log(state.allProducts);
-      //     return {
-      //       ...state,
-      //       productosFiltrados: state.productosFiltrados,
-      //     };
-      //   }
-      // }
+// case ORDER_LETTER: {
+//   const order = action.payload;
+//   if (order === "Ascendente") {
+//     const filtroAsc = [...state.productosFiltrados];
+//     filtroAsc.sort((a, b) => a.name.localeCompare(b.name));
+//     console.log(filtroAsc);
+//     return {
+//       ...state,
+//       productosFiltrados: filtroAsc,
+//     };
+//   } else if (order === "Descendente") {
+//     const filtroDesc = [...state.productosFiltrados];
+//     filtroDesc.sort((a, b) => a.name.localeCompare(b.name));
+//     filtroDesc.reverse();
+//     console.log(filtroDesc);
+//     return {
+//       ...state,
+//       productosFiltrados: filtroDesc,
+//     };
+//   } else {
+//     console.log(state.allProducts);
+//     return {
+//       ...state,
+//       productosFiltrados: state.productosFiltrados,
+//     };
+//   }
+// }
+
+// case ORDER_PRICE: {
+//   const precio = action.payload;
+//   if (precio === "Ascendente") {
+//     const precioAsc = [...state.productosFiltrados];
+//     precioAsc.sort((a, b) => a.priceOfList - b.priceOfList);
+//     console.log(precioAsc);
+//     return {
+//       ...state,
+//       productosFiltrados: precioAsc,
+//     };
+//   } else if (precio === "Descendente") {
+//     const precioDesc = [...state.productosFiltrados];
+//     precioDesc.sort((a, b) => b.priceOfList - a.priceOfList);
+//     console.log(precioDesc);
+//     return {
+//       ...state,
+//       productosFiltrados: precioDesc,
+//     };
+//   } else {
+//     console.log(state.allProducts);
+//     return {
+//       ...state,
+//       productosFiltrados: state.productosFiltrados,
+//     };
+//   }
+// }
