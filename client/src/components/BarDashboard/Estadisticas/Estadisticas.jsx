@@ -21,20 +21,105 @@ const Estadisticas = () => {
   });
 
   const [ordersGender, setOrdersGender] = useState();
+  const [usersGender, setUsersGender] = useState();
+  const [salesByMonth, setSalesByMonth] = useState();
+  const [monthSales, setMonthSales] = useState();
 
   useEffect(() => {
-    const response = async () => {
-      const apiResponse = await axios.get(
-        "http://localhost:3001/metrics/count-orders-by-gender"
-      );
+    const responseOrdersByGender = async () => {
+      try {
+        const apiResponse = await axios.get(
+          "http://localhost:3001/metrics/count-orders-by-gender"
+        );
 
-      const dataResponse = apiResponse.data;
+        const dataResponse = apiResponse.data;
 
-      setOrdersGender(dataResponse);
-      console.log(dataResponse);
+        setOrdersGender(dataResponse);
+      } catch (error) {
+        alert("error", error.message);
+      }
     };
 
-    response();
+    const responseUsersByGender = async () => {
+      try {
+        const apiResponse = await axios.get(
+          "http://localhost:3001/metrics/users-by-gender"
+        );
+
+        const dataResponse = apiResponse.data;
+        const newDataResponse = dataResponse.map((item) => ({
+          gender: item.gender,
+          cantidad: parseInt(item.cantidad, 10),
+        }));
+
+        setUsersGender(newDataResponse);
+      } catch (error) {
+        alert("Error", error.message);
+      }
+    };
+
+    const responseSalesByMonth = async () => {
+      try {
+        const apiResponse = await axios.get(
+          "http://localhost:3001/metrics/sales-by-month"
+        );
+
+        const dataResponse = apiResponse.data.ventasPorMes;
+
+        setSalesByMonth(dataResponse);
+      } catch (error) {
+        alert("error", error.message);
+      }
+    };
+
+    const responseSalesActualMonth = async () => {
+      try {
+        const currentDate = new Date();
+
+        const monthNames = [
+          "Enero",
+          "Febrero",
+          "Marzo",
+          "Abril",
+          "Mayo",
+          "Junio",
+          "Julio",
+          "Agosto",
+          "Septiembre",
+          "Octubre",
+          "Noviembre",
+          "Diciembre",
+        ];
+
+        const currentMonthName = monthNames[currentDate.getMonth()];
+
+        const apiResponse = await axios.get(
+          `http://localhost:3001/metrics/ordermonth?month=${currentMonthName}`
+        );
+
+        const apiResponseData = apiResponse.data;
+
+        let totalCount = 0;
+
+        apiResponseData.forEach((item) => {
+          totalCount += parseFloat(item.totalAmount);
+        });
+
+        setMonthSales({
+          cantidad: apiResponseData.length,
+          total: totalCount.toFixed(1),
+        });
+
+        console.log(apiResponseData.length);
+      } catch (error) {
+        alert("error", error.message);
+      }
+    };
+
+    responseSalesActualMonth();
+    responseUsersByGender();
+    responseOrdersByGender();
+    responseSalesByMonth();
   }, []);
 
   const chartdata = [
@@ -76,24 +161,6 @@ const Estadisticas = () => {
     },
   ];
 
-  const cities = [
-    {
-      name: "Masculino",
-      cantidad: 122,
-    },
-    {
-      name: "Femenino",
-      cantidad: 182,
-    },
-    {
-      name: "No definido",
-      cantidad: 37,
-    },
-  ];
-
-  const valueFormatter = (number) =>
-    `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
-
   const dataFormatter = (number) => {
     return new Intl.NumberFormat("us").format(number).toString();
   };
@@ -102,18 +169,22 @@ const Estadisticas = () => {
     <div className={style.divEstadisticas}>
       <div className="flex flex-row justify-around mb-5">
         <Card className="w-6/12">
-          <Title>Ingresos este mes</Title>
-          <Metric>$ 34,743</Metric>
+          <Title>Pedidos este mes</Title>
+          <Metric>cantidad: {monthSales ? monthSales.cantidad : ""}</Metric>
+          <Subtitle>Total: ${monthSales ? monthSales.total : ""}</Subtitle>
         </Card>
-        <DateRangePicker
-            className="max-w-sm mx-auto"
-            enableSelect={true}
-            value={value}
-            onValueChange={setValue}
-            selectPlaceholder="Seleccionar"
-          />
         <Card className="w-6/12">
-          <Title>Cantidad de Compras</Title>
+          <Title>Usuarios</Title>
+          <DonutChart
+            className="mt-6"
+            data={usersGender}
+            category="cantidad"
+            index="gender"
+            colors={["sky", "teal", "indigo", "rose", "cyan", "amber"]}
+          />
+        </Card>
+        <Card className="w-6/12">
+          <Title>Cantidad de ventas</Title>
           <DonutChart
             className="mt-6"
             data={ordersGender}
@@ -124,19 +195,16 @@ const Estadisticas = () => {
         </Card>
       </div>
       <Card className="w-70">
-        <Title>Number of species threatened with extinction (2021)</Title>
-        <Subtitle>
-          The IUCN Red List has assessed only a small share of the total known
-          species in the world.
-        </Subtitle>
+        <Title>Ventas por mes</Title>
+        <Subtitle>Facturacion en COP mensual</Subtitle>
         <BarChart
           className="mt-6"
-          data={chartdata}
-          index="name"
-          categories={["cantidad de ventas por mes"]}
+          data={salesByMonth}
+          index="mes"
+          categories={["totalVentas"]}
           colors={["sky"]}
           valueFormatter={dataFormatter}
-          yAxisWidth={48}
+          yAxisWidth={70}
         />
       </Card>
     </div>

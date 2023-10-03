@@ -2,7 +2,9 @@ const { Cart, User, Product } = require("../db");
 
 const userData = [
     { email: "usuario@gmail.com" },
-    { email: "admin@gmail.com" }
+    { email: "admin@gmail.com" },
+    { email: "maria2@gmail.com" },
+    { email: "raulcastro@gmail.com" }
 ];
 
 const productData = [

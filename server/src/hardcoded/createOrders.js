@@ -2,15 +2,55 @@ const { Order, User, OrderItems, Cart, Product } = require('../db');
 
 const createOrders = async () => {
 
-    await new Promise(resolve => setTimeout(resolve, 4000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     const userData = await User.findOne({ where: { email: "usuario@gmail.com" } });
     const userAdmin = await User.findOne({ where: { email: "admin@gmail.com" } });
+    const userMaria = await User.findOne({ where: { email: "maria2@gmail.com" } });
+    const userRaul = await User.findOne({ where: { email: "raulcastro@gmail.com" } });
 
     const cartDataUser = await Cart.findAll({ where: { UserId: userData.id } });
     const cartDataAdmin = await Cart.findAll({ where: { UserId: userAdmin.id } });
+    const cartDataMaria = await Cart.findAll({ where: { UserId: userMaria.id } });
+    const cartDataRaul = await Cart.findAll({ where: { UserId: userRaul.id } });
 
     const ordersData = [
+
+        {
+
+            idMp: "231289120812",
+            totalAmount: 25000,
+            UserId: userRaul.id,
+            name: "Raul",
+            surname: "Castro",
+            phone: "3178783829",
+            cc: "222222",
+            payment: "Banesco",
+            payStatus: "approved",
+            retiro: "local centro de Bogotá",
+            city: "Bogotá",
+            address: "Dirección 123",
+            department: "Antioquia"
+        },
+
+        {
+
+            idMp: "231289120812",
+            totalAmount: 65000,
+            UserId: userMaria.id,
+            name: "Maria",
+            surname: "Perez",
+            phone: "041278783829",
+            cc: "222222",
+            payment: "Banesco",
+            payStatus: "approved",
+            retiro: "local centro de Bogotá",
+            city: "Bogotá",
+            address: "Dirección 123",
+            department: "Antioquia"
+
+        },
+
         {
             idMp: "291289120812",
             totalAmount: 25000,
@@ -96,10 +136,14 @@ const createOrders = async () => {
 
         let cartData;
 
-        if (orderData.userId === userData.id) {
+        if (orderData.UserId === userData.id) {
             cartData = cartDataUser;
-        } else {
+        } else if (orderData.UserId === userAdmin.id) {
             cartData = cartDataAdmin;
+        } else if (orderData.UserId === userMaria.id) {
+            cartData = cartDataMaria;
+        } else if (orderData.UserId === userRaul.id) {
+            cartData = cartDataRaul;
         }
 
         for (const cartItem of cartData) {

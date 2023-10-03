@@ -1,5 +1,40 @@
-const { ordersByMenOrWoman, howManyOrderMonthControllers, getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
+const { getUserByGenderRegister, getSalesMetricsByMonth, ordersByMenOrWoman, howManyOrderMonthControllers, getBuyTopUsersControllers, calculateMetricsControllers, getTopSoldProductsControllers } = require("../controllers/calculateMetricsControllers");
 
+
+
+
+const getUserByGenderRegisterHandlers = async (req, res) => {
+
+    try {
+
+        const response = await getUserByGenderRegister();
+
+        return res.status(200).json(response);
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+
+}
+
+const getSalesMetricsByMonthHandlers = async (req, res) => {
+
+    try {
+
+        const response = await getSalesMetricsByMonth();
+
+        return res.status(200).json(response);
+
+    } catch (error) {
+
+        return res.status(400).json({ error: error.message });
+
+    }
+
+
+}
 
 
 const ordersByMenOrWomanHandlers = async (req, res) => {
@@ -112,6 +147,8 @@ module.exports = {
     getTopSoldProductsHandlers,
     getBuyTopUsersHandlers,
     howManyOrderMonthHandlers,
-    ordersByMenOrWomanHandlers
+    ordersByMenOrWomanHandlers,
+    getSalesMetricsByMonthHandlers,
+    getUserByGenderRegisterHandlers
 
 }

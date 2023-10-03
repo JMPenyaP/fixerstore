@@ -4,7 +4,68 @@ const { format } = require("date-fns-tz");
 // Configura la zona horaria en español (por ejemplo, 'es-ES')
 const spanishTimeZone = "es-ES";
 
-// cuantas ordenes se registraron segun su genero
+const getUserByGenderRegister = async () => {
+  const query = `
+      SELECT gender, COUNT(*) as cantidad
+      FROM "Users"
+      WHERE gender IN ('Hombre', 'Mujer', 'Prefiero no decirlo')
+      GROUP BY gender;
+    `;
+
+  const result = await conn.query(query, {
+    type: conn.QueryTypes.SELECT,
+  });
+
+  return result;
+};
+
+const getSalesMetricsByMonth = async () => {
+  const currentYear = new Date().getFullYear();
+
+  // Crear un arreglo para almacenar las ventas por mes
+  const ventasPorMes = [];
+
+  // Array de nombres de los meses
+  const nombresMeses = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
+
+  // Consultar las ventas por mes
+  for (let mes = 1; mes <= 12; mes++) {
+    const fechaInicio = new Date(currentYear, mes - 1, 1);
+    const fechaFin = new Date(currentYear, mes, 0, 23, 59, 59, 999);
+
+    const ventas = await Order.findAll({
+      where: {
+        createdAt: {
+          [Op.between]: [fechaInicio, fechaFin],
+        },
+      },
+    });
+
+    const totalVentasMes = ventas.reduce((total, venta) => {
+      return total + parseFloat(venta.totalAmount);
+    }, 0);
+
+    ventasPorMes.push({
+      mes: nombresMeses[mes - 1], // Obtener el nombre del mes
+      totalVentas: totalVentasMes,
+    });
+  }
+
+  return { success: true, ventasPorMes: ventasPorMes };
+};
 
 const ordersByMenOrWoman = async () => {
   const ordersWithUser = await Order.findAll({
@@ -29,7 +90,7 @@ const ordersByMenOrWoman = async () => {
   ordersWithUser.forEach((order) => {
     const gender = order.User ? order.User.getDataValue("gender") : null;
     if (gender === "Hombre") {
-      counts[0].cantidad++; 
+      counts[0].cantidad++;
     } else if (gender === "Mujer") {
       counts[1].cantidad++;
     } else {
@@ -57,8 +118,9 @@ const howManyOrderMonthControllers = async (month) => {
     noviembre: "November",
     diciembre: "December",
   };
+  const montlower = month.toLowerCase();
 
-  const englishMonth = monthMappings[month].toLowerCase();
+  const englishMonth = monthMappings[montlower].toLowerCase();
   if (!englishMonth) {
     throw new Error("Nombre de mes no válido");
   }
@@ -167,4 +229,6 @@ module.exports = {
   getBuyTopUsersControllers,
   howManyOrderMonthControllers,
   ordersByMenOrWoman,
+  getSalesMetricsByMonth,
+  getUserByGenderRegister,
 };
