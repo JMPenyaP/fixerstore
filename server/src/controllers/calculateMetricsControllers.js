@@ -1,11 +1,56 @@
 const { Order, User, conn, Product, OrderItems } = require('../db');
 const { Op } = require('sequelize');
-const { format } = require('date-fns-tz');
+const { format } = require('date-fns');
+
 // Configura la zona horaria en español (por ejemplo, 'es-ES')
 const spanishTimeZone = 'es-ES';
 
 
-// cuantas ordenes se registraron segun su genero
+
+
+const getSalesMetricsByMonth = async () => {
+
+
+    const currentYear = new Date().getFullYear();
+
+    // Crear un arreglo para almacenar las ventas por mes
+    const ventasPorMes = [];
+
+    // Array de nombres de los meses
+    const nombresMeses = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+
+    // Consultar las ventas por mes
+    for (let mes = 1; mes <= 12; mes++) {
+        const fechaInicio = new Date(currentYear, mes - 1, 1);
+        const fechaFin = new Date(currentYear, mes, 0, 23, 59, 59, 999);
+
+        const ventas = await Order.findAll({
+            where: {
+                createdAt: {
+                    [Op.between]: [fechaInicio, fechaFin],
+                },
+            },
+        });
+
+        const totalVentasMes = ventas.reduce((total, venta) => {
+            return total + parseFloat(venta.totalAmount);
+        }, 0);
+
+        ventasPorMes.push({
+            mes: nombresMeses[mes - 1], // Obtener el nombre del mes
+            totalVentas: totalVentasMes,
+        });
+    }
+
+
+
+
+    return { success: true, ventasPorMes: ventasPorMes };
+
+}
 
 const ordersByMenOrWoman = async () => {
 
@@ -17,7 +62,7 @@ const ordersByMenOrWoman = async () => {
                 attributes: ['gender'], // Solo necesitamos el atributo 'gender' del usuario
             },
         ],
-    }); git
+    });
 
     if (!ordersWithUser) {
         return { hombres: 0, mujeres: 0 };
@@ -27,6 +72,7 @@ const ordersByMenOrWoman = async () => {
     const counts = {
         hombres: 0,
         mujeres: 0,
+        prefieroNoDecirlo: 0,
     };
 
     ordersWithUser.forEach((order) => {
@@ -35,6 +81,8 @@ const ordersByMenOrWoman = async () => {
             counts.hombres++;
         } else if (gender === 'Mujer') {
             counts.mujeres++;
+        } else if (gender === 'Prefiero no decirlo') {
+            counts.prefieroNoDecirlo++;
         }
     });
 
@@ -191,7 +239,8 @@ module.exports = {
     getTopSoldProductsControllers,
     getBuyTopUsersControllers,
     howManyOrderMonthControllers,
-    ordersByMenOrWoman
+    ordersByMenOrWoman,
+    getSalesMetricsByMonth
 }
 
 

@@ -46,6 +46,9 @@ OrderItems.belongsTo(UserReviews, { foreignKey: 'ProductId' });
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
 Favorites.belongsTo(User);
 Favorites.belongsTo(Product);
+OrderItems.belongsTo(Order);
+
+
 
 module.exports = {
     ...sequelize.models, // exporta los modelos

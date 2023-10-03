@@ -2,13 +2,15 @@ const { Order, User, OrderItems, Cart, Product } = require('../db');
 
 const createOrders = async () => {
 
-    await new Promise(resolve => setTimeout(resolve, 4000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     const userData = await User.findOne({ where: { email: "usuario@gmail.com" } });
     const userAdmin = await User.findOne({ where: { email: "admin@gmail.com" } });
 
     const cartDataUser = await Cart.findAll({ where: { UserId: userData.id } });
     const cartDataAdmin = await Cart.findAll({ where: { UserId: userAdmin.id } });
+
+
 
     const ordersData = [
         {

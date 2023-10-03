@@ -44,7 +44,7 @@ flex-direction: column;
 }
 
 .containerContactanos button {
-  background-color: #007bff;
+  background-color: #a3c1e0;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -60,12 +60,14 @@ flex-direction: column;
   display: flex;
   flex-direction: column;
   gap: 40px; /* Espacio entre los mapas */
+  align-items: center;
 }
 
 .map {
   width: 70%;
   border-radius: 5px;
   gap: 20px;
+  align-items: center;
 }
 
 /* Estilo específico para los iframes de Google Maps */
@@ -83,4 +85,29 @@ flex-direction: column;
 .slogan-cabecera {
   color: #5f70c6; /* Color del texto en negro */
 }
+.buttonContainer {
+  display: flex;
+  flex-direction: column; /* Alineación vertical */
+}
+.offBoton,
+.onBoton {
+  border: none;
+  font-size: 14px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+  margin: 5px 0px;
+}
+/* Estilos para botones desactivados (.offBoton) */
+.offBoton {
+  color: #3cbbed;
+  background-color: transparent;
+}
 
+.offBoton:hover {
+  color: white; /* Cambia el color de la letra a blanco al hacer hover */
+}
