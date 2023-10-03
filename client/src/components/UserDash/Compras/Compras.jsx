@@ -4,11 +4,27 @@ import { useEffect, useState } from "react";
 import { userHistorial } from "../../../redux/Actions/userHistorial";
 import ReviewModal from "../Compras/Review/Modal";
 import { sendReview } from "../../../redux/Actions/sendReview";
+import axios from 'axios'
 
 const Compras = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const [userId, setUserId] = useState(null)
 
-    const ordenes = [
+  const dataProfileActual = useSelector((state) => (state.dataProfile === null ? { userData: { name: "", email: "", surname: "" } } : state.dataProfile));
+  const { userData } = dataProfileActual
+  const [orders, setOrders] = useState([])
+  const historial = useSelector((state) => state.historial)
+  
+  useEffect(() => {
+    if (historial.length === 0) {
+      dispatch(userHistorial(userData.id));
+      setOrders(historial)
+    } else {
+      setOrders(historial);
+    }
+  }, [historial]);
+
+    /* const ordenes = [
     {
       "id": 10,
       "status": "delivered",
@@ -54,34 +70,58 @@ const Compras = () => {
             "id": 2,
             "name": "cordones"
           }
-    }]}]
+    }]}] */
 
+    
     const [rev, setRev] = useState(false)
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
 
     const [reviewData, setReviewData] = useState({ productId: null, userId: null });
-    const [userId, setUserId] = useState(null)
 
     const [isDetail, setIsDetail] = useState(false)
     const [detailOrder, setDetailOrder] = useState({})
-    const handleDetail = (id, UserId) => {
-      //Solo habria que cambiar la manera en que se obtiene la orden especifica, por medio de la ruta y setearla igual en detailOrder
-      const orden = ordenes.filter((or) => or.id === id)
-      setDetailOrder(orden[0])
-      if (isDetail) {
-        setIsDetail(false)
-        setDetailOrder({})
-      }
-      else {
-        setIsDetail(true)
-        setUserId(UserId)
-        setDetailOrder(orden[0])
-      }
 
-      if(ordenes.some((orden) => orden.status === 'delivered')){
-        setRev(true)
-      }else {
-        setRev(false)
+    const [idOrden, setIdOrden] = useState("")
+
+    const handleDetail = async (id, UserId) => {
+
+      if(historial.length === 0) {
+
+        const orden = historial.filter((or) => or.id === id)
+        console.log(orden);
+        setDetailOrder(orden[0])
+        if (isDetail) {
+          setIsDetail(false)
+          setDetailOrder({})
+        }
+        else {
+          setIsDetail(true)
+          setUserId(UserId)
+          setDetailOrder(orden[0])
+          setIdOrden(orden[0].id)
+        }
+
+        
+        
+      } else if (historial.length > 0) {
+        if(isDetail) {
+          setIsDetail(false)
+          setDetailOrder({})
+        } else {
+          const endpoint = `http://localhost:3001/order/id/${id}`
+          const response = await axios.get(endpoint)
+          console.log(response);
+          const orden = response.data
+          const {order} = orden 
+          setIsDetail(true)
+          setDetailOrder(order)
+          setIdOrden(order.id)
+          if(order.status === 'delivered'){
+            setRev(true)
+          }else {
+            setRev(false)
+          }
+        }
       }
     }
 
@@ -94,13 +134,6 @@ const Compras = () => {
       setIsReviewModalOpen(false);
     };
 
-  /* useEffect(() => {
-    if (historial.length === 0) {
-      dispatch(userHistorial(userData.id));
-    } else {
-      setHistory(historial);
-    }
-  }, []); */
 
   
   return (
@@ -119,7 +152,7 @@ const Compras = () => {
               <th className={style.th}>Medio de pago</th>
               <th className={style.th}>Detalle</th>
           </tr>
-          {ordenes.map((orden) => (
+          {historial.map((orden) => (
           <tr className={style.tr} key={orden.id}>
               <td className={style.td}>{orden.id}</td>
               <td className={style.td}>{orden.status}</td>
@@ -194,7 +227,7 @@ const Compras = () => {
                             const finalReviewData = {
                               ...reviewDataFromModal,
                               ProductId: reviewData.productId,
-                              userId: reviewData.userId
+                              userId: userData.id
                             }
                             // Aquí puedes manejar la lógica para enviar la reseña (reviewData)
                             // Por ejemplo, puedes enviarlo al servidor o almacenarlo en el estado de tu aplicación.
