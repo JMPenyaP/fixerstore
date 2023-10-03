@@ -7,7 +7,6 @@ import styles from './Pay.module.css'
 const Success = () => {
   const dataProfile = useSelector((state) => state.dataProfile);
   const [secondsRemaining, setSecondsRemaining] = useState(5);
-  const carritoById = useSelector(state=>state.carritoById)
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,7 +15,7 @@ const Success = () => {
     const searchParams = new URLSearchParams(location.search);
     const externalReference = searchParams.get("external_reference");
     const id = searchParams.get("collection_id");
-    const status = searchParams.get("status");
+    const payStatus = searchParams.get("status");
     const payment = searchParams.get("payment_type");
 
     try {
@@ -42,7 +41,8 @@ const Success = () => {
           retiro:retiro,
           city: "",
           address: "",
-          department: ""
+          department: "",
+          payStatus,
         };
         setForm(updatedForm); // Actualiza el estado con los valores extraídos
         
@@ -53,7 +53,7 @@ const Success = () => {
       console.error("Error al analizar la cadena JSON:", error);
     }
   };
-
+console.log(dataProfile.userData.id)
   useEffect(() => {
     extractValuesFromQuery();
 
