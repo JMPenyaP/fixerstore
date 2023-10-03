@@ -5,6 +5,7 @@ import * as actions from "../../redux/actions"
 import setProduct from '../../redux/Actions/setProduct';
 import style from "./FormProduct.module.css"
 import { getCategories } from '../../redux/Actions/getCategories';
+import { getAllProducts } from "../../redux/Actions/getAllProducts"
 import { NavLink} from "react-router-dom"
 
 const FormProduct = () => {
@@ -92,6 +93,7 @@ const FormProduct = () => {
       }
       dispatch(actions.createProd(data))
       setCreateOptions(true)
+      dispatch(getAllProducts())
     }
     const [botonLimpiar, setBotonLimpiar] = useState(null)
     const handleCancel = () => {

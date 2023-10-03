@@ -3,7 +3,7 @@ const filtrosPreciosRouters = Router();
 
 const filtrosPreciosHandlers = require('../handlers/filtrosPreciosHandlers');
 
-
+//Filtros de precios
 filtrosPreciosRouters.get("/", filtrosPreciosHandlers);
 
 
