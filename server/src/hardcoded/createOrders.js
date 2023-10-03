@@ -2,7 +2,7 @@ const { Order, User, OrderItems, Cart, Product } = require('../db');
 
 const createOrders = async () => {
 
-    await new Promise(resolve => setTimeout(resolve, 4000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     const userData = await User.findOne({ where: { email: "usuario@gmail.com" } });
     const userAdmin = await User.findOne({ where: { email: "admin@gmail.com" } });
@@ -10,11 +10,13 @@ const createOrders = async () => {
     const cartDataUser = await Cart.findAll({ where: { UserId: userData.id } });
     const cartDataAdmin = await Cart.findAll({ where: { UserId: userAdmin.id } });
 
+
+
     const ordersData = [
         {
             idMp: "291289120812",
             totalAmount: 25000,
-            userId: userData.id,
+            UserId: userData.id,
             name: "Ansony",
             surname: "Rojas",
             phone: "04128093829",
@@ -30,7 +32,7 @@ const createOrders = async () => {
 
             idMp: "291289120812",
             totalAmount: 85000,
-            userId: userData.id,
+            UserId: userData.id,
             name: "Ansony",
             surname: "Rojas",
             phone: "04128093829",
@@ -45,7 +47,7 @@ const createOrders = async () => {
         {
             idMp: "291289120812",
             totalAmount: 25000,
-            userId: userAdmin.id,
+            UserId: userAdmin.id,
             name: "Fabian",
             surname: "Idarraga",
             phone: "2212321321",
@@ -59,7 +61,7 @@ const createOrders = async () => {
         {
             idMp: "291289120812",
             totalAmount: 55000,
-            userId: userAdmin.id,
+            UserId: userAdmin.id,
             name: "Fabian",
             surname: "Idarraga",
             phone: "2212321321",
@@ -73,7 +75,7 @@ const createOrders = async () => {
         {
             idMp: "291289120812",
             totalAmount: 515000,
-            userId: userAdmin.id,
+            UserId: userAdmin.id,
             name: "Fabian",
             surname: "Idarraga",
             phone: "2212321321",
