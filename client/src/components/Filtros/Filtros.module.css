@@ -3,6 +3,8 @@
   flex-direction: column;
   font-size: 14px;
   width: 300px;
+  padding: 5px;
+  align-items: center;
 }
 
 .buttonContainer {
@@ -63,4 +65,46 @@
 .onBoton .logoboton {
   filter: brightness(50);
   cursor: pointer;
+}
+
+.selectOrden {
+  font-family: "Gotham", sans-serif;
+  background-color: white;
+  height: auto;
+  padding: 4px;
+  color: #3cbbed;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  border: solid #3cbbed 1.8px;
+  border-radius: 10px;
+}
+.selectOrden:focus {
+  background-color: #3cbbed;
+  color: white;
+  outline: none; 
+  border-color: #15214a;
+}
+
+.titulo {
+  border: none;
+  font-size: 15px;
+  padding: 8px 28px 8px 28px;
+  color: #15214a;
+  transition: 0.2s;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
+}
+
+
+.ordenadores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  padding: 10px;
 }

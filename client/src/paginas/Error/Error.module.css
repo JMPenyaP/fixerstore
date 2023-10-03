@@ -1,0 +1,73 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 20%;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 80px;
+    .titulo {
+        border: none;
+        font-size: 25px;
+        padding: 8px 28px 8px 28px;
+        position: relative;
+        color: white;
+        transition: 0.2s;
+        background-color: #15214a;
+        transition: 0.3s;
+        font-family: "Gotham", sans-serif;
+        width: auto;
+    }
+    .subtitulo {
+        border: none;
+        font-size: 18px;
+        padding: 8px 28px 8px 28px;
+        position: relative;
+        color:#15214a;
+        transition: 0.2s;
+        transition: 0.3s;
+        font-family: "Gotham", sans-serif;
+        width: auto;
+    }
+
+}
+
+.imagen {
+    width: 10%;
+}
+
+.formbutton {
+    border: none;
+    font-size: 18px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: transparent;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbutton:hover{
+    color: white;
+}
+.formbutton::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbutton:hover::before{
+    width: 100%;
+    opacity: 1;
+}

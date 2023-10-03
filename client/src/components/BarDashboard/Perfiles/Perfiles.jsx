@@ -68,11 +68,11 @@ const Perfiles = () => {
             return error.message;
         }
     }
-    console.log(verifyEmail("jsochoaco@unal.edu.co"));
     const handlePermanentDelete = async (id) => {
         try {
-          const endpoint = `http://localhost:3001/users/destroy/${id}`
-          const response = await axios.delete(endpoint)
+          const endpoint = `http://localhost:3001/users/delete`
+          const usuario = {id: id}
+          const response = await axios.delete(endpoint, {data: usuario})
           console.log(response);
           const {data} = response
           const {message} = data
@@ -86,7 +86,8 @@ const Perfiles = () => {
         setTimeout(()=> {
           dispatch(getAllUsers())
           setDeleteUser(false)
-        }, 800)
+          setMensaje("")
+        }, 1500)
     }
     const generatePassword = () => {
       const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
@@ -148,7 +149,7 @@ const Perfiles = () => {
                             <button className={style.botonCancelConfirm} onClick={() => handleDelete(user.id)}>Cancelar</button>
                         </div>
                         <div className={style.mensajeDelete}>
-                            {mensaje !== '' ? (<><p className={style.mensajeCreated}>{mensaje}</p></>) : null}
+                            {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>) : null}
                         </div>
                     </td>
                 </tr>)}
