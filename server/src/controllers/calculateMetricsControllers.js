@@ -7,6 +7,28 @@ const spanishTimeZone = 'es-ES';
 
 
 
+const getUserByGenderRegister = async () => {
+
+
+    const query = `
+      SELECT gender, COUNT(*) as cantidad
+      FROM "Users"
+      WHERE gender IN ('Hombre', 'Mujer', 'Prefiero no decirlo')
+      GROUP BY gender;
+    `;
+
+
+
+    const result = await conn.query(query, {
+        type: conn.QueryTypes.SELECT,
+    });
+
+    return result;
+
+
+
+}
+
 
 const getSalesMetricsByMonth = async () => {
 
@@ -69,20 +91,20 @@ const ordersByMenOrWoman = async () => {
     }
 
     // Procesa los resultados para contar las órdenes por género
-    const counts = {
+    const counts = [{
         hombres: 0,
         mujeres: 0,
-        prefieroNoDecirlo: 0,
-    };
+        indefinido: 0,
+    }];
 
     ordersWithUser.forEach((order) => {
         const gender = order.User ? order.User.getDataValue('gender') : null;
         if (gender === 'Hombre') {
-            counts.hombres++;
+            counts[0].hombres++;
         } else if (gender === 'Mujer') {
-            counts.mujeres++;
+            counts[0].mujeres++;
         } else if (gender === 'Prefiero no decirlo') {
-            counts.prefieroNoDecirlo++;
+            counts[0].indefinido++;
         }
     });
 
@@ -115,9 +137,10 @@ const howManyOrderMonthControllers = async (month) => {
         diciembre: 'December',
     };
 
+    const montlower = month.toLowerCase();
 
 
-    const englishMonth = monthMappings[month].toLowerCase();
+    const englishMonth = monthMappings[montlower].toLowerCase();
     if (!englishMonth) {
         throw new Error('Nombre de mes no válido');
     }
@@ -240,7 +263,8 @@ module.exports = {
     getBuyTopUsersControllers,
     howManyOrderMonthControllers,
     ordersByMenOrWoman,
-    getSalesMetricsByMonth
+    getSalesMetricsByMonth,
+    getUserByGenderRegister
 }
 
 
