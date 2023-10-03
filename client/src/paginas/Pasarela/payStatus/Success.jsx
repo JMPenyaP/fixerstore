@@ -5,6 +5,7 @@ import axios from 'axios'
 import styles from './Pay.module.css'
 
 const Success = () => {
+
   const dataProfile = useSelector((state) => state.dataProfile);
   const [secondsRemaining, setSecondsRemaining] = useState(5);
 
@@ -53,8 +54,9 @@ const Success = () => {
       console.error("Error al analizar la cadena JSON:", error);
     }
   };
-console.log(dataProfile.userData.id)
+
   useEffect(() => {
+    
     extractValuesFromQuery();
 
     const timer = setInterval(() => {
@@ -91,6 +93,7 @@ console.log(dataProfile.userData.id)
 
   useEffect(() => {
     if (secondsRemaining === 0) {
+      console.log(form)
       axios.post('http://localhost:3001/order/',{form})
       navigate("/");
     }
