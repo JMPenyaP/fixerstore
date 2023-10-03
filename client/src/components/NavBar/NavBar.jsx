@@ -12,6 +12,7 @@ import { setOrder } from "../../redux/Actions/setOrder";
 import { setOrder2 } from "../../redux/Actions/setOrder2";
 import { setCategoryId } from "../../redux/Actions/setCategoryId";
 import { setUserMenu } from "../../redux/Actions/setUserMenu";
+import { setDataProfile } from "../../redux/Actions/setDataProfile";
 
 const Navbar = () => {
   const [name, setName] = useState("");
@@ -42,6 +43,7 @@ const Navbar = () => {
     } else {
       setLetter(null);
     }
+
 
     if (carritoById.length >= 0) {
       setCartLong(carritoById.length);
@@ -95,6 +97,14 @@ const Navbar = () => {
     setDisplayMenu(!displayMenu);
   };
 
+  const handleSearchKeyPress = (event) => {
+    if (event.key === "Enter") {
+      // Realizar búsqueda cuando se presiona "Enter"
+      searchName(name, categoryId, order, order2);
+    }
+  };
+
+
   return (
     <>
       <div className={style.divNavBar}>
@@ -131,6 +141,8 @@ const Navbar = () => {
             placeholder="Buscar Productos"
             value={search}
             onChange={handleChange}
+            onKeyPress={handleSearchKeyPress} // Agrega el manejador de eventos
+
           />
           {name.length > 0 ? (
             <Link to={currentPath === "/productos" ? "#" : "/productos"}>
