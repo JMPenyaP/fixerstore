@@ -15,13 +15,52 @@ const user = [{
     email: "usuario@gmail.com",
     password: "abcdef",
     role: "client",
-    name: "Carlos",
+    name: "Carla",
     surname: "Gomez",
     phone: "3115889778",
     address: "calle 30 Kra 15 #8",
     gender: "Mujer",
     city: "Villeta",
     department: "Cundinamarca"
+}, {
+
+    email: "user2@gmail.com",
+    password: "123456",
+    role: "client",
+    name: "Martin",
+    surname: "Rodriguez",
+    phone: "23123321",
+    address: "calle 30 Kra 15 #8",
+    gender: "Hombre",
+    city: "Kenedy",
+    department: "Cundinamarca"
+
+
+}, {
+    email: "maria2@gmail.com",
+    password: "123456",
+    role: "client",
+    name: "Maria",
+    surname: "Perez",
+    phone: "231232321",
+    address: "calle 3 AV 15 #33",
+    gender: "Mujer",
+    city: "Otro",
+    department: "Antioquia"
+
+}, {
+
+    email: "raulcastro@gmail.com",
+    password: "123456",
+    role: "client",
+    name: "Raul",
+    surname: "Castro",
+    phone: "231232321",
+    address: "calle 3 AV 15 #33",
+    gender: "Prefiero no decirlo",
+    city: "Otro",
+    department: "Antioquia"
+
 }];
 
 async function createAdmin() {
