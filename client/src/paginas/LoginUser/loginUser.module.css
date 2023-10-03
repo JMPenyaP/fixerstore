@@ -23,7 +23,6 @@
     align-content: center;
     justify-items: center;
     gap: 10px;
-
 }
 
 .divImagen {
@@ -75,9 +74,8 @@
 .form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     align-items: center;
-    gap: 9px;
+    gap: 25px;
 }
 .formbutton {
     border: none;
@@ -156,6 +154,7 @@
     cursor: pointer;
     position: absolute;
     user-select: none; /* Evita que el ícono se seleccione al hacer clic */
+    padding: 20px;
   }
 
 
