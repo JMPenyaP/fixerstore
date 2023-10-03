@@ -104,11 +104,9 @@ const RegistroUsuario = () => {
             const endpoint = URL + query;
             const res = await axios.get(endpoint);
             console.log(res.data.success);
-            if (res.status === 200) {
                 const { success } = res.data;
                 if (success === true) {setExiste(true); return true}
                 else setExiste(false);return false
-            }
         } catch (error) {
             return error.message;
         }
@@ -150,9 +148,7 @@ const RegistroUsuario = () => {
                                 render={({ field }) => (
                                 <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("name"); }}/>)}/>
                                 <div className={style.errorMenssage}>
-                                    {errors.name && <p className={style.simbolo}>¡</p>}
                                     {errors.name && <p className={style.errorText}>{errors.name.message}</p>}
-                                    {errors.name && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
                         </div>
@@ -166,9 +162,7 @@ const RegistroUsuario = () => {
                                 render={({ field }) => (
                                 <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("surname"); }}/>)}/>
                                 <div className={style.errorMenssage}>
-                                {errors.surname&& <p className={style.simbolo}>¡</p>}
                                 {errors.surname && <p className={style.errorText}>{errors.surname.message}</p>}
-                                {errors.surname && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
                         </div>
@@ -193,9 +187,7 @@ const RegistroUsuario = () => {
                                 render={({ field }) => (
                                     <input className={style.input} type="text" {...field} onChange={(e) => {field.onChange(e); trigger("email")}}/>)}/>
                                 <div className={style.errorMenssage}>
-                                    {errors.email && <p className={style.simbolo}>¡</p>}
                                     {errors.email && <p className={style.errorText}>{errors.email.message}</p>}
-                                    {errors.email && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
                         </div>
@@ -250,9 +242,7 @@ const RegistroUsuario = () => {
                                     </span>
                                 </div>
                                 <div className={style.errorMenssage}>
-                                    {errors.repeatPassword && <p className={style.simbolo}>¡</p>}
                                     {errors.repeatPassword && <p className={style.errorText}>{errors.repeatPassword.message}</p>}
-                                    {errors.repeatPassword && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
                         </div>
@@ -274,9 +264,7 @@ const RegistroUsuario = () => {
                                 render={({ field }) => (
                                 <input type="date" className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("birthDate"); }} />)}/>
                                 <div className={style.errorMenssage}>
-                                    {errors.birthDate && <p className={style.simbolo}>¡</p>}
                                     {errors.birthDate && <p className={style.errorText}>{errors.birthDate.message}</p>}
-                                    {errors.birthDate && <p className={style.simbolo}>!</p>}
                                 </div>
                             </div>
                         </div>
@@ -290,8 +278,8 @@ const RegistroUsuario = () => {
                                 render={({ field }) => (
                                     <select className={style.select} {...field} onChange={(e) => {field.onChange(e); trigger("gender"); }}> 
                                         <option value="" disabled> Seleccione su género </option>
-                                        <option value="Hombre"> Hombre </option>
-                                        <option value="Mujer"> Mujer </option>
+                                        <option value="Masculino"> Masculino </option>
+                                        <option value="Femenino"> Femenino </option>
                                         <option value="Prefiero no decirlo"> Prefiero no decirlo</option>
                                     </select>)} />
                                 {/* <div className={style.errorMenssage}>
@@ -363,7 +351,7 @@ const RegistroUsuario = () => {
                     <button type="submit" className={style.formbutton} disabled={formDisabled} >Registrarme</button>
                 </form>
                 <div className= {style.mensaje}>
-                    <NavLink to="/login"><button className={style.formbutton}>Volver</button></NavLink>
+                    <NavLink to="/login"><button className={style.formbuttonBack}>Volver</button></NavLink>
                     {confirmRegistro === true ? (<><p className={style.positivo}>Usuario registrado con exito</p></>):(confirmRegistro === false ? (<><p className={style.negativo} >No se pudo registrar, vuelve a intentarlo</p></>):(null))}
                 </div>
             </div>

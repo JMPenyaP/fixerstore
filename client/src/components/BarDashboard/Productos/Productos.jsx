@@ -10,12 +10,16 @@ import axios from "axios"
 
 const Productos = () => {
     const dispatch = useDispatch()
-    const allProducts = useSelector((state) => (state.allProducts ?? null ))
-    allProducts.sort((a, b) => a.id - b.id);
+    const allProductsGlobal = useSelector((state) => (state.allProducts ?? null ))
+    allProductsGlobal.sort((a, b) => a.id - b.id);
+    const [allProducts, setAllProducts] = useState(allProductsGlobal)
     const [isModify, setIsModify] = useState(false)
     const [modifyProduct, setModifyProduct] = useState({})
     const [showEdit, setShowEdit] = useState(false)
     const [mensaje, setMensaje] = useState("")
+    useEffect(()=> {
+      setAllProducts(allProductsGlobal)
+    }, [allProductsGlobal])
     const handleShowEdit = () => {
       if(showEdit) {
         setShowEdit(false)
@@ -37,10 +41,10 @@ const Productos = () => {
       }
     }
     useEffect(()=> {
-      if( allProducts.length === 0) {
+      if(allProductsGlobal.length === 0) {
         dispatch(getAllProducts())
       }
-    }, [allProducts])
+    }, [allProductsGlobal])
 
     //Condicionales para eliminar
     const [deleteProduct, setDeleteProduct] = useState(false)
@@ -70,7 +74,8 @@ const Productos = () => {
         setMensaje("Hubo un error, intentalo de nuevo") 
       }
       setTimeout(()=> {
-        window.location.reload()
+        dispatch(getAllProducts())
+        setDeleteProduct(false)
       }, 800)
     }
     return (
@@ -83,7 +88,7 @@ const Productos = () => {
             (<div className={style.divTabla}>
               <table className={style.table}>
                   <tr className={style.tr}> 
-                      <th className={style.th}>ID de producto </th>
+                      <th className={style.th}>ID</th>
                       <th className={style.th}>Nombre</th>
                       <th className={style.th}>Estado</th>
                       <th className={style.th}>Precio</th>
@@ -95,10 +100,10 @@ const Productos = () => {
                   <tr className={style.tr} key={product.id}>
                     <td className={style.td}># {product.id}</td>
                     <td className={style.td}>{product.name}</td>
-                    <td className={style.td}>{product.status ? "Disponible" : "No disponible"}</td>
+                    <td className={style.td}>{product.status ? (<p style={{ color: 'green', margin: "0px" }} >Habilitado</p>) : (<p style={{ color: 'red', fontWeight: "bold", margin: "0px" }}>Deshabilitado</p>)}</td>
                     <td className={style.td}>${product.priceOfList}</td>
                     <td className={style.td}>{product.statusOffer ? `En oferta: ${product.offer} %` : "Sin oferta"}</td>
-                    <td className={style.td}>{product.stock}</td>
+                    <td className={style.td}>{product.stock >= 5 ? (<p style={{ color: 'black', margin: "0px" }} >{product.stock}</p>) : (<p style={{ color: 'red', fontWeight: "bold", margin: "0px" }}>{product.stock}</p>)}</td>
                     <td className={style.tdetail}>
                         <button className= {style.botonEdit} disabled={deleteProduct} onClick= {() => handleDetail (product.id)}>Detalle</button>
                         <button className={style.botonDelete} disabled={deleteProduct} onClick={()=> handleDelete(product.id)}>Eliminar</button>
@@ -119,9 +124,9 @@ const Productos = () => {
               </table>
               </div>): (<div>
                 <div className={style.divModify}>
-                <LogicDelete product={modifyProduct}/>
-                {showEdit === false ? (<button onClick={handleShowEdit} className={style.editBoton}>Editar producto</button>) : (<button onClick={handleShowEdit} className={style.closeEditBoton}>Cerrar editor</button>) }
-                {showEdit === true ? (<EditProduct product={modifyProduct} />): (null)}
+                <LogicDelete onModify={()=> {handleDetail();setShowEdit(false)}} product={modifyProduct}/>
+                {showEdit === false ? (<button onClick={handleShowEdit} className={style.editBoton}>Abrir editor</button>) : (<button onClick={handleShowEdit} className={style.closeEditBoton}>Cerrar editor</button>) }
+                {showEdit === true ? (<EditProduct product={modifyProduct} onModify={()=> {handleDetail();setShowEdit(false)}} />): (null)}
                 </div>              
               </div>
 

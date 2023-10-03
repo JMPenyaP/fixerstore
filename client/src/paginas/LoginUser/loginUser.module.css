@@ -199,20 +199,34 @@
 
 }
 
+
+.divOpciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    padding: 10px;
+}
 .olvido{
     font-family: "Gotham", sans-serif;
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
     text-decoration: underline;
     color: #15214a;
-    margin: 0px;
-    padding: 0px;
+    margin-top: 8px;
+    padding: 3px;
+}
+.olvido:hover {
+    font-weight: bold;
 }
 
 .formbuttonBack {
     border: none;
     font-size: 15px;
     padding: 5px 20px 5px 20px;
+    margin-top: 10px;
     border-radius: 50px;
     cursor: pointer;
     position: relative;

@@ -11,6 +11,7 @@ import { showFilters } from "../../redux/Actions/showFilters";
 import { setOrder } from "../../redux/Actions/setOrder";
 import { setOrder2 } from "../../redux/Actions/setOrder2";
 import { setCategoryId } from "../../redux/Actions/setCategoryId";
+import { setUserMenu } from "../../redux/Actions/setUserMenu";
 import { setDataProfile } from "../../redux/Actions/setDataProfile";
 
 const Navbar = () => {
@@ -28,10 +29,11 @@ const Navbar = () => {
   const carrito = useSelector((state) => state.carrito);
   const carritoById = useSelector((state) => state.carritoById);
   const dataProfile = useSelector((state) => state.dataProfile);
-  const categoryId = useSelector((state) => state.categoryId)
-  const order = useSelector((state) => state.order)
-  const order2 = useSelector((state) => state.order2)
-  const search = useSelector((state) => state.search)
+  const categoryId = useSelector((state) => state.categoryId);
+  const order = useSelector((state) => state.order);
+  const order2 = useSelector((state) => state.order2);
+  const search = useSelector((state) => state.search);
+  const userMenu = useSelector((state) => state.userMenu);
 
   useEffect(() => {
     if (dataProfile !== null) {
@@ -53,7 +55,7 @@ const Navbar = () => {
   const handleChange = (event) => {
     const updatedName = event.target.value; // MIENTRAS CAMBIA EL INPUT TAMBIEN LO HACE EL NAME
     setName(updatedName);
-    dispatch(setNameSearch(updatedName))
+    dispatch(setNameSearch(updatedName));
     if (updatedName.length === 0) {
       dispatch(setFilters(false)); //
     }
@@ -61,14 +63,14 @@ const Navbar = () => {
 
   const handleClick = () => {
     dispatch(showFilters(false)); //
-    dispatch(setNameSearch(''))
-    dispatch(setOrder(''))
-    dispatch(setOrder2(''))
-    dispatch(setCategoryId(0))
-  }
+    dispatch(setNameSearch(""));
+    dispatch(setOrder(""));
+    dispatch(setOrder2(""));
+    dispatch(setCategoryId(0));
+  };
 
-  const handleMenu = () => {
-    setShowMenu(!showMenu);
+  const handleMenu = (boolean) => {
+    dispatch(setUserMenu(boolean));
   };
 
   const searchName = (name, categoryId, order, order2) => {
@@ -77,10 +79,10 @@ const Navbar = () => {
     if (name.length < 1) {
       alert("debe buscar algo");
     } else {
-      dispatch(setOrder(''))
-      dispatch(setOrder2(''))
-      dispatch(showFilters(true))
-      dispatch(buscaComb(name, categoryId, order, order2))
+      dispatch(setOrder(""));
+      dispatch(setOrder2(""));
+      dispatch(showFilters(true));
+      dispatch(buscaComb(name, categoryId, order, order2));
       /* dispatch(getProductName(name)); // FUNCION PARA HACER DISPATCH DE LA ACTION QUE CONSIGUE EL Product */
     }
   };
@@ -94,6 +96,14 @@ const Navbar = () => {
   const showHideMenu = () => {
     setDisplayMenu(!displayMenu);
   };
+
+  const handleSearchKeyPress = (event) => {
+    if (event.key === "Enter") {
+      // Realizar búsqueda cuando se presiona "Enter"
+      searchName(name, categoryId, order, order2);
+    }
+  };
+
 
   return (
     <>
@@ -119,9 +129,11 @@ const Navbar = () => {
               <h5>Quienes Somos</h5>
             </button>
           </Link>
+          <Link to="/contactanos">
           <button>
             <h5>Contactanos</h5>
           </button>
+          </Link>
         </div>
         <div className={style.searchBarDiv}>
           <input
@@ -129,10 +141,14 @@ const Navbar = () => {
             placeholder="Buscar Productos"
             value={search}
             onChange={handleChange}
+            onKeyPress={handleSearchKeyPress} // Agrega el manejador de eventos
+
           />
           {name.length > 0 ? (
-            <Link to={currentPath === '/productos' ? '#' : '/productos'}>
-              <button onClick={() => searchName(name, categoryId, order, order2)}>
+            <Link to={currentPath === "/productos" ? "#" : "/productos"}>
+              <button
+                onClick={() => searchName(name, categoryId, order, order2)}
+              >
                 <ion-icon name="search-outline"></ion-icon>
               </button>
             </Link>
@@ -145,19 +161,31 @@ const Navbar = () => {
         <div className={style.containerLogIn}>
           {dataProfile !== null ? (
             <>
-              <div className={style.userLetter} onClick={handleMenu}>
-                <h4>{letter}</h4>
+              <div
+                className={style.userLetter}
+                onClick={() => handleMenu(!userMenu)}
+                id="user-menu-button"
+              >
+                <h4 id="letterId">{letter}</h4>
               </div>
-              {showMenu ? (
+              {userMenu ? (
                 letter !== null ? (
                   <div className={style.divMenuDesplegable}>
-                    <Link to={`/user/${dataProfile.userData.id}`}>
-                      <button>
-                        <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
-                      </button>
-                    </Link>
+                    {dataProfile.userData.role != "admin" ? (
+                      <Link to={`/user/${dataProfile.userData.id}`}>
+                        <button>
+                          <ion-icon name="person"></ion-icon> <h5>Mi perfil</h5>
+                        </button>
+                      </Link>
+                    ) : (
+                      <Link to={`/dashboard`}>
+                        <button>
+                          <ion-icon name="person"></ion-icon> <h5>Dashboard</h5>
+                        </button>
+                      </Link>
+                    )}
                     <button onClick={() => handleRedirect()}>
-                      <ion-icon name="log-out"></ion-icon>{" "}
+                      <ion-icon name="log-out"></ion-icon>
                       <h5>Cerrar sesion</h5>
                     </button>
                   </div>
@@ -169,7 +197,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <button className={style.botonInicio}>Iniciar sesión</button>
+                <button className={style.botonInicio}>Ingresar</button>
               </Link>
             </>
           )}
@@ -188,8 +216,9 @@ const Navbar = () => {
         <div className={style.resNavBarNoSearch}>
           <button
             onClick={showHideMenu}
-            className={`${style.buttonShowMenu} ${displayMenu ? style.actived : ""
-              }`}
+            className={`${style.buttonShowMenu} ${
+              displayMenu ? style.actived : ""
+            }`}
           >
             <ion-icon name="menu-outline"></ion-icon>
           </button>
@@ -214,7 +243,7 @@ const Navbar = () => {
                 <h4>{letter}</h4>
               </div>
             ) : (
-              <h2>inicia sesion</h2>
+              <h2>Ingresar</h2>
             )}
             <ul>
               <li>te</li>

@@ -94,7 +94,7 @@ const LoginUser = () => {
         <div className={style.contenedorMayor}>
             <div className={style.contenedor} >
                 <img className={style.logo} src="https://res.cloudinary.com/dgxp4c4yk/image/upload/v1694710937/FIXERSHOES/LOGO-FIXER-SOLO-PNG_mwfsfe.png" alt="Logo" />
-                <h1 className={style.titulo}>Inicia sesión</h1>
+                <h1 className={style.titulo}>Iniciar sesión</h1>
                 <form>
                     <div className={style.form}>
                         <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Correo electronico"/>
@@ -115,8 +115,6 @@ const LoginUser = () => {
                         ) : null}
                         {existe === true ? (<NavLink to="/dashboard"> <button className={style.formbutton} onClick={(event) => loginAdmin(emailInput, password, event)}>Iniciar sesión</button></NavLink>
                         ) : (null)}
-
-
                         <GoogleOAuthProvider clientId={googleId}>
                             <GoogleLogin
                                 onSuccess={credentialResponse => {
@@ -128,9 +126,10 @@ const LoginUser = () => {
                                 }}
                             />
                         </GoogleOAuthProvider>
-
+                        <div className={style.divOpciones}>
                         <Link to='/reset' className={style.olvido}><span>¿Olvidó su contraseña?</span></Link>
-                        <Link to='/registro' className={style.olvido}><span>Registrarse</span></Link>
+                        <p>Si no tiene una cuenta, <Link to='/registro' className={style.olvido}><span>Registrese aquí</span></Link></p>
+                        </div>
                         {handleRedirect()}
                         {clientPass === false ? (
                             <div className={style.divmensajePass}>
