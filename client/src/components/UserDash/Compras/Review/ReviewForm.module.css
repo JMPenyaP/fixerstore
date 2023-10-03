@@ -1,0 +1,72 @@
+/* ReviewForm.css */
+
+.reviewform {
+    width: 100%; /* Ajusta el ancho del formulario */
+    max-width: 400px; /* Establece un ancho máximo para mantenerlo legible */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+  }
+  
+  .rating {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    font-weight: bold;
+    display: block; /* Coloca cada etiqueta en una nueva línea */
+  }
+  
+  .input[type="range"] {
+    width: 100%;
+  }
+  
+  .ratingValue {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+  
+  .ratingValue.red {
+    color: red; /* Color rojo para puntuaciones de 1 y 2 */
+  }
+  
+  .ratingValue.yellow {
+    color: rgb(219, 219, 0); /* Color amarillo para puntuaciones de 3 y 4 */
+  }
+  
+  .ratingValue.green {
+    color: green; /* Color verde para puntuaciones de 5 */
+  }
+  
+  .textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+  
+  .button {
+    display: block;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+
+  .error{
+    color: red;
+    font-size: 13px;
+  }
+
+  .button[disabled] {
+    background-color: #ccc; /* Cambia el color cuando está deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+    color: #888; /* Cambia el color de texto cuando está deshabilitado */
+  }

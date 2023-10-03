@@ -178,6 +178,7 @@ const Pedidos = () => {
           createdAt: "2023-09-27 15:17:26.026-05" 
         },
       ];
+      
     const [isDetail, setIsDetail] = useState(false)
     const [detailOrder, setDetailOrder] = useState({})
     const handleDetail = (id) => {

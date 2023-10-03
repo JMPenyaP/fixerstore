@@ -37,6 +37,7 @@ import {
   SET_ORDER,
   SET_ORDER2,
   SET_BUSCA_COMB,
+  SEND_REVIEW,
 } from "./actionTypes";
 
 const initialState = {
@@ -49,6 +50,7 @@ const initialState = {
   product_creado: null,
   dataProfile: null,
   createdProfile: null,
+  createdReview: null,
   allProducts: [],
   productosFiltrados: [],
   allCategories: [],
@@ -210,7 +212,14 @@ const rootReducer = (state = initialState, action) => {
         productName: false,
         productByName: [],
       };
-    }
+      }
+
+      case SEND_REVIEW: {
+        return {
+          ...state,
+          createdReview: action.payload,
+        }
+      }
 
     // CARRITO
 
