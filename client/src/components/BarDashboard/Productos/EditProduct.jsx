@@ -95,11 +95,9 @@ const EditProduct = (props) => {
         datas.offer = "0"
       }
       datas.date = product.date
-      console.log(datas);
       try {
         const endpoint = `http://localhost:3001/products/update/${product.id}`
         const response = await axios.patch(endpoint, datas)
-        console.log(response);
         const {data} = response
         const {message} = data
         if(message) {

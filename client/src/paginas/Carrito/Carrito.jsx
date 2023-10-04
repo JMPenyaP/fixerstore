@@ -21,7 +21,6 @@ const Carrito = () => {
     return accumulator + item.precio * item.cantidad;
   }, 0);
 
-  console.log(carritoById);
 
   useEffect(() => {
     if (dataProfile) {
