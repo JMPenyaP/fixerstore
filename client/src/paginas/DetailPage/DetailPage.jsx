@@ -192,9 +192,19 @@ const DetailPage = () => {
     
     const showAll = counter? reviews: reviews.slice(0,2)
     const showAllButton = ()=>{
-      setCounter(true)
+      if(counter) {
+        setCounter(false)
+      }
+      else {
+        setCounter(true)
+      }
+
     }
 
+    const [totalReviews, setTotalReviews] = useState("")
+    useEffect(()=> {
+      setTotalReviews(reviews.length)
+    }, [reviews])
 
     
   return (
@@ -375,14 +385,13 @@ const DetailPage = () => {
       />
       <div className={style.mainContRev}>
         <div className={style.rate}>
-          <Stars ratingValue={rateValue}/> 
-          <h1>{rateValue}</h1>
-          <p>{reviews.length} calificaciones</p>
+        {rateValue === 0 ? (<h1>-</h1>):(<h1>{rateValue}</h1>)}
+          <Stars ratingValue={rateValue}/>
+          {reviews.length === 0 ? (<><p>No hay calificaciones</p></>): (<p>{reviews.length} calificacion(es)</p>)}
         </div>
-        <div>
-        <h1>Opiniones acerca de este producto:</h1>
+        <div className={style.reviewsShow}>
+        {reviews.length === 0 ? (null): (<h1>Opiniones de este producto</h1>)}
         {showAll.map((op,index) => (
-
           <>
           <div className={style.reviewCont} key={index}>
            <div className={style.subDivStar}>
@@ -394,7 +403,7 @@ const DetailPage = () => {
           </>
         ))}
         {
-          !counter&& <button onClick={()=>showAllButton()}>Mostrar mas opiniones</button>
+          totalReviews > 3 && (!counter ? (<button className={style.formbutton} onClick={()=>showAllButton()}>Mostrar mas opiniones</button>):(<button className={style.formbutton} onClick={()=>showAllButton()}>Ocultar opiniones </button>))
         }
         </div>
       </div>
