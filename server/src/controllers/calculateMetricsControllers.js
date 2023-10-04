@@ -5,118 +5,104 @@ const { Op } = require('sequelize');
 
 
 // Configura la zona horaria en español (por ejemplo, 'es-ES')
-const spanishTimeZone = 'es-ES';
-
-
+const spanishTimeZone = "es-ES";
 
 const getUserByGenderRegister = async () => {
-
-
-    const query = `
+  const query = `
       SELECT gender, COUNT(*) as cantidad
       FROM "Users"
       WHERE gender IN ('Hombre', 'Mujer', 'Prefiero no decirlo')
       GROUP BY gender;
     `;
 
+  const result = await conn.query(query, {
+    type: conn.QueryTypes.SELECT,
+  });
 
-
-    const result = await conn.query(query, {
-        type: conn.QueryTypes.SELECT,
-    });
-
-    return result;
-
-
-
-}
-
+  return result;
+};
 
 const getSalesMetricsByMonth = async () => {
+  const currentYear = new Date().getFullYear();
 
+  // Crear un arreglo para almacenar las ventas por mes
+  const ventasPorMes = [];
 
-    const currentYear = new Date().getFullYear();
+  // Array de nombres de los meses
+  const nombresMeses = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
 
-    // Crear un arreglo para almacenar las ventas por mes
-    const ventasPorMes = [];
+  // Consultar las ventas por mes
+  for (let mes = 1; mes <= 12; mes++) {
+    const fechaInicio = new Date(currentYear, mes - 1, 1);
+    const fechaFin = new Date(currentYear, mes, 0, 23, 59, 59, 999);
 
-    // Array de nombres de los meses
-    const nombresMeses = [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-    ];
+    const ventas = await Order.findAll({
+      where: {
+        createdAt: {
+          [Op.between]: [fechaInicio, fechaFin],
+        },
+      },
+    });
 
-    // Consultar las ventas por mes
-    for (let mes = 1; mes <= 12; mes++) {
-        const fechaInicio = new Date(currentYear, mes - 1, 1);
-        const fechaFin = new Date(currentYear, mes, 0, 23, 59, 59, 999);
+    const totalVentasMes = ventas.reduce((total, venta) => {
+      return total + parseFloat(venta.totalAmount);
+    }, 0);
 
-        const ventas = await Order.findAll({
-            where: {
-                createdAt: {
-                    [Op.between]: [fechaInicio, fechaFin],
-                },
-            },
-        });
+    ventasPorMes.push({
+      mes: nombresMeses[mes - 1], // Obtener el nombre del mes
+      totalVentas: totalVentasMes,
+    });
+  }
 
-        const totalVentasMes = ventas.reduce((total, venta) => {
-            return total + parseFloat(venta.totalAmount);
-        }, 0);
-
-        ventasPorMes.push({
-            mes: nombresMeses[mes - 1], // Obtener el nombre del mes
-            totalVentas: totalVentasMes,
-        });
-    }
-
-
-
-
-    return { success: true, ventasPorMes: ventasPorMes };
-
-}
+  return { success: true, ventasPorMes: ventasPorMes };
+};
 
 const ordersByMenOrWoman = async () => {
+  const ordersWithUser = await Order.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ["gender"],
+      },
+    ],
+  });
 
+  if (!ordersWithUser) {
+    return { hombres: 0, mujeres: 0 };
+  }
 
-    const ordersWithUser = await Order.findAll({
-        include: [
-            {
-                model: User,
-                attributes: ['gender'], // Solo necesitamos el atributo 'gender' del usuario
-            },
-        ],
-    });
+  const counts = [
+    { name: "Hombre", cantidad: 0 },
+    { name: "Mujer", cantidad: 0 },
+    { name: "Indefinido", cantidad: 0 },
+  ];
 
-    if (!ordersWithUser) {
-        return { hombres: 0, mujeres: 0 };
+  ordersWithUser.forEach((order) => {
+    const gender = order.User ? order.User.getDataValue("gender") : null;
+    if (gender === "Hombre") {
+      counts[0].cantidad++;
+    } else if (gender === "Mujer") {
+      counts[1].cantidad++;
+    } else {
+      counts[2].cantidad++;
     }
+  });
 
-    // Procesa los resultados para contar las órdenes por género
-    const counts = [{
-        hombres: 0,
-        mujeres: 0,
-        indefinido: 0,
-    }];
-
-    ordersWithUser.forEach((order) => {
-        const gender = order.User ? order.User.getDataValue('gender') : null;
-        if (gender === 'Hombre') {
-            counts[0].hombres++;
-        } else if (gender === 'Mujer') {
-            counts[0].mujeres++;
-        } else if (gender === 'Prefiero no decirlo') {
-            counts[0].indefinido++;
-        }
-    });
-
-    // Devuelve el objeto con la cantidad de órdenes por género
-    return counts;
-
-
-
-}
-
+  return counts;
+};
 
 /* Cuantos pedidos se hicieron este mes*/
 
@@ -150,120 +136,95 @@ const howManyOrderMonthControllers = async (month) => {
     const startDate = new Date(year, monthIndex, 1);
     const endDate = new Date(year, monthIndex + 1, 0);
 
-    const orders = await Order.findAll({
-        where: {
-            createdAt: {
-                [Op.between]: [startDate, endDate],
-            },
-        },
-    });
+  const orders = await Order.findAll({
+    where: {
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+  });
 
-    return orders;
-
-}
-
-
-
+  return orders;
+};
 
 // Usuarios que mas han comprado
 const getBuyTopUsersControllers = async () => {
+  const buyCounts = await Order.findAll({
+    attributes: [
+      "UserId", // ID del usuario
+      [conn.fn("COUNT", conn.col("id")), "totalOrders"], // Conteo de órdenes por usuario
+    ],
+    group: ["UserId"], // Agrupar por ID de usuario
+  });
 
+  // Mapear los resultados para obtener información adicional de los usuarios
+  const userBuyCounts = await Promise.all(
+    buyCounts.map(async (result) => {
+      const userId = result.UserId;
+      const totalOrders = parseInt(result.dataValues.totalOrders);
+      const user = await User.findByPk(userId);
+      return {
+        user,
+        totalOrders,
+      };
+    })
+  );
 
-    const buyCounts = await Order.findAll({
-        attributes: [
-            'UserId', // ID del usuario
-            [conn.fn('COUNT', conn.col('id')), 'totalOrders'], // Conteo de órdenes por usuario
-        ],
-        group: ['UserId'], // Agrupar por ID de usuario
-    });
-
-    // Mapear los resultados para obtener información adicional de los usuarios
-    const userBuyCounts = await Promise.all(
-        buyCounts.map(async (result) => {
-            const userId = result.UserId;
-            const totalOrders = parseInt(result.dataValues.totalOrders);
-            const user = await User.findByPk(userId);
-            return {
-                user,
-                totalOrders,
-            };
-        })
-    );
-
-    return userBuyCounts;
-
-}
+  return userBuyCounts;
+};
 
 // Producto mas vendido por un rango de fecha / tienes que pasarle 2 fechas desde el inicio que desee que busque
-// hasta la fecha que desea encontrar, no puede buscar productos de una fecha que ni siquiera ha pasado, 
-// 
-
+// hasta la fecha que desea encontrar, no puede buscar productos de una fecha que ni siquiera ha pasado,
+//
 
 const getTopSoldProductsControllers = async (date, datetwo) => {
+  const topSoldProducts = await OrderItems.findAll({
+    attributes: [
+      "ProductId", // ID del producto
+      [conn.fn("SUM", conn.col("quantity")), "totalSold"], // Suma de la cantidad vendida
+    ],
+    where: {
+      createdAt: {
+        [Op.gte]: date + " 00:00:00", // Fecha de inicio del día
+        [Op.lte]: datetwo + " 23:59:59", // Fecha de fin del día
+      },
+    },
+    group: ["ProductId"], // Agrupa por ID de producto
+    order: [[conn.literal("SUM(quantity)"), "DESC"]], // Ordena por cantidad vendida en orden descendente
+    limit: 10, // Limita la cantidad de resultados a 10 (puedes ajustarlo)
+  });
 
+  // Mapea los resultados para obtener información adicional de los productos
+  const productDetails = await Promise.all(
+    topSoldProducts.map(async (result) => {
+      const productId = result.ProductId;
+      const totalSold = parseInt(result.dataValues.totalSold);
+      const product = await Product.findByPk(productId);
+      return {
+        product,
+        totalSold,
+      };
+    })
+  );
 
-
-    const topSoldProducts = await OrderItems.findAll({
-        attributes: [
-            'ProductId', // ID del producto
-            [conn.fn('SUM', conn.col('quantity')), 'totalSold'], // Suma de la cantidad vendida
-        ],
-        where: {
-            createdAt: {
-                [Op.gte]: date + ' 00:00:00', // Fecha de inicio del día
-                [Op.lte]: datetwo + ' 23:59:59', // Fecha de fin del día
-            },
-        },
-        group: ['ProductId'], // Agrupa por ID de producto
-        order: [[conn.literal('SUM(quantity)'), 'DESC']], // Ordena por cantidad vendida en orden descendente
-        limit: 10, // Limita la cantidad de resultados a 10 (puedes ajustarlo)
-    });
-
-
-    // Mapea los resultados para obtener información adicional de los productos
-    const productDetails = await Promise.all(
-        topSoldProducts.map(async (result) => {
-            const productId = result.ProductId;
-            const totalSold = parseInt(result.dataValues.totalSold);
-            const product = await Product.findByPk(productId);
-            return {
-                product,
-                totalSold,
-            };
-        })
-    );
-
-    return productDetails;
-
-
-}
-
-
-
-
+  return productDetails;
+};
 
 // cantidad de ordenes, usuarios y productos que hay actualmente disponibles
 const calculateMetricsControllers = async () => {
+  const totalOrders = await Order.count();
+  const totalUsers = await User.count();
+  const totalProduct = await Product.count();
 
-    const totalOrders = await Order.count()
-    const totalUsers = await User.count();
-    const totalProduct = await Product.count();
-
-    return { orders: totalOrders, users: totalUsers, products: totalProduct };
-
-}
-
+  return { orders: totalOrders, users: totalUsers, products: totalProduct };
+};
 
 module.exports = {
-
-    calculateMetricsControllers,
-    getTopSoldProductsControllers,
-    getBuyTopUsersControllers,
-    howManyOrderMonthControllers,
-    ordersByMenOrWoman,
-    getSalesMetricsByMonth,
-    getUserByGenderRegister
-}
-
-
-
+  calculateMetricsControllers,
+  getTopSoldProductsControllers,
+  getBuyTopUsersControllers,
+  howManyOrderMonthControllers,
+  ordersByMenOrWoman,
+  getSalesMetricsByMonth,
+  getUserByGenderRegister,
+};
