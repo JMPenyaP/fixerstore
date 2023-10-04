@@ -133,11 +133,11 @@ const Productos = () => {
                   ))}
               </table>
               <div className={style.paginado}>
-                <button className= {style.botonpag} onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}> Previous</button>
+                <button className= {style.botonpag} onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}> Anteior </button>
                 {pageNumbers.map((pageNumber) => (
                     <button key={pageNumber} className={pageNumber === pagina ? style.pagina : style.paginaboton} onClick={() => setPagina(pageNumber)}>{pageNumber}</button>
                 ))}
-                <button className= {style.botonpag} onClick={() => setPagina(pagina + 1)} disabled={ultimoElemento >= allProducts.length}>Next</button>
+                <button className= {style.botonpag} onClick={() => setPagina(pagina + 1)} disabled={ultimoElemento >= allProducts.length}> Siguiente </button>
             </div>
               </div>): (<div>
                 <div className={style.divModify}>

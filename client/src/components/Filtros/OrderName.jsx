@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOrder } from "../../redux/Actions/setOrder";
 import { buscaComb } from "../../redux/Actions/buscaComb";
 import { setOrder2 } from "../../redux/Actions/setOrder2";
+import style from "./Filtros.module.css"
 
 export default function OrderName() {
   const dispatch = useDispatch();
@@ -19,12 +20,13 @@ export default function OrderName() {
 
   return (
     <>
-      <div>
-        <h2>A-Z</h2>
+      <div className={style.ordenadores}>
+        <h2 className={style.titulo} >Ordenar A-Z</h2>
         <select
           onChange={(event) => handleSelect(event.target.value)}
           defaultValue="DEFAULT"
           value={order}
+          className={style.selectOrden}
         >
           <option value="DEFAULT" disabled>Selecciona</option>
           <option value="ASC">Ascendente</option>

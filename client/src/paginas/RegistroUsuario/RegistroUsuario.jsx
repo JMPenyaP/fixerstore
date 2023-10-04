@@ -125,7 +125,6 @@ const RegistroUsuario = () => {
         const edad = Math.floor(diferenciaMilisegundos / (365.25 * 24 * 60 * 60 * 1000));
         delete data.repeatPassword;
         data.age = edad
-        console.log(data)
         dispatch(createUser(data))
         setTimeout(()=> {reset(); dispatch(closeUser()); setFormDisabled(false); navigate("/login")}, 1000)
     }

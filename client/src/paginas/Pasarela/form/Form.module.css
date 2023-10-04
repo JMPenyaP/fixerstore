@@ -1,15 +1,14 @@
 /* Form.module.css */
 
 .divForm {
-  background-color: #f0f0f0;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   max-width: 800px;
   min-width: 600px;
-  margin: 100px auto;
-  min-height: 600px;
+  margin: 80px auto;
+  min-height: 500px;
 }
 
 .info {
@@ -17,8 +16,9 @@
 }
 
 .subDiv {
-  display: flex; 
-  gap: 10px;
+  display: flex;
+  flex-direction: column; 
+
 }
 
 .errors{
@@ -26,26 +26,63 @@
   font-size: 12px;
 }
 
-.btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-right: 10px;
+.divButton {
+  margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.btn:disabled {
-  background-color: #ccc;
+.divButton .button {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #15214a;
+  border: 1px solid #15214a;
+  background-color: transparent;
+  transition: color 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.divButton .button::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: -100%;
+  border-radius: 50px;
+  background-color: #15214a;
+  z-index: -1;
+  transition: left 0.3s ease-in-out;
+}
+
+.divButton .button:hover {
+  color: white;
+}
+
+.divButton .button:hover::before {
+  left: 0;
+}
+
+.button[disabled] {
+  font-size: 15px;
+  background-color: #999;
   cursor: not-allowed;
+  color:#ccc;
+  padding: 10px 30px;
+  font-weight: bold;
+  border: 1px solid #999;
+
 }
 
 /* Estilos para los títulos de cada paso */
 .h2 {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #15214a;
 }
 
 /* Estilos para los componentes de los pasos */
@@ -63,9 +100,16 @@
 }
 
 /* Estilos para los campos de entrada de texto */
-.datas[type="text"],
-.datas[type="number"] {
+.datas[type="text"]{
   width: 80%; /* Ocupa todo el ancho disponible */
+  padding: 10px;
+  margin: 15px 15px 15px 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.datas[type="number"] {
+  width: 100%; /* Ocupa todo el ancho disponible */
   padding: 10px;
   margin: 15px 15px 15px 0px;
   border: 1px solid #ccc;
@@ -88,6 +132,9 @@
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
   min-height: 200px; /* Establece un alto mínimo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Estilos para los campos de entrada de texto */
@@ -98,6 +145,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  margin: 10px;
 }
 
 /* Estilos para el placeholder de los campos de entrada */
@@ -107,14 +155,23 @@
 
 /* Estilos para los input de radio y sus etiquetas */
 .label {
+  font-size: 15px;
   display: block;
-  margin-bottom: 10px;
-  position: relative;
+  width: 90%;
   cursor: pointer;
+}
+
+.labelsec{
+  font-size: 15px;
+  display: block;
+  width: 90%;
+  cursor: pointer;
+  margin: 10px;
 }
 
 /* Estilos para el componente Pay */
 .pay {
+
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 20px;
@@ -125,4 +182,28 @@
   display: flex; /* Utiliza flexbox */
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
+  flex-direction: column;
+}
+
+.btn{
+  width: 300px;
+  height: 40px;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid #3cbbed;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: #3cbbed;
+  margin: 10px;
+}
+
+.btn:active {
+  background-color: #3cbbed; /* Cambio de color de fondo cuando el botón está activo (clic) */
+  color: white; /* Cambio de color de texto para mejorar la legibilidad */
+}
+
+.btn[disabled]{
+  background-color: #999;
+  color: #ccc;
+  border: #999;
 }

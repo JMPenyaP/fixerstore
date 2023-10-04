@@ -27,9 +27,6 @@ const Form = () => {
         }
       }, [dataProfile]);
 
-
-    
-    console.log(dataProfile) 
     const [errors, setErrors] = useState({});
     const [formData,setFormData]= useState({
         name: '',
@@ -44,7 +41,7 @@ const Form = () => {
         // }
     })
 
-    const FormTitle = ["1-Datos Personales", "2-Domicilio y Entrega", "3-Pago"]
+    const FormTitle = ["1-Datos Personales", "2-Retiro en sucursal", "3-Pago"]
 
     const handleInputChange = (event) => {
 
@@ -91,18 +88,21 @@ const Form = () => {
                     {PageDisplay()}
                 </div>
                 <div>
-                <button className={styles.btn} onClick={() => {if (page > 0) {setPage(page - 1);}}}disabled={page === 0}>Prev</button>
-                <button
-                className={styles.btn}
-                onClick={() => {
-                    if (page < FormTitle.length - 1 && Object.keys(errors).length === 0) {
-                    setPage(page + 1);
-                    }
-                }}
-                disabled={page === FormTitle.length - 1 || Object.keys(errors).length > 0}
-                >
-                Next
-                </button>
+                {page !== 2 &&
+                <div className={styles.divButton}>
+                    <button
+                    className={styles.button}
+                    onClick={() => {
+                        if (page < FormTitle.length - 1 && Object.keys(errors).length === 0) {
+                        setPage(page + 1);
+                        }
+                    }}
+                    disabled={page === FormTitle.length - 1 || Object.keys(errors).length > 0}
+                    >
+                    Siguiente
+                    </button>
+                    
+                </div>}
                 </div>
             </div>
         </div>

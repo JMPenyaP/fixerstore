@@ -85,7 +85,7 @@ const Carrusel = () => {
                   className="carouselImage"
                 />
                 <div>
-                  <h3>$ {prod.priceOfList}</h3>
+                  <h3 className={style.crossedPrice}>$ {prod.priceOfList}</h3>
                   <h4>{prod.offer}% Off</h4>
                 </div>
                 <h2>$ {discountedPrice}</h2>

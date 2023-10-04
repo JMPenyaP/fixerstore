@@ -9,7 +9,6 @@ import { useEffect } from "react";
 const Pasarela = () => {
   const carritoById = useSelector((state) => state.carritoById);
   const dataProfile = useSelector((state) => state.dataProfile);
-  console.log(dataProfile);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -24,6 +23,8 @@ const Pasarela = () => {
   const totalCarrito = carritoById?.reduce((valorAnterior, valorActual) => {
     return valorAnterior + valorActual.precio * valorActual.cantidad;
   }, 0);
+
+
   return (
     <>
       <div className={styles.divMain}>
@@ -44,9 +45,8 @@ const Pasarela = () => {
             <h2>Compra segura</h2>
           </div>
         </div>
-        <div>
-          <h2>Finalizar Compra</h2>
-        </div>
+
+          <h2 className={styles.title}>Finalizar Compra</h2>
 
         <div className={styles.contenedor}>
           <Form />
@@ -57,7 +57,7 @@ const Pasarela = () => {
               <Ticket carrito={carritoById} />
             </div>
 
-            <div>
+            <div className={styles.divTotal}>
               <h3>Total</h3>
               <h2>${totalCarrito}</h2>
             </div>

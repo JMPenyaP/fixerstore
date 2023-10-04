@@ -7,36 +7,38 @@ export const validate =(formData,page)=>{
           errors.name = "El nombre es obligatorio.";
         } else if (formData.name.length < 3) {
           errors.name = "El nombre debe tener al menos 3 caracteres.";
-        } else if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
+        } else if (!/^[A-Za-zÁÉÍÓÚÑñáéíóúüÜ\s]+$/.test(formData.name)) {
           errors.name = "El nombre solo debe contener letras.";
+        } else if(formData.name.length > 20){
+          errors.name = "El nombre no puede superar los 20 caracteres"
         }
         
           // Validación para el campo 'lastName' (si es necesario)
           if (!formData.lastName) {
             errors.lastName = "El apellido es obligatorio.";
-          } else if (!/^[a-zA-Z]+$/.test(formData.lastName)) {
+          } else if (!/^[A-Za-zÁÉÍÓÚÑñáéíóúüÜ\s]+$/.test(formData.lastName)) {
             errors.lastName = "El apellido solo debe contener letras.";
           }
         
           if (!formData.phoneNumber) {
             errors.phoneNumber = "El número de teléfono es obligatorio.";
           } else if (!/^\d{10}$/.test(formData.phoneNumber)) {
-            errors.phoneNumber = "El número de teléfono debe contener exactamente 10 dígitos.";
+            errors.phoneNumber = "El número de teléfono debe contener 10 dígitos.";
           }
           
           // Validación para el campo 'dni'
           if (!formData.dni) {
             errors.dni = "El CC / DNI es obligatorio.";
           } else if (!/^\d{10}$/.test(formData.dni)) {
-            errors.dni = "El CC / DNI debe contener exactamente 10 dígitos.";
+            errors.dni = "El CC / DNI debe contener 10 dígitos.";
           }
     }else{
         if(!formData.place){
-          errors.place="seleccionar una opcion"
+          errors.place="Seleccionar una opcion"
         }
     }
     
-      // Validación para otros campos según sea necesario
+
     
       return errors;
 }
