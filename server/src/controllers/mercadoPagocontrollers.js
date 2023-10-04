@@ -1,6 +1,4 @@
 require('dotenv').config();
-
-const cors = require("cors");
 const mercadopago = require("mercadopago");
 const { ACCESS_TOKEN } = process.env;
 
@@ -26,7 +24,7 @@ const pagoOrder = (req, res) => {
 			"failure": "https://dev.fixershoes.com/payment/failured",
 		},
 		auto_return: "approved",
-		external_reference:`name:${req.body.formData.name},surname:${req.body.formData.lastName},phone:${req.body.formData.phoneNumber},retiro:${req.body.formData.place},cc:${req.body.formData.dni}`,
+		external_reference:`name:${req.body.name},surname:${req.body.lastName},phone:${req.body.phoneNumber},retiro:${req.body.place},cc:${req.body.dni}`,
 	};
 
 	mercadopago.preferences.create(preference)

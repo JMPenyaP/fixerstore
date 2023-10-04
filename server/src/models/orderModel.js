@@ -15,9 +15,9 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     status: {
-      type: DataTypes.ENUM('pending', 'in progress', 'delivered'),
+      type: DataTypes.ENUM('Pendiente', 'Enviado', 'Entregado'),
       allowNull: false,
-      defaultValue: 'pending'
+      defaultValue: 'Pendiente'
     },
     totalAmount: {
       type: DataTypes.DECIMAL(10, 2),

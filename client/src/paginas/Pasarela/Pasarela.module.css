@@ -1,15 +1,15 @@
 .divMain{
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+
 }
 
 .nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100vw;
-    height: 110px;
+    width: auto;
+    height: 100px;
     background-color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -28,6 +28,9 @@
     margin: 50px;
     gap: 10px;
 }
+.title{
+    padding-left: 50px;
+}
 
 .contenedor{
     display: flex;
@@ -39,16 +42,16 @@
 
 
             .divDetalle{
+                color: #2C2D32;
                 border-radius: 15px;
                 display: flex;
                 flex-direction: column;
-                width: 300px;
-                max-height: 800px;
+                width: 350px;
                 background-color: lightblue;
                 margin: 0px 10px;
-                padding: 20px;
+                padding: 10px;
                 align-items: center;
-                height: 700px;
+                height: auto;
             }
 
             
@@ -56,28 +59,49 @@
             
             .ticket{
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
                 flex-wrap: wrap;
+                justify-content: space-between;
             }
 
 .img{
-    background-color: gray;
+    background-color: #3cbbed3b;
     border-radius: 5px;
 }
 
-.span{
+.divSpan{
+    color: #2C2D32;
+    margin-left: 3px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    width: 70%;
+    width: 60%;
+    justify-content: space-around;
+}
+
+.span1{
+    font-size: 17px;
+}
+.span2{
+    font-size: 13px;
+    color: #656569;
+}
+
+.span3{
+    font-size: 14px;
 }
 
 .separador{
-    background-color: grey;
+    background-color: #2C2D32;
     width: 80%;
     height: 2px;
     border-radius: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 17px auto;
 
+}
+
+.divTotal{
+    display: flex;
+    align-items: center;
+    width: 250px;
+    justify-content: space-between;
 }

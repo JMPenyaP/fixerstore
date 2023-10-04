@@ -8,15 +8,24 @@ const Ticket = ({carrito}) => {
         <div>
             {carrito?.map((product)=>(
                 <div className={styles.divMain}  key={product.name}>
+
                     <div className={styles.ticket}>
-                        <div className={styles.span}>
-                            <span>{product.cantidad}|{product.name}</span>
+
+                        <img className={styles.img} src={product.image} alt={product.name} width={'70px'} height={'70px'} />
+
+                        
+
+                        <div className={styles.divSpan}>
+                            <span className={styles.span1}>{product.name}</span>
+                            <span className={styles.span2}>precio:${product.precio}</span>
+                            <span className={styles.span3}><b>Cantidad: </b> {product.cantidad}</span>
                         </div>
-                        <img className={styles.img} src={product.image} alt={product.name} width={'60px'} height={'60px'} />
+
+                        <h5>${product.precio*product.cantidad}</h5>
+
+                        
                     </div>
-                    <div>
-                        <span>${product.precio}</span>
-                    </div>
+                    
                     <div className={styles.separador}></div>
                     
                 </div>

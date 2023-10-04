@@ -29,4 +29,4 @@ router.use("/passuser", passRouter);
 router.use('/metrics', calculateMetricsRouter);
 router.use('/mailing', mailingRouters);
 
-module.exports = router; // Exportamos el router configurado
+module.exports = router; 
