@@ -21,12 +21,14 @@ const createReview = async (req, res) => {
 
 const getReviews =async(req,res)=>{
   const {id}= req.params
+  console.log(id)
   try {
     const reviews = await UserReviews.findAll({
         where:{
-          ProduuctId:id  
+          ProductId:id  
         }
     })
+    console.log("reviews aqui",reviews)
     res.status(200).json(reviews)
   } catch (error) {
     res.status(500).json({ success: false, message: 'Error 500 en el servidor' })

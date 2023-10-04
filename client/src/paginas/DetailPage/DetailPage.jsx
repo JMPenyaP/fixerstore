@@ -13,26 +13,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React from 'react';
 import { getReviews } from "../../redux/Actions/getReviews";
+import Stars from "./Stars";
 
 const DetailPage = () => {
   
-  const opinion = [{
-    ratingValue: 4.0,
-    comment: "malisimo pesimo producto no lorecomiendo",
-    ProductId: 5
-  }, {
-    ratingValue: 3.0,
-    comment: "bueno que lindo",
-    ProductId: 5
-  }, {
-    ratingValue: 3.0,
-    comment: "recomendado",
-    ProductId: 5
-  }, {
-    ratingValue: 1.0, 
-    comment: "que buen producto",
-    ProductId: 5
-  }]
+  
   // ESTADOS ///
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
@@ -42,6 +27,7 @@ const DetailPage = () => {
   const [cantidadEnCarrito, setCantidadEnCarrito] = useState();
   const [idVariable, setIdVariable] = useState(null);
   const dataProfile = useSelector((state) => state.dataProfile);
+  const [counter,setCounter]=useState(false)
   //////
   
   let carritoEnLocalStorage = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -110,7 +96,7 @@ const DetailPage = () => {
 
  // Reviews
   useEffect(()=>{
-     dispatch(getReviews)
+     dispatch(getReviews(id))
   },[])
 
   // ONCLICK FUNCTIONS
@@ -190,8 +176,27 @@ const DetailPage = () => {
   }
   ///////
   
- 
+  function reviewRate(reviews) {
+    if (reviews.length === 0) {
+      return 0; 
+    }
   
+    const add = reviews.reduce((total, number) => total + number, 0);
+    const rowRate = add / reviews.length;
+    const rate = Math.round(rowRate)
+     console.log(rate)
+    return rate;
+  }
+    const scoreReviews = reviews.map((rev)=>rev.ratingValue) 
+    const rateValue = reviewRate(scoreReviews)
+    
+    const showAll = counter? reviews: reviews.slice(0,2)
+    const showAllButton = ()=>{
+      setCounter(true)
+    }
+
+
+    
   return (
     <>
       <div className={style.divDetail}>
@@ -369,16 +374,31 @@ const DetailPage = () => {
         theme="light"
       />
       <div className={style.mainContRev}>
+        <div className={style.rate}>
+          <Stars ratingValue={rateValue}/> 
+          <h1>{rateValue}</h1>
+          <p>{reviews.length} calificaciones</p>
+        </div>
+        <div>
         <h1>Opiniones acerca de este producto:</h1>
-        {opinion.map((op) => (
-        <div className={style.reviewCont}>
-          <h3>{op.ratingValue}</h3>
-          <p>{op.comment}</p>
+        {showAll.map((op,index) => (
 
-         </div>
+          <>
+          <div className={style.reviewCont} key={index}>
+           <div className={style.subDivStar}>
+            <Stars ratingValue={op.ratingValue}/>
+            <p className={style.date}>{op.createdAt.substring(0, 10)}</p>
+          </div>
+            <p>{op.comment}</p>
+          </div>
+          </>
         ))}
+        {
+          !counter&& <button onClick={()=>showAllButton()}>Mostrar mas opiniones</button>
+        }
+        </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };
