@@ -19,7 +19,7 @@ const Shipment = ({errors,formData,onInputChange}) => {
         
 
             {errors.place && <span className={styles.errors}>{errors.place}</span>}
-            <label className={styles.label}>
+            <label className={styles.labelsec}>
                 <input
                 className={styles.inputRadio}
                 type="radio"
@@ -30,7 +30,7 @@ const Shipment = ({errors,formData,onInputChange}) => {
                 />C.C. Centro Mayor
             </label>
             
-            <label className={styles.label}>
+            <label className={styles.labelsec}>
                 <input 
                 className={styles.inputRadio}
                 type="radio"

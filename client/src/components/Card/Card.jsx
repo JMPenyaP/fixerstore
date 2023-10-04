@@ -78,18 +78,23 @@ const Card = ({ product }) => {
         </div>
 
         <div className={styles.divInfo}>
+
           <div className={styles.divName}>
             <span className={styles.span}>{product.name}</span>
           </div>
+
           <div>
             <span className={styles.spanPrice}>${product.priceOfList}</span>
           </div>
+
         </div>
+
         <Link to={`/detail/${product.id}`}>
           <div className={styles.divButton}>
-            <button>Ver Producto</button>
+            <button className={styles.button}>Ver Producto</button>
           </div>
         </Link>
+
         <div className={styles.divFavoriteButtton}>
           {client && (
             <button onClick={() => handleFavorite()}>

@@ -94,7 +94,7 @@ const Failured = () => {
     if (secondsRemaining === 0) {
       console.log(form)
       axios.post('http://localhost:3001/order/', { form })
-      navigate("/");
+      navigate("/user/"+dataProfile.userData.id);
     }
   }, [navigate, secondsRemaining]);
 

@@ -100,8 +100,8 @@ const Success = () => {
 
   useEffect(() => {
     if (secondsRemaining === 0) {
-      axios.post("http://localhost:3001/order/", { form });
-      navigate("/");
+      axios.post("http://localhost:3001/order/", { form })
+      navigate("/user/"+dataProfile.userData.id);
     }
   }, [navigate, secondsRemaining]);
 

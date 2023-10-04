@@ -6,9 +6,13 @@ import axios from 'axios'
 const Pay = ({formData}) => {
 
     const carritoById = useSelector(state=>state.carritoById)
+    const [btn, setBtn] = useState('Ir a pagar')
+    const [isActive,setIsActive] = useState(false)
 
 
     const createPreference = async () => {
+        setIsActive(true)
+        setBtn('Cargando...')
         const totalcarrito = carritoById?.reduce((valorAnterior, valorActual) => {
             return valorAnterior + (valorActual.precio * valorActual.cantidad);
         }, 0);
@@ -18,7 +22,11 @@ const Pay = ({formData}) => {
                 description: "Compra FixerShoes",
                 price: totalcarrito,
                 quantity: 1,
-                formData
+                name: formData.name,
+                lastName: formData.lastName,
+                phoneNumber: formData.phoneNumber,
+                dni: formData.dni,
+                place: formData.place,
             });
 
             window.location.href = response.data.response.body.init_point;
@@ -33,9 +41,9 @@ const Pay = ({formData}) => {
     return ( 
         <>
         <div className={styles.pay}>
-
-            <button className={styles.btn} onClick={createPreference} >Ir a Pagar</button>
-
+            <img src="https://logotipoz.com/wp-content/uploads/2021/10/version-horizontal-large-logo-mercado-pago.webp" alt="logo_mercadopago" width={'150px'} />
+            <button className={styles.btn} onClick={createPreference} disabled={isActive} >{btn}</button>
+            
         </div>
         </>
      );
