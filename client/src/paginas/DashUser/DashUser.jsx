@@ -23,7 +23,8 @@ const DashUser = () => {
     useEffect(() => {
         if (dataProfileActual) {
             setEmail(userData.email)
-            setName(userData.name + " " + userData.surname)
+            if(userData.surname === null) setName(userData.name)
+            else setName(userData.name + " " + userData.surname)
             setInicial(userData.name[0])
         }
         setLog(clientProfile)
