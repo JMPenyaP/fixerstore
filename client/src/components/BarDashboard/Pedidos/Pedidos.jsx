@@ -193,17 +193,17 @@ const Pedidos = () => {
     const [backStatus, setBackStatus] = useState("")
     useEffect(()=> {
       if(statusModify !== "") {
-        if (statusModify === "pending") {
-          setNextStatus("in progress")
+        if (statusModify === "Pendiente") {
+          setNextStatus("Enviado")
           setBackStatus("")
         }
-        if (statusModify === "in progress") {
-          setNextStatus("delivered")
-          setBackStatus("pending")
+        if (statusModify === "Enviado") {
+          setNextStatus("Entregado")
+          setBackStatus("Pendiente")
         }
-        if (statusModify === "delivered") {
+        if (statusModify === "Entregado") {
           setNextStatus("")
-          setBackStatus("in progress")
+          setBackStatus("Enviado")
         }
       }
     }, [statusModify])
@@ -291,11 +291,12 @@ const Pedidos = () => {
                   {orders.map((orden) => (
                   <tr className={style.tr} key={orden.id}>
                       <td className={style.td}>{orden.id}</td>
+                      <td className={style.td}>{orden.idMP}</td>
                       <td className={style.td}>{orden.name + " " + orden.surname}</td>
-                      <td className={style.td}>{orden.status === 'pending' ? 'Pendiente' : orden.status === 'in progress' ? 'Enviado' : orden.status === 'delivered' ? 'Entregado' : ''}</td>
+                      <td className={style.td}>{orden.status}</td>
                       <td className={style.td}>{new Date(orden.createdAt).toLocaleString('es-CO', {year: 'numeric',month: 'numeric',day: 'numeric',hour: 'numeric',minute: 'numeric',hour12: false})}</td>
                       <td className={style.td}>${orden.totalAmount}</td>
-                      <td className={style.td}>{orden.payment}</td>
+                      <td className={style.td}>{orden.payment === 'credit_card' ? 'Tarjeta de credito' : ""}</td>
                       <td className={style.tdetail}>
                       <button className={style.botonEdit} onClick= {() => handleDetail (orden.id)}>Detalle</button>
                       </td>
@@ -312,11 +313,11 @@ const Pedidos = () => {
                       <h5 className={style.tituloSeccion}>Detalles de la orden</h5>
                       <p className={style.mensajeProductos}><strong>Fecha de creación: </strong>{new Date(detailOrder.createdAt).toLocaleString('es-CO', {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false})}</p>
                       <p className={style.mensajeProductos}><strong>Valor total: </strong> ${detailOrder.totalAmount}</p>
-                      <p className={style.mensajeProductos}><strong>Pago: </strong> {detailOrder.payStatus === "aproved" ? "Aprobado" : "En proceso/rechazado"}</p>
+                      <p className={style.mensajeProductos}><strong>Pago: </strong> {detailOrder.payStatus === "approved" ? "Aprobado" : "En proceso/rechazado"}</p>
                       <p className={style.mensajeProductos}><strong>Método de pago:</strong> {detailOrder.payment === 'credit_card' ? 'Tarjeta de credito' : ""}</p>
-                      <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status === 'pending' ? 'Pendiente' : detailOrder.status === 'in progress' ? 'Enviado' : detailOrder.status === 'delivered' ? 'Entregado' : ''}</p>
-                      {nextStatus !== "" ? (nextStatus === "in progress" ? (<button value="in progress" onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="delivered" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
-                      {backStatus !== "" ? (backStatus === "pending" ? (<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="pending" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="in progress" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
+                      <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status}</p>
+                      {nextStatus !== "" ? (nextStatus === "Enviado" ? (<button value="Enviado" onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="Entregado" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
+                      {backStatus !== "" ? (backStatus === "Pendiente" ? (<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="Pendiente" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="Enviado" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
                       {/* {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>):(null)} */}
                     </div>
                     <div>

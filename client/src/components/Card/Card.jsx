@@ -84,7 +84,7 @@ const Card = ({ product }) => {
           </div>
 
           <div>
-            <span className={styles.spanPrice}>${product.priceOfList}</span>
+            <span className={styles.spanPrice}>${product.priceOfList*(1-product.offer/100)}</span>
           </div>
 
         </div>
