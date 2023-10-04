@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import styles from "./ReviewForm.module.css";
-import { validate } from "../Review/validate";
 
 const Review = ({ onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
-    ratingValue: 3,
+    ratingValue: 5,
     comment: "",
   });
+
+  const [commentError, setCommentError] = useState("");
+  const [reviewSent, setReviewSent] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleRatingChange = (event) => {
     const ratingValue = parseInt(event.target.value);
@@ -16,16 +19,26 @@ const Review = ({ onSubmit, onClose }) => {
   const handleReviewTextChange = (event) => {
     const comment = event.target.value;
     setFormData({ ...formData, comment });
+    setCommentError("");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
-    onSubmit(formData);
-    setFormData({
-      ratingValue: 3,
-      comment: "",
-    });
+
+    const comment = formData.comment;
+    const commentRegex = /\S/;
+
+    if (!commentRegex.test(comment)) {
+      setCommentError("Debes dejar un comentario.");
+    } else if (comment.length > 500) {
+      setCommentError("El comentario no puede exceder los 500 caracteres.");
+    } else {
+      // Si pasa todas las validaciones, envía el formulario
+      onSubmit(formData);
+      setCommentError("");
+      setReviewSent(true);
+      setSuccessMessage("Reseña enviada!");
+    }
   };
 
   const getRatingColor = () => {
@@ -40,15 +53,15 @@ const Review = ({ onSubmit, onClose }) => {
 
   return (
     <div className={styles.reviewform}>
-      <h2>Dejar una reseña</h2>
+      <h2>Reseña del producto</h2>
       <form onSubmit={handleSubmit}>
         <div className={styles.rating}>
-          <label className={styles.label}>Puntuación:</label>
+          <label className={styles.label}>Agrega una puntuación:</label>
           {/* {errors.rating && <p className={styles.error}>{errors.rating}</p>} */}
           <input
             className={styles.input}
             type="range"
-            min="0"
+            min="1"
             max="5"
             step="1"
             name="ratingValue"
@@ -56,30 +69,38 @@ const Review = ({ onSubmit, onClose }) => {
             onChange={handleRatingChange}
           />
           <span className={`${styles.ratingValue} ${getRatingColor()}`}>
-            {formData.ratingValue} estrella{formData.ratingValue !== 1 ? "s" : ""}
+            {formData.ratingValue} 
           </span>
         </div>
         <div>
-          <label className={styles.label}>Reseña:</label>
-          {/* {errors.reviewText && <p>{errors.reviewText}</p>} */}
+          <label className={styles.label}>Deja un comentario:</label>
           <textarea
             className={styles.textarea}
             name="comment"
             value={formData.comment}
             onChange={handleReviewTextChange}
-            rows={4}
-            cols={50}
-          />
+            rows={6}
+            cols={60}
+            />
+            {commentError && (
+              <p className={styles.error} style={{ color: "red" }}>
+                {commentError}
+              </p>
+            )}
         </div>
 
-        <button
-          className={styles.button}
-          type="submit"
-        
-          /* disabled={Object.keys(errors).length > 0} */
-        >
-          Enviar reseña
-        </button>
+        <div className={styles.buttonContainer}>
+          <button className={styles.button} type="submit">
+            Enviar reseña
+          </button>
+
+          {/* Muestra el mensaje de éxito al lado derecho del botón */}
+          {reviewSent && (
+            <p className={styles.successMessage} style={{ color: "green" }}>
+              {successMessage}
+            </p>
+          )}
+        </div>
       </form>
     </div>
   );

@@ -24,67 +24,20 @@ const Compras = () => {
     }
   }, [historial]);
 
-    /* const ordenes = [
-    {
-      "id": 10,
-      "status": "delivered",
-      "totalAmount": "725.00",
-      "UserId": "7376eaed-c524-49b3-a0ea-b1cc1314d9d0",
-      "name": "Andres",
-      "surname": "Rodriguez",
-      "phone": "3105487561",
-      "cc": "20644880",
-      "payment": "Bancolombia",
-      "retiro": "local centro de bogota",
-      "city": "",
-      "address": "",
-      "department": "",
-      "createdAt": "2023-09-28T22:55:37.328Z",
-      "updatedAt": "2023-09-28T22:55:37.380Z",
-      "Products": [
-        {
-          "id": 2,
-          "name": "Cordones Reflectivos",
-          "categoryId": 2,
-          "firstImage": "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1695330026/FIXERSHOES/lkszx33ausu5eze0fmyv.png",
-          "carrouselImage": [
-            "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1695330026/FIXERSHOES/mowtprncpvxnn7nck11q.png"
-          ],
-          "description": "cordones reflectivos, decoran muy bonito el calzado, tiene muy buena resitencia y reflejan en la oscuridad, se utilizan en las botas y los tenis.",
-          "date": "01-18-2023",
-          "priceOfList": "15.000",
-          "statusOffer": true,
-          "offer": 25,
-          "stock": 15,
-          "status": true,
-          "OrderItems": {
-            "OrderId": 1,
-            "ProductId": 2,
-            "quantity": 30,
-            "price": "15.00",
-            "createdAt": "2023-09-28T22:55:37.348Z",
-            "updatedAt": "2023-09-28T22:55:37.348Z",
-            "orderedProductoId": null
-          },
-          "Category": {
-            "id": 2,
-            "name": "cordones"
-          }
-    }]}] */
-
-    
-    const [rev, setRev] = useState(false)
-    const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
-
+  
+  
+  const [rev, setRev] = useState(false)
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
+  
     const [reviewData, setReviewData] = useState({ productId: null, userId: null });
-
+    
     const [isDetail, setIsDetail] = useState(false)
     const [detailOrder, setDetailOrder] = useState({})
 
     const [idOrden, setIdOrden] = useState("")
-
+    
     const handleDetail = async (id, UserId) => {
-
+      
       if(historial.length === 0) {
 
         const orden = historial.filter((or) => or.id === id)
@@ -110,7 +63,6 @@ const Compras = () => {
         } else {
           const endpoint = `http://localhost:3001/order/id/${id}`
           const response = await axios.get(endpoint)
-          console.log(response);
           const orden = response.data
           const {order} = orden 
           setIsDetail(true)
@@ -124,7 +76,7 @@ const Compras = () => {
         }
       }
     }
-
+    
     const openReviewModal = (productId) => {
       setIsReviewModalOpen(true);
       setReviewData({ productId, userId });
@@ -144,6 +96,7 @@ const Compras = () => {
     {isDetail === false ? 
     (            <div className={style.divTabla}>
       <table className={style.table}>
+        <thead>
           <tr className={style.tr}> 
               <th className={style.th}>Orden ID</th>
               <th className={style.th}>Estado</th>
@@ -152,11 +105,13 @@ const Compras = () => {
               <th className={style.th}>Medio de pago</th>
               <th className={style.th}>Detalle</th>
           </tr>
+        </thead>
+        <tbody>
           {historial.map((orden) => (
-          <tr className={style.tr} key={orden.id}>
+            <tr className={style.tr} key={orden.id}>
               <td className={style.td}>{orden.id}</td>
               <td className={style.td}>{orden.status}</td>
-              <td className={style.td}>{new Date(orden.createdAt).toLocaleString('es-CO', {year: 'numeric',month: 'numeric',day: 'numeric',hour: 'numeric',minute: 'numeric',hour12: false})}</td>
+              <td className={style.td}>{new Date(orden.createdAt).toLocaleString('es-CO', {year: 'numeric',month: 'numeric',day: 'numeric'})}</td>
               <td className={style.td}>${orden.totalAmount}</td>
               <td className={style.td}>{orden.payment}</td>
               <td className={style.tdetail}>
@@ -164,6 +119,7 @@ const Compras = () => {
               </td>
               </tr>
               ))}
+              </tbody>
       </table>
       </div>): ( 
         <div>
@@ -196,7 +152,7 @@ const Compras = () => {
                     <p className={style.mensajeProductos}>Nombre: {detailOrder.name + " " + detailOrder.surname}</p>
                   </div>
                 ):(
-                    <div>
+                  <div>
                       <p className={style.mensajeProductos}><strong>Retiro en </strong> {detailOrder.retiro} por parte del cliente</p>
                     </div>
                 )}
@@ -216,8 +172,7 @@ const Compras = () => {
                         <p className={style.mensajeProductosLittle}> <strong>Cantidad:</strong> {product.OrderItems.quantity} unidades</p>
                         <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.priceOfList} </p>
                         <p className={style.mensajeProductosLittle}> <strong>Subtotal producto: </strong> $ {product.priceOfList * product.OrderItems.quantity}</p>
-                      </div>
-                      { rev && <button onClick={() => openReviewModal(product.id)}>Dejanos tu opinion</button>}                      
+                      { rev && <button className={style.buttonReview} onClick={() => openReviewModal(product.id)}>Dejanos tu opinion</button>}                      
                       {isReviewModalOpen && (
                         <ReviewModal
                           isOpen={isReviewModalOpen}
@@ -233,10 +188,11 @@ const Compras = () => {
                             // Por ejemplo, puedes enviarlo al servidor o almacenarlo en el estado de tu aplicación.
                             dispatch(sendReview(finalReviewData))
                             // Cierra el modal después de enviar la reseña
-                            closeReviewModal();
+                            setTimeout(() => {closeReviewModal()}, 1500)
                           }}
                         />
                       )}
+                      </div>
                         </>
                       );})
                       ) : (null)}
@@ -293,3 +249,51 @@ export default Compras;
           detalle: "Detalles de la orden 5",
         },
       ]; */
+
+      /* const ordenes = [
+      {
+        "id": 10,
+        "status": "delivered",
+        "totalAmount": "725.00",
+        "UserId": "7376eaed-c524-49b3-a0ea-b1cc1314d9d0",
+        "name": "Andres",
+        "surname": "Rodriguez",
+        "phone": "3105487561",
+        "cc": "20644880",
+        "payment": "Bancolombia",
+        "retiro": "local centro de bogota",
+        "city": "",
+        "address": "",
+        "department": "",
+        "createdAt": "2023-09-28T22:55:37.328Z",
+        "updatedAt": "2023-09-28T22:55:37.380Z",
+        "Products": [
+          {
+            "id": 2,
+            "name": "Cordones Reflectivos",
+            "categoryId": 2,
+            "firstImage": "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1695330026/FIXERSHOES/lkszx33ausu5eze0fmyv.png",
+            "carrouselImage": [
+              "https://res.cloudinary.com/dgxp4c4yk/image/upload/v1695330026/FIXERSHOES/mowtprncpvxnn7nck11q.png"
+            ],
+            "description": "cordones reflectivos, decoran muy bonito el calzado, tiene muy buena resitencia y reflejan en la oscuridad, se utilizan en las botas y los tenis.",
+            "date": "01-18-2023",
+            "priceOfList": "15.000",
+            "statusOffer": true,
+            "offer": 25,
+            "stock": 15,
+            "status": true,
+            "OrderItems": {
+              "OrderId": 1,
+              "ProductId": 2,
+              "quantity": 30,
+              "price": "15.00",
+              "createdAt": "2023-09-28T22:55:37.348Z",
+              "updatedAt": "2023-09-28T22:55:37.348Z",
+              "orderedProductoId": null
+            },
+            "Category": {
+              "id": 2,
+              "name": "cordones"
+            }
+      }]}] */
