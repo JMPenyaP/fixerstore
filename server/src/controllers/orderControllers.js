@@ -81,8 +81,8 @@ const getOrderId = async (req, res) => {
 
 const createOrder = async (req, res) => {
   // datos que recibira por body 
-  const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department, payStatus } = req.body.form
- 
+  const { idMp, userId, totalAmount, name, surname, phone, cc, payment, retiro, city, address, department, payStatus } = req.body
+
 
   try {
     const carItems = await Cart.findAll({ where: { UserId: userId } })
@@ -90,7 +90,7 @@ const createOrder = async (req, res) => {
     if (carItems.length === 0) {
       return res.status(200).json({ message: 'El carrito está vacío' });
     }
-    let totalAmount = 0;
+
     const order = await Order.create({ idMp, totalAmount, UserId: userId, name, surname, phone, cc, payment, payStatus, retiro, city, address, department, payStatus });
     for (const car of carItems) {
       const product = await Product.findByPk(car.ProductId)
@@ -98,7 +98,18 @@ const createOrder = async (req, res) => {
         return res.status(200).json({ succes: false, message: "no se encontro el producto" })
       }
 
-      const price = product.priceOfList
+      let price = 0;
+
+      if (product.statusOffer === true || product.offer !== 0) {
+
+        price = product.priceOfList * (1 - product.offer / 100)
+
+      } else {
+
+        price = product.priceOfList
+
+      }
+
       const quantity = car.quantity
 
       if (product.stock >= quantity) {
@@ -112,7 +123,7 @@ const createOrder = async (req, res) => {
           quantity,
           price,
         });
-        totalAmount += price * quantity;
+
         await car.destroy()
 
       } else {
@@ -121,7 +132,6 @@ const createOrder = async (req, res) => {
 
       }
 
-      await order.update({ totalAmount })
     }
     //================================================
     const user = await User.findByPk(userId);
