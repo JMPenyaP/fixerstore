@@ -308,6 +308,7 @@
 
 /* Reviews */
 .mainContRev{
+    display: flex;
     max-width: 800px;
     margin-left: 400px;
 }
@@ -328,9 +329,37 @@
     font-size: 18px;
     color: #333;
     margin-bottom: 5px;
+    display: flex;
   }
   
   .reviewCont p {
     font-size: 16px;
     color: #666;
+  }
+  .date {
+    
+    top: 0;
+    right: 500px;
+   
+  }
+  .rate{
+    
+   align-items: center;
+    font-size: larger;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 200px;
+    margin: 10px;
+    height: 200px;
+    margin-top: 78px;
+    color: #3cbbed;
+  }
+  .rate p {
+    color: black;
+  }
+  .subDivStar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
   }
