@@ -22,11 +22,12 @@ const Pay = ({formData}) => {
                 description: "Compra FixerShoes",
                 price: totalcarrito,
                 quantity: 1,
-                name: formData.name,
-                lastName: formData.lastName,
-                phoneNumber: formData.phoneNumber,
-                dni: formData.dni,
-                place: formData.place,
+                formData
+                // name: formData.name,
+                // lastName: formData.lastName,
+                // phoneNumber: formData.phoneNumber,
+                // dni: formData.dni,
+                // place: formData.place,
             });
 
             window.location.href = response.data.response.body.init_point;
