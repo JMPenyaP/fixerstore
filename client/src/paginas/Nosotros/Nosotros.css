@@ -1,13 +1,14 @@
 .global-container {
   align-content: center;
-  background-color: #ffffff;
+  background-color:transparent
 }
 
 .cabecera {
+  padding-top: 5px;
   width: 100%;
   min-height: 90px;
   height: auto;
-  background-color: #f8f8f8;
+  background-color: transparent;
   align-content: center;
 }
 

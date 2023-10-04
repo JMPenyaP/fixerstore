@@ -49,15 +49,15 @@ const ContactForm = () => {
         <div className='logo-cabecera'>
           <img src="https://fixershoes.com/assets/logo-slogan.png" alt="Logo" width="80px" height="70px" />
         </div>
-        <div className='slogan-cabecera'>
+        {/* <div className='slogan-cabecera'>
           Cuidado y Restauración de Calzado
-        </div>
-        <h1>Contacto</h1>
+        </div> */}
+        <h1 className='titulo'>Contacto</h1>
       </div>
       
       <form className='Form' onSubmit={handleSubmit}>
-        <label htmlFor="nombre">Nombre:</label>
-        <input
+        <label className='p' htmlFor="nombre">Nombre completo:</label>
+        <input className='inputData'
           type="text"
           id="nombre"
           name="nombre"
@@ -66,8 +66,8 @@ const ContactForm = () => {
           required
         />
 
-        <label htmlFor="email">Email:</label>
-        <input
+        <label className='p' >Email:</label>
+        <input className='inputData'
           type="email"
           id="email"
           name="email"
@@ -76,8 +76,8 @@ const ContactForm = () => {
           required
         />
   
-        <label htmlFor="telefono">Teléfono:</label>
-        <input
+        <label className='p' >Teléfono:</label>
+        <input className='inputData'
           type="tel"
           id="telefono"
           name="telefono"
@@ -86,8 +86,8 @@ const ContactForm = () => {
           required
         />
 
-        <label htmlFor="mensaje">Mensaje:</label>
-        <textarea
+        <label className='p' >Mensaje:</label>
+        <textarea className='inputData'
           id="mensaje"
           name="mensaje"
           value={formData.mensaje}
@@ -96,7 +96,7 @@ const ContactForm = () => {
           required
         ></textarea>
         
-        <button type="submit">Enviar</button>
+        <button className='formbutton' type="submit">Enviar</button>
       </form>
       
       {enviado && (
@@ -107,10 +107,10 @@ const ContactForm = () => {
       <p>
       
       </p>
-      
+      <h1 className='titulo'>Visitanos</h1>
       <div className="sede-maps">
         <div className="map">
-          <label htmlFor="Sede 1 Fixer">Mapa Sede Plaza de las Americas FixerShoes:</label>
+          <label  className='p' htmlFor="Sede 1 Fixer">Sede Plaza de las Americas</label>
           <p>
           </p>
           <iframe
@@ -125,7 +125,7 @@ const ContactForm = () => {
           ></iframe>
         </div>
         <div className="map">
-          <label htmlFor="Sede 2 Fixer">Mapa Sede Centro Mayor FixerShoes:</label>
+          <label className='p'  htmlFor="Sede 2 Fixer">Sede Centro Mayor</label>
           <p>
           </p>
           <iframe

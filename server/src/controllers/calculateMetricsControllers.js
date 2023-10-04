@@ -1,6 +1,9 @@
-const { Order, User, conn, Product, OrderItems } = require("../db");
-const { Op } = require("sequelize");
-const { format } = require("date-fns-tz");
+const { Order, User, conn, Product, OrderItems } = require('../db');
+const { Op } = require('sequelize');
+
+
+
+
 // Configura la zona horaria en español (por ejemplo, 'es-ES')
 const spanishTimeZone = "es-ES";
 
@@ -104,41 +107,34 @@ const ordersByMenOrWoman = async () => {
 /* Cuantos pedidos se hicieron este mes*/
 
 const howManyOrderMonthControllers = async (month) => {
-  const monthMappings = {
-    enero: "January",
-    febrero: "February",
-    marzo: "March",
-    abril: "April",
-    mayo: "May",
-    junio: "June",
-    julio: "July",
-    agosto: "August",
-    septiembre: "September",
-    octubre: "October",
-    noviembre: "November",
-    diciembre: "December",
-  };
-  const montlower = month.toLowerCase();
 
-  const englishMonth = monthMappings[montlower].toLowerCase();
-  if (!englishMonth) {
-    throw new Error("Nombre de mes no válido");
-  }
+    const monthMappings = {
+        enero: 0,
+        febrero: 1,
+        marzo: 2,
+        abril: 3,
+        mayo: 4,
+        junio: 5,
+        julio: 6,
+        agosto: 7,
+        septiembre: 8,
+        octubre: 9,
+        noviembre: 10,
+        diciembre: 11,
+    };
 
-  // Obtiene el año actual
-  const year = new Date().getFullYear();
+    const lowercaseMonth = month.toLowerCase();
+    const monthIndex = monthMappings[lowercaseMonth];
 
-  // Formatea las fechas en español
-  const startDate = format(
-    new Date(`${englishMonth} 1, ${year}`),
-    "yyyy-MM-dd",
-    { timeZone: spanishTimeZone }
-  );
-  const endDate = format(
-    new Date(`${englishMonth} 31, ${year}`),
-    "yyyy-MM-dd",
-    { timeZone: spanishTimeZone }
-  );
+    if (typeof monthIndex === 'undefined') {
+        throw new Error('Nombre de mes no válido');
+    }
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+
+    const startDate = new Date(year, monthIndex, 1);
+    const endDate = new Date(year, monthIndex + 1, 0);
 
   const orders = await Order.findAll({
     where: {

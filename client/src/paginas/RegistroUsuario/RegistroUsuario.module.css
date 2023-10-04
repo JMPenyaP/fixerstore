@@ -346,6 +346,15 @@
     gap: 1px;
     align-content: flex-start;
 }
+.errorMenssagePass {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    justify-items: left;
+    align-content: flex-start;
+    gap: 1px;
+}
 .errorText {
     font-size: 10px;
     margin-top: 5px;
@@ -408,7 +417,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
     gap: 10px;
 }
 

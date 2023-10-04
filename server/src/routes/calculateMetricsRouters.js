@@ -6,6 +6,7 @@ const calculateMetricsRouter = Router();
 const { getUserByGenderRegisterHandlers, getSalesMetricsByMonthHandlers, ordersByMenOrWomanHandlers, howManyOrderMonthHandlers, calculateMetricsHandlers, getTopSoldProductsHandlers, getBuyTopUsersHandlers } = require("../handlers/calculateMetricsHandlers");
 
 
+
 calculateMetricsRouter.get("/", calculateMetricsHandlers);
 calculateMetricsRouter.get('/top-sold-products', getTopSoldProductsHandlers);
 calculateMetricsRouter.get('/buy-top-users', getBuyTopUsersHandlers);

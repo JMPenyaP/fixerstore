@@ -57,7 +57,7 @@ const FiltroCategoria = () => {
   return (
     <>
       <div className={style.divMain}>
-        <h2>Categorias</h2>
+        <h2 className={style.titulo}>Categorias</h2>
         <div className={style.buttonContainer}>
           <button
             className={categoryGlobal === 0 ? style.onBoton : style.offBoton}
@@ -78,7 +78,7 @@ const FiltroCategoria = () => {
                       : style.offBoton
                   }
                 >
-                  {category.name}
+                  {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
                 </button>
               )
           )}

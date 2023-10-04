@@ -145,10 +145,10 @@
 .divVistaPrevia {
     width: 400px;
     border: 2px solid #15214a;
-    height: 120px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    min-height: 120px;
     border-radius: 10px;
 }
 

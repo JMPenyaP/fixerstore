@@ -115,22 +115,22 @@ const Navbar = () => {
         />
         <div className={style.divButtonsNav}>
           <Link to="/">
-            <button>
+            <button className={currentPath === "/" ? style.onBoton : style.offBoton}>
               <h5>Inicio</h5>
             </button>
           </Link>
           <Link to="/productos">
-            <button onClick={() => handleClick()}>
-              <h5>Productos</h5>
-            </button>
+          <button className={currentPath === "/productos" ? style.onBoton : style.offBoton} onClick={() => handleClick()}>
+            <h5>Productos</h5>
+          </button>
           </Link>
           <Link to="/nosotros">
-            <button>
+            <button className={currentPath === "/nosotros" ? style.onBoton : style.offBoton}>
               <h5>Quienes Somos</h5>
             </button>
           </Link>
           <Link to="/contactanos">
-          <button>
+          <button  className={currentPath === "/contactanos" ? style.onBoton : style.offBoton}>
             <h5>Contactanos</h5>
           </button>
           </Link>
