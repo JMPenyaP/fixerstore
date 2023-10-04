@@ -16,12 +16,11 @@ const Favoritos = () => {
 
   const [hasMore, setHasMore] = useState(true); // Indica si hay más elementos para cargar
   const [visibleCards, setVisibleCards] = useState(6); // Número inicial de cards visibles
-  const cardsPerPage = 5;
+  const cardsPerPage = 4;
 
   useEffect(() => {
     // Fetch initial data when the component mounts
-    dispatch(getFav({ userData, page: 1 })); // Assuming the API supports pagination
-
+    dispatch(getFav({ userData }));
     // Clean up the component when unmounting
     return () => {
       // Remove the scroll event listener
