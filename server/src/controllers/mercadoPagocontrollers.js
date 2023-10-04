@@ -9,6 +9,7 @@ mercadopago.configure({
 
 const pagoOrder = (req, res) => {
 
+	const {name,lastName,phoneNumber,place,dni}= req.body.formData
 
 	let preference = {
 		items: [
@@ -24,7 +25,7 @@ const pagoOrder = (req, res) => {
 			"failure": "http://localhost:3000/payment/failured",
 		},
 		auto_return: "approved",
-		external_reference:`name:${req.body.name},surname:${req.body.lastName},phone:${req.body.phoneNumber},retiro:${req.body.place},cc:${req.body.dni}`,
+		external_reference:`name:${name},surname:${lastName},phone:${phoneNumber},retiro:${place},cc:${dni}`,
 	};
 
 	mercadopago.preferences.create(preference)
