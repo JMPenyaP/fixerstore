@@ -41,7 +41,7 @@ const Form = () => {
         // }
     })
 
-    const FormTitle = ["1-Datos Personales", "2-Domicilio y Entrega", "3-Pago"]
+    const FormTitle = ["1-Datos Personales", "2-Retiro en sucursal", "3-Pago"]
 
     const handleInputChange = (event) => {
 
