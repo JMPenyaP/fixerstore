@@ -78,6 +78,16 @@ const Productos = () => {
         setDeleteProduct(false)
       }, 800)
     }
+    const [pagina, setPagina] = useState(1)
+    const porPagina = 8
+    const ultimoElemento = pagina*porPagina
+    const primerElemento = ultimoElemento - porPagina
+    const actualProducts = allProducts.slice(primerElemento, ultimoElemento)
+    const totalPages = Math.ceil(allProducts.length / porPagina);
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);}
+    useEffect(() => {setPagina(1)}, [totalPages]);
     return (
         <div className={style.contenedor}>
             <div className={style.divComplementario}>
@@ -96,7 +106,7 @@ const Productos = () => {
                       <th className={style.th}>Stock</th>
                       <th className={style.th}>Acciones</th>
                   </tr>
-                  {allProducts.map((product) => (<>
+                  {actualProducts.map((product) => (<>
                   <tr className={style.tr} key={product.id}>
                     <td className={style.td}># {product.id}</td>
                     <td className={style.td}>{product.name}</td>
@@ -122,6 +132,13 @@ const Productos = () => {
                   </td>)}</>
                   ))}
               </table>
+              <div className={style.paginado}>
+                <button className= {style.botonpag} onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}> Anteior </button>
+                {pageNumbers.map((pageNumber) => (
+                    <button key={pageNumber} className={pageNumber === pagina ? style.pagina : style.paginaboton} onClick={() => setPagina(pageNumber)}>{pageNumber}</button>
+                ))}
+                <button className= {style.botonpag} onClick={() => setPagina(pagina + 1)} disabled={ultimoElemento >= allProducts.length}> Siguiente </button>
+            </div>
               </div>): (<div>
                 <div className={style.divModify}>
                 <LogicDelete onModify={()=> {handleDetail();setShowEdit(false)}} product={modifyProduct}/>

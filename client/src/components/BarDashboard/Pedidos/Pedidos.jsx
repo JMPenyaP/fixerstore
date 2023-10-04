@@ -207,10 +207,15 @@ const Pedidos = () => {
         }
       }
     }, [statusModify])
+    useEffect(()=> {
+      if (allOrders.length === 0) {
+        setOrders(ordenes)}
+        else if (allOrders.length > 0) {
+          setOrders(allOrders)}
+    }, [allOrders])
 
     const handleDetail = async (id) => {
       if (allOrders.length === 0) {
-        setOrders(ordenes)
         const orden = orders.filter((or) => or.id === id)
         setDetailOrder(orden[0])
         if (isDetail) {
@@ -226,10 +231,6 @@ const Pedidos = () => {
         }
       }
       else if (allOrders.length > 0) {
-        setOrders(allOrders)
-        const endpoint = `http://localhost:3001/order/id/${id}`
-        const response = await axios.get(endpoint)
-        const orden = response.data
         if (isDetail) {
           setIsDetail(false)
           setDetailOrder({})
@@ -237,10 +238,15 @@ const Pedidos = () => {
           setOrigen("")
         }
         else {
+          const endpoint = `http://localhost:3001/order/id/${id}`
+          const response = await axios.get(endpoint)
+          console.log(response);
+          const orden = response.data
+          const {order} = orden 
           setIsDetail(true)
-          setDetailOrder(orden)
-          setStatusModify(orden.status)
-          setIdOrden(orden.id)
+          setDetailOrder(order)
+          setStatusModify(order.status)
+          setIdOrden(order.id)
           setOrigen("DB")
         }
       }
@@ -265,7 +271,6 @@ const Pedidos = () => {
         }
       }
     }
-    console.log(statusModify);
     return (
         <div className={style.contenedor}>
             <div className={style.divComplementario}>
@@ -283,7 +288,7 @@ const Pedidos = () => {
                       <th className={style.th}>Medio de pago</th>
                       <th className={style.th}>Detalle</th>
                   </tr>
-                  {ordenes.map((orden) => (
+                  {orders.map((orden) => (
                   <tr className={style.tr} key={orden.id}>
                       <td className={style.td}>{orden.id}</td>
                       <td className={style.td}>{orden.name + " " + orden.surname}</td>
@@ -309,9 +314,9 @@ const Pedidos = () => {
                       <p className={style.mensajeProductos}><strong>Valor total: </strong> ${detailOrder.totalAmount}</p>
                       <p className={style.mensajeProductos}><strong>Método de pago:</strong> {detailOrder.payment}</p>
                       <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status === 'pending' ? 'Pendiente' : detailOrder.status === 'in progress' ? 'Enviado' : detailOrder.status === 'delivered' ? 'Entregado' : ''}</p>
-                      {nextStatus !== "" ? (nextStatus === "in progress" ? (<button value="in progress" onClick={updateState} className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button onClick={updateState} value="delivered" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
-                      {backStatus !== "" ? (backStatus === "pending" ? (<button onClick={updateState} value="pending" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button onClick={updateState} value="in progress" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
-                      {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>):(null)}
+                      {nextStatus !== "" ? (nextStatus === "in progress" ? (<button value="in progress" onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} className={style.modifyOrdenNext}>Cambiar a Enviado</button>):(<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="delivered" className={style.modifyOrdenNext}>Cambiar a Entregado</button>)):(null)}
+                      {backStatus !== "" ? (backStatus === "pending" ? (<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="pending" className={style.modifyOrdenBack}>Cambiar a Pendiente</button>):(<button onClick={(e)=> {updateState(e); setTimeout(()=> {setIsDetail(false)}, 500)}} value="in progress" className={style.modifyOrdenBack}>Cambiar a Enviado</button>)):(null)}
+                      {/* {mensaje !== "" ? (<><p className={style.mensajeCreated}>{mensaje}</p></>):(null)} */}
                     </div>
                     <div>
                         <h5 className={style.tituloSeccion}>Productos de la orden</h5>

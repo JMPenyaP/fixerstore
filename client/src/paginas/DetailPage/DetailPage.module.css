@@ -4,7 +4,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    padding: 35px;
+    /* min-height: 100vh; */
 }
 
 .buttonCantidad:disabled{
@@ -117,6 +118,10 @@
     width: 120%;
     transform: rotate(3deg);
     border-radius: 50%;
+}
+
+.infoDiv h6:first-of-type{
+    font-size: 15px;
 }
 
 /* BUTTON */
@@ -255,6 +260,8 @@
 
 .imgNoCarousel {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .imgNoCarousel img{
@@ -297,10 +304,20 @@
     font-size: 25px;
     color: #3cbbed;
 }
+
+
+
 /* Reviews */
 .mainContRev{
-    max-width: 800px;
-    margin-left: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
+    justify-items: center;
+    gap: 10px;
+    margin: 25px;
+    font-family: "Gotham", sans-serif;
 }
 .reviewContainer {
     max-width: 780px; /* Ajusta el ancho máximo según tu diseño */
@@ -308,7 +325,6 @@
   }
   
   .reviewCont {
-    border: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #f9f9f9;
@@ -317,11 +333,94 @@
   
   .reviewCont h3 {
     font-size: 18px;
-    color: #333;
+    color: black;
     margin-bottom: 5px;
+    display: flex;
   }
   
   .reviewCont p {
     font-size: 16px;
-    color: #666;
+    color: black;
   }
+  .date {
+    top: 0;
+    color: black;
+    right: 500px;
+  }
+  .rate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: larger;
+    border-radius: 10px;
+    width: 200px;
+    padding: 5px;
+    gap: 2px;
+    color: #3cbbed;
+    margin-bottom: 10px;
+  }
+  .rate p {
+    font-size: 18px;
+    margin: 0px;
+    color: #3cbbed;
+    font-weight: bold;
+  }
+  .rate h1 {
+    font-size: 40px;
+    margin: 0px;
+    color: #3cbbed;
+    margin: 0px;
+  }
+  .subDivStar{ 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: larger;
+    border-radius: 10px;
+    color: #3cbbed;
+    margin-bottom: 10px;
+    font-family: "Gotham", sans-serif;
+  }
+
+  .formbutton {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: transparent;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbutton:hover{
+    color: white;
+}
+.formbutton::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbutton:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+.reviewsShow h1{
+    font-size: 20px;
+    margin-top: 0px;
+    color: #3cbbed;
+}

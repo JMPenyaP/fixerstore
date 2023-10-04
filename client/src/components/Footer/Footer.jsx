@@ -46,12 +46,34 @@ export default function Footer() {
               <Link
                 to="https://www.instagram.com/fixershoes/?hl=es"
                 className={style.link}
+                target="_blank"
               >
                 <div className={style.divInstagram}>
                   <ion-icon name="logo-instagram"></ion-icon>
                   Instagram
                 </div>
               </Link>
+            </tr>
+            <tr>
+              <Link
+              to="https://www.facebook.com/fixershoes/"
+              className={style.link}
+              target="_blank">
+                <div className={style.divInstagram}>
+                  <ion-icon name="logo-facebook"></ion-icon>
+                  Facebook
+                  </div>
+                </Link>
+            </tr>
+            <tr>
+              <Link
+              to="https://www.tiktok.com/@fixershoes?_t=8gBU1nI4Tcz&_r=1"
+              className={style.link}
+              target="_blank">
+                <div className={style.divInstagram}>
+                  <ion-icon name="logo-tiktok"></ion-icon>Tik Tok
+                  </div>
+                </Link>
             </tr>
             {/*<tr>
               <Link className={style.link}>Facebook</Link>

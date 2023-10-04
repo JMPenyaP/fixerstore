@@ -61,7 +61,6 @@ const LoginAdmin = () => {
       navigate("/dashboard");
     }
   };
-  console.log(existe);
   // Renderizado
   return (
     <div className={style.contenedorMayor}>

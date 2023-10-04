@@ -137,6 +137,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 10px;
   justify-items: center;
   text-align: center;
@@ -255,7 +256,7 @@
   font-family: "Gotham", sans-serif;
   text-align: center;
   margin-top: 3px;
-  width: 40%;
+  width: 30%;
 }
 
 .modifyOrdenBack:hover{
@@ -296,7 +297,7 @@
   font-family: "Gotham", sans-serif;
   text-align: center;
   margin-top: 3px;
-  width: 40%;
+  width: 30%;
 }
 
 .modifyOrdenNext:hover{

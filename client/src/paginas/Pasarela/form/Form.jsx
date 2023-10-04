@@ -27,9 +27,6 @@ const Form = () => {
         }
       }, [dataProfile]);
 
-
-    
-    console.log(dataProfile) 
     const [errors, setErrors] = useState({});
     const [formData,setFormData]= useState({
         name: '',

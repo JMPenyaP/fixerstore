@@ -20,8 +20,8 @@ const pagoOrder = (req, res) => {
 			}
 		],
 		back_urls: {
-			"success": "https://dev.fixershoes.com/payment/success",
-			"failure": "https://dev.fixershoes.com/payment/failured",
+			"success": "http://localhost:3000/payment/success",
+			"failure": "http://localhost:3000/payment/failured",
 		},
 		auto_return: "approved",
 		external_reference:`name:${req.body.name},surname:${req.body.lastName},phone:${req.body.phoneNumber},retiro:${req.body.place},cc:${req.body.dni}`,

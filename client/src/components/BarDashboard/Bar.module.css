@@ -21,8 +21,8 @@
     flex-direction: column;
     gap: 5px;
     padding: 5%;
-    border-right: 2px solid #15214a;
-    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+
+    height: 100%
 }
 
 .section {
@@ -91,10 +91,6 @@
     background-color: #3cbbed;
     transition: 0.3s;
     font-family: "Gotham", sans-serif;
-    .logoboton {
-        filter: brightness(50); /* Cambia la imagen a escala de grises al hacer hover en offBoton */
-        cursor: pointer; /* Cambia el cursor al hacer hover en offBoton */
-      }
 }
 
 

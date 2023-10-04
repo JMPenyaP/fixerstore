@@ -19,7 +19,6 @@ const Catalogo = () => {
   // const productosFiltrados = useSelector((state) => state.productosFiltrados);
   const productosFiltrados = useSelector((state) => state.prodBuscaComb);
   const Products = useSelector((state) => state.showFilters)
-  console.log(productosFiltrados);
 
   /*  const handlerFilter = () => {
     dispatch(setFiltros())

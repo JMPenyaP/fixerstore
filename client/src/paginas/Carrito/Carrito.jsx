@@ -21,7 +21,6 @@ const Carrito = () => {
     return accumulator + item.precio * item.cantidad;
   }, 0);
 
-  console.log(carritoById);
 
   useEffect(() => {
     if (dataProfile) {
@@ -154,7 +153,7 @@ const Carrito = () => {
               <ion-icon name="cart-outline"></ion-icon> Comprar
             </button>
             {dataProfile === null || dataProfile.success === null ? (
-              <span>Debes Inciar sesion</span>
+              <span><ion-icon name="alert-outline"></ion-icon>Debes Inciar sesion</span>
             ) : (
               ""
             )}
