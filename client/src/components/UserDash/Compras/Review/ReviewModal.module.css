@@ -5,17 +5,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.078);
   z-index: 2;
 }
 
 .modalContent {
+  border-radius: 10px;;
   background-color: #fff;
   margin: 20% auto;
   padding: 20px;
   width: 80%;
-  height: 500px;
-  max-width: 500px;
+  height: 430px;
+  max-width: 470px;
   position: relative;
   z-index: 3;
 }

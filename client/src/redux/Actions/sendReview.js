@@ -2,7 +2,6 @@ import { SEND_REVIEW } from "../actionTypes";
 import axios from "axios";
 
 export const sendReview = (review) => {
-    console.log(review);
   try {
     return async (dispatch) => {
       const response = await axios.post(

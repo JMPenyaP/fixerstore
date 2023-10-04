@@ -47,18 +47,18 @@ const Card = ({ product }) => {
 
     // Retorna una función de limpieza para ejecutar cuando el componente se desmonte
 
-  }, [favoritos, product, isFav]);
+  }, [favoritos, dispatch]);
 
 
 
   const handleFavorite = () => {
     if (isFav) {
-      setIsFav(false);
       dispatch(borrarFavoritos({ userData, product }));
+      setIsFav(false);
     } else {
-      setIsFav(true);
 
       dispatch(crearFavoritos({ userData, product }));
+      setIsFav(true);
     }
   };
 
@@ -84,7 +84,7 @@ const Card = ({ product }) => {
           </div>
 
           <div>
-            <span className={styles.spanPrice}>${product.priceOfList}</span>
+            <span className={styles.spanPrice}>${product.priceOfList*(1-product.offer/100)}</span>
           </div>
 
         </div>
