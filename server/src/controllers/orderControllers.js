@@ -83,9 +83,6 @@ const createOrder = async (req, res) => {
   // datos que recibira por body 
   const { idMp, userId, name, surname, phone, cc, payment, retiro, city, address, department, payStatus } = req.body.form
  
-  const error = await Order.findOne({where: {idMp: idMp}})
-
-  
 
   try {
     const carItems = await Cart.findAll({ where: { UserId: userId } })
