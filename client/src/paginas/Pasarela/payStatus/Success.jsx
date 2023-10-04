@@ -30,10 +30,11 @@ const Success = () => {
             return acc;
           }, {});
 
-        const { name, surname, phone, cc, retiro } = externalReferenceData;
+        const { name, surname, phone, cc, retiro, totalAmount } = externalReferenceData;
         const updatedForm = {
           idMp: id,
           userId: dataProfile.userData.id,
+          totalAmount,
           name: name,
           surname: surname,
           phone: phone,
@@ -96,6 +97,7 @@ const Success = () => {
     city: "",
     address: "",
     department: "",
+    totalAmount:0
   });
 
   useEffect(() => {
