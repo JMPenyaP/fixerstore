@@ -29,14 +29,10 @@ const PassSolicitud = () => {
     }
     const onSubmit = async (data) => {
         try {
-            console.log(data);
             const response = await axios.post(`http://localhost:3001/passuser/request-reset`, { email: data.email })
-
             const { message, success } = response.data
             setMensaje(message)
             setFormDisabled(true)
-            console.log(response);
-            console.log(message);
             if (success === true) {
                 setTimeout(() => {
                     reset()
@@ -48,7 +44,6 @@ const PassSolicitud = () => {
             console.error("Error:", error);
         }
     }
-    console.log(mensaje);
     return (
         <div>
             <div className={style.div}>

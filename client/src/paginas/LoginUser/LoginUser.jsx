@@ -62,7 +62,6 @@ const LoginUser = () => {
             navigate("/")
         }
     };
-    console.log(existe);
 
     const onSuccessLogin = async (decoded) => {
         try {

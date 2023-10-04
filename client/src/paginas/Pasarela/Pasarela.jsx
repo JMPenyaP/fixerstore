@@ -9,7 +9,6 @@ import { useEffect } from "react";
 const Pasarela = () => {
   const carritoById = useSelector((state) => state.carritoById);
   const dataProfile = useSelector((state) => state.dataProfile);
-  console.log(dataProfile);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

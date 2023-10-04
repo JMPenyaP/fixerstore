@@ -133,7 +133,6 @@ const Datos = () => {
     const onSubmit = async (data) => {
         data.email = userDatos.email
         data.id = userDatos.id
-        console.log(data);
         dispatch(actions.modify(data))
         setTimeout(()=> {dispatch(setModify());setUserMod(null)}, 1000)
     }
