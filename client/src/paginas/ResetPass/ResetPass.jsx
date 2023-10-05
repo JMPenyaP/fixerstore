@@ -7,6 +7,7 @@ import axios from "axios"
 
 const ResetPass = () => {
     const {token} = useParams()
+    console.log(token);
     const {handleSubmit, control, formState: {errors}, trigger, reset, watch} = useForm()
     const [mensaje, setMensaje] = useState("")
     const [formDisabled, setFormDisabled] = useState(false);
@@ -62,7 +63,7 @@ const ResetPass = () => {
         delete data.repeatPassword;
 
         try {
-            const response = await axios.post(`http://localhost:3001/reset/${token}`, data)
+            const response = await axios.post(`http://localhost:3001/passuser/reset/${token}`, data)
             const {message, success} = response.data
             setMensaje(message)
             setFormDisabled(true)

@@ -154,9 +154,7 @@
     cursor: pointer;
     position: absolute;
     user-select: none; /* Evita que el ícono se seleccione al hacer clic */
-    padding: 20px;
   }
-
 
 .divmensaje {
     background-color: #3cbbed;

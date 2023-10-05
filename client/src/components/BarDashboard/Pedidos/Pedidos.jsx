@@ -281,6 +281,7 @@ const Pedidos = () => {
               <table className={style.table}>
                   <tr className={style.tr}> 
                       <th className={style.th}>ID</th>
+                      <th className={style.th}>ID Mercado Pago</th>
                       <th className={style.th}>Cliente</th>
                       <th className={style.th}>Estado</th>
                       <th className={style.th}>Fecha</th>
@@ -291,7 +292,7 @@ const Pedidos = () => {
                   {orders.map((orden) => (
                   <tr className={style.tr} key={orden.id}>
                       <td className={style.td}>{orden.id}</td>
-                      <td className={style.td}>{orden.idMP}</td>
+                      <td className={style.td}>{orden.idMp}</td>
                       <td className={style.td}>{orden.name + " " + orden.surname}</td>
                       <td className={style.td}>{orden.status}</td>
                       <td className={style.td}>{new Date(orden.createdAt).toLocaleString('es-CO', {year: 'numeric',month: 'numeric',day: 'numeric',hour: 'numeric',minute: 'numeric',hour12: false})}</td>
@@ -332,7 +333,7 @@ const Pedidos = () => {
                                 </div>
                                 <p className={style.mensajeProductosLittle}> <strong>{product.name}</strong></p>
                                 <p className={style.mensajeProductosLittle}> <strong>Cantidad:</strong> {product.OrderItems.quantity} unidades</p>
-                                <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.priceOfList} </p>
+                                <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.statusOffer === true ? (product.priceOfList*(1-(product.offer)/100)):(product.priceOfList)} </p>
                                 <p className={style.mensajeProductosLittle}> <strong>Subtotal producto: </strong> $ {product.priceOfList * product.OrderItems.quantity}</p>
                               </div>
                               );})
