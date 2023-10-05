@@ -15,6 +15,6 @@ conn
       createCategories()
       createProducts()
       createAdmin()
-      createCarts()
-      createOrders()
+      // createCarts()
+      // createOrders()
    })

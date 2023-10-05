@@ -19,6 +19,7 @@ const Catalogo = () => {
   // const productosFiltrados = useSelector((state) => state.productosFiltrados);
   const productosFiltrados = useSelector((state) => state.prodBuscaComb);
   const Products = useSelector((state) => state.showFilters)
+  const name = useSelector((state) => state.search)
 
   /*  const handlerFilter = () => {
     dispatch(setFiltros())
@@ -26,15 +27,20 @@ const Catalogo = () => {
 
   useEffect(() => {
     dispatch(clearProductName());
-    return () => {
-      dispatch(showFilters(false))
-      dispatch(setOrder(''))
-      dispatch(setOrder2(''))
-      dispatch(setNameSearch(''))
-      dispatch(setCategoryId(0))
-      dispatch(setBuscaComb([]))
-    }
+    // return () => {
+    //   dispatch(showFilters(false))
+    //   dispatch(setOrder(''))
+    //   dispatch(setOrder2(''))
+    //   dispatch(setNameSearch(''))
+    //   dispatch(setCategoryId(0))
+    //   dispatch(setBuscaComb([]))
+    // }
   }, [dispatch]);
+
+  useEffect(()=>{
+    const stored = JSON.parse(localStorage.getItem("filtros"))
+    localStorage.setItem("filtros", JSON.stringify({...stored,name}));
+  },[name])
 
   return (
     <>

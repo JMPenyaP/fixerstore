@@ -14,18 +14,34 @@ import { setBuscaComb } from "../../redux/Actions/setBuscaComb";
 const FiltroCategoria = () => {
   const dispatch = useDispatch();
   const allCategories = useSelector((state) => state.allCategories);
+  const categoryId = useSelector(state=> state.categoryId)
   const name = useSelector((state) => state.search);
   const order = useSelector((state) => state.order);
   const order2 = useSelector((state) => state.order2);
   const categoryGlobal = useSelector((state) => state.categoryId);
   const Products = useSelector((state) => state.prodBuscaComb);
 
+
   useEffect(() => {
     allCategories?.length === 0 && dispatch(getCategories());
-    return () => {
-      dispatch(setBuscaComb([]));
-    }
+    // return () => {
+    //   dispatch(setBuscaComb([]));
+    // }
   }, [allCategories, dispatch]);
+
+  // useEffect(() => {
+  //   const storedFilters = JSON.parse(localStorage.getItem("filtros")) || [];
+  //   if (categoryGlobal === 0 || name === '' || order === '' || order2 === '') {
+
+  //       dispatch(showFilters(true));
+  //       dispatch(setCategoryId(storedFilters.categoryId));
+  //       dispatch(setOrder(storedFilters.order));
+  //       dispatch(setOrder2(storedFilters.order2));
+  //       dispatch(setNameSearch(storedFilters.name));
+
+  //   }
+    
+  // }, [categoryId,name,order,order2]);
 
   /* const shouldRenderCategory = (categoryId) => {
     if (categoryId === 0) {
@@ -41,6 +57,7 @@ const FiltroCategoria = () => {
   /* const [actualBoton, setActualBoton] = useState("DEFAULT"); // Estado para rastrear el botón actual */
 
   const handleSection = (categoryId /* categoryId local */) => {
+
     if (categoryId === 0) {
       dispatch(showFilters(false));
       dispatch(setCategoryId(0));
@@ -50,6 +67,8 @@ const FiltroCategoria = () => {
     } else {
       dispatch(showFilters(true));
       dispatch(setCategoryId(categoryId));
+      const stored = JSON.parse(localStorage.getItem("filtros"))
+      localStorage.setItem("filtros", JSON.stringify({...stored,categoryId}));
       dispatch(buscaComb(name, categoryId, order, order2));
     }
   };

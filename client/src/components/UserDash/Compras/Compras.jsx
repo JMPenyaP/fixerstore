@@ -5,8 +5,11 @@ import { userHistorial } from "../../../redux/Actions/userHistorial";
 import ReviewModal from "../Compras/Review/Modal";
 import { sendReview } from "../../../redux/Actions/sendReview";
 import axios from 'axios'
+import { useParams } from "react-router-dom";
 
 const Compras = () => {
+  const params = useParams();
+  const id = params.id;
   const dispatch = useDispatch()
   const [userId, setUserId] = useState(null)
 
@@ -18,13 +21,11 @@ const Compras = () => {
     dispatch(userHistorial)
   }, [dispatch])
   useEffect(() => {
-    if (historial.length === 0) {
-      dispatch(userHistorial(userData.id));
+
+      dispatch(userHistorial(id));
       setOrders(historial)
-    } else {
-      setOrders(historial);
-    }
-  }, [historial]);
+
+  }, [orders]);
 
   
   
@@ -70,7 +71,7 @@ const Compras = () => {
           setIsDetail(true)
           setDetailOrder(order)
           setIdOrden(order.id)
-          if(order.status === 'delivered'){
+          if(order.status === 'Entregado'){
             setRev(true)
           }else {
             setRev(false)

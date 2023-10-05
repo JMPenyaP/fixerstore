@@ -81,7 +81,7 @@ const getOrderId = async (req, res) => {
 
 const createOrder = async (req, res) => {
   // datos que recibira por body 
-  const { idMp, userId, totalAmount, name, surname, phone, cc, payment, retiro, city, address, department, payStatus } = req.body
+  const { idMp, userId, totalAmount, name, surname, phone, cc, payment, retiro, city, address, department, payStatus } = req.body.form
 
 
   try {

@@ -22,7 +22,7 @@ const Pay = ({formData}) => {
                 description: "Compra FixerShoes",
                 price: totalcarrito,
                 quantity: 1,
-                formData
+                formData,
                 // name: formData.name,
                 // lastName: formData.lastName,
                 // phoneNumber: formData.phoneNumber,

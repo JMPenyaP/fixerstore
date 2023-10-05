@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     width: auto;
-    height: 100px;
+    height: 105px;
     background-color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -59,7 +59,6 @@
             
             .ticket{
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: space-between;
             }
 
@@ -80,6 +79,11 @@
 
 .span1{
     font-size: 17px;
+    display: inline-block; /* Asegura que el span tenga un ancho específico */
+    width: 150px; /* Establece el ancho máximo que deseas */
+    white-space: nowrap; /* Evita el salto de línea del texto */
+    overflow: hidden; /* Oculta el contenido que no cabe */
+    text-overflow: ellipsis;
 }
 .span2{
     font-size: 13px;
