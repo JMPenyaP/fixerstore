@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/Actions/getCategories";
 import { agregarAlCarrito } from "../../redux/Actions/carrito";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import Slider from "react-slick";
@@ -49,6 +49,7 @@ const DetailPage = () => {
   }
 
   // USE PARAMS Y DISPATCH
+  const navigate = useNavigate()
   const params = useParams();
   const dispatch = useDispatch();
   //////
@@ -227,10 +228,10 @@ const DetailPage = () => {
                     <h5>Buscar Productos</h5>
                   </button>
                 ) : (
-                  <button>
-                    <Link to="/productos">
+                  <button onClick={()=>navigate(-1)}>
+                    
                       <h5>Productos</h5>
-                    </Link>
+                    
                   </button>
                 )}
               </div>

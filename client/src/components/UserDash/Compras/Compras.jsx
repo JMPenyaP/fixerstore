@@ -173,8 +173,8 @@ const Compras = () => {
                         </div>
                         <p className={style.mensajeProductosLittle}> <strong>{product.name}</strong></p>
                         <p className={style.mensajeProductosLittle}> <strong>Cantidad:</strong> {product.OrderItems.quantity} unidades</p>
-                        <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.priceOfList} </p>
-                        <p className={style.mensajeProductosLittle}> <strong>Subtotal producto: </strong> $ {product.priceOfList * product.OrderItems.quantity}</p>
+                        <p className={style.mensajeProductosLittle}> <strong>Precio unitario: </strong>$ {product.statusOffer === true ? (product.priceOfList*(1-(product.offer)/100)):(product.priceOfList)} </p>
+                        <p className={style.mensajeProductosLittle}> <strong>Subtotal producto: </strong> $ {product.statusOffer === true ? ((product.priceOfList*(1-(product.offer)/100)) * product.OrderItems.quantity) : product.priceOfList * product.OrderItems.quantity}</p>
                       { rev && <button className={style.buttonReview} onClick={() => openReviewModal(product.id)}>Dejanos tu opinion</button>}                      
                       {isReviewModalOpen && (
                         <ReviewModal
