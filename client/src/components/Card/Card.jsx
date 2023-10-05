@@ -84,7 +84,12 @@ const Card = ({ product }) => {
           </div>
 
           <div>
-            <span className={styles.spanPrice}>${product.priceOfList*(1-product.offer/100)}</span>
+            {product.statusOffer === true ? (<span className={styles.spanPrice}>${product.priceOfList*(1-product.offer/100)}</span>):(<span className={styles.spanPrice}>${product.priceOfList}</span>)}
+
+          </div>
+
+          <div className={styles.divName}>
+          {product.statusOffer === true ? (<span className={styles.span}>{product.offer} % off</span>):(null)}
           </div>
 
         </div>

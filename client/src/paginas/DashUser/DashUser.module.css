@@ -21,7 +21,6 @@
     flex-direction: column;
     gap: 5px;
     padding: 5%;
-    border-right: 2px solid #15214a;
     height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
 }
 
