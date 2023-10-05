@@ -29,10 +29,11 @@ const Failured = () => {
             return acc;
           }, {});
 
-        const { name, surname, phone, cc, retiro } = externalReferenceData
+        const { name, surname, phone, cc, retiro, totalAmount } = externalReferenceData;
         const updatedForm = {
           idMp: id,
           userId: dataProfile.userData.id,
+          totalAmount,
           name: name,
           surname: surname,
           phone: phone,
@@ -45,17 +46,14 @@ const Failured = () => {
           payStatus,
         };
         setForm(updatedForm); // Actualiza el estado con los valores extraídos
-
       }
-
     } catch (error) {
-
       console.error("Error al analizar la cadena JSON:", error);
     }
   };
 
   useEffect(() => {
-
+    
     extractValuesFromQuery();
 
     const timer = setInterval(() => {
@@ -76,24 +74,34 @@ const Failured = () => {
     };
   }, [navigate, secondsRemaining]);
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (dataProfile === null) {
+        window.location.href = "/";
+      }
+    }, 10);
+
+    return () => clearTimeout(timeoutId);
+  }, [dataProfile]);
+
   const [form, setForm] = useState({
-    idMp: '',
-    userId: '',
-    name: '',
-    surname: '',
-    phone: '',
-    cc: '',
-    payment: '',
-    retiro: '',
-    city: '',
-    address: '',
-    department: ''
+    idMp: "",
+    userId: "",
+    name: "",
+    surname: "",
+    phone: "",
+    cc: "",
+    payment: "",
+    retiro: "",
+    city: "",
+    address: "",
+    department: "",
+    totalAmount:0
   });
 
   useEffect(() => {
     if (secondsRemaining === 0) {
-      console.log(form)
-      axios.post('http://localhost:3001/order/', { form })
+      axios.post("http://localhost:3001/order/", { form })
       navigate("/user/"+dataProfile.userData.id);
     }
   }, [navigate, secondsRemaining]);

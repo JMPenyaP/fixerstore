@@ -23,7 +23,6 @@ const Pay = ({formData}) => {
                 price: totalcarrito,
                 quantity: 1,
                 formData,
-                totalAmount,
                 // name: formData.name,
                 // lastName: formData.lastName,
                 // phoneNumber: formData.phoneNumber,

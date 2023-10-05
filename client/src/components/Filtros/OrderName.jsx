@@ -13,6 +13,8 @@ export default function OrderName() {
   const order = useSelector((state) => state.order)
 
   const handleSelect = (value) => {
+    const stored = JSON.parse(localStorage.getItem("filtros"))
+    localStorage.setItem("filtros", JSON.stringify({...stored,order2:value,order:''}));
     dispatch(setOrder2(""));
     dispatch(setOrder(value));
     dispatch(buscaComb(name, categoryId, value, ''));

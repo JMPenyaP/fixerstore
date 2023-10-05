@@ -15,8 +15,8 @@ const Favoritos = () => {
   const { userData } = dataProfileActual;
 
   const [hasMore, setHasMore] = useState(true); // Indica si hay más elementos para cargar
-  const [visibleCards, setVisibleCards] = useState(6); // Número inicial de cards visibles
-  const cardsPerPage = 4;
+  const [visibleCards, setVisibleCards] = useState(10); // Número inicial de cards visibles
+  const cardsPerPage = 10;
 
   useEffect(() => {
     // Fetch initial data when the component mounts
@@ -62,7 +62,7 @@ const Favoritos = () => {
         dataLength={visibleCards}
         next={() => { }}
         hasMore={hasMore}
-        loader={favoritos.length > 0 && <Spinner />}
+        loader={favoritos.length > 0 }
       >
         <div className={style.cards}>
           {favoritos?.length > 0 ? (

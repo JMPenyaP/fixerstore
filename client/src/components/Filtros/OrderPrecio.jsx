@@ -13,6 +13,8 @@ export default function OrderPrecio() {
   const order2 = useSelector((state) => state.order2)
 
   const handleSelect = (value) => {
+    const stored = JSON.parse(localStorage.getItem("filtros"))
+    localStorage.setItem("filtros", JSON.stringify({...stored,order:value,order2:''}));
     dispatch(setOrder(''))
     dispatch(setOrder2(value));
     dispatch(buscaComb(name, categoryId, '', value));

@@ -20,6 +20,18 @@ const DashUser = () => {
     const [email, setEmail] = useState(null)
     const [name, setName] = useState(null)
     const [inicial, setInicial] = useState(null)
+    const dataProfile = useSelector((state) => state.dataProfile);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+          if (dataProfile === null) {
+            window.location.href = "/";
+          }
+        }, 10);
+      
+        return () => clearTimeout(timeoutId); 
+      }, [dataProfile]);
+
     useEffect(() => {
         if (dataProfileActual) {
             setEmail(userData.email)
