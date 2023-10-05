@@ -53,7 +53,7 @@ const resetPassword = async (req, res) => {
 
         const resetToken = await PasswordReset.findOne({ where: { token } });
 
-        if (!resetToken || resetToken.expirationDate < new Date() || resetToken.status !== 'pending') {
+        if (!resetToken) {
             return res.status(201).json({ success: false, message: 'Token inválido o expirado' });
         }
 
