@@ -4,7 +4,7 @@ import Card from "../../Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { getFav } from "../../../redux/Actions/getFav";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Spinner } from "../../Carga/Carga";
+
 
 const Favoritos = () => {
   const dispatch = useDispatch();
@@ -29,13 +29,13 @@ const Favoritos = () => {
   }, [dispatch, userData]);
 
   const loadMoreCards = () => {
-    if (visibleCards + cardsPerPage >= favoritos.length) {
+    if (visibleCards < favoritos.length) {
+      // Increment the number of visible cards
+      setVisibleCards((prevVisibleCards) => prevVisibleCards + cardsPerPage);
+    } else {
       // All cards have been loaded
       setHasMore(false);
-      return;
     }
-    // Increment the number of visible cards
-    setVisibleCards((prevVisibleCards) => prevVisibleCards + cardsPerPage);
   };
 
   const handleScroll = () => {
@@ -60,9 +60,7 @@ const Favoritos = () => {
 
       <InfiniteScroll
         dataLength={visibleCards}
-        next={() => { }}
         hasMore={hasMore}
-        loader={favoritos.length > 0 && <Spinner />}
       >
         <div className={style.cards}>
           {favoritos?.length > 0 ? (
