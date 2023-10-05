@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+
 }
 
 .divComplementario {
@@ -42,5 +43,5 @@
     flex-wrap: wrap;
     justify-content: center;
     transform: scale(0.8);
-    margin:0px;
+    margin: 0px;
 }
