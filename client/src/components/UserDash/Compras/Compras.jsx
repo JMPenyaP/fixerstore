@@ -14,7 +14,9 @@ const Compras = () => {
   const { userData } = dataProfileActual
   const [orders, setOrders] = useState([])
   const historial = useSelector((state) => state.historial)
-  
+  useEffect(()=> {
+    dispatch(userHistorial)
+  }, [dispatch])
   useEffect(() => {
     if (historial.length === 0) {
       dispatch(userHistorial(userData.id));
@@ -113,7 +115,7 @@ const Compras = () => {
               <td className={style.td}>{orden.status}</td>
               <td className={style.td}>{new Date(orden.createdAt).toLocaleString('es-CO', {year: 'numeric',month: 'numeric',day: 'numeric'})}</td>
               <td className={style.td}>${orden.totalAmount}</td>
-              <td className={style.td}>{orden.payment}</td>
+              <td className={style.td}>{orden.payment === 'credit_card' ? 'Tarjeta de credito' : ""}</td>
               <td className={style.tdetail}>
               <button className={style.botonEdit} onClick= {() => handleDetail (orden.id, orden.UserId)}>Detalle</button>
               </td>
@@ -131,7 +133,7 @@ const Compras = () => {
               <h5 className={style.tituloSeccion}>Detalles de la orden</h5>
               <p className={style.mensajeProductos}><strong>Fecha de creación: </strong>{new Date(detailOrder.createdAt).toLocaleString('es-CO', {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false})}</p>
               <p className={style.mensajeProductos}><strong>Valor total: </strong> ${detailOrder.totalAmount}</p>
-              <p className={style.mensajeProductos}><strong>Método de pago:</strong> {detailOrder.payment}</p>
+              <p className={style.mensajeProductos}><strong>Método de pago:</strong> {detailOrder.payment === 'credit_card' ? 'Tarjeta de credito' : ""}</p>
               <p className={style.mensajeProductos}><strong>Estado de la orden: </strong>{detailOrder.status}</p>            </div>
             <div className={style.divInformacion}>
                 <h5 className={style.tituloSeccion}>Información del cliente</h5>
