@@ -1,0 +1,378 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-family: "Gotham", sans-serif;
+}
+
+.divComplementario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tituloProduct {
+    border: none;
+    font-size: 15px;
+    padding: 8px 28px 8px 28px;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    background-color: #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.th {
+    background-color: #3cbbed;
+    border: 1px solid #dddddd;
+    color: white;
+    text-align: center;
+    padding: 5px;
+  }
+  .th:hover {
+    background-color: #3cbbed;
+    border: 1px solid #dddddd;
+    color: white;
+    text-align: center;
+    padding: 5px;
+  }
+  
+  .td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 5px;
+  }
+  .tdetail {
+    border: 1px solid #dddddd;
+    text-decoration: underline;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .tr:hover {
+    background-color: #c4dae2;
+    font-weight: bold;
+    cursor:auto;
+  }
+  
+  .table thead th {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+
+
+.botonEdit {
+    border: none;
+    font-size: 12.5px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: white;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonEdit:hover{
+    color: white;
+    background-color: #15214a;
+    border: 2px solid white;
+}
+.botonEdit[disabled] {
+  color: gray; /* You can choose the color you prefer for disabled text */
+  background-color: lightgray; /* You can choose the color you prefer for disabled background */
+  cursor: not-allowed;
+  border: none;
+}
+
+.botonDelete{
+    border: none;
+    font-size: 12.5px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: white;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.botonDelete:hover{
+    color: white;
+    background-color: red;
+    border: 2px solid white;
+}
+.botonDelete[disabled] {
+  color: gray; /* You can choose the color you prefer for disabled text */
+  background-color: lightgray; /* You can choose the color you prefer for disabled background */
+  cursor: not-allowed;
+  border: none;
+}
+.mensajeDelete{
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: #1d4ef0;
+}
+
+.mensajeConfirmacion {
+  margin: 0%;
+  font-family: "Gotham", sans-serif;
+  font-size: 11.5px;
+  color: white;
+}
+
+.botonDeleteConfirm{
+  border: none;
+  font-size: 11.5px;
+  padding: 3px 5px 3px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #1d4ef0;
+  background-color: white;
+  border: 2px solid white;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+.botonDeleteConfirm:hover{
+  color: white;
+  background-color: red;
+  border: 2px solid white;
+}
+
+.botonCancelConfirm{
+  border: none;
+  font-size: 11.5px;
+  padding: 3px 5px 3px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #1d4ef0;
+  background-color: white;
+  border: 2px solid white;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+.botonCancelConfirm:hover{
+  color: white;
+  background-color: #15214a;
+  border: 2px solid white;
+}
+
+.divModify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
+
+.editBoton {
+  border: none;
+  font-size: 13px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #14a314;
+  border: 2px solid #14a314;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.editBoton:hover{
+  color: white;
+}
+.editBoton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #14a314;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.editBoton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+.closeEditBoton {
+  border: none;
+  font-size: 13px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #bb1919;
+  border: 2px solid #bb1919;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.closeEditBoton:hover{
+  color: white;
+}
+.closeEditBoton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #bb1919;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.closeEditBoton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+.mensajeCreated {
+  font-family: "Gotham", sans-serif;
+  color: white;
+  background-color: rgb(74, 134, 74);
+  padding: 5px;
+  border-radius: 10px;
+  align-items: center;
+  align-content: center;
+
+}
+
+.backBoton {
+  border: none;
+  font-size: 35px;
+  padding: 3px 20px 3px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #15214a;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.backBoton:hover{
+  color: white;
+}
+.backBoton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 25px;
+  background-color: #15214a;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.backBoton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+.paginado {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.botonpag {
+  height: 40%;
+  width: 80px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3cbbed;
+  color: white;
+  cursor: pointer;
+  font-family: "Gotham", sans-serif;
+}
+.botonpag:hover {
+  background-color: #15214a; 
+  color: white;
+}
+.botonpag:disabled {
+  background-color: #213a44;
+  color: white;
+  cursor: not-allowed;
+}
+
+.pagina {
+  font-family: "Gotham", sans-serif;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border-radius: 25%;
+  font-size: 16px;
+  border: none;
+}
+
+.paginaboton {
+  font-family: "Gotham", sans-serif;
+  background-color: transparent;
+  color: #007bff;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+.paginaboton:hover {
+  font-size: 16px;
+  color: #007bff;
+}

@@ -1,0 +1,47 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+}
+
+.divComplementario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    border: none;
+    font-size: 12.5px;
+    padding: 8px 28px 8px 28px;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    background-color: #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: stretch;
+}
+
+.cardWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    transform: scale(0.8);
+    margin: 0px;
+}

@@ -1,0 +1,426 @@
+/* DIV DETAILED PRODUCT */
+
+.divDetail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px;
+    /* min-height: 100vh; */
+}
+
+.buttonCantidad:disabled{
+    cursor: not-allowed;
+}
+
+.buttonAgregar:disabled{
+    cursor: not-allowed;
+}
+
+
+.divDetailedProduct {
+    width: 80%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    padding: 3px 0px 3px 50px;
+}
+
+/* IMAGE */
+
+
+.divImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    width: 100%;
+    background-color: #3cbbed24;
+    padding: 50px 15px 50px 15px;
+}
+
+.divImage img {
+    width: 70%;
+    height: 300px;
+}
+
+.divImagesCar {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    height: 100%;
+    justify-content: center;
+    width: 40%;
+    align-items: center;
+}
+
+
+/* INFO */
+
+.infoDiv {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    align-items: start;
+    width: 40%;
+    height: 90%;
+    margin-bottom: auto;
+}
+
+.stock{
+    color: black;
+}
+
+.noStock{
+    color: red;
+    position: relative;
+}
+
+.noStock::before{
+    content: "¡No hay stock!";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: red;
+}
+
+
+.infoDiv h3 {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.infoDiv h1 {
+    font-size: 38px;
+    color: #3cbbed;
+    max-width: 100%;
+    white-space: wrap;
+    text-align: start;
+}
+
+.infoDiv h5 {
+    margin-right: auto;
+}
+
+.oldPrice{
+    position: relative;
+}
+
+.oldPrice::before{
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: -16%;
+    background-color: rgba(0, 0, 0, 0.733);
+    height: 2px;
+    width: 120%;
+    transform: rotate(3deg);
+    border-radius: 50%;
+}
+
+.infoDiv h6:first-of-type{
+    font-size: 15px;
+}
+
+/* BUTTON */
+
+.divButton button {
+    border: none;
+    font-size: 23px;
+    padding: 4px 13px 4px 13px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    border: 1px solid #3cbbed;
+    color: #3cbbed;
+    background-color: transparent;
+    transition: 0.3s;
+    overflow: hidden;
+    z-index: 99999999999999;
+}
+
+.divButton button:hover {
+    color: white;
+}
+
+.divButton button::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0.5;
+}
+
+.divButton button:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+
+/* WHATSAPP */
+.buttonwpp a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: green;
+}
+
+.buttonwpp ion-icon {
+    font-size: 40px;
+    color: green;
+}
+
+/* PAGINATE BUTTONS */
+
+.paginateButton {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.paginateButton button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+}
+
+.paginateButton button:disabled {
+    cursor: auto;
+}
+
+.paginateButton button h5 {
+    margin: 0;
+    font-size: 12px;
+    color: #3cbbed;
+}
+
+.paginateButton button h5::before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 0px;
+    top: 100%;
+    left: 0;
+    background-color: #3cbbed;
+    transition: 0.4s;
+}
+
+.paginateButton button:hover h5::before {
+    width: 100%;
+}
+
+
+.stockAndCategory {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+/* CAROUSEL */
+
+.carouselImages {
+    width: 100%;
+}
+
+.divImageCarousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.carouselImages img {
+    height: 80px;
+    width: 80px;
+    transition: 0.4s;
+    background-color: #3cbbed24;
+    padding: 10px;
+    margin: auto;
+    cursor: pointer;
+}
+
+/* NO CAROUSEL */
+
+.imgNoCarousel {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.imgNoCarousel img{
+    cursor: pointer;
+}
+
+/* AGREGAR AL CARRITO */
+
+.divAddCart{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+
+.addAndRestButtons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 20%;
+}
+
+.divAddCart span{
+    font-size: 26px;
+}
+
+.buttonCantidad{
+    padding: 0px;
+    background-color: transparent;
+    margin: 0px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.buttonCantidad ion-icon{
+    font-size: 25px;
+    color: #3cbbed;
+}
+
+
+
+/* Reviews */
+.mainContRev{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    align-content: flex-start;
+    justify-items: center;
+    gap: 10px;
+    margin: 25px;
+    font-family: "Gotham", sans-serif;
+}
+.reviewContainer {
+    max-width: 780px; /* Ajusta el ancho máximo según tu diseño */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+  }
+  
+  .reviewCont {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+   border-radius: 10px;
+  }
+  
+  .reviewCont h3 {
+    font-size: 18px;
+    color: black;
+    margin-bottom: 5px;
+    display: flex;
+  }
+  
+  .reviewCont p {
+    font-size: 16px;
+    color: black;
+  }
+  .date {
+    top: 0;
+    color: black;
+    right: 500px;
+  }
+  .rate{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: larger;
+    border-radius: 10px;
+    width: 200px;
+    padding: 5px;
+    gap: 2px;
+    color: #3cbbed;
+    margin-bottom: 10px;
+  }
+  .rate p {
+    font-size: 18px;
+    margin: 0px;
+    color: #3cbbed;
+    font-weight: bold;
+  }
+  .rate h1 {
+    font-size: 40px;
+    margin: 0px;
+    color: #3cbbed;
+    margin: 0px;
+  }
+  .subDivStar{ 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: larger;
+    border-radius: 10px;
+    color: #3cbbed;
+    margin-bottom: 10px;
+    font-family: "Gotham", sans-serif;
+  }
+
+  .formbutton {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: transparent;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.formbutton:hover{
+    color: white;
+}
+.formbutton::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbutton:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+.reviewsShow h1{
+    font-size: 20px;
+    margin-top: 0px;
+    color: #3cbbed;
+}

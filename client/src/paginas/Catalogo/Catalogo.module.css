@@ -1,0 +1,12 @@
+.divMain{
+    display: flex;
+    margin: 50px 0px 150px 0px;
+}
+
+
+/* .divOne, .divTwo, .divThree {
+    flex: 1 0 30%; /* El 30% es el ancho máximo de cada div 
+    margin: 0px 10px;
+    height: 50px;
+    box-sizing: border-box;  Asegura que el margen no aumente el ancho *
+  } */

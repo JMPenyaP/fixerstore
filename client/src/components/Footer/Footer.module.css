@@ -1,0 +1,71 @@
+.contact{
+  display: flex;
+  background: #3cbbed;
+  height: 250px;
+  color: aliceblue;
+  flex-direction: column;
+  justify-content: center;
+  font-size: small;
+}
+
+.tabla{
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  gap: 200px;
+  line-height: 30px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.footer {
+  display: flex;
+  background: black;
+  line-height: 40px;
+  justify-content: center;
+  gap: 5px;
+  text-decoration: none;
+  color: aliceblue;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+
+/* INSTAGRAM */
+.divInstagram{
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+  gap: 10px;
+}
+
+.divInstagram ion-icon{
+  font-size: 20px;
+}
+
+/* PUNTOS DE VENTA */
+
+.puntosDeVentaDiv{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.puntosDeVentaDiv ion-icon{
+  font-size: 20px;
+}
+
+/* INFO DIV */
+
+.infoDiv{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.infoDiv ion-icon{
+  font-size: 20px;
+}

@@ -1,0 +1,152 @@
+.containerContactanos {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: transparent;
+  gap: 10px;
+}
+.Form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 3px;
+}
+
+.containerContactanos .cabecera {
+  grid-column: span 1; 
+  min-height: 90px;
+  background-color: #1d2fb5;
+  display: flex;
+  align-items: center;
+}
+.titulo-cabecera {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.sede-maps {
+  display: flex;
+  flex-direction: row;
+  gap: 40px; /* Espacio entre los mapas */
+  align-items: center;
+}
+
+.map {
+  width: 60%;
+  border-radius: 5px;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Estilo específico para los iframes de Google Maps */
+.map iframe {
+  width: 100%;
+  height: 300px; /* Ajusta la altura según tus necesidades */
+  border: none;
+  border-radius: 5px;
+}
+/* Estilo para los títulos de los mapas */
+.map label {
+  font-size: 20px; /* Cambia el tamaño de letra según tus preferencias */
+  font-weight: bold; /* Opcional: Puedes hacer que los títulos sean negrita */
+}
+.slogan-cabecera {
+  color: #5f70c6; /* Color del texto en negro */
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column; /* Alineación vertical */
+  align-items: center;
+  justify-content: center;
+}
+.logo-cabecera {
+  display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.formbutton {
+  border: none;
+  font-size: 18px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  background-color: transparent;
+  border: 2px solid #3cbbed;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: center;
+}
+.formbutton:hover{
+  color: white;
+}
+.formbutton::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #3cbbed;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+.formbutton:hover::before{
+  width: 100%;
+  opacity: 1;
+}
+
+
+.p {
+  font-family: "Gotham", sans-serif;
+  color: #15214a;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 1px;
+}
+.inputData {
+  height: auto;
+  padding: 4px;
+  font-family: "Gotham", sans-serif;
+  font-size: 15px;
+  align-items: center;
+  border-radius: 10px;
+  border: 0.8px solid #3cbbed;
+  text-align: center;
+  font-weight: bold;
+}
+.inputData::placeholder {
+  font-size: 12.5px;
+}
+.inputData:focus {
+  outline: none;
+  border: 2px solid #3cbbed;
+}
+
+
+.titulo {
+  border: none;
+  font-size: 20px;
+  padding: 8px 28px 8px 28px;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  background-color: #15214a;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
+  text-align: center;
+}
+
+

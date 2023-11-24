@@ -1,0 +1,508 @@
+.divNavBar {
+    display: flex;
+    height: 100px;
+    padding: 0px 15px 5px 0px;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    row-gap: 115px;
+    flex-wrap: wrap;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* IMAGEN LOGO */
+
+.logo {
+    height: 78px;
+    width: 227px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+/* BUTTONS */
+
+.divButtonsNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+.offBoton {
+    border: none;
+    font-size: 15px;
+    padding: 3px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #202549;
+    background-color: transparent;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+.offBoton:hover{
+    color: #202549;
+}
+.offBoton::before{
+    content: "";
+    position: absolute;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+
+.offBoton:hover::before{
+    width: 100%;
+    opacity: 1;
+}
+
+.onBoton {
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+    color: #3cbbed;
+    background-color: transparent;
+    transition: 0.2s;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+}
+
+
+
+/* INPUT SEARCH */
+
+.searchBarDiv input {
+    display: flex;
+    width: 336px;
+    padding: 10px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 20px;
+    background: transparent;
+    border: 1px solid #3cbbed;
+}
+
+.searchBarDiv input:focus {
+    outline: none;
+    border: 2px solid #3cbbed;
+}
+
+.searchBarDiv {
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBarDiv button {
+    background-color: #3cbbed;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border: none;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.searchBarDiv button:disabled {
+    cursor: not-allowed;
+}
+
+.searchBarDiv button h5 {
+    font-family: 'Gotham Black', sans-serif;
+}
+
+.searchBarDiv button ion-icon {
+    font-size: 16px;
+}
+
+
+/* Carrito */
+
+.carritoDiv {
+    position: relative;
+    cursor: pointer;
+}
+
+.carritoDiv ion-icon {
+    color: black;
+    font-size: 36px;
+}
+
+.cartCounter {
+    background-color: #3cbbed;
+    border-radius: 50%;
+    height: 60%;
+    width: 60%;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* MENU DESPLEGABLE LOG IN LETTER */
+
+
+.containerLogIn {
+    position: relative;
+}
+
+.divMenuDesplegable {
+    position: absolute;
+    height: 120px;
+    width: 250px;
+    background-color: #202549;
+    left: -160%;
+    top: 110%;
+    z-index: 99;
+    border: 2px solid #3cbbed;
+    border-radius: 16px;
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    justify-items: stretch;
+    gap: 10%;
+}
+
+.divMenuDesplegable ion-icon {
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+.divMenuDesplegable h5 {
+    text-align: left;
+    margin: 0;
+    color: #3cbbed;
+}
+.divMenuDesplegable button {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-radius: 16px;
+    width: 200px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 18px;
+    font-size: 18px;
+    padding: 5px 20px;
+    position: relative;
+    color: #3cbbed;
+    transition: color 0.3s, background-color 0.3s; /* Combinar las transiciones */
+    background-color: white;
+    border: 2px solid #3cbbed;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+  }
+  
+  .divMenuDesplegable button:hover {
+    color: white;
+    background-color: #3cbbed;
+  }
+
+  .divMenuDesplegable button h5 {
+    /*padding: 5px;*/
+    font-size: 12.5px;
+    text-align: start;
+    margin: 0;
+    color: #3cbbed;
+}
+.divMenuDesplegable button:hover h5 {
+    /*padding: 5px;*/
+    font-size: 12.5px;
+    text-align: start;
+    margin: 0;
+    color: white;
+}
+
+
+.userLetter {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #202549;
+    color: white;
+    font-size: 20px;
+    position: relative;
+    transition: 0.6s;
+    overflow: hidden;
+    z-index: 99999999999;
+    font-family: 'Gotham Black', sans-serif;
+    cursor: pointer;
+}
+
+.userLetter:hover {
+    background-color: transparent;
+}
+
+.userLetter::before {
+    position: absolute;
+    content: "";
+    top: -20%;
+    left: 0%;
+    background-color: #3cbbed;
+    height: 10%;
+    width: 0%;
+    border-radius: 50%;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+
+.userLetter:hover::before {
+    width: 150%;
+    height: 150%;
+    opacity: 1;
+}
+
+
+.botonInicio {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #3cbbed;
+    background-color: transparent;
+    border: 2px solid #3cbbed;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+}
+
+.botonInicio:hover {
+    color: white;
+    background-color: #3cbbed;
+}
+
+
+
+@media(min-width: 769px) {
+    .resNavBar {
+        display: none;
+    }
+}
+
+
+/* ///////        RESPONSIVE MOBILE          ///////// */
+
+
+
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+    .divNavBar {
+        display: none;
+    }
+
+    .resNavBar {
+        display: flex;
+        padding: 10px;
+        gap: 5px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .resNavBarNoSearch {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .resNavBarNoSearch img {
+        width: 170px;
+    }
+
+    /* searchbar */
+
+    .resSearchBarDiv input {
+        display: flex;
+        width: 270px;
+        padding: 4px;
+        align-items: center;
+        gap: 12px;
+        border-radius: 20px;
+        background: transparent;
+        border: 1px solid #3cbbed;
+    }
+
+    .resSearchBarDiv input:focus {
+        outline: none;
+        border: 2px solid #3cbbed;
+    }
+
+    .resSearchBarDiv {
+        display: flex;
+        gap: 9px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .resSearchBarDiv button {
+        background-color: #3cbbed;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        border: none;
+        padding: 2px;
+        cursor: pointer;
+    }
+
+    .resSearchBarDiv button:disabled {
+        cursor: not-allowed;
+    }
+
+    .resSearchBarDiv button h5 {
+        font-family: 'Gotham Black', sans-serif;
+    }
+
+    .resSearchBarDiv button ion-icon {
+        font-size: 16px;
+    }
+
+    /* BUTTON */
+
+    .buttonShowMenu {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10%;
+        padding: 3px;
+        transition: 0.3s;
+    }
+
+    .buttonShowMenu ion-icon {
+        font-size: 20px;
+    }
+
+    .actived {
+        background-color: #86c4dc;
+        border-radius: 50%;
+        padding: 3px;
+    }
+
+    .actived ion-icon {
+        font-size: 20px;
+    }
+
+    /* LOGO */
+
+    .resLogo {
+        height: 60px;
+        width: 180px;
+    }
+
+    /* CARRITO */
+
+    .carritoDiv {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .carritoDiv ion-icon {
+        color: black;
+        font-size: 29px;
+    }
+
+    .cartCounter {
+        background-color: #3cbbed;
+        border-radius: 50%;
+        height: 60%;
+        width: 60%;
+        position: absolute;
+        top: 60%;
+        left: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    /* DISPLAY NAV */
+
+    .menuDisplay {
+        position: absolute;
+        top: 0%;
+        right: 0px;
+        width: 0%;
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        padding: 0;
+        transition: 0.5s;
+        opacity: 1;
+        height: 100%;
+        list-style-type: none;
+        z-index: 9999;
+        margin-top: 0;
+        padding: 10px;
+    }
+
+    .menuDisplay li {
+        display: none;
+    }
+
+    .menuDisplay .resUserLetter {
+        display: none;
+    }
+
+    .show {
+        position: absolute;
+        opacity: 1;
+        width: 50%;
+        height: 100%;
+        background-color: #3cbbed;
+        z-index: 9999;
+        margin-top: 0;
+        list-style-type: none;
+    }
+
+    .show .resUserLetter {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: #202549;
+        color: white;
+        font-size: 20px;
+        position: relative;
+        transition: 0.6s;
+        overflow: hidden;
+        z-index: 99999999999;
+        font-family: 'Gotham Black', sans-serif;
+        cursor: pointer;
+    }
+
+    .show li {
+        display: block;
+    }
+}

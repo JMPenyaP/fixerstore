@@ -1,0 +1,59 @@
+
+
+
+.div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.tituloDash {
+  font-family: "Gotham", sans-serif;
+  color: #15214a;
+}
+.logo {
+  width: 10%;
+  height: 10%;
+}
+
+.titulo {
+  border: none;
+  font-size: 15px;
+  padding: 8px 28px 8px 28px;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  background-color: #15214a;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
+}
+
+.img {
+    width: 25%;
+    height: 25%;
+}
+
+.p {
+    padding: 8px 28px 8px 28px;
+    font-family: "Gotham", sans-serif;
+    font-size: 20px;
+    font-weight: 4px;
+    text-align: center;
+    animation: blink 3s infinite;
+}
+  @keyframes blink {
+    0% {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+    50% {
+      color: orange;
+      text-shadow: 0 0 10px orange;
+    }
+    100% {
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+  }

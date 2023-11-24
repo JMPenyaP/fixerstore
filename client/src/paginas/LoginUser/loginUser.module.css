@@ -1,0 +1,257 @@
+.contenedorMayor {
+    height: 100vb;
+    display: flex;
+    flex-direction: row;
+    font-family: "Gotham", sans-serif;
+    border: 10px solid #15214a;
+    margin: 0;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    gap: 10px;
+    padding-top: 20px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    gap: 10px;
+}
+
+.divImagen {
+    width: 50%; /* Ancho del 100% para ocupar toda la página */
+    border-left: 10px solid #15214a;
+    box-sizing: border-box; /* Esto asegura que el borde esté incluido en el ancho total */
+}
+
+.imgder {
+    width: 100%;
+    height: 100%;
+}
+
+.titulo {
+    font-family: "Gotham", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #15214a;
+}
+
+.logo {
+    width: 40%;
+}
+
+/* FORM */
+.form input {
+    display: flex;
+    width: 400px;
+    height: 100%;
+    padding: 10px;
+    font-family: "Gotham", sans-serif;
+    font-size: 12.5px;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+    background: transparent;
+    border: 1px solid #3cbbed;
+}
+.form input::placeholder {
+    font-size: 12.5px;
+}
+.form input:focus {
+    outline: none;
+    border: 2.5px solid #3cbbed;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+.formbutton {
+    border: none;
+    font-family: "Gotham", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    width: 400px;
+    height: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    border: 1px solid #3cbbed;
+    color: #3cbbed;
+    background-color: transparent;
+    transition: 0.3s;
+    overflow: hidden;
+}
+.formbutton:hover {
+    color: white;
+    background-color: #3cbbed;
+}
+.formbutton::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #98d0e6;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+
+/* BOTON CLOSE */
+
+.x {
+    border: none;
+    font-family: "Gotham", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    transition: 0.2s;
+    background-color: transparent;
+    transition: 0.3s;
+    overflow: hidden;
+}
+.x:hover {
+    color: #15214a;
+}
+
+
+/* Password  */
+
+.passwordcontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    text-align: center;
+    .img {
+        width: 20px;
+        height: 20px;
+    }
+  }
+.passwordtoggle {
+    transform: translateX(900%);
+    align-content: center;
+    cursor: pointer;
+    position: absolute;
+    user-select: none; /* Evita que el ícono se seleccione al hacer clic */
+  }
+
+.divmensaje {
+    background-color: #3cbbed;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    padding: 0px 10px 10px 10px;
+    font-family: "Gotham", sans-serif;
+    gap: 5px;
+    border-radius: 5px;
+    .span {
+        font-family: "Gotham", sans-serif;
+        padding: 20px 0px 10px 0px;
+        font-weight: bolder;
+    }
+
+}
+
+.divmensajePass {
+    background-color: #3cbbed;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    padding: 0px 10px 10px 10px;
+    font-family: "Gotham", sans-serif;
+    gap: 5px;
+    border-radius: 5px;
+    .x {
+        left: 35%;
+    }
+    .span {
+        font-family: "Gotham", sans-serif;
+        padding: 20px 0px 10px 0px;
+        font-weight: bolder;
+    }
+
+}
+
+
+.divOpciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    padding: 10px;
+}
+.olvido{
+    font-family: "Gotham", sans-serif;
+    font-size: 18px;
+    text-decoration: underline;
+    color: #15214a;
+    margin-top: 8px;
+    padding: 3px;
+}
+.olvido:hover {
+    font-weight: bold;
+}
+
+.formbuttonBack {
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 5px 20px;
+    margin-top: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    color: #15214a;
+    background-color: transparent;
+    border: 2px solid #15214a;
+    transition: 0.3s;
+    font-family: "Gotham", sans-serif;
+}
+.formbuttonBack:hover{
+    color: white;
+}
+.formbuttonBack::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #15214a;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0;
+}
+.formbuttonBack:hover::before{
+    width: 100%;
+    opacity: 1;
+}

@@ -1,0 +1,263 @@
+.cartContainer{
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+/* CARD CONTAINER */
+
+.cartCardDivContainer{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.cartCardDivContainer h2{
+    text-align: center;
+}
+
+.cardCartContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    border: 1px solid rgb(54, 54, 54);
+    border-radius: 16px;
+    padding: 10px 30px 10px 30px;
+    gap: 90px;
+    height: 150px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+}
+
+.cardCartContainer img{
+    height: 130px;
+    width: 130px;
+}
+
+.cardCartContainer h1{
+    color: #3cbbed;
+    font-size: 27px;
+    width: 300px;
+}
+
+/* DATOS CART Product*/
+
+.divDatosCart{
+    height: 100%;
+    display: flex;
+    gap: 50px;
+}
+
+.infoDetail{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.infoDetail h2{
+    font-size: 19px;
+    padding: 3px 7px 3px 7px;
+}
+
+.infoDetail:nth-child(2) h2:nth-child(2){
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+/* EDITAR */
+
+.editarCtdadDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.editarCtdadDiv button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editarCtdadDiv button:disabled{
+    cursor: not-allowed;
+    position: relative;
+}
+
+.editarCtdadDiv button:disabled::before{
+    position: absolute;
+    content: "maximo en stock";
+    color: red;
+    top: 180%;
+    left: -330%;
+    width: 500%;
+}
+
+.editarCtdadDiv ion-icon{
+    color: #3cbbed;
+    font-size: 20px;
+}
+
+/* RESUMEN */
+
+.containerResumen{
+    width: 17%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.divResumen{
+    background-color: #3cbbed30;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 16px;
+}
+
+.divResumen h2{
+    font-size: 16px;
+    border-bottom: 1px solid rgb(62, 62, 62);
+    padding-bottom: 5px;
+}
+
+
+/* BUTTON RESUMEN */
+
+.divButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.divButton button {
+    border: none;
+    font-size: 23px;
+    padding: 4px 13px 4px 13px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    border: 1px solid #3cbbed;
+    color: #3cbbed;
+    background-color: transparent;
+    transition: 0.3s;
+    overflow: hidden;
+    z-index: 99999999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.divButton button:disabled{
+    cursor: not-allowed;
+}
+
+.divButton button:hover {
+    color: white;
+}
+
+.divButton button::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0.5;
+}
+
+.divButton button:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+.divButton span{
+    color: rgb(255, 191, 0);
+    font-weight: bold;
+}
+
+/* DISABLED */
+
+.divButton button:disabled:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: rgb(128, 128, 128);
+    z-index: -1;
+    transition: 0.6s;
+    opacity: 0.5;
+}
+
+.divButton button:disabled:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+/* DELETE */
+
+.divDelete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.divDelete ion-icon{
+    color: red;
+    font-size: 20px;
+}
+
+/* EMPTY CART */
+
+.divEmptyCart{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.divLinkToProducts{
+    width: 35%;
+    margin: auto;
+}
+
+.divLinkToProducts a{
+    color: #3cbbed;
+    transition: 0.4s;
+}
+
+.divLinkToProducts a:hover{
+    color: #1d8ab5;
+}

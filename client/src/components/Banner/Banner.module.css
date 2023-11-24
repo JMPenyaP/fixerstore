@@ -1,0 +1,104 @@
+.fondo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 30px;
+}
+.cita {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.peq{
+  display: flex;
+  justify-content: center;
+  font-size: large;
+}
+.imagenContainer {
+  width: 50%;
+  height: auto;
+}
+.imagen {
+  width: auto;
+  height: 27vw;
+  border-top-left-radius: 400px;
+  border-bottom-left-radius: 400px;
+  position: relative;
+  background-image: url('../../assets/Zapato\ y\ Porducto.png');
+  border-style: none;
+  background-size: contain;
+  background-color: #3cbbed; 
+  background-repeat: no-repeat;
+}
+.promo2 {
+  font-family: "Gotham", sans-serif;
+  display: flex;
+  width: auto;
+  height: 0px;
+  flex-direction: column;
+  text-align: center;
+  color: #15214a;
+  font-size: 65px;
+  font-weight: 600;
+  margin-top: 0px;
+}
+.promo1 {
+  font-family: "Gotham", sans-serif;
+  display: flex;
+  width: auto;
+  height: 0px;
+  flex-direction: column;
+  text-align: center;
+  color: #15214a;
+  font-size: 45px;
+  font-weight: 600;
+  margin-top: 0px;
+}
+.link {
+  text-decoration: none;
+}
+.divButton {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.divButton button {
+  border: none;
+  font-size: 23px;
+  padding: 10px 30px 10px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  border: 1px solid #3cbbed;
+  color: #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.divButton button:hover{
+  color: white;
+}
+
+.divButton button::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #3cbbed;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0.5;
+}
+
+.divButton button:hover::before{
+  width: 100%;
+  opacity: 1;
+}

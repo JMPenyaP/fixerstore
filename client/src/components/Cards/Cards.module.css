@@ -1,0 +1,28 @@
+.divScroll{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divCards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+}
+
+
+
+
+/* margin: 50px 0px 150px 0px; */
+
+.divMain{
+justify-content: center;
+margin: auto;
+}
+
+.divCardsArr{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

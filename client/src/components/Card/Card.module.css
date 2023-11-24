@@ -1,0 +1,120 @@
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+.divCard {
+    display: flex;
+    flex-direction: column;
+    width: 290px;
+    height: 390px;
+    margin: 35px 20px;
+    border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.divImg {
+
+    border-radius: 5px;
+}
+
+.img {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.divInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    font-family: 'AntipastoPro', sans-serif;
+    align-items: center;
+    gap: 5px;
+}
+
+.divName {
+
+    &:hover {
+        color: #3cbbed;
+    }
+}
+
+.divButton {
+    margin-top: 18px;
+}
+
+.divButton .button {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #3cbbed;
+    border: 1px solid #3cbbed;
+    background-color: transparent;
+    transition: color 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.divButton .button::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: -100%;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: left 0.3s ease-in-out;
+}
+
+.divButton .button:hover {
+    color: white;
+}
+
+.divButton .button:hover::before {
+    left: 0;
+}
+
+/* FAVORITE */
+
+.divFavoriteButtton {
+    position: absolute;
+    right: 0px;
+    top: 2px;
+}
+
+.divFavoriteButtton button {
+    background-color: transparent;
+    border: none;
+    cursor: grab;
+}
+
+.divFavoriteButtton ion-icon {
+    color: #3cbbed;
+    font-size: 29px;
+}
+
+.span {
+    border: none;
+    font-size: 14px;
+    position: relative;
+    font-weight: light;
+    color: #15214a;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}
+.spanPrice {
+    border: none;
+    font-size: 18px;
+    position: relative;
+    font-weight: bolder;
+    color: #15214a;
+    font-family: "Gotham", sans-serif;
+    width: auto;
+}

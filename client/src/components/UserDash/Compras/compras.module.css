@@ -1,0 +1,292 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: "Gotham", sans-serif;
+}
+
+.divComplementario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tituloPedidos {
+  border: none;
+  font-size: 15px;
+  padding: 8px 28px 8px 28px;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  background-color: #15214a;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
+}
+
+.divInformacion {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: flex-start;
+  gap: 5px;
+  justify-items: center;
+  padding: 3px;
+}
+
+.divtitulo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10%;
+  justify-items: center;
+  margin: 0px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+}
+
+.th {
+  background-color: #3cbbed;
+  border: 1px solid #dddddd;
+  color: white;
+  text-align: center;
+  padding: 3px;
+}
+.th:hover {
+  background-color: #3cbbed;
+  border: 1px solid #dddddd;
+  color: white;
+  text-align: center;
+  padding: 3px;
+}
+
+.td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 3px;
+}
+.tdetail {
+  border: 1px solid #dddddd;
+  text-decoration: underline;
+  text-align: center;
+  padding: 3px;
+}
+
+.tr:hover {
+  background-color: #c4dae2;
+  font-weight: bold;
+  cursor: auto;
+}
+
+.table thead th {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.botonEdit {
+  border: none;
+  font-size: 12.5px;
+  padding: 5px 5px 5px 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  background-color: white;
+  border: 2px solid #3cbbed;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+.botonEdit:hover {
+  color: white;
+  background-color: #15214a;
+  border: 2px solid white;
+}
+
+.divProductos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.divProduct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.divProductImage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-content: center;
+  gap: 3px;
+  margin: 0px;
+  height: auto;
+}
+
+.productImage {
+  width: 150px;
+}
+
+.mensajeProductos {
+  margin: 0%;
+  font-family: "Gotham", sans-serif;
+  font-size: 18px;
+  color: #15214a;
+}
+
+.mensajeProductosLittle {
+  margin: 0%;
+  font-family: "Gotham", sans-serif;
+  font-size: 14px;
+  color: #15214a;
+}
+
+.tituloSeccion {
+  border: none;
+  font-size: 20px;
+  padding: 8px 28px 8px 28px;
+  position: relative;
+  color: white;
+  transition: 0.2s;
+  background-color: #15214a;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
+}
+
+.backPedBoton {
+  border: none;
+  font-size: 30px;
+  padding: 2px 20px 2px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  border: 2px solid #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}
+
+.backPedBoton:hover {
+  color: white;
+}
+.backPedBoton::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #3cbbed;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.backPedBoton:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+.ordenTitulo {
+  border: none;
+  font-size: 25px;
+  position: relative;
+  color: #15214a;
+  transition: 0.2s;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  width: auto;
+  margin: 0px;
+}
+
+.modifyOrden {
+  border: none;
+  font-size: 18px;
+  padding: 2px 20px 2px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  border: 2px solid #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: center;
+  margin-top: 3px;
+  width: 50%;
+}
+
+.modifyOrden:hover {
+  color: white;
+}
+.modifyOrden::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 0%;
+  top: 0%;
+  left: 0;
+  border-radius: 50px;
+  background-color: #3cbbed;
+  z-index: -1;
+  transition: 0.6s;
+  opacity: 0;
+}
+
+.modifyOrden:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+.buttonReview {
+  border: none;
+  font-size: 15px;
+  padding: 2px 20px 2px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  border: 2px solid #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+}

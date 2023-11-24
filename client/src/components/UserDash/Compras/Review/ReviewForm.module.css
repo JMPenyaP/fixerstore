@@ -1,0 +1,107 @@
+/* ReviewForm.css */
+
+.reviewform {
+  width: 100%; /* Ajusta el ancho del formulario */
+  max-width: 400px; /* Establece un ancho máximo para mantenerlo legible */
+  margin: 0 auto;
+  padding: 20px;
+  color: #15214a;
+  font-family: "Gotham", sans-serif;
+}
+
+.rating {
+  margin-bottom: 15px;
+}
+
+.label {
+  padding: 10px;
+  font-weight: bold;
+  display: block; /* Coloca cada etiqueta en una nueva línea */
+  color: #3cbbed;
+}
+
+.input[type="range"] {
+  width: 100%;
+}
+
+.ratingValue {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.ratingValue.red {
+  color: red; /* Color rojo para puntuaciones de 1 y 2 */
+}
+
+.ratingValue.yellow {
+  color: rgb(219, 219, 0); /* Color amarillo para puntuaciones de 3 y 4 */
+}
+
+.ratingValue.green {
+  color: green; /* Color verde para puntuaciones de 5 */
+}
+
+.textarea {
+  width: 400px;
+    height: auto;
+    padding: 4px;
+    font-family: "Gotham", sans-serif;
+    font-size: 15px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    background: transparent;
+    border: 0.5px solid #3cbbed;
+    text-align: center;
+    font-weight: bold;
+  resize: none;
+}
+
+.button {
+  display: block;
+  margin-top: 10px;
+  border: none;
+  font-size: 15px;
+  padding: 2px 20px 2px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  color: #3cbbed;
+  border: 2px solid #3cbbed;
+  background-color: transparent;
+  transition: 0.3s;
+  font-family: "Gotham", sans-serif;
+  text-align: left;
+  padding: 10px 20px;
+  cursor: pointer;
+  
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+}
+
+.button[disabled] {
+  background-color: #ccc; /* Cambia el color cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+  color: #888; /* Cambia el color de texto cuando está deshabilitado */
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center; /* Alinea verticalmente el botón y el mensaje de éxito */
+  justify-content: center;
+}
+
+.successMessage {
+  color: green;
+  margin-left: 20px; /* Margen izquierdo para separar el mensaje del botón */
+  font-weight: 500;
+  font-size: 20px;
+}

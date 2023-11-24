@@ -1,0 +1,241 @@
+/* CSS DE SLICK */
+.slick-list {
+    margin-bottom: 20px;
+}
+
+.slick-initialized {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+/* DIV CAROUSEL */
+
+.divImgsCarousel:focus {
+    outline: none;
+    border: none;
+}
+
+.divImgsCarousel:hover {
+    background-color: transparent;
+}
+
+.divImgsCarousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    padding-bottom: 10px;
+    background-color: #2988ad0b;
+}
+
+.divImgsCarousel img {
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
+
+.divImgsCarousel h1 {
+    color: #2987ad;
+    font-size: 18px;
+}
+
+.divImgsCarousel h2 {
+    color: #3cbbed;
+}
+
+
+.divImgsCarousel h3 {
+    font-weight: normal;
+    color: rgb(26, 24, 24);
+    position: relative;
+    width: 100%;
+}
+
+.divImgsCarousel h3::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    height: 2px;
+    width: 20%;
+    background-color: rgb(26, 24, 24);
+    transform: rotate(3deg);
+    border-radius: 50%;
+}
+
+.divImgsCarousel h4 {
+    color: #00FF00;
+    font-size: 19px;
+}
+
+.carouselImage {
+    height: 500px;
+    width: 100%;
+}
+
+.divButton {
+    margin-top: 3px;
+}
+
+.divButton button {
+    border: none;
+    font-size: 18px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    color: white;
+    transition: 0.2s;
+    border: 1px solid #3cbbed;
+    color: #3cbbed;
+    background-color: transparent;
+    transition: 0.3s;
+    overflow: hidden;
+    z-index: 99999999999999;
+}
+
+.divButton button h5 {
+    font-size: 15px;
+    margin: 0;
+    font-family: 'Gotham', sans-serif;
+}
+
+.divButton button:hover {
+    color: white;
+}
+
+.divButton button::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0%;
+    left: 0;
+    border-radius: 50px;
+    background-color: #3cbbed;
+    z-index: -1;
+    transition: 0.4s;
+    opacity: 0.5;
+}
+
+.divButton button:hover::before {
+    width: 100%;
+    opacity: 1;
+}
+
+.divCarga {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+
+    .divImgsCarousel {
+        display: flex !important;
+        justify-content: space-around !important;
+        align-items: center !important;
+        transition: 0.3s !important;
+        padding-bottom: 10px !important;
+        background-color: #2988ad0b !important;
+        flex-direction: column !important;
+        height: 300px;
+    }
+
+
+    .divImgsCarousel img {
+        height: 120px;
+        width: 120px;
+        margin: auto;
+    }
+
+    .divImgsCarousel h1 {
+        color: #2987ad;
+        font-size: 12px;
+    }
+
+    .divImgsCarousel h4 {
+        color: #00FF00;
+        font-size: 11px;
+    }
+
+    .carouselImage {
+        height: 250px;
+        width: 100%;
+    }
+
+    .divButton button {
+        border: none;
+        font-size: 11px;
+        padding: 5px 15px 5px 15px;
+        border-radius: 50px;
+        cursor: pointer;
+        color: white;
+        position: relative;
+        color: white;
+        transition: 0.2s;
+        border: 1px solid #3cbbed;
+        color: #3cbbed;
+        background-color: transparent;
+        transition: 0.3s;
+        overflow: hidden;
+        z-index: 99999999999999;
+    }
+
+    .divButton button h5 {
+        font-size: 11px;
+        margin: 0;
+        font-family: 'Gotham', sans-serif;
+    }
+
+    .divImgsCarousel h2 {
+        color: #3cbbed;
+        font-size: 12px;
+    }
+
+    .divImgsCarousel h3 {
+        font-size: 12px;
+    }
+
+    .divImgsCarousel h3::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 32%;
+        height: 2px;
+        width: 70%;
+        background-color: rgb(26, 24, 24);
+        transform: rotate(3deg);
+        border-radius: 50%;
+    }
+
+    .slick-initialized {
+        width: 85%;
+    }
+
+    .slick-list {
+        margin: 0 -5px;
+    }
+
+    .slick-slide>div {
+        padding: 0 5px;
+    }
+
+    .slick-prev:before {
+        content: "<";
+        color: #3cbbed;
+        font-size: 20px;
+    }
+
+    .slick-next:before {
+        content: ">";
+        color: #3cbbed;
+        font-size: 20px;
+    }
+
+}

@@ -1,0 +1,35 @@
+.titulo {
+  line-height: 50px;
+  text-align: center;
+  margin-left: 30px;
+  color: #3cbbed;
+  margin-bottom: 70px;
+}
+
+.carrusel{
+  margin-top: 150px;
+  margin-bottom: 150px;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  background: black;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+}
+.separador{
+  height: 10px;
+  width: 100%;
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .carrusel{
+    margin-bottom: 70px;
+    margin-top: 70px;
+  }
+}

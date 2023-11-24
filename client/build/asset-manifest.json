@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d24b5d61.css",
+    "main.js": "/static/js/main.bade1d5a.js",
+    "static/media/Zapato y Porducto.png": "/static/media/Zapato y Porducto.fbe182641695cb53179d.png",
+    "static/media/Fondolaterallogin.png": "/static/media/Fondolaterallogin.7f44fbaee69501a2292b.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.d24b5d61.css.map": "/static/css/main.d24b5d61.css.map",
+    "main.bade1d5a.js.map": "/static/js/main.bade1d5a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d24b5d61.css",
+    "static/js/main.bade1d5a.js"
+  ]
+}
