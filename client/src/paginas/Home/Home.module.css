@@ -12,20 +12,7 @@
   text-align: center;
 }
 
-.footer {
-  display: flex;
-  background: black;
-  line-height: 20px;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  gap: 5px;
-}
-.separador{
-  height: 10px;
-  width: 100%;
-  background-color: transparent;
-}
+
 
 @media (max-width: 768px) {
   .carrusel{
