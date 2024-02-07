@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body {  
+  height: 100%;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,9 +12,14 @@ body {
   min-height: 100vh;
 }
 
-
-
 *{
   scroll-behavior: smooth;
   box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: none;
 }

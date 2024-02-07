@@ -3,9 +3,9 @@ import BarDashboard from "../../components/BarDashboard/BarDashboard"
 
 const Dashboard = () => {
     return (
-        <div>
+        <>
             <BarDashboard/>
-        </div>
+        </>
     )
 }
 

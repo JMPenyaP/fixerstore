@@ -11,11 +11,13 @@ export default function Filtros() {
         <div className={styles.divOne}>
           <FiltroCategoria />
         </div>
-        <div className={styles.divTwo}>
-          <OrderName />
-        </div>
-        <div className={styles.divThree}>
-          <OrderPrice />
+        <div className={styles.query}>
+          <div className={styles.divTwo}>
+            <OrderName />
+          </div>
+          <div className={styles.divThree}>
+            <OrderPrice />
+          </div>
         </div>
       </div>
     </>

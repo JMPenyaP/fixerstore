@@ -47,7 +47,7 @@ const Catalogo = () => {
       <div>
         <div className={style.divMain}>
 
-          <div className={style.divFiltros}>
+          <div>
             <Filtros />
           </div>
 

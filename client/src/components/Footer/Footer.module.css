@@ -1,7 +1,7 @@
-.contact{
+/* .contact{
   display: flex;
   background: #3cbbed;
-  height: 250px;
+  height: auto;
   color: aliceblue;
   flex-direction: column;
   justify-content: center;
@@ -11,6 +11,7 @@
 .tabla{
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   text-align: left;
   gap: 200px;
   line-height: 30px;
@@ -31,11 +32,11 @@
 a {
   text-decoration: none;
   color: aliceblue;
-}
+} */
 
 
 /* INSTAGRAM */
-.divInstagram{
+/* .divInstagram{
   display: flex;
   justify-content: flex-start;
   align-items: left;
@@ -44,7 +45,7 @@ a {
 
 .divInstagram ion-icon{
   font-size: 20px;
-}
+} */
 
 /* PUNTOS DE VENTA */
 
@@ -60,7 +61,7 @@ a {
 
 /* INFO DIV */
 
-.infoDiv{
+/* .infoDiv{
   display: flex;
   align-items: center;
   gap: 10px;
@@ -68,4 +69,67 @@ a {
 
 .infoDiv ion-icon{
   font-size: 20px;
+}
+ */
+.footer{
+  background-color: #3cbbed;
+}
+
+ .section {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  color: aliceblue;
+  padding: 20px;
+  
+}
+
+.footerSection {
+  font-weight: 500;
+  margin: 0 15px;
+  padding: 15px; 
+}
+
+.divRed {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: 18px;
+}
+
+.divRed ion-icon {
+  font-size: 18px;
+}
+
+.divRed a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+
+.infoDiv {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.infoDiv ion-icon {
+  font-size: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+
+/* Estilos generales para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+  .section{
+    justify-content:start;
+  }
 }
