@@ -44,7 +44,6 @@ const Navbar = () => {
       setLetter(null);
     }
 
-
     if (carritoById.length >= 0) {
       setCartLong(carritoById.length);
     }
@@ -104,35 +103,49 @@ const Navbar = () => {
     }
   };
 
-
   return (
     <>
       <div className={style.divNavBar}>
-        <img className={style.logo}
+        <img
+          className={style.logo}
           src="https://fixershoes.com/assets/fixer-227x78.jpg"
           alt="Logo Fixer"
-
         />
         <div className={style.divButtonsNav}>
           <Link to="/">
-            <button className={currentPath === "/" ? style.onBoton : style.offBoton}>
+            <button
+              className={currentPath === "/" ? style.onBoton : style.offBoton}
+            >
               <h5>Inicio</h5>
             </button>
           </Link>
           <Link to="/productos">
-          <button className={currentPath === "/productos" ? style.onBoton : style.offBoton} onClick={() => handleClick()}>
-            <h5>Productos</h5>
-          </button>
+            <button
+              className={
+                currentPath === "/productos" ? style.onBoton : style.offBoton
+              }
+              onClick={() => handleClick()}
+            >
+              <h5>Productos</h5>
+            </button>
           </Link>
           <Link to="/nosotros">
-            <button className={currentPath === "/nosotros" ? style.onBoton : style.offBoton}>
+            <button
+              className={
+                currentPath === "/nosotros" ? style.onBoton : style.offBoton
+              }
+            >
               <h5>Quienes Somos</h5>
             </button>
           </Link>
           <Link to="/contactanos">
-          <button  className={currentPath === "/contactanos" ? style.onBoton : style.offBoton}>
-            <h5>Contactanos</h5>
-          </button>
+            <button
+              className={
+                currentPath === "/contactanos" ? style.onBoton : style.offBoton
+              }
+            >
+              <h5>Contactanos</h5>
+            </button>
           </Link>
         </div>
         <div className={style.searchBarDiv}>
@@ -142,7 +155,6 @@ const Navbar = () => {
             value={search}
             onChange={handleChange}
             onKeyPress={handleSearchKeyPress} // Agrega el manejador de eventos
-
           />
           {name.length > 0 ? (
             <Link to={currentPath === "/productos" ? "#" : "/productos"}>
@@ -235,23 +247,6 @@ const Navbar = () => {
               <div className={style.cartCounter}>{cartLong}</div>
             </div>
           </Link>
-          <div
-            className={`${style.menuDisplay} ${displayMenu ? style.show : ""}`}
-          >
-            {dataProfile !== null ? (
-              <div className={style.resUserLetter}>
-                <h4>{letter}</h4>
-              </div>
-            ) : (
-              <h2>Ingresar</h2>
-            )}
-            <ul>
-              <li>te</li>
-              <li>tet</li>
-              <li>tet</li>
-              <li>tt</li>
-            </ul>
-          </div>
         </div>
         <div className={style.resSearchBarDiv}>
           <input
@@ -271,6 +266,122 @@ const Navbar = () => {
               <ion-icon name="search-outline"></ion-icon>
             </button>
           )}
+        </div>
+        <div
+          className={`${style.menuDisplay} ${displayMenu ? style.show : ""}`}
+        >
+          {dataProfile !== null ? (
+            <div className={style.resUserLetter}>
+              <h4>{letter}</h4>
+            </div>
+          ) : (
+            <div className={style.divResLogin}>
+              <div className={style.divImgResNavBar}>
+                <img
+                  src="https://fixershoes.com/assets/logo-slogan.png"
+                  alt="Logo"
+                  width="100px"
+                  height="90px"
+                />
+              </div>
+              <Link to="/login">
+                <button className={style.botonInicio}>Ingresar</button>
+              </Link>
+            </div>
+          )}
+          {dataProfile !== null ? (
+            <div className={style.logInButtons}>
+              <Link to={`/user/${dataProfile.userData.id}`}>
+                <button className={style.buttonMiPerfil} onClick={showHideMenu}>
+                  <ion-icon name="person"></ion-icon>
+                  <h6>Mi Perfil</h6>
+                </button>
+              </Link>
+              <button
+                onClick={() => {
+                  handleRedirect();
+                  showHideMenu();
+                }}
+                className={style.buttonLogOut}
+              >
+                <ion-icon name="log-out"></ion-icon>
+                <h6>Cerrar Sesion</h6>
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+          <div className={style.divButtonsNav}>
+            <Link
+              to="/"
+              className={
+                currentPath === "/" ? style.activatedA : style.desactivatedA
+              }
+            >
+              <button
+                className={currentPath === "/" ? style.onBoton : style.offBoton}
+                onClick={showHideMenu}
+              >
+                <h5>Inicio</h5>
+              </button>
+            </Link>
+            <Link
+              to="/productos"
+              className={
+                currentPath === "/productos"
+                  ? style.activatedA
+                  : style.desactivatedA
+              }
+            >
+              <button
+                className={
+                  currentPath === "/productos" ? style.onBoton : style.offBoton
+                }
+                onClick={() => {
+                  handleClick();
+                  showHideMenu();
+                }}
+              >
+                <h5>Productos</h5>
+              </button>
+            </Link>
+            <Link
+              to="/nosotros"
+              className={
+                currentPath === "/nosotros"
+                  ? style.activatedA
+                  : style.desactivatedA
+              }
+            >
+              <button
+                className={
+                  currentPath === "/nosotros" ? style.onBoton : style.offBoton
+                }
+                onClick={showHideMenu}
+              >
+                <h5>Quienes Somos</h5>
+              </button>
+            </Link>
+            <Link
+              to="/contactanos"
+              className={
+                currentPath === "/contactanos"
+                  ? style.activatedA
+                  : style.desactivatedA
+              }
+            >
+              <button
+                className={
+                  currentPath === "/contactanos"
+                    ? style.onBoton
+                    : style.offBoton
+                }
+                onClick={showHideMenu}
+              >
+                <h5>Contactanos</h5>
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </>

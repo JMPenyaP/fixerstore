@@ -261,3 +261,87 @@
 .divLinkToProducts a:hover{
     color: #1d8ab5;
 }
+
+@media (max-width: 768px) {
+
+    .cartContainer{
+        min-height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .cartCardDivContainer{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cardCartContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 98%;
+        border: 1px solid rgb(54, 54, 54);
+        border-radius: 16px;
+        padding: 0px;
+        gap: 3px;
+        height: fit-content;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    }
+
+    .cardCartContainer img{
+        height: 15%;
+        width: 15%;
+    }
+
+    .cardCartContainer h1{
+        color: #3cbbed;
+        font-size: 12px;
+        width: fit-content;
+    }
+
+    .divDatosCart{
+        height: 100%;
+        display: flex;
+        gap: 3px;
+    }
+
+    .infoDetail h2{
+        font-size: 11px;
+        padding: 3px 7px 3px 7px;
+    }
+
+    .containerResumen{
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .divEmptyCart{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .divLinkToProducts{
+        width: 100%;
+        margin: auto;
+    }
+}

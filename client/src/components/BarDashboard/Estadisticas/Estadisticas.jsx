@@ -122,44 +122,6 @@ const Estadisticas = () => {
     responseSalesByMonth();
   }, []);
 
-  const chartdata = [
-    {
-      name: "enero",
-      "cantidad de ventas por mes": 2488,
-    },
-    {
-      name: "febrero",
-      "cantidad de ventas por mes": 1445,
-    },
-    {
-      name: "marzo",
-      "cantidad de ventas por mes": 743,
-    },
-    {
-      name: "abril",
-      "cantidad de ventas por mes": 621,
-    },
-    {
-      name: "mayo",
-      "cantidad de ventas por mes": 834,
-    },
-    {
-      name: "junio",
-      "cantidad de ventas por mes": 1092,
-    },
-    {
-      name: "julio",
-      "cantidad de ventas por mes": 1532,
-    },
-    {
-      name: "agosto",
-      "cantidad de ventas por mes": 1987,
-    },
-    {
-      name: "septiembre",
-      "cantidad de ventas por mes": 1675,
-    },
-  ];
 
   const dataFormatter = (number) => {
     return new Intl.NumberFormat("us").format(number).toString();

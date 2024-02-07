@@ -8,10 +8,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #fbfbfb;
   font-family: 'Gotham', sans-serif;
+  min-height: 100vh;
 }
 
 
 
 *{
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }

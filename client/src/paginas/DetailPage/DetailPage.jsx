@@ -68,7 +68,7 @@ const DetailPage = () => {
         if (data.name) {
           setProduct(data);
           setMainImage(data.firstImage);
-          setImages([data.firstImage, ...data.carrouselImage]); // Actualiza el estado de las imágenes
+          setImages([data.firstImage, ...data.carrouselImage]); 
         }
         setLoading(false);
       });
