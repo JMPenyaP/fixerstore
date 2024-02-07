@@ -479,4 +479,9 @@
         margin-bottom: auto;
     }
 
+    .divImage {
+        width: 350px;
+        height: 350px;
+    }
+
 }
