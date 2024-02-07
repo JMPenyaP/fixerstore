@@ -15,10 +15,9 @@ body {
   scroll-behavior: smooth;
 }
 
-
 #root {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: none;
 }

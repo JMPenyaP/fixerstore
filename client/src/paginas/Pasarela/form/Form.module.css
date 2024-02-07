@@ -192,7 +192,7 @@
   cursor: pointer;
   font-size: 20px;
   background-color: #3cbbed;
-  margin: 10px;
+  margin: 10px 0px;
 }
 
 .btn:active {
@@ -214,5 +214,6 @@
     max-width: 600px;
     min-width: 340px;
     min-height: 400px;
+    padding: 15px;
   }
 }

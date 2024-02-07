@@ -124,6 +124,15 @@
         padding: 10px;
         align-items: center;
         height: auto;
-        margin: 15px;
+    }
+
+    .seguro{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 15px;
+        padding-left: 15px;
+        gap: 10px;
+        font-size: 8px;
     }
   }

@@ -63,6 +63,7 @@ const BarDashboard = () => {
     }
     //Renderizado de barra 
     return (
+        <>
         <div className={style.contenedor}>
             <div className={style.barralateral}>
                 <div className={style.profile}>
@@ -87,6 +88,7 @@ const BarDashboard = () => {
                 {actualSection}
             </div>
         </div>
+        </>
     )
 }
 

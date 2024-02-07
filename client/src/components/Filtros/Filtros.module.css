@@ -101,10 +101,50 @@
 .ordenadores {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
   gap: 10px;
-  justify-items: center;
-  text-align: center;
   padding: 10px;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1042px) {
+  .divMain{
+    width: auto;
+  }
+
+  .buttonContainer {
+    flex-direction: row; /* Alineación vertical */
+    flex-wrap: wrap;
+  }
+
+  .offBoton,
+  .onBoton {
+    border: none;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    font-family: "Gotham", sans-serif;
+    text-align: left;
+    margin: 5px 0px;
+  }
+
+  .query{
+    display: flex;
+  }
+
+  .titulo {
+    border: none;
+    font-size: 14px;
+    padding: 8px 28px 8px 28px;
+    color: #15214a;
+    font-family: "Gotham", sans-serif;
+  }
 }

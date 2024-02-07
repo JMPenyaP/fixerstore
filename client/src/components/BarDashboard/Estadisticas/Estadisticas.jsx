@@ -166,48 +166,52 @@ const Estadisticas = () => {
   };
 
   return (
-    <div className={style.divEstadisticas}>
-      <div className="flex flex-row justify-around mb-5">
-        <Card className="w-6/12">
-          <Title>Pedidos este mes</Title>
-          <Metric>cantidad: {monthSales ? monthSales.cantidad : ""}</Metric>
-          <Subtitle>Total: ${monthSales ? monthSales.total : ""}</Subtitle>
-        </Card>
-        <Card className="w-6/12">
-          <Title>Usuarios</Title>
-          <DonutChart
-            className="mt-6"
-            data={usersGender}
-            category="cantidad"
-            index="gender"
-            colors={["sky", "teal", "indigo", "rose", "cyan", "amber"]}
-          />
-        </Card>
-        <Card className="w-6/12">
-          <Title>Cantidad de ventas</Title>
-          <DonutChart
-            className="mt-6"
-            data={ordersGender}
-            category="cantidad"
-            index="name"
-            colors={["sky", "teal", "indigo", "rose", "cyan", "amber"]}
-          />
-        </Card>
+    <>
+      <div className="w-full">
+        <div className="flex flex-wrap">
+          <Card className="flex-1 p-5 m-5 w-1/3">
+            <Title>Pedidos este mes</Title>
+            <Metric>cantidad: {monthSales ? monthSales.cantidad : ""}</Metric>
+            <Subtitle>Total: ${monthSales ? monthSales.total : ""}</Subtitle>
+          </Card>
+          <Card className="flex-1 p-5 m-5 w-1/3">
+            <Title>Usuarios</Title>
+            <DonutChart
+              className="mt-6"
+              data={usersGender}
+              category="cantidad"
+              index="gender"
+              colors={["sky", "teal", "indigo", "rose", "cyan", "amber"]}
+            />
+          </Card>
+          <Card className="flex-1 p-5 m-5 w-1/3">
+            <Title>Cantidad de ventas</Title>
+            <DonutChart
+              className="mt-6"
+              data={ordersGender}
+              category="cantidad"
+              index="name"
+              colors={["sky", "teal", "indigo", "rose", "cyan", "amber"]}
+            />
+          </Card>
+        </div>
+        <div className="w-1/1 flex items-center justify-center p-0 m-0">
+          <Card className=" p-5 m-5">
+            <Title className="w-1/2 p-0 m-0">Ventas por mes</Title>
+            <Subtitle className="w-1/2 p-0 m-0">Facturación en COP mensual</Subtitle>
+            <BarChart
+              className=" w-3/4 m-0 p-0 mx-auto"
+              data={salesByMonth}
+              index="mes"
+              categories={["totalVentas"]}
+              colors={["sky"]}
+              valueFormatter={dataFormatter}
+              yAxisWidth={50}
+            />
+          </Card>
+        </div>
       </div>
-      <Card className="w-70">
-        <Title>Ventas por mes</Title>
-        <Subtitle>Facturacion en COP mensual</Subtitle>
-        <BarChart
-          className="mt-6"
-          data={salesByMonth}
-          index="mes"
-          categories={["totalVentas"]}
-          colors={["sky"]}
-          valueFormatter={dataFormatter}
-          yAxisWidth={70}
-        />
-      </Card>
-    </div>
+    </>
   );
 };
 

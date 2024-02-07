@@ -1,11 +1,13 @@
+#root {
 
+    justify-content: none;
+}
 
 
 /* Div contenedor seccion completa */
 .contenedor {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
 
 }
 
@@ -21,15 +23,13 @@
     flex-direction: column;
     gap: 5px;
     padding: 5%;
-
-    height: 100%
+    height: auto
 }
 
 .section {
     display: flex;
     flex-direction: column;
     width: 80%;
-    padding: 1.5%;
 }
 /* Boton en off */
 .offBoton {
@@ -126,7 +126,6 @@
     display: flex;
     flex-direction: column;
     width: 20%;
-    height: 100vb;
 }
 
 .dataProfile {
@@ -197,4 +196,49 @@
 .offBoton2:hover::before{
     width: 100%;
     opacity: 1;
+}
+
+
+
+
+
+
+
+@media (max-width: 1000px) {
+    .dataProfile {
+        display: none;
+    }
+
+    .logoboton{
+        display: none;
+    }
+
+    .divbotones {
+        z-index: 1;
+        justify-content: space-evenly;
+        flex-direction: row;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: #fff;
+
+    }
+
+    .onBoton,.offBoton, .offBoton2 {
+        transition: none;
+        padding: 5;
+        margin: 0;
+
+    }
+
+
+
+    .contenedor {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
 }
