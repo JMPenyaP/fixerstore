@@ -26,10 +26,9 @@ import { setDataProfile } from "./redux/Actions/setDataProfile";
 import { setUserMenu } from "./redux/Actions/setUserMenu";
 import PassAnsony from "./paginas/PassSolicitud/PassAnsony";
 import Success from "./paginas/Pasarela/payStatus/Success";
-import Failured from './paginas/Pasarela/payStatus/Failured'
-import ContactForm from './paginas/Contactanos/ContactForm';
+import Failured from "./paginas/Pasarela/payStatus/Failured";
+import ContactForm from "./paginas/Contactanos/ContactForm";
 import Error from "./paginas/Error/Error";
-
 
 function App() {
   const navigate = useNavigate();
@@ -40,7 +39,7 @@ function App() {
   const [idVariable, setIdVariable] = useState(null);
   const dispatch = useDispatch();
   const dataProfile = useSelector((state) => state.dataProfile);
-  const userMenu = useSelector((state) => state.userMenu)
+  const userMenu = useSelector((state) => state.userMenu);
 
   useEffect(() => {
     const handleClick = (event) => {
@@ -48,11 +47,10 @@ function App() {
       // o dentro del elemento con el ID "letterId"
       if (
         userMenu &&
-        event.target.id !== 'user-menu-button' &&
-        event.target.id !== 'letterId'
+        event.target.id !== "user-menu-button" &&
+        event.target.id !== "letterId"
       ) {
         dispatch(setUserMenu(false));
-        console.log("hola");
       }
     };
 
@@ -64,8 +62,6 @@ function App() {
       document.removeEventListener("click", handleClick);
     };
   }, [userMenu, dispatch]);
-
-
 
   useEffect(() => {
     setAdminPass(admin);
@@ -160,28 +156,16 @@ function App() {
         <Route
           path="/user/:id"
           element={<DashUser />} // : <Navigate to="/login" />
-        /> 
+        />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/reset" element={<PassSolicitud />} />
         <Route path="/reset/:token" element={<ResetPass />} />
         <Route path="/resetAnsony" element={<PassAnsony />} />
         <Route path="/contactanos" element={<ContactForm />} />
-        <Route
-          path="/payment"
-          element={<Pasarela />}
-        />
-        <Route
-          path="/payment/success"
-          element={<Success />}
-        />
-        <Route
-          path="/payment/failured"
-          element={<Failured />}
-        />
-        <Route
-            path='*'
-        element={<Error/>}/>
-
+        <Route path="/payment" element={<Pasarela />} />
+        <Route path="/payment/success" element={<Success />} />
+        <Route path="/payment/failured" element={<Failured />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );

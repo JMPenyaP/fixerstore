@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-items:center;
+    justify-items: center;
     justify-content: center;
     width: 100%;
     gap: 8px;
@@ -42,6 +42,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: left;
+
     .label {
         font-family: "Gotham", sans-serif;
         color: #15214a;
@@ -57,6 +58,7 @@
     align-items: center;
     justify-content: left;
     gap: 1px;
+
     .p {
         font-family: "Gotham", sans-serif;
         color: #15214a;
@@ -64,6 +66,7 @@
         font-size: 15px;
         margin-top: 1px;
     }
+
     .input {
         width: 400px;
         height: auto;
@@ -76,13 +79,16 @@
         border: 0.5px solid #3cbbed;
         text-align: center;
     }
+
     .input::placeholder {
         font-size: 12.5px;
     }
+
     .input:focus {
         outline: none;
         border: 2px solid #3cbbed;
     }
+
     .select {
         font-family: "Gotham", sans-serif;
         background-color: white;
@@ -95,10 +101,11 @@
         border: solid #3cbbed 1.8px;
         border-radius: 10px;
     }
+
     .select:focus {
         background-color: #3cbbed;
         color: white;
-        outline: none; 
+        outline: none;
         border-color: #15214a;
     }
 }
@@ -119,9 +126,11 @@
     text-align: center;
     font-weight: bold;
 }
+
 .inputext::placeholder {
     font-size: 12.5px;
 }
+
 .inputext:focus {
     outline: none;
     border: 2px solid #3cbbed;
@@ -159,6 +168,7 @@
     margin-top: 15px;
 
 }
+
 .mensajeCreated {
     font-family: "Gotham", sans-serif;
     color: white;
@@ -169,6 +179,7 @@
     align-content: center;
 
 }
+
 .mensajeNoCreated {
     font-family: "Gotham", sans-serif;
     color: white;
@@ -195,10 +206,12 @@
     font-family: "Gotham", sans-serif;
     text-align: left;
 }
-.formbutton:hover{
+
+.formbutton:hover {
     color: white;
 }
-.formbutton::before{
+
+.formbutton::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -211,7 +224,8 @@
     transition: 0.6s;
     opacity: 0;
 }
-.formbutton:hover::before{
+
+.formbutton:hover::before {
     width: 100%;
     opacity: 1;
 }
@@ -232,10 +246,12 @@
     font-family: "Gotham", sans-serif;
     text-align: left;
 }
-.formbuttonClean:hover{
+
+.formbuttonClean:hover {
     color: white;
 }
-.formbuttonClean::before{
+
+.formbuttonClean::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -248,7 +264,8 @@
     transition: 0.6s;
     opacity: 0;
 }
-.formbuttonClean:hover::before{
+
+.formbuttonClean:hover::before {
     width: 100%;
     opacity: 1;
 }
@@ -260,7 +277,7 @@
     gap: 10px;
 }
 
-.botonYes  {
+.botonYes {
     border: none;
     font-size: 12px;
     padding: 5px 20px 5px 20px;
@@ -275,10 +292,12 @@
     font-family: "Gotham", sans-serif;
     text-align: left;
 }
-.botonYes:hover{
+
+.botonYes:hover {
     color: white;
 }
-.botonYes::before{
+
+.botonYes::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -291,12 +310,13 @@
     transition: 0.6s;
     opacity: 0;
 }
-.botonYes:hover::before{
+
+.botonYes:hover::before {
     width: 100%;
     opacity: 1;
 }
 
-.botonNo  {
+.botonNo {
     border: none;
     font-size: 12px;
     padding: 5px 20px 5px 20px;
@@ -311,10 +331,12 @@
     font-family: "Gotham", sans-serif;
     text-align: left;
 }
-.botonNo:hover{
+
+.botonNo:hover {
     color: white;
 }
-.botonNo::before{
+
+.botonNo::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -327,7 +349,8 @@
     transition: 0.6s;
     opacity: 0;
 }
-.botonNo:hover::before{
+
+.botonNo:hover::before {
     width: 100%;
     opacity: 1;
 }
@@ -346,6 +369,7 @@
     gap: 1px;
     align-content: flex-start;
 }
+
 .errorMenssagePass {
     display: flex;
     flex-direction: column;
@@ -355,6 +379,7 @@
     align-content: flex-start;
     gap: 1px;
 }
+
 .errorText {
     font-size: 10px;
     margin-top: 5px;
@@ -362,7 +387,7 @@
     transition: opacity 0.3s ease;
     font-family: "Gotham", sans-serif;
     color: red;
-    
+
 }
 
 .container {
@@ -377,6 +402,7 @@
 .passOn {
     color: green;
 }
+
 .passOff {
     color: red;
 }
@@ -391,6 +417,7 @@
     justify-items: center;
     text-align: center;
     padding: 10px;
+
     .positivo {
         font-family: "Gotham", sans-serif;
         color: white;
@@ -399,8 +426,9 @@
         border-radius: 10px;
         align-items: center;
         align-content: center;
-    
+
     }
+
     .negativo {
         font-family: "Gotham", sans-serif;
         color: white;
@@ -409,7 +437,7 @@
         border-radius: 10px;
         align-items: center;
         align-content: center;
-    
+
     }
 }
 
@@ -434,10 +462,12 @@
     font-family: "Gotham", sans-serif;
     text-align: left;
 }
-.formbuttonBack:hover{
+
+.formbuttonBack:hover {
     color: white;
 }
-.formbuttonBack::before{
+
+.formbuttonBack::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -450,7 +480,115 @@
     transition: 0.6s;
     opacity: 0;
 }
-.formbuttonBack:hover::before{
+
+.formbuttonBack:hover::before {
     width: 100%;
     opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .divComplementario{
+        justify-content: center;
+    }
+
+    .div{
+        padding-top: 90px;
+    }
+
+    .divDatos{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .logo {
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 65%;
+    }
+
+    .titulo {
+        font-family: "Gotham", sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #15214a;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+    }
+
+    .form {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .divCampo {
+        width: 90%;
+        gap: 5px;
+    }
+
+    .divInput {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1px;
+
+        .p {
+            font-family: "Gotham", sans-serif;
+            color: #15214a;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 1px;
+        }
+
+        .input {
+            width: 90%;
+            height: auto;
+            padding: 4px;
+            font-family: "Gotham", sans-serif;
+            font-size: 17px;
+            align-items: center;
+            border-radius: 10px;
+            background: transparent;
+            border: 0.5px solid #3cbbed;
+            text-align: center;
+        }
+
+        .input::placeholder {
+            font-size: 12.5px;
+        }
+
+        .input:focus {
+            outline: none;
+            border: 2px solid #3cbbed;
+        }
+
+        .select {
+            font-family: "Gotham", sans-serif;
+            background-color: white;
+            width: 400px;
+            height: auto;
+            padding: 4px;
+            color: #2f92b9;
+            text-align: center;
+            font-size: 17px;
+            border: solid #3cbbed 1.8px;
+            border-radius: 10px;
+        }
+
+        .select:focus {
+            background-color: #3cbbed;
+            color: white;
+            outline: none;
+            border-color: #15214a;
+        }
+    }
+
+    .formbuttonBack{
+        font-size: 15px;
+    }
+
 }

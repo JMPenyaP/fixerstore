@@ -1,5 +1,5 @@
 .contenedorMayor {
-    height: 100vb;
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
     font-family: "Gotham", sans-serif;
@@ -15,6 +15,7 @@
     gap: 10px;
     padding-top: 20px;
 }
+
 .form {
     display: flex;
     flex-direction: column;
@@ -26,9 +27,11 @@
 }
 
 .divImagen {
-    width: 50%; /* Ancho del 100% para ocupar toda la página */
+    width: 50%;
+    /* Ancho del 100% para ocupar toda la página */
     border-left: 10px solid #15214a;
-    box-sizing: border-box; /* Esto asegura que el borde esté incluido en el ancho total */
+    box-sizing: border-box;
+    /* Esto asegura que el borde esté incluido en el ancho total */
 }
 
 .imgder {
@@ -64,25 +67,29 @@
     background: transparent;
     border: 1px solid #3cbbed;
 }
+
 .form input::placeholder {
     font-size: 12.5px;
 }
+
 .form input:focus {
     outline: none;
     border: 2.5px solid #3cbbed;
 }
+
 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
 }
+
 .formbutton {
     border: none;
     font-family: "Gotham", sans-serif;
     font-size: 15px;
     font-weight: bold;
-    width: 400px;
+    width: 100%;
     height: 100%;
     padding: 10px;
     border-radius: 50px;
@@ -95,11 +102,13 @@
     transition: 0.3s;
     overflow: hidden;
 }
+
 .formbutton:hover {
     color: white;
     background-color: #3cbbed;
 }
-.formbutton::before{
+
+.formbutton::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -128,6 +137,7 @@
     transition: 0.3s;
     overflow: hidden;
 }
+
 .x:hover {
     color: #15214a;
 }
@@ -143,18 +153,21 @@
     justify-items: center;
     align-content: center;
     text-align: center;
+
     .img {
         width: 20px;
         height: 20px;
     }
-  }
+}
+
 .passwordtoggle {
     transform: translateX(900%);
     align-content: center;
     cursor: pointer;
     position: absolute;
-    user-select: none; /* Evita que el ícono se seleccione al hacer clic */
-  }
+    user-select: none;
+    /* Evita que el ícono se seleccione al hacer clic */
+}
 
 .divmensaje {
     background-color: #3cbbed;
@@ -167,6 +180,7 @@
     font-family: "Gotham", sans-serif;
     gap: 5px;
     border-radius: 5px;
+
     .span {
         font-family: "Gotham", sans-serif;
         padding: 20px 0px 10px 0px;
@@ -186,9 +200,11 @@
     font-family: "Gotham", sans-serif;
     gap: 5px;
     border-radius: 5px;
+
     .x {
         left: 35%;
     }
+
     .span {
         font-family: "Gotham", sans-serif;
         padding: 20px 0px 10px 0px;
@@ -208,7 +224,8 @@
     text-align: center;
     padding: 10px;
 }
-.olvido{
+
+.olvido {
     font-family: "Gotham", sans-serif;
     font-size: 18px;
     text-decoration: underline;
@@ -216,6 +233,7 @@
     margin-top: 8px;
     padding: 3px;
 }
+
 .olvido:hover {
     font-weight: bold;
 }
@@ -235,10 +253,12 @@
     transition: 0.3s;
     font-family: "Gotham", sans-serif;
 }
-.formbuttonBack:hover{
+
+.formbuttonBack:hover {
     color: white;
 }
-.formbuttonBack::before{
+
+.formbuttonBack::before {
     content: "";
     position: absolute;
     height: 100%;
@@ -251,7 +271,89 @@
     transition: 0.6s;
     opacity: 0;
 }
-.formbuttonBack:hover::before{
+
+.formbuttonBack:hover::before {
     width: 100%;
     opacity: 1;
+}
+
+@media (max-width: 768px) {
+
+    .contenedorMayor {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contenedor {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 10px;
+        padding-top: 20px;
+    }
+
+    .contenedor form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .divImagen {
+        width: 100%;
+        border: none;
+        /* Esto asegura que el borde esté incluido en el ancho total */
+        height: 20%;
+        margin-top: auto;
+        display: none;
+    }
+
+    /* FORM */
+    .form input {
+        display: flex;
+        width: 90%;
+        height: 100%;
+        padding: 10px;
+        font-family: "Gotham", sans-serif;
+        font-size: 12.5px;
+        align-items: center;
+        gap: 5px;
+        border-radius: 20px;
+        background: transparent;
+        border: 1px solid #3cbbed;
+    }
+
+    .formbutton {
+        width: 100%;
+    }
+
+    /* Password  */
+
+    .passwordcontainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 90%;
+    }
+
+    .img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .logo {
+        width: 70%;
+    }
 }

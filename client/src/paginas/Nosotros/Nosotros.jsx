@@ -63,7 +63,6 @@ export default function Nosotros() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     )
 }
